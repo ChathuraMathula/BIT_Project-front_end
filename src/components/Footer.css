@@ -1,0 +1,14 @@
+.main-footer {
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 0.6rem;
+    background-image: linear-gradient(to left, #acb6e5, #86fde8);
+    display: flex;
+    justify-content: center;
+    padding: 0.3rem;
+    color: #5e7bff;
+    box-shadow: 0 -2px 8px 0 gray;
+}

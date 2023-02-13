@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="350" viewBox="0 0 350 350">
+  <g id="Rectangle_1" data-name="Rectangle 1" fill="#768df3" stroke="#768df3" stroke-width="1">
+    <rect width="150" height="150" rx="17" stroke="none"/>
+    <rect x="0.5" y="0.5" width="149" height="149" rx="16.5" fill="none"/>
+  </g>
+  <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(200)" fill="#768df3" stroke="#768df3" stroke-width="1">
+    <rect width="150" height="150" rx="17" stroke="none"/>
+    <rect x="0.5" y="0.5" width="149" height="149" rx="16.5" fill="none"/>
+  </g>
+  <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(0 200)" fill="#768df3" stroke="#768df3" stroke-width="1">
+    <rect width="150" height="150" rx="17" stroke="none"/>
+    <rect x="0.5" y="0.5" width="149" height="149" rx="16.5" fill="none"/>
+  </g>
+  <g id="Rectangle_4" data-name="Rectangle 4" transform="translate(200 200)" fill="#768df3" stroke="#768df3" stroke-width="1">
+    <rect width="150" height="150" rx="17" stroke="none"/>
+    <rect x="0.5" y="0.5" width="149" height="149" rx="16.5" fill="none"/>
+  </g>
+</svg>

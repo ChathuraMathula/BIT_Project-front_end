@@ -1,0 +1,33 @@
+.nav-menu__btn {
+  height: 3rem;
+  width: 3rem;
+  padding: 0.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.5rem;
+  border-radius: 0.2rem;
+  border: 1px solid #768df3;
+}
+
+.nav-menu__btn:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 6px 0 #768df3;
+}
+
+.dot {
+  background-color: #768df3;
+  width: 100%;
+  margin: 0.2rem;
+  padding: 0;
+  height: 0.5rem;
+}
+
+.nav-menu__dropdown {
+  position: fixed;
+  top: 5rem;
+  right: 10%;
+  width: 35%;
+  height: 50%;
+  background-image: linear-gradient(to right, #acb6e5, #86fde8);
+}

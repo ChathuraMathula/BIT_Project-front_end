@@ -1,25 +1,39 @@
 import React from "react";
-import Header from "./components/Header";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Outlet,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+
 import Welcome from "./pages/Welcome";
 import Dates from "./pages/Dates";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Welcome />,
-  },
-  {
-    path: "dates",
-    element: <Dates />,
-  },
-]);
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route
+      element={
+        <>
+          <Header />
+          <Outlet />
+          <Footer />
+        </>
+      }
+    >
+      <Route path="/" element={<Welcome />} />
+      <Route path="/dates" element={<Dates />} />
+    </Route>
+  )
+);
 
 function App() {
   return (
     <>
-      <Header />
       <RouterProvider router={router} />
     </>
   );
