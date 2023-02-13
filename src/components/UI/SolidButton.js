@@ -1,7 +1,7 @@
 import React from "react";
-import "./Solid_Button.css";
+import "./SolidButton.css";
 
-const Solid_Button = props => {
+const SolidButton = props => {
 
     const buttonClickHandler = props.onClick;
 
@@ -14,4 +14,4 @@ const Solid_Button = props => {
     );
 };
 
-export default Solid_Button;
+export default SolidButton;

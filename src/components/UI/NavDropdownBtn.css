@@ -1,7 +1,8 @@
-.nav-menu__btn {
+.nav-dropdown__btn {
   height: 3rem;
   width: 3rem;
   padding: 0.5rem;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -10,12 +11,12 @@
   border: 1px solid #768df3;
 }
 
-.nav-menu__btn:hover {
+.nav-dropdown__btn:hover {
   cursor: pointer;
   box-shadow: 0px 0px 6px 0 #768df3;
 }
 
-.dot {
+.nav-dropdown__dash {
   background-color: #768df3;
   width: 100%;
   margin: 0.2rem;
@@ -23,11 +24,8 @@
   height: 0.5rem;
 }
 
-.nav-menu__dropdown {
-  position: fixed;
-  top: 5rem;
-  right: 10%;
-  width: 35%;
-  height: 50%;
-  background-image: linear-gradient(to right, #acb6e5, #86fde8);
+@media (min-width: 688px) {
+  .nav-dropdown__btn {
+    display: none;
+  }
 }

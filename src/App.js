@@ -11,18 +11,13 @@ import {
 import Welcome from "./pages/Welcome";
 import Dates from "./pages/Dates";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Layout from "./Layout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
       element={
-        <>
-          <Header />
-          <Outlet />
-          <Footer />
-        </>
+        <Layout />
       }
     >
       <Route path="/" element={<Welcome />} />
