@@ -23,7 +23,12 @@
 }
 
 .main-header__title {
+  font-weight: bold;
   color: white;
+}
+
+.main-header__title:hover {
+  color: #7243ff;
 }
 
 .main-header__option {

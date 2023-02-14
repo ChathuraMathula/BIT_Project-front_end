@@ -10,6 +10,7 @@ import {
 
 import Welcome from "./pages/Welcome";
 import Dates from "./pages/Dates";
+import SignUp from "./pages/SignUp";
 
 import Layout from "./Layout";
 
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
     >
       <Route path="/" element={<Welcome />} />
       <Route path="/dates" element={<Dates />} />
+      <Route path="/sign-up" element={<SignUp />} />
     </Route>
   )
 );

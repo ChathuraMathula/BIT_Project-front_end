@@ -28,6 +28,7 @@
   border-radius: 0.3rem;
   font-weight: bold;
   color: #7243ff;
+  border: 2px solid #7243ff;
 }
 
 .welcome-card__btn:hover {

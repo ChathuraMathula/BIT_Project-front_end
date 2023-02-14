@@ -1,0 +1,139 @@
+.customer-reg-form__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 1rem ;
+    padding: 1rem;
+    background-image: linear-gradient(to right, #acb6e5, #86fde8);
+    border-radius: 0.3rem;
+    box-shadow: 0 0 8px 0px #acb6e5;
+}
+
+.customer-reg-form__inputs {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.customer-reg-form__input-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 50%;
+    padding: 1rem;
+}
+
+.customer-reg-form__input-item {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0.3rem 0;
+    color: #480bff;
+}
+
+.customer-reg-form__input-item input {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #7243ff;
+    color: #6e40f9;
+}
+
+.customer-reg-form__input-item input:focus-visible {
+    outline: 2px solid #7243ff;
+    
+}
+
+.customer-reg-form__input-item input::placeholder {
+    opacity: 1;
+    color: #ad92fe;
+}
+
+.customer-reg-form__confirmations {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.customer-reg-form__confirmation-item {
+    width: 50%;
+}
+
+.confirmation-checkbox label {
+    font-weight: bold;
+    color: #480bff;
+    margin: 0.2rem 0;
+
+}
+
+.customer-reg-form__confirmation-item.confirmation-checkbox{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+input[type="checkbox"] {
+    /* appearance: none; */
+    margin: 0;
+    margin-right: 0.3rem;
+    height: 1rem;
+    width: 1rem;
+    border: 1.5px solid #480bff;
+    border-radius: none;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: #480bff;
+}
+
+.customer-reg-form__confirmation-item.confirmation-declaration {
+    text-align: justify;
+    font-size: 1rem;
+    color: #6e40f9;
+}
+
+.customer-reg-form__confirmation-item.action-buttons {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.8rem;
+}
+
+.customer-reg-form__action-btn {
+    margin: 0.5rem;
+}
+
+/* For Mobile Devices */
+@media (max-width: 688px) {
+
+    .customer-reg-form__container {
+        width: 90%;
+    }
+
+    .customer-reg-form__input-col {
+        width: 80%;
+        padding: 0 0;
+    }
+    
+    .customer-reg-form__inputs {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1rem 0;
+    }
+
+    .customer-reg-form__input-item {
+        margin: 0.6rem 0;
+    }
+    
+}

@@ -1,17 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./SolidButton.css";
 
-const SolidButton = props => {
+const SolidButton = (props) => {
+  const buttonClickHandler = props.onClick;
 
-    const buttonClickHandler = props.onClick;
-
-    return (
-        <>
-            <button className="solid-button" onClick={buttonClickHandler}>
-                {props.children}
-            </button>
-        </>
-    );
+  return (
+    <>
+      <Link
+        className={"solid-button " + props.className}
+        onClick={buttonClickHandler}
+        to={props.url}
+      >
+        {props.children}
+      </Link>
+    </>
+  );
 };
 
 export default SolidButton;
