@@ -1,0 +1,55 @@
+.general-nav__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.general-nav__link {
+    color: #7243ff;
+    margin: 0 0.3rem;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+}
+
+.general-nav__link:hover {
+    background-color: #7243ff;
+    color: #86fde8;
+    box-shadow: 1px 1px 8px 0 #8299fc;
+}
+
+
+/* For Mobile Devices */
+@media (max-width: 688px) {
+    .general-nav__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        position: fixed;
+        top: 5rem;
+        left: 0;
+        padding: 2rem;
+        width: 100%;
+        z-index: 0;
+        background-image: linear-gradient(to right, #acb6e5, #86fde8);
+        border-top: 1px solid white;
+        box-shadow: 0 2px 6px 0 rgb(97, 97, 97);
+    }
+    
+    .general-nav__link {
+        padding: 1rem;
+        margin: 0.5rem;
+        width: 50%;
+        text-align: center;
+    }
+    
+    .general-nav__link:hover {
+        background-color: #7243ff;
+        color: #86fde8;
+        text-decoration: none;
+    }
+    
+    .nav-not-expanded {
+        display: none;
+    }
+}

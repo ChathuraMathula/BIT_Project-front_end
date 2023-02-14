@@ -1,0 +1,54 @@
+.welcome-card__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  background-image: linear-gradient(to right, #ffffff, #d8faf4);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px 0px #b7bede;
+}
+
+.welcome-card__img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  height: 10rem;
+  width: 10rem;
+  padding: 0.5rem;
+}
+
+.welcome-card__btn {
+  padding: 0.6rem;
+  margin: 0;
+  width: 95%;
+  text-align: center;
+  background-color: #86fde8;
+  border-radius: 0.3rem;
+  font-weight: bold;
+  color: #7243ff;
+}
+
+.welcome-card__btn:hover {
+  /* background-color: #acb6e5; */
+  background-color: #7243ff;
+  color: #86fde8;
+  box-shadow: 0 0 4px 0 #acb6e5;
+}
+/* For Mobile Devices */
+@media (max-width: 688px) {
+  .welcome-card__img-container {
+    margin: 1rem;
+    height: 70vh;
+    width: 70vw;
+  }
+
+  .welcome-card__btn {
+    width: 50%;
+  }
+
+  /* .welcome-card__img-container svg {
+    flex-shrink: 0;
+  } */
+}

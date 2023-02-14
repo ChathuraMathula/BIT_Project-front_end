@@ -1,0 +1,40 @@
+.welcome-sub-heading {
+    color: #4063ff;
+    font-weight: bold;
+    padding: 0.3rem;
+    margin-top: 1rem;
+}
+
+.welcome-options__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem;
+    margin-top: 0;
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+.welcome-options__option {
+    width: 32%;
+    margin: 0.4rem 0;
+}
+
+
+
+/* For Mobile Devices */
+@media (max-width: 688px) {
+    .welcome-options__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 90%;
+    }
+
+    .welcome-options__option {
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+}
