@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./src/index.js",
-  "homepage": "http://https://github.com/ChathuraMathula/testing",
+  "homepage": "https://chathuramathula.github.io/BIT_Project-front_end",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server .",
