@@ -5,6 +5,7 @@
     flex-direction: column;
     width: 100%;
     margin: 1rem ;
+    margin-bottom: 2rem;
     padding: 1rem;
     background-image: linear-gradient(to right, #acb6e5, #86fde8);
     border-radius: 0.3rem;
