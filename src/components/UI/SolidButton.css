@@ -13,3 +13,15 @@
     background-color: #7243ff;
     border: 2px solid #7243ff;
 }
+
+/* For Mobile Phones */
+@media (max-width: 768px) {
+}
+
+/* For Tablets */
+@media (min-width: 768px) and (max-width: 992px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

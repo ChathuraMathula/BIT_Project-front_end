@@ -1,0 +1,54 @@
+/* 
+blue => hsl(216, 100%, 5%);
+light blue => hsl(220, 61%, 80%);
+*/
+
+.profile-pic-upload__container {
+    position: relative;
+}
+
+.profile-pic-upload__pic {
+    display: block;
+    height: 50vw;
+    width: 50vw;
+    border-radius: 50%;
+    border: 2px solid hsl(220, 61%, 80%);
+    position: relative;
+}
+
+.profile-pic-upload__button svg {
+    display: block;
+    height: 3rem;
+    width: 3rem;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#profilePicUpload {
+    display: none;
+}
+
+
+/* For Mobile Phones */
+@media (max-width: 768px) {
+}
+
+/* For Tablets & Laptops*/
+@media (min-width: 768px) {
+
+    .profile-pic-upload__pic {
+        height: 20vw;
+        width: 20vw;
+    }
+
+    .profile-pic-upload__button svg {
+        height: 4rem;
+        width: 4rem;
+    }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

@@ -1,40 +1,111 @@
 .welcome-sub-heading {
-    color: #4063ff;
-    font-weight: bold;
-    padding: 0.3rem;
-    margin-top: 1rem;
+  color: hsl(220, 61%, 80%);
+  font-size: 0.8rem;
 }
 
 .welcome-options__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 1rem;
-    margin-top: 0;
-    width: 100%;
-    padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 .welcome-options__option {
-    width: 32%;
-    margin: 0.4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+  border-radius: 0.3rem;
 }
 
+.welcome-options__option-svg {
+  padding: 1rem;
+  display: block;
+  height: 80vw;
+  width: 80vw;
+}
 
+.welcome-options__option-link {
+  width: 60%;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+}
 
-/* For Mobile Devices */
-@media (max-width: 688px) {
-    .welcome-options__container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        width: 90%;
-    }
+/* Welcome Option Card Styles */
+.welcome-options__option.welcome-date {
+  background-color: hsl(200, 100%, 25%);
+  border: 1px solid hsl(200, 100%, 80%);
+}
 
-    .welcome-options__option {
-        width: 100%;
-        margin: 1rem 0;
-    }
+.welcome-options__option.welcome-package {
+  background-color: hsl(264, 100%, 15%);
+  border: 1px solid hsl(264, 100%, 80%);
+}
 
+.welcome-options__option.welcome-portfolio {
+  background-color: hsl(240, 100%, 10%);
+  border: 1px solid hsl(240, 100%, 80%);
+}
+
+/* Welcome Option Button Styles */
+.welcome-options__option-link.pick-date {
+  color: hsl(200, 100%, 25%);
+  background-color: hsl(200, 100%, 80%);
+}
+
+.welcome-options__option-link.select-package {
+  color: hsl(264, 100%, 15%);
+  background-color: hsl(264, 100%, 80%);
+}
+
+.welcome-options__option-link.see-portfolio {
+  color: hsl(240, 100%, 10%);
+  background-color: hsl(240, 100%, 80%);
+}
+
+/* Welcom Option Button Hover effect Styles */
+.welcome-options__option-link.pick-date:hover {
+  color: hsl(200, 100%, 80%);
+  background-color: hsl(200, 100%, 25%);
+  outline: 2px solid hsl(200, 100%, 80%);
+}
+
+.welcome-options__option-link.select-package:hover {
+  color: hsl(264, 100%, 80%);
+  background-color: hsl(264, 100%, 15%);
+  outline: 2px solid hsl(264, 100%, 80%);
+}
+
+.welcome-options__option-link.see-portfolio:hover {
+  color: hsl(240, 100%, 80%);
+  background-color: hsl(240, 100%, 10%);
+  outline: 2px solid hsl(240, 100%, 80%);
+}
+
+/* For Tablets */
+@media (min-width: 768px) {
+  .welcome-options__container {
+    flex-direction: row;
+  }
+
+  .welcome-options__option {
+    width: 32%;
+  }
+
+  .welcome-options__option-svg {
+    display: block;
+    height: 25vw;
+    width: 25vw;
+  }
+
+  .welcome-sub-heading {
+    font-size: 1.2rem;
+  }
 }

@@ -8,7 +8,7 @@ const WelcomeCard = (props) => {
   return (
     <div className={"welcome-card__container " + props.className}>
       <div className="welcome-card__img-container">{props.children}</div>
-      <Link className="welcome-card__btn" to={props.url}>
+      <Link className="welcome-card__btn-container" to={props.url}>
         {props.name}
       </Link>
     </div>

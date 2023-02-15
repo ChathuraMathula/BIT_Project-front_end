@@ -4,11 +4,28 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    font-size: 0.6rem;
-    background-image: linear-gradient(to left, #acb6e5, #86fde8);
+    font-size: 0.8rem;
+    background-color: hsl(209, 100%, 15%);
     display: flex;
     justify-content: center;
     padding: 0.3rem;
-    color: #5e7bff;
-    box-shadow: 0 -2px 8px 0 gray;
+    color: hsl(220, 61%, 80%);
+    box-shadow: 0 -2px 8px 0 hsl(209, 100%, 15%);
+    border-top: 1px solid hsl(220, 61%, 80%);
+}
+
+/* For Mobile Phones */
+@media (max-width: 768px) {
+    .main-footer {
+        padding: 0.1rem;
+        font-size: 0.6rem;
+    }
+}
+
+/* For Tablets */
+@media (min-width: 768px) and (max-width: 992px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
 }

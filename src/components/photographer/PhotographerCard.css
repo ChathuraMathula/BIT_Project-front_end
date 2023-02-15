@@ -6,10 +6,9 @@
     padding: 0.5rem;
     margin: 1rem;
     width: 100%;
-    background-image: linear-gradient(to right, #acb6e5, #86fde8);
-    color: #7243ff;
-    border-radius: 0.5rem;
-    box-shadow: 2px 2px 8px 0px #acb6e5;
+    color: hsl(220, 61%, 80%);
+    border-radius: 0.3rem;
+    border: 1px solid hsl(220, 61%, 80%);
 }
 
 .photographer-card__img-container {
@@ -25,7 +24,7 @@
     height: 10rem;
     width: 10rem;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid hsl(220, 61%, 80%);
     flex-shrink: 0;
 }
 
@@ -65,13 +64,22 @@
     cursor: pointer;
 }
 
-/* For Mobile Devices */
-@media (max-width: 688px) {
+
+/* For Mobile Phones */
+@media (max-width: 768px) {
     .photographer-card__container {
         width: 90%;
     }
-
+    
     .photographer-card__info-container, .photographer-card__img-container {
         width: 100%;
     }
+}
+
+/* For Tablets */
+@media (min-width: 768px) and (max-width: 992px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
 }

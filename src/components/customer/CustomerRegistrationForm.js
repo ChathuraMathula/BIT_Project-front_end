@@ -1,5 +1,6 @@
 import React from "react";
-import SolidButton from "../UI/SolidButton";
+import { Link } from "react-router-dom";
+import ProfilePicUpload from "../UI/ProfilePicUpload";
 import "./CustomerRegistrationForm.css";
 
 // This component renders the customer registration form/sign up form
@@ -7,9 +8,13 @@ import "./CustomerRegistrationForm.css";
 const CustomerRegistrationForm = (props) => {
   return (
     <div className="customer-reg-form__container">
-      <div className="customer-reg-form__heading"></div>
-      <div className="customer-reg-form__sub-heading"></div>
-      <div className="customer-reg-form__profile-pic-container"></div>
+      <h1 className="customer-reg-form__heading">Customer Registration Form</h1>
+      <div className="customer-reg-form__sub-heading">
+        &#9888; Please enter your details to register as a customer
+      </div>
+      <div className="customer-reg-form__profile-pic-container">
+        <ProfilePicUpload />
+      </div>
 
       <form className="customer-reg-form__inputs">
         <div className="customer-reg-form__input-col">
@@ -34,6 +39,7 @@ const CustomerRegistrationForm = (props) => {
             />
           </div>
         </div>
+
         <div className="customer-reg-form__input-col">
           <div className="customer-reg-form__input-item">
             <label for="username">Username:</label>
@@ -53,7 +59,7 @@ const CustomerRegistrationForm = (props) => {
           </div>
         </div>
 
-        <div className="customer-reg-form__confirmations">
+        <div className="customer-reg-form__confirmations-container">
           <div className="customer-reg-form__confirmation-item confirmation-checkbox">
             <label for="confirm">Confirm</label>
             <input type="checkbox" name="confirm" />
@@ -63,8 +69,10 @@ const CustomerRegistrationForm = (props) => {
             accurate to the best of my knowledge.
           </div>
           <div className="customer-reg-form__confirmation-item action-buttons">
-            <SolidButton className="customer-reg-form__action-btn" url="/">Cancel</SolidButton>
-            <SolidButton className="customer-reg-form__action-btn">Register</SolidButton>
+            <Link className="customer-reg-form__action-btn" to="/">
+              Cancel
+            </Link>
+            <button className="customer-reg-form__action-btn">Register</button>
           </div>
         </div>
       </form>

@@ -1,55 +1,73 @@
 .general-nav__list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .general-nav__link {
-    color: #7243ff;
-    margin: 0 0.3rem;
-    padding: 0.5rem;
-    border-radius: 0.3rem;
+  color: hsl(220, 61%, 80%);
+  margin: 0 0.3rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  text-decoration: none;
 }
 
 .general-nav__link:hover {
-    background-color: #7243ff;
-    color: #86fde8;
-    box-shadow: 1px 1px 8px 0 #8299fc;
+  background-color: hsl(220, 61%, 80%);
+  color: hsl(209, 100%, 15%);
 }
 
+.general-nav__dropdown-btn {
+  display: none;
+}
 
-/* For Mobile Devices */
-@media (max-width: 688px) {
-    .general-nav__list {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        position: fixed;
-        top: 5rem;
-        left: 0;
-        padding: 2rem;
-        width: 100%;
-        z-index: 0;
-        background-image: linear-gradient(to right, #acb6e5, #86fde8);
-        border-top: 1px solid white;
-        box-shadow: 0 2px 6px 0 rgb(97, 97, 97);
-    }
-    
-    .general-nav__link {
-        padding: 1rem;
-        margin: 0.5rem;
-        width: 50%;
-        text-align: center;
-    }
-    
-    .general-nav__link:hover {
-        background-color: #7243ff;
-        color: #86fde8;
-        text-decoration: none;
-    }
-    
-    .nav-not-expanded {
-        display: none;
-    }
+/* For Mobile Phones */
+@media (max-width: 768px) {
+  .general-nav__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    top: 3rem;
+    left: 0;
+    padding: 2rem;
+    width: 100%;
+    z-index: 0;
+    background-color: hsl(209, 100%, 15%);
+    border-top: 1px solid hsl(220, 61%, 80%);
+    border-bottom: 1px solid hsl(220, 61%, 80%);
+    box-shadow: 0 2px 4px 0 hsl(209, 100%, 15%);
+  }
+
+  .general-nav__link {
+    padding: 1rem;
+    margin: 0.5rem;
+    width: 50%;
+    text-align: center;
+    font-size: 1rem;
+    color: hsl(220, 61%, 80%);
+    font-weight: bold;
+  }
+
+  .general-nav__link:hover {
+    background-color: hsl(220, 61%, 80%);
+    color: hsl(209, 100%, 15%);
+  }
+
+  .nav-not-expanded {
+    display: none;
+  }
+
+  .general-nav__dropdown-btn {
+    display: flex;
+  }
+}
+
+/* For Tablets */
+@media (min-width: 768px) and (max-width: 992px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
 }

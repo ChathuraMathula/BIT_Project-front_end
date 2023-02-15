@@ -5,8 +5,7 @@
   align-items: center;
   padding: 1rem 0.5rem;
   background-image: linear-gradient(to right, #ffffff, #d8faf4);
-  border-radius: 0.5rem;
-  box-shadow: 0 0 8px 0px #b7bede;
+  /* border-radius: 0.5rem; */
 }
 
 .welcome-card__img-container {
@@ -19,7 +18,7 @@
   padding: 0.5rem;
 }
 
-.welcome-card__btn {
+.welcome-card__btn-container {
   padding: 0.6rem;
   margin: 0;
   width: 95%;
@@ -37,19 +36,25 @@
   color: #86fde8;
   box-shadow: 0 0 4px 0 #acb6e5;
 }
-/* For Mobile Devices */
-@media (max-width: 688px) {
+
+
+/* For Mobile Phones */
+@media (max-width: 768px) {
   .welcome-card__img-container {
     margin: 1rem;
     height: 70vh;
     width: 70vw;
   }
-
+  
   .welcome-card__btn {
     width: 50%;
   }
+}
 
-  /* .welcome-card__img-container svg {
-    flex-shrink: 0;
-  } */
+/* For Tablets */
+@media (min-width: 768px) and (max-width: 992px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
 }

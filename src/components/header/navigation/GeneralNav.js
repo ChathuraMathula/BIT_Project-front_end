@@ -37,7 +37,7 @@ const GeneralNav = (props) => {
           Login
         </Link>
       </div>
-      <NavDropdownBtn
+      <NavDropdownBtn className="general-nav__dropdown-btn"
         onClick={() => {
           setIsNavNotExpanded(!isNavNotExpanded);
         }}
