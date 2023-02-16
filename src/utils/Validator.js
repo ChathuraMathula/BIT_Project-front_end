@@ -60,6 +60,22 @@ class Validator {
     str = str.toLowerCase();
     return Validator.#isValidString(str, pattern); // returns true if email is valid
   }
+
+  static isValidAddress(str) {
+    const pattern = /^$/;
+    // address pattern eg: No 35, Colombo Rd, Polgahawela.
+
+    str = str.toLowerCase();
+    return Validator.#isValidString(str, pattern); // returns true if address is valid
+  }
+
+  static isValidUrl(str) {
+    const pattern = /^$/;
+    // address pattern eg: http://example.com.
+
+    str = str.toLowerCase();
+    return Validator.#isValidString(str, pattern); // returns true if url is valid
+  }
 }
 
 export default Validator;
