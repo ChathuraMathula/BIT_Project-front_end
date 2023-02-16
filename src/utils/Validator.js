@@ -52,6 +52,14 @@ class Validator {
     
     return Validator.#isValidString(str, pattern); // returns true if phone number is valid
   }
+
+  static isValidEmail(str) {
+    const pattern = /^[a-z0-9\.\-\_]+[a-z]+\@[a-z0-9\-]+\.[a-z]{2,}$/;
+    // email pattern eg: example@gmail.com
+
+    str = str.toLowerCase();
+    return Validator.#isValidString(str, pattern); // returns true if email is valid
+  }
 }
 
 export default Validator;
