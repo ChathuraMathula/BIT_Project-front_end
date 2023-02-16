@@ -1,0 +1,24 @@
+.login-form__container {
+    width: 90%;
+}
+
+.login-form-inputs__container {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.login-form-action-btn__container {
+    margin-bottom: 1rem;
+}
+
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .login-form__container {
+        width: 50%;
+    }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

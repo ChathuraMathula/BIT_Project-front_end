@@ -3,6 +3,12 @@ blue => hsl(216, 100%, 5%);
 light blue => hsl(220, 61%, 80%);
 */
 
+.customer-registration-form__container {
+  width: 100%;
+}
+
+/* ------------------------------ */
+
 .customer-reg-form__heading {
     font-size: 1.3rem;
     margin-bottom: 0.1rem;

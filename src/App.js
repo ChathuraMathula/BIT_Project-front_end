@@ -13,6 +13,7 @@ import Dates from "./pages/Dates";
 import SignUp from "./pages/SignUp";
 
 import Layout from "./Layout";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Welcome />} />
       <Route path="/dates" element={<Dates />} />
       <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
     </Route>
   )
 );

@@ -1,0 +1,17 @@
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid hsl(220, 61%, 80%);
+    color: hsl(220, 61%, 80%);
+    margin-bottom: 3rem;
+    border-radius: 0.3rem;
+  }
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+}
