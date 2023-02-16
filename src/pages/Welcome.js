@@ -1,7 +1,7 @@
 import React from "react";
 import "./Welcome.css";
 import PhotographerCard from "../components/photographer/PhotographerCard";
-import ReservationSteps from "../components/UI/ReservationSteps";
+import ReservationSteps from "../components/UI/SVG/ReservationSteps";
 import { Link } from "react-router-dom";
 import DateSVG from "../components/UI/SVG/DateSVG";
 import PackagesSVG from "../components/UI/SVG/PackagesSVG";
