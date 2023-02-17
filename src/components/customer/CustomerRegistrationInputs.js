@@ -36,7 +36,7 @@ const CustomerRegistrationInputs = (props) => {
           validateType="name"
           type="text"
           id="customer-lastname"
-          name="lasttname"
+          name="lastname"
           placeholder="Ranasinghe"
         >
           Last Name:
@@ -48,7 +48,7 @@ const CustomerRegistrationInputs = (props) => {
           validateType="phoneNo"
           type="text"
           id="customer-phone_number"
-          name="phone_number"
+          name="phoneNo"
           placeholder="070-XXXXXXX"
         >
           Phone No:
@@ -98,7 +98,7 @@ const CustomerRegistrationInputs = (props) => {
           validateType="password"
           type="password"
           id="customer-password-confirm"
-          name="password-confirm"
+          name="confirmedPassword"
           placeholder="your password"
         >
           Confirm Password:

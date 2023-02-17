@@ -7,6 +7,14 @@
     align-items: flex-start;
 }
 
+.customer-registration-actions__message {
+    text-align: center;
+    width: 100%;
+    color: red;
+    height: 1.2rem;
+    font-size: 0.8rem;
+}
+
 .customer-registration-action__declaration {
     padding: 0.5rem 0;
 }
