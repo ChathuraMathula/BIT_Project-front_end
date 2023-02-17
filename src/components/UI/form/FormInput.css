@@ -35,3 +35,17 @@
   color: hsl(220, 61%, 60%);
   font-size: 1rem;
 }
+
+input.form-input__required::placeholder {
+  color: hsl(0, 100%, 50%);
+}
+
+input.form-input__not-valid {
+  border: 1px solid hsl(0, 100%, 50%);
+  color: red;
+}
+
+input.form-input__not-valid:focus-visible {
+  outline: 1px solid hsl(0, 100%, 50%);
+  border: 1px solid hsl(0, 100%, 50%);
+}

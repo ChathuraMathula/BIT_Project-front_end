@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import FormContainer from "../UI/form/FormContainer";
 import FormHeading from "../UI/form/FormHeading";
 import FormSubHeading from "../UI/form/FormSubHeading";
@@ -9,9 +9,17 @@ import "./CustomerRegistrationForm.css";
 
 // This component renders the customer registration form/sign up form
 
+export const CustomerRegistrationContext = createContext(null);
+
 const CustomerRegistrationForm = (props) => {
+  const [customerData, setCustomerData] = useState({});
+
+  const inputValuesHandler = (inputValues) => {
+    setCustomerData({ ...customerData, ...inputValues });
+  };
+
   return (
-    <>
+    <CustomerRegistrationContext.Provider value={customerData}>
       <div className="customer-registration-form__container">
         <FormContainer>
           <FormHeading>Customer Registration Form</FormHeading>
@@ -20,11 +28,11 @@ const CustomerRegistrationForm = (props) => {
           </FormSubHeading>
 
           <CustomerRegistrationProfilePhoto />
-          <CustomerRegistrationInputs />
+          <CustomerRegistrationInputs value={inputValuesHandler} />
           <CustomerRegistrationActions />
         </FormContainer>
       </div>
-    </>
+    </CustomerRegistrationContext.Provider>
   );
 };
 
