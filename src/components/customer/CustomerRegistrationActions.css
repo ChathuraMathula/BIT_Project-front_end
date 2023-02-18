@@ -13,6 +13,7 @@
     color: red;
     height: 1.2rem;
     font-size: 0.8rem;
+    margin: 1rem 0;
 }
 
 .customer-registration-action__declaration {
@@ -30,4 +31,11 @@
     .customer-registration-actions__container {
         padding: 0 1rem;
     }
+
+    .customer-registration-actions__message {
+        height: 1.5rem;
+        font-size: 1rem;
+        margin: 0.8rem 0;
+    }
+    
 }

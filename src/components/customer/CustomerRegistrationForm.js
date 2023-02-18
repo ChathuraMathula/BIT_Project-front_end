@@ -7,9 +7,9 @@ import CustomerRegistrationActions from "./CustomerRegistrationActions";
 import CustomerRegistrationProfilePhoto from "./CustomerRegistrationProfilePhoto";
 import "./CustomerRegistrationForm.css";
 
-// This component renders the customer registration form/sign up form
+import { CustomerRegistrationContext } from "../../context/Context";
 
-export const CustomerRegistrationContext = createContext(null);
+// This component renders the customer registration form/sign up form
 
 const CustomerRegistrationForm = (props) => {
   const [customerData, setCustomerData] = useState({});

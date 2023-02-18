@@ -21,4 +21,7 @@
 
 /* For Laptops */
 @media (min-width: 992px) {
+    .login-form__container {
+        width: 40%;
+    }
 }

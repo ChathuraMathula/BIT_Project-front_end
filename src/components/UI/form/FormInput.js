@@ -3,6 +3,20 @@ import Sanitizer from "../../../utils/Sanitizer";
 import Validator from "../../../utils/Validator";
 import "./FormInput.css";
 
+/* 
+Date-Modified : 18.02.2023
+Name: <FormInput /> 
+props: 
+  value = function()
+  required = boolean
+  placeholder = string
+  validateType = username | password | name | email | phoneNo | address | url_path
+  id = string
+  type = string
+  className = string
+  name = string
+*/
+
 const FormInput = (props) => {
   const [value, setValue] = useState("");
   const [placeholder, setPlaceholder] = useState(props.placeholder);

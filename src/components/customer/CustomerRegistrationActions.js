@@ -1,83 +1,100 @@
 import React, { useContext, useState } from "react";
-import Fetcher from "../../utils/Fetcher";
+import { useNavigate } from "react-router-dom";
 import Validator from "../../utils/Validator";
 import FormActionButton from "../UI/form/FormActionButton";
 import FormInputCheckBox from "../UI/form/FormInputCheckBox";
 import "./CustomerRegistrationActions.css";
-import { CustomerRegistrationContext } from "./CustomerRegistrationForm";
+import { CustomerRegistrationContext } from "../../context/Context";
 
 const CustomerRegistrationActions = (props) => {
   const customerData = useContext(CustomerRegistrationContext);
+
+  const navigate = useNavigate();
+
   const [isChecked, setIsChecked] = useState(false);
   const [usernameWarningMsg, setUsernameWarningMsg] = useState("");
   const [passwordWarningMsg, setPasswordWarningMsg] = useState("");
   const [emptyWarningMsg, setEmptyWarningMsg] = useState("");
   const [uncheckedWarningMsg, setUncheckedWarningMsg] = useState("");
+  const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
+  const [isRequiredFieldsNotEmpty, setIsRequiredFieldsNotEmpty] = useState(false);
 
   const isCheckedHandler = (isChecked) => setIsChecked(isChecked);
 
+  const password = customerData["password"];
+  const confirmedPassword = customerData["confirmedPassword"];
+  const requiredFields = [
+    "firstname",
+    "lastname",
+    "phoneNo",
+    "address",
+    "username",
+    "password",
+    "email",
+  ];
+
   // give a warning message if user enters an already existing username
   const usernameWarning = async () => {
-    await Fetcher.getCustomers().then((customers) => {
-      if (customers) {
-        for (let customer of customers) {
-          console.log(customer);
-          if (customerData["username"] === customer["username"]) {
-            console.log(customerData["username"] === customer["username"]);
-            setUsernameWarningMsg(
-              "Username you entered already exists. Please try another one. "
-            );
-            return;
-          } else {
-            setUsernameWarningMsg("");
-          }
-        }
+    Validator.isExistingUser(customerData["username"]).then((isExisting) => {
+      if (isExisting) {
+        setUsernameWarningMsg(
+          "Username you entered already exists. Please try another one. "
+        );
+      } else {
+        setUsernameWarningMsg("");
       }
     });
   };
 
   // give a warning if both password and confirm password fields do not match
-  const passwordWarning = () => {
-    if (customerData["password"] !== customerData["confirmedPassword"]) {
-      setPasswordWarningMsg("Your passwords must be same. ");
-    } else {
+  const passwordWarning = async () => {
+    if (Validator.isPasswordConfirmed(password, confirmedPassword)) {
       setPasswordWarningMsg("");
+      setIsPasswordConfirmed(true);
+    } else {
+      setPasswordWarningMsg("Both passwords you entered must be same. ");
+      setIsPasswordConfirmed(false);
     }
   };
 
   // Give a warning if user does not fill any input value
-  const emptyWarning = () => {
-    if (!Object.keys(customerData).length) {
-      console.log(customerData);
-      setEmptyWarningMsg("Please make sure you entered all input values. ");
+  const emptyWarning = async () => {
+    if (Validator.isEmptyObject(customerData)) {
+      setEmptyWarningMsg("All inputs must be duly filled. ");
+      setIsRequiredFieldsNotEmpty(false);
+    } else if (Validator.isRequiredFieldsEmpty(customerData, requiredFields)) {
+      setEmptyWarningMsg("All inputs must be duly filled. ");
+      setIsRequiredFieldsNotEmpty(false);
     } else {
-      Object.keys(customerData).forEach((key) => {
-        if (!customerData[key]) {
-          setEmptyWarningMsg("Please make sure you entered all input values. ");
-        } else {
-          setEmptyWarningMsg("");
-        }
-      });
+      setEmptyWarningMsg("");
+      setIsRequiredFieldsNotEmpty(true);
     }
   };
 
-  const onClickHandler = () => {
+  const onClickHandler = async () => {
+    usernameWarning();
+    passwordWarning();
+    emptyWarning();
+
     if (isChecked) {
-      usernameWarning();
-      passwordWarning();
-      emptyWarning();
       setUncheckedWarningMsg("");
+      Validator.isExistingUser(customerData["username"]).then(isExisting => {
+        if (!isExisting && isPasswordConfirmed && isRequiredFieldsNotEmpty) {
+          
+          console.log("I am done")
+          navigate('/login', { replace: true });
+          // window.location.replace("/login"); // redirect to /login
+        } else {
+        }
+      });
     } else {
-      usernameWarning();
-      passwordWarning();
-      emptyWarning();
       setUncheckedWarningMsg("Please confirm the declaration.");
     }
   };
 
   return (
     <div className="customer-registration-actions__container">
-      <div className="customer-registration-actions__message">
+      <div className={"customer-registration-actions__message"}>
         {usernameWarningMsg +
           passwordWarningMsg +
           emptyWarningMsg +
