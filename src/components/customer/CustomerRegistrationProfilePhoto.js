@@ -4,9 +4,14 @@ import "./CustomerRegistrationProfilePhoto.css";
 
 
 const CustomerRegistrationProfilePhoto = (props) => {
+
+  const profilePhotoValueHandler = (inputValue) => {
+    props.value(inputValue);
+  }
+
   return (
     <>
-      <FormUploadProfilePhoto />
+      <FormUploadProfilePhoto value={profilePhotoValueHandler}/>
     </>
   );
 };

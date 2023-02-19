@@ -5,6 +5,8 @@ light blue => hsl(220, 61%, 80%);
 
 .form-upload-profile-photo__container {
     position: relative;
+    border-radius: 50%;
+    padding: 0.3rem;
 }
 
 .form-upload-profile-photo__pic {

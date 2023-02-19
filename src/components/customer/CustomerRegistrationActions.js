@@ -5,6 +5,8 @@ import FormActionButton from "../UI/form/FormActionButton";
 import FormInputCheckBox from "../UI/form/FormInputCheckBox";
 import "./CustomerRegistrationActions.css";
 import { CustomerRegistrationContext } from "../../context/Context";
+import Fetcher from "../../utils/Fetcher";
+import { toFormData } from "../../utils/Utils";
 
 const CustomerRegistrationActions = (props) => {
   const customerData = useContext(CustomerRegistrationContext);
@@ -17,7 +19,8 @@ const CustomerRegistrationActions = (props) => {
   const [emptyWarningMsg, setEmptyWarningMsg] = useState("");
   const [uncheckedWarningMsg, setUncheckedWarningMsg] = useState("");
   const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(false);
-  const [isRequiredFieldsNotEmpty, setIsRequiredFieldsNotEmpty] = useState(false);
+  const [isRequiredFieldsNotEmpty, setIsRequiredFieldsNotEmpty] =
+    useState(false);
 
   const isCheckedHandler = (isChecked) => setIsChecked(isChecked);
 
@@ -71,6 +74,11 @@ const CustomerRegistrationActions = (props) => {
     }
   };
 
+  /* ------------------------------------------------------------------------------------
+     ------------------------------------------------------------------------------------ 
+      Handles the Registration click event and post data into backend
+     ------------------------------------------------------------------------------------   
+     ------------------------------------------------------------------------------------ */
   const onClickHandler = async () => {
     usernameWarning();
     passwordWarning();
@@ -78,12 +86,17 @@ const CustomerRegistrationActions = (props) => {
 
     if (isChecked) {
       setUncheckedWarningMsg("");
-      Validator.isExistingUser(customerData["username"]).then(isExisting => {
+      Validator.isExistingUser(customerData["username"]).then((isExisting) => {
         if (!isExisting && isPasswordConfirmed && isRequiredFieldsNotEmpty) {
-          
-          console.log("I am done")
-          navigate('/login', { replace: true });
-          // window.location.replace("/login"); // redirect to /login
+          // =====================================================================================
+
+          // =====================================================================================
+
+          toFormData(customerData)
+            .then((formData) => Fetcher.postUser(formData))
+            .then((res) => console.log("response: ", res))
+            .catch((err) => console.log("error: ", err));
+          // navigate('/login', { replace: true });
         } else {
         }
       });
@@ -91,6 +104,8 @@ const CustomerRegistrationActions = (props) => {
       setUncheckedWarningMsg("Please confirm the declaration.");
     }
   };
+
+  /** ------------------------------------------------------------------------------------ */
 
   return (
     <div className="customer-registration-actions__container">

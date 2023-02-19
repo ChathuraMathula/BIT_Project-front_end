@@ -1,11 +1,36 @@
 import React, { useState } from "react";
+import Validator from "../../../utils/Validator";
 import "./FormUploadProfilePhoto.css";
+
+/* 
+  Component Name: <FormUploadProfilePhoto />
+  Date Modified: 19.02.2023
+  Author: Chathura Ekanayake
+  Props:
+    value = function() --- returns the {image: file} or {imageWarning: "message string"}
+*/
 
 const FormUploadProfilePhoto = (props) => {
   const [fileUrl, setFileUrl] = useState(null);
 
   const onchangeHandler = (event) => {
-    setFileUrl(URL.createObjectURL(event.target.files[0]));
+    const file = event.target.files[0]; // take the uploaded file
+    if (file) {
+      // if image is of type png/jpeg
+      if (Validator.isValidImageFile(file)) {
+        // if image is less than 2MB
+        if (Validator.isImageSizeLessThan(file)) {
+          setFileUrl(URL.createObjectURL(event.target.files[0]));
+          props.value({ image: file, imageWarning: ""});
+        } else {
+          props.value({ image: null, imageWarning: "Image size must be less than 2MB. " });
+          setFileUrl("");
+        }
+      } else {
+        props.value({ image: null, imageWarning: "Image must be a png/jpeg file " });
+        setFileUrl("");
+      }
+    }
   };
 
   return (
@@ -50,6 +75,7 @@ const FormUploadProfilePhoto = (props) => {
 
         <input
           type="file"
+          name="image"
           id="uploadProfilePhoto"
           onChange={onchangeHandler}
         ></input>

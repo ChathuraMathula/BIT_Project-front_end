@@ -93,7 +93,34 @@ class Validator {
     return false;
   }
 
-  // --------- These Functions use fetch API to get data from backend ----------
+  /* This function checks if the imageFile is of a valid image type (jpeg/png)  */
+  static isValidImageFile(imageFile) {
+    if (imageFile) {
+      // match /image/png or /image/jpeg pattern
+      return /^image\/(png|jpeg)$/.test(imageFile.type); 
+    } else {
+      return false;
+    }
+  }
+  /* -------------------- END isValidImageFile() ----------------------------------*/
+
+/* This function checks if the imageFile is less than the given size in bytes  
+  by defalt it checks for imageFiles less than 2MB
+*/
+static isImageSizeLessThan(imageFile, size = 2000000) {
+  if (!imageFile) return false;
+
+  if (imageFile.size <= size) {
+    return true;
+  } else {
+    return false;
+  }
+}
+/* -------------------- END isImageSizeLessThan() ---------------------------------*/
+
+  /* ------------------------------------------------------------------------------- */
+  /* ---------- These Functions use fetch API to get data from backend ------------- */
+  /* ------------------------------------------------------------------------------- */
 
   // checks whether the username is already existing in the database
   static async isExistingUser(username) {

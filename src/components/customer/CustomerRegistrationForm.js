@@ -27,7 +27,7 @@ const CustomerRegistrationForm = (props) => {
             &#9888; Please enter your details to register as a customer
           </FormSubHeading>
 
-          <CustomerRegistrationProfilePhoto />
+          <CustomerRegistrationProfilePhoto value={inputValuesHandler} />
           <CustomerRegistrationInputs value={inputValuesHandler} />
           <CustomerRegistrationActions />
         </FormContainer>
