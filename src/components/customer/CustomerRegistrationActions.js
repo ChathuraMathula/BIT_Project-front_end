@@ -22,7 +22,14 @@ const CustomerRegistrationActions = (props) => {
   const [isRequiredFieldsNotEmpty, setIsRequiredFieldsNotEmpty] =
     useState(false);
 
+  // let isChecked = false;
+
   const isCheckedHandler = (isChecked) => setIsChecked(isChecked);
+
+  // const isCheckedHandler = (isCheckedValue) => {
+  //   isChecked = isCheckedValue;
+  //   console.log(isChecked);
+  // };
 
   const password = customerData["password"];
   const confirmedPassword = customerData["confirmedPassword"];
@@ -79,7 +86,7 @@ const CustomerRegistrationActions = (props) => {
       Handles the Registration click event and post data into backend
      ------------------------------------------------------------------------------------   
      ------------------------------------------------------------------------------------ */
-  const onClickHandler = async () => {
+  const onClickHandler = (event) => {
     usernameWarning();
     passwordWarning();
     emptyWarning();
@@ -88,16 +95,13 @@ const CustomerRegistrationActions = (props) => {
       setUncheckedWarningMsg("");
       Validator.isExistingUser(customerData["username"]).then((isExisting) => {
         if (!isExisting && isPasswordConfirmed && isRequiredFieldsNotEmpty) {
-          // =====================================================================================
-
-          // =====================================================================================
-
+          // converts customerData object into a form data object
           toFormData(customerData)
             .then((formData) => Fetcher.postUser(formData))
-            .then((res) => console.log("response: ", res))
+            .then((res) => {
+              navigate("/login", { replace: true });
+            })
             .catch((err) => console.log("error: ", err));
-          // navigate('/login', { replace: true });
-        } else {
         }
       });
     } else {
