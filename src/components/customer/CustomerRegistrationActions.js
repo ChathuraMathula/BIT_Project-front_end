@@ -22,14 +22,8 @@ const CustomerRegistrationActions = (props) => {
   const [isRequiredFieldsNotEmpty, setIsRequiredFieldsNotEmpty] =
     useState(false);
 
-  // let isChecked = false;
 
   const isCheckedHandler = (isChecked) => setIsChecked(isChecked);
-
-  // const isCheckedHandler = (isCheckedValue) => {
-  //   isChecked = isCheckedValue;
-  //   console.log(isChecked);
-  // };
 
   const password = customerData["password"];
   const confirmedPassword = customerData["confirmedPassword"];
@@ -99,6 +93,7 @@ const CustomerRegistrationActions = (props) => {
           toFormData(customerData)
             .then((formData) => Fetcher.postUser(formData))
             .then((res) => {
+              console.log(res.message);
               navigate("/login", { replace: true });
             })
             .catch((err) => console.log("error: ", err));

@@ -21,13 +21,13 @@ const FormUploadProfilePhoto = (props) => {
         // if image is less than 2MB
         if (Validator.isImageSizeLessThan(file)) {
           setFileUrl(URL.createObjectURL(event.target.files[0]));
-          props.value({ image: file, imageWarning: ""});
+          props.value({ profilePicture: file, imageWarning: ""});
         } else {
-          props.value({ image: null, imageWarning: "Image size must be less than 2MB. " });
+          props.value({ profilePicture: null, imageWarning: "Image size must be less than 2MB. " });
           setFileUrl("");
         }
       } else {
-        props.value({ image: null, imageWarning: "Image must be a png/jpeg file " });
+        props.value({ profilePicture: null, imageWarning: "Image must be a png/jpeg file " });
         setFileUrl("");
       }
     }
