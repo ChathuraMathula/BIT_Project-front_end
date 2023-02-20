@@ -29,7 +29,7 @@ class Validator {
   }
 
   static isValid(type, value) {
-    let pattern = / /;
+    let pattern = /./;
 
     switch (type) {
       case "username":
@@ -59,6 +59,9 @@ class Validator {
       case "url_path":
         // url path pattern eg: /profile/photo
         pattern = /\/[a-z0-9\.]+$/i;
+        break;
+      default:
+        pattern = /./;
         break;
     }
 
@@ -97,26 +100,26 @@ class Validator {
   static isValidImageFile(imageFile) {
     if (imageFile) {
       // match /image/png or /image/jpeg pattern
-      return /^image\/(png|jpeg)$/.test(imageFile.type); 
+      return /^image\/(png|jpeg)$/.test(imageFile.type);
     } else {
       return false;
     }
   }
   /* -------------------- END isValidImageFile() ----------------------------------*/
 
-/* This function checks if the imageFile is less than the given size in bytes  
+  /* This function checks if the imageFile is less than the given size in bytes  
   by defalt it checks for imageFiles less than 2MB
 */
-static isImageSizeLessThan(imageFile, size = 2000000) {
-  if (!imageFile) return false;
+  static isImageSizeLessThan(imageFile, size = 2000000) {
+    if (!imageFile) return false;
 
-  if (imageFile.size <= size) {
-    return true;
-  } else {
-    return false;
+    if (imageFile.size <= size) {
+      return true;
+    } else {
+      return false;
+    }
   }
-}
-/* -------------------- END isImageSizeLessThan() ---------------------------------*/
+  /* -------------------- END isImageSizeLessThan() ---------------------------------*/
 
   /* ------------------------------------------------------------------------------- */
   /* ---------- These Functions use fetch API to get data from backend ------------- */
