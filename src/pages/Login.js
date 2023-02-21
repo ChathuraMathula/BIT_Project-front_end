@@ -1,22 +1,18 @@
-import React, { useContext } from "react";
-import { useOutletContext } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import FormActionButton from "../components/UI/form/FormActionButton";
 import FormContainer from "../components/UI/form/FormContainer";
 import FormHeading from "../components/UI/form/FormHeading";
 import FormInput from "../components/UI/form/FormInput";
-// import { UserLoginContext } from "../context/Context";
 import { postLogin } from "../utils/post";
 
 import "./Login.css";
 
 const Login = (props) => {
-  // const [user, setUser] = useContext(UserLoginContext);
-  const [user, setUser] = useOutletContext();
 
-  let userLoginData = {};
+  const [userLoginData, setUserLoginData] = useState({});
 
   const inputValuesHandler = (inputValues) => {
-    userLoginData = { ...userLoginData, ...inputValues };
+    setUserLoginData(prevData => ({...prevData, ...inputValues}));
   };
 
   const onClickLoginHandler = () => {
@@ -27,17 +23,11 @@ const Login = (props) => {
         }
         return res.json();
       })
-      .then((data) => {
-        if (data) {
-          console.log(data);
-          setUser({
-            loggedIn: true,
-            role: data.user.role,
-            username: data.user.name,
-          });
-          console.log(user);
+      .then((loginResponseData) => {
+        if (loginResponseData) {
+          props.user(loginResponseData);
         } else {
-          return;
+          throw error;
         }
       })
       .catch((error) => {

@@ -1,0 +1,32 @@
+.user-navigation-button__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-navigation-button__container div {
+    margin-right: 0.5rem;
+}
+
+.user-navigation-button__container img {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid hsl(220, 61%, 80%);
+}
+
+/* For Tablets */
+@media (min-width: 768px) {
+    .user-navigation-button__container div {
+        margin-right: 1rem;
+    }
+    
+    .user-navigation-button__container img {
+        height: 4rem;
+        width: 4rem;
+    }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

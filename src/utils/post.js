@@ -3,7 +3,7 @@ import Validator from "./Validator";
 
 export const postLogin = async (userData) => {
   const formData = new FormData();
-  
+  console.log("inside post.js => " ,userData);
   const username = Sanitizer.sanitize(userData.username);
   const password = Sanitizer.sanitize(userData.password);
 
@@ -18,6 +18,7 @@ export const postLogin = async (userData) => {
     const options = {
       method: "POST",
       body: formData,
+      credentials: "include",
     };
 
     return await fetch(url, options);
