@@ -39,14 +39,14 @@ function App() {
     user: null
   });
 
-  const userHandler = (loginResponseData) => {
+  const userLoginHandler = (loginResponseData) => {
     setLogin((prevState) => ({
       ...prevState,
       ...loginResponseData,
       isLogged: true,
     }));
   };
-  console.log("inside App.js (line 43): ", login);
+  console.log("inside App.js: ", login);
 
   return (
     <>
@@ -57,7 +57,7 @@ function App() {
               <Route path="/" element={<Welcome />} />
               <Route path="/dates" element={<Dates />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/login" element={<Login user={userHandler} />} />
+              <Route path="/login" element={<Login user={userLoginHandler} />} />
             </Route>
           </Routes>
         </BrowserRouter>

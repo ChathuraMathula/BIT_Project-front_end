@@ -1,11 +1,18 @@
 import React from "react";
-import UserNavigationButton from "../../UI/navigation/UserNavigationButton";
+import { Link } from "react-router-dom";
+import UserNavigation from "../../UI/navigation/UserNavigation";
 import "./AdminNav.css";
 
 const AdminNav = (props) => {
   return (
     <>
-      <UserNavigationButton />
+      <UserNavigation>
+        <Link>Dashbord</Link>
+        <Link>Profile</Link>
+        <Link>Photographer</Link>
+        <Link>Packages</Link>
+        <Link>Portfolio</Link>
+      </UserNavigation>
     </>
   );
 };

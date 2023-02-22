@@ -1,0 +1,62 @@
+.user-navigation-list__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  padding: 1rem;
+  top: 3rem;
+  width: 86%;
+  margin: auto;
+  background-color: hsl(209, 100%, 15%);
+  border: 1px solid hsl(220, 61%, 80%);
+  border-top: none;
+}
+
+.user-navigation-list__container a {
+  text-decoration: none;
+  width: 60%;
+  margin: 0.4rem;
+  padding: 0.3rem;
+  font-size: 1rem;
+  text-align: center;
+  background-color: hsl(220, 61%, 80%);
+  border: 1px solid hsl(220, 61%, 80%);
+  color: hsl(216, 100%, 5%);
+  border-radius: 0.3rem;
+}
+
+.user-navigation-list__container a:hover {
+    background-color: hsl(216, 100%, 5%);
+    border: 1px solid hsl(220, 61%, 80%);
+    color: hsl(220, 61%, 80%); 
+    transition: all 0.5s;
+    font-weight: bold;
+}
+
+a.log-out__button {
+    background-color: hsl(0, 84%, 83%);
+    border: 1px solid hsl(0, 84%, 83%);
+    color: hsl(216, 100%, 5%); 
+}
+
+a.log-out__button:hover {
+    background-color: hsl(216, 100%, 5%);
+    border: 1px solid hsl(0, 100%, 50%);
+    color: hsl(0, 100%, 50%); 
+}
+
+
+/* For Tablets */
+@media (min-width: 768px) {
+  .user-navigation-list__container {
+    padding: 1rem;
+    top: 5rem;
+    right: 10%;
+    width: 25%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

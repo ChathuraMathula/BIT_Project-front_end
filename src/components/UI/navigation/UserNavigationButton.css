@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.user-navigation-button__container:hover {
+    cursor: pointer;
+}
+
 .user-navigation-button__container div {
     margin-right: 0.5rem;
 }

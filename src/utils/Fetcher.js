@@ -1,6 +1,31 @@
 // This class contains all the data fetching and posting methods
 
 class Fetcher {
+  /**
+   * @function getUserByName(username);
+   * @returns A promise resolving a user document with username equal to username provided
+   * as the parameter
+   * @author Chathura Ekanayake
+   */
+  static async getUserByName(username) {
+    let newUser;
+    await this.getUsers()
+      .then((users) => {
+        for (let user of users) {
+          if (user.username === username) {
+            newUser = user;
+            break;
+          }
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          console.log("Fetcher.getUserByName() -- ERROR: => ", error);
+        }
+      });
+    return newUser;
+  }
+
   // getCustomers() returns an array of customer documents
   static async getUsers() {
     const url = "http://localhost:3001/users";

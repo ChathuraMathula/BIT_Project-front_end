@@ -20,7 +20,7 @@ const HeaderOptions = (props) => {
       </>
     );
   } else if (login.isLogged) {
-    if (login.user.name === "admin") {
+    if (login.user.role === "admin") {
       return (
         <>
           <AdminNav />
