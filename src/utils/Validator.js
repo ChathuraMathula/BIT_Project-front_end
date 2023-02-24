@@ -1,8 +1,99 @@
 import Fetcher from "./Fetcher";
-import Sanitizer from "./Sanitizer";
+import Sanitizer, { sanitize } from "./Sanitizer";
+
+/**
+ * 
+ * @param {string} str string of value to be matched against pattern
+ * @param {RegExp} pattern RegEx pattern to be matched
+ * @returns true if str is matched to pattern, else false.
+ */
+const isMatched = (str, pattern) => {
+  if (str !== "") {
+    str = sanitize(str);
+    return pattern.test(str);
+  }
+  return false;
+};
+
+/**
+ * 
+ * @param {string} str string to be validate
+ * @returns true if the string is empty, else false.
+ */
+export const isEmpty = (str) => {
+  if (typeof str === "string") {
+    str = str.trim();
+    if (str === "") {
+      return true; 
+    }
+  }
+  return false; 
+};
+
+/**
+ * 
+ * @param {string} type type of the string passed ( username | password | name | phoneNo | email | address | url_path )
+ * @param {string} value string to be validated against type
+ * @returns returns true if the value is of specified type, else false.
+ */
+export const isValid = (type, value) => {
+  let pattern = /./;
+
+  switch (type) {
+    case "username":
+      pattern = /^[a-z0-9]+$/i; // username eg: janakran12
+      break;
+    case "password":
+      // password pattern eg: Mypass@#$!123
+      pattern = /^[a-z0-9\!\(\)\-\.\?\[\]\_\`\~\;\:\@\#\$\%\&\*\+\=\^]+$/i;
+      break;
+    case "name":
+      // name pattern eg: Janaka/Ranasinghe
+      pattern = /^[a-z]+$/i;
+      break;
+    case "phoneNo":
+      // phone_no pattern eg: 0701234567
+      pattern = /^\d{10}$/; // matches exactly 10 digits
+      break;
+    case "email":
+      value = value.toLowerCase(); // converts to a lower case string
+      // email pattern eg: example@gmail.com
+      pattern = /^[a-z0-9\.\-\_]+[a-z0-9]+\@[a-z0-9\-]+\.[a-z]{2,}$/;
+      break;
+    case "address":
+      // address pattern eg: No 35, Colombo Rd, Polgahawela.
+      pattern = /^[a-z0-9\.\,\ ]+$/i;
+      break;
+    case "url_path":
+      // url path pattern eg: /profile/photo
+      pattern = /\/[a-z0-9\.]+$/i;
+      break;
+    default:
+      pattern = /./;
+      break;
+  }
+
+  // return true if the value is matched to the pattern, otherwise return false
+  return isMatched(value, pattern);
+};
+
+/**
+* 
+* @param {object} imageFile 
+* @returns true if image if of mime type "image/png" or "image/jpeg"
+*/
+export const isValidImageFile = (imageFile) => {
+ if (imageFile) {
+   // match /image/png or /image/jpeg pattern
+   return /^image\/(png|jpeg)$/.test(imageFile.type);
+ } else {
+   return false;
+ }
+};
+
+
 
 // This Validator Class contains functions need to validate user inputs
-
 class Validator {
   static #isMatched(str, pattern) {
     /* 
@@ -96,7 +187,11 @@ class Validator {
     return false;
   }
 
-  /* This function checks if the imageFile is of a valid image type (jpeg/png)  */
+  /**
+   * 
+   * @param {object} imageFile 
+   * @returns true if image if of mime type "image/png" or "image/jpeg"
+   */
   static isValidImageFile(imageFile) {
     if (imageFile) {
       // match /image/png or /image/jpeg pattern
@@ -105,11 +200,14 @@ class Validator {
       return false;
     }
   }
-  /* -------------------- END isValidImageFile() ----------------------------------*/
 
-  /* This function checks if the imageFile is less than the given size in bytes  
-  by defalt it checks for imageFiles less than 2MB
-*/
+
+  /**
+   * 
+   * @param {object} imageFile 
+   * @param {number} size defult 2000000 = 2MB
+   * @returns true if image file less than the size
+   */
   static isImageSizeLessThan(imageFile, size = 2000000) {
     if (!imageFile) return false;
 
@@ -119,7 +217,7 @@ class Validator {
       return false;
     }
   }
-  /* -------------------- END isImageSizeLessThan() ---------------------------------*/
+
 
   /* ------------------------------------------------------------------------------- */
   /* ---------- These Functions use fetch API to get data from backend ------------- */

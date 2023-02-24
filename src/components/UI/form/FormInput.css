@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 0.6rem 0;
+  margin: 1rem 0;
 }
 
 .form-input__container label {

@@ -1,3 +1,22 @@
+@keyframes slideIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+.welcome__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation-name: slideIn;
+  animation-duration: 1.2s;
+}
+
 .welcome-sub-heading {
   color: hsl(220, 61%, 80%);
   font-size: 0.8rem;

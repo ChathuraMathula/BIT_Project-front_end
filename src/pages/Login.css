@@ -1,27 +1,41 @@
+@keyframes slideIn {
+  from {
+    transform: scaleY(0);
+    transform-origin: 0 top;
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: 0 top;
+    opacity: 100%;
+  }
+}
+
 .login-form__container {
-    width: 90%;
+  animation-name: slideIn;
+  animation-duration: 0.8s;
+  width: 90%;
 }
 
 .login-form-inputs__container {
-    width: 100%;
-    margin-bottom: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .login-form-action-btn__container {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
-
 
 /* For Tablets & Laptops */
 @media (min-width: 768px) {
-    .login-form__container {
-        width: 50%;
-    }
+  .login-form__container {
+    width: 50%;
+  }
 }
 
 /* For Laptops */
 @media (min-width: 992px) {
-    .login-form__container {
-        width: 40%;
-    }
+  .login-form__container {
+    width: 40%;
+  }
 }

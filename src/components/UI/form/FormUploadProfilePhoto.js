@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Validator from "../../../utils/Validator";
+import { isValidImageFile } from "../../../utils/Validator";
 import "./FormUploadProfilePhoto.css";
 
 /* 
@@ -10,6 +10,11 @@ import "./FormUploadProfilePhoto.css";
     value = function() --- returns the {image: file} or {imageWarning: "message string"}
 */
 
+/**
+ *
+ * @param value function to lift up the value of the file
+ * @returns object containing the image file or null { image : null } | { image: file }
+ */
 const FormUploadProfilePhoto = (props) => {
   const [fileUrl, setFileUrl] = useState(null);
 
@@ -17,19 +22,13 @@ const FormUploadProfilePhoto = (props) => {
     const file = event.target.files[0]; // take the uploaded file
     if (file) {
       // if image is of type png/jpeg
-      if (Validator.isValidImageFile(file)) {
-        // if image is less than 2MB
-        if (Validator.isImageSizeLessThan(file)) {
-          setFileUrl(URL.createObjectURL(event.target.files[0]));
-          props.value({ profilePicture: file, imageWarning: ""});
-        } else {
-          props.value({ profilePicture: null, imageWarning: "Image size must be less than 2MB. " });
-          setFileUrl("");
-        }
-      } else {
-        props.value({ profilePicture: null, imageWarning: "Image must be a png/jpeg file " });
-        setFileUrl("");
+      if (isValidImageFile(file)) {
+        setFileUrl(URL.createObjectURL(event.target.files[0]));
+        props.value(file);
       }
+    } else {
+      props.value(null);
+      setFileUrl("");
     }
   };
 

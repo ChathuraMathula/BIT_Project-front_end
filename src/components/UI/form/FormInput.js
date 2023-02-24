@@ -3,20 +3,19 @@ import Sanitizer from "../../../utils/Sanitizer";
 import Validator from "../../../utils/Validator";
 import "./FormInput.css";
 
-/* 
-Date-Modified : 18.02.2023
-Name: <FormInput /> 
-props: 
-  value = function()
-  required = boolean
-  placeholder = string
-  validateType = username | password | name | email | phoneNo | address | url_path
-  id = string
-  type = string
-  className = string
-  name = string
-*/
 
+/**
+ * 
+ * @param value function to lift up the value taken from the input 
+ * @param required boolean value to be specified as the input component to be displayed as required if empty
+ * @param placeholder placeholder value to be displayed
+ * @param validateType validation types ( username | password | name | email | phoneNo | address | url_path )
+ * @param id
+ * @param type string of input type
+ * @param className string
+ * @param name string 
+ * @returns 
+ */
 const FormInput = (props) => {
   const [value, setValue] = useState("");
   const [placeholder, setPlaceholder] = useState(props.placeholder);

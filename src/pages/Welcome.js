@@ -11,7 +11,7 @@ import PortfolioSVG from "../components/UI/SVG/PortfolioSVG";
 
 const Welcome = () => {
   return (
-    <>
+    <div className="welcome__container">
       <div className="welcome-sub-heading">
         Need to capture your unforgettable moments?
       </div>
@@ -33,7 +33,7 @@ const Welcome = () => {
           <Link className="welcome-options__option-link see-portfolio">See Portfolio</Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

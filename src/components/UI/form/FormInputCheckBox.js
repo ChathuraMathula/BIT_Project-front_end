@@ -1,27 +1,22 @@
 import React, { useRef, useState } from "react";
 import "./FormInputCheckBox.css";
 
+/**
+ * 
+ * @param isChecked function to return boolean value of the checkbox
+ * @param className string
+ * @param id string
+ * @param children string to be displayed as a label
+ * @param accentColor   red | green | (default) blue
+ * @param name string
+ * @returns 
+ */
 const FormInputCheckBox = (props) => {
-  // const [value, setValue] = useState(false);
-
   let value;
-
-  // set the value and returns a promise if resolved
-  // const setCheckValue = async (value) => {
-  //   setValue(value);
-  //   return value;
-  // };
 
   const onClickHandler = (event) => {
     value = event.target.checked;
-    if (typeof props.isChecked === "function") {
-      props.isChecked(value); // pass the value to the higher component via a property called value
-    }
-    // setCheckValue(event.target.checked).then((value) => {
-    //   if (typeof props.isChecked === "function") {
-    //     props.isChecked(value); // pass the value to the higher component via a property called value
-    //   }
-    // });
+    props.isChecked(value); // pass the value to the higher component via a property called value
   };
 
   return (

@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { UserLoginContext } from "../../../context/Context";
 import "./UserNavigationButton.css";
 
+/**
+ * Renders a navigation dropdown expand and close button
+ */
 const UserNavigationButton = (props) => {
   const login = useContext(UserLoginContext);
   return (

@@ -54,6 +54,8 @@ class Fetcher {
     const options = {
       method: "POST",
       body: userData,
+      Credentials: "include",
+      mode: "no-cors",
     };
 
     return await fetch(url, options);

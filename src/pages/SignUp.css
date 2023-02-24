@@ -1,9 +1,64 @@
-/* For Mobile Phones */
-@media (max-width: 768px) {
+@keyframes slideIn {
+  from {
+    transform: scaleY(0);
+    transform-origin: 0 top;
+    opacity: 0;
+}
+to {
+    transform: scaleY(1);
+    transform-origin: 0 top;
+    opacity: 100%;
+  }
+}
+
+.sign-up-form__container {
+  animation-name: slideIn;
+  animation-duration: 0.8s;
+}
+
+.sign-up-form-input__container {
+  width: 100%;
+}
+
+.sign-up-form-input__declaration {
+  width: 100%;
+}
+
+.sign-up-form-input__action {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sign-up-form__warning {
+  color: red;
+  font-size: 0.6rem;
+  text-align: center;
+  height: 2rem;
+  width: 100%;
 }
 
 /* For Tablets */
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 768px) {
+  .sign-up-form-input__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sign-up-form-input__col-container {
+    width: 100%;
+    margin: 1rem;
+  }
+
+  .sign-up-form-input__declaration {
+    width: 100%;
+    padding: 1rem;
+  }
 }
 
 /* For Laptops */

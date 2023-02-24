@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormActionButton from "../components/UI/form/FormActionButton";
 import FormContainer from "../components/UI/form/FormContainer";
 import FormHeading from "../components/UI/form/FormHeading";
@@ -8,6 +9,7 @@ import { postLogin } from "../utils/post";
 import "./Login.css";
 
 const Login = (props) => {
+  const navigate = useNavigate();
 
   const [userLoginData, setUserLoginData] = useState({});
 
@@ -26,6 +28,7 @@ const Login = (props) => {
       .then((loginResponseData) => {
         if (loginResponseData) {
           props.user(loginResponseData);
+          navigate("/", { replace: true });
         } else {
           throw error;
         }

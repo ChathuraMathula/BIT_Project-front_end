@@ -94,7 +94,7 @@ const CustomerRegistrationActions = (props) => {
             .then((formData) => Fetcher.postUser(formData))
             .then((res) => {
               console.log(res.message);
-              // navigate("/login", { replace: true });
+              navigate("/login", { replace: true });
             })
             .catch((err) => console.log("error: ", err));
         }

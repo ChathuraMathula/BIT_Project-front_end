@@ -3,6 +3,8 @@ import { UserLoginContext } from "../../context/Context";
 import "./HeaderOptions.css";
 import GeneralNav from "./navigation/GeneralNav";
 import AdminNav from "./navigation/AdminNav";
+import PhotograpehrNav from "./navigation/PhotographerNav";
+import CustomerNav from "./navigation/CustomerNav";
 
 /*
     This component renders the Option links in Main Header based on the login state and user
@@ -10,6 +12,7 @@ import AdminNav from "./navigation/AdminNav";
 
 const HeaderOptions = (props) => {
   const login = useContext(UserLoginContext);
+
 
   console.log("Inside HeaderOptions.js: ", login);
   // if user is not logged to the system
@@ -24,6 +27,18 @@ const HeaderOptions = (props) => {
       return (
         <>
           <AdminNav />
+        </>
+      );
+    } else if (login.user.role === "photographer") {
+      return (
+        <>
+          <PhotograpehrNav />
+        </>
+      );
+    } else if (login.user.role === "customer") {
+      return (
+        <>
+          <CustomerNav />
         </>
       );
     }

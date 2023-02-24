@@ -36,7 +36,7 @@ function App() {
   // useState hooks to manage user login
   const [login, setLogin] = useState({
     isLogged: false,
-    user: null
+    user: null,
   });
 
   const userLoginHandler = (loginResponseData) => {
@@ -48,6 +48,7 @@ function App() {
   };
   console.log("inside App.js: ", login);
 
+
   return (
     <>
       <UserLoginContext.Provider value={login}>
@@ -57,7 +58,10 @@ function App() {
               <Route path="/" element={<Welcome />} />
               <Route path="/dates" element={<Dates />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/login" element={<Login user={userLoginHandler} />} />
+              <Route
+                path="/login"
+                element={<Login user={userLoginHandler} />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
