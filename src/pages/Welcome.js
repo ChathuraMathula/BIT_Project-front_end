@@ -1,6 +1,6 @@
 import React from "react";
 import "./Welcome.css";
-import PhotographerCard from "../components/photographer/PhotographerCard";
+import PhotographerCard from "../components/user/photographer/PhotographerCard";
 import ReservationSteps from "../components/UI/SVG/ReservationSteps";
 import { Link } from "react-router-dom";
 import DateSVG from "../components/UI/SVG/DateSVG";

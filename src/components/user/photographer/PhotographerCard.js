@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./PhotographerCard.css";
 
 // This componenet renders photographer description and profile picture at the welcome page
@@ -14,16 +13,17 @@ const PhotographerCard = (props) => {
   const [insta_link, set_insta_link] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3001/users/photographer/details")
+    fetch("http://localhost:3001/users")
       .then((res) => res.json())
-      .then((data) => {
-        setSummary(data.summary);
-        setFirstName(data.firstname);
-        setLastName(data.lastname);
-        setEmail(data.email);
-        set_phone_no(data.phone_no);
-        set_fb_link(data.fb_link);
-        set_insta_link(data.insta_link);
+      .then(users => users.find(user => user.role === "photographer"))
+      .then((photographer) => {
+        setSummary(photographer.summary);
+        setFirstName(photographer.firstname);
+        setLastName(photographer.lastname);
+        setEmail(photographer.email);
+        set_phone_no(photographer.phone_no);
+        set_fb_link(photographer.fb_link);
+        set_insta_link(photographer.insta_link);
       });
   }, [summary, firstname, lastname, email, phone_no, fb_link, insta_link]);
 
@@ -36,7 +36,7 @@ const PhotographerCard = (props) => {
         <h1 className="photographer-card__info-Heading">Hire Me!</h1>
         <div className="photographer-card__info-Description">{summary}</div>
         <div className="photographer-card__info-Name">
-          - {firstname + " " + lastname}
+          {firstname ? `- ${firstname} ${lastname}` : ``}
         </div>
         <div className="photographer-card__info-links">
           <a

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   Routes,
-  RouterProvider,
   BrowserRouter,
 } from "react-router-dom";
 
@@ -16,6 +15,7 @@ import SignUp from "./pages/SignUp";
 import Layout from "./Layout";
 import Login from "./pages/Login";
 import { UserLoginContext } from "./context/Context";
+import Dashboard from "./components/user/Dashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,7 +48,6 @@ function App() {
   };
   console.log("inside App.js: ", login);
 
-
   return (
     <>
       <UserLoginContext.Provider value={login}>
@@ -62,6 +61,7 @@ function App() {
                 path="/login"
                 element={<Login user={userLoginHandler} />}
               />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Route>
           </Routes>
         </BrowserRouter>

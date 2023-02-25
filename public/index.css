@@ -4,5 +4,8 @@
 }
 
 body {
+    color: hsl(220, 61%, 80%);
     background-color: hsl(216, 100%, 5%);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }

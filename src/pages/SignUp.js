@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./SignUp.css";
-import CustomerRegistrationForm from "../components/customer/CustomerRegistrationForm";
 import FormHeading from "../components/UI/form/FormHeading";
 import FormSubHeading from "../components/UI/form/FormSubHeading";
 import FormContainer from "../components/UI/form/FormContainer";
@@ -8,10 +7,11 @@ import FormUploadProfilePhoto from "../components/UI/form/FormUploadProfilePhoto
 import FormInput from "../components/UI/form/FormInput";
 import FormActionButton from "../components/UI/form/FormActionButton";
 import FormInputCheckBox from "../components/UI/form/FormInputCheckBox";
-import { sanitize } from "../utils/Sanitizer";
-import { isEmpty, isValid } from "../utils/Validator";
 
 const SignUp = (props) => {
+
+  const [warning, setWarning] = useState("");
+
   let customerData = {};
   let checked = false;
   let image = {};
@@ -32,8 +32,9 @@ const SignUp = (props) => {
   };
 
   const onClickRegisterHandler = async () => {
-    if (!customerData && Object.keys(customerData).length !== 8) {
+    if (!customerData | Object.keys(customerData).length !== 8) {
       // all fields must be filled properly.
+      setWarning("all fields must be filled properly");
     } else {
       const isExistingUser = await fetch("http://localhost:3001/users")
         .then((res) => res.json())
@@ -49,12 +50,15 @@ const SignUp = (props) => {
       console.log("Is existing user: ", isExistingUser);
       if (isExistingUser) {
         // Username Already Exists.
+        setWarning("Username Already Exists");
       } else {
         if (customerData.password !== customerData.confirmedPassword) {
           // Passwords did not match.
+          setWarning("Passwords did not match");
         } else {
           if (!checked) {
             // Please Confirm the Declaration.
+            setWarning("Please Confirm the Declaration");
           } else {
             const formData = new FormData();
 
@@ -190,7 +194,7 @@ const SignUp = (props) => {
             </FormInput>
           </div>
         </div>
-        <div id="sign-up-form__warning"></div>
+        <div id="sign-up-form__warning">{warning}</div>
         <div className="sign-up-form-input__declaration">
           <FormInputCheckBox isChecked={isCheckedHandler} accentColor="red">
             Confirm
