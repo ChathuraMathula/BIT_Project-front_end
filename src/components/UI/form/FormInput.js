@@ -14,10 +14,12 @@ import "./FormInput.css";
  * @param type string of input type
  * @param className string
  * @param name string 
+ * @param initialValue string to be displayed initially
+ * @param disabled boolean 
  * @returns 
  */
 const FormInput = (props) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(props.initialValue);
   const [placeholder, setPlaceholder] = useState(props.placeholder);
   const [placeholderStyles, setPlaceholderStyles] = useState("");
   const [notValidStyles, setNotValidStyles] = useState("");
@@ -67,6 +69,7 @@ const FormInput = (props) => {
         name={props.name}
         placeholder={placeholder}
         onChange={onChangeValueHandler}
+        disabled={props.disabled}
       />
     </div>
   );

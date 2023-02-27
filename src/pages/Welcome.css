@@ -1,4 +1,4 @@
-@keyframes slideIn {
+@keyframes wipeIn {
   from {
     opacity: 0;
   }
@@ -13,7 +13,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  animation-name: slideIn;
+  animation-name: wipeIn;
   animation-duration: 1.2s;
 }
 

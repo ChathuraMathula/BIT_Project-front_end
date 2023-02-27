@@ -13,10 +13,11 @@ import "./FormUploadProfilePhoto.css";
 /**
  *
  * @param value function to lift up the value of the file
+ * @param src optional image source url to display an initial image
  * @returns object containing the image file or null { image : null } | { image: file }
  */
 const FormUploadProfilePhoto = (props) => {
-  const [fileUrl, setFileUrl] = useState(null);
+  const [fileUrl, setFileUrl] = useState(props.src);
 
   const onchangeHandler = (event) => {
     const file = event.target.files[0]; // take the uploaded file
@@ -28,7 +29,11 @@ const FormUploadProfilePhoto = (props) => {
       }
     } else {
       props.value(null);
-      setFileUrl("");
+      if (props.src) {
+        setFileUrl(props.src);
+      } else {
+        setFileUrl("");
+      }
     }
   };
 

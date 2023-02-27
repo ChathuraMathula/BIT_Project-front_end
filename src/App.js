@@ -16,6 +16,7 @@ import Layout from "./Layout";
 import Login from "./pages/Login";
 import { UserLoginContext } from "./context/Context";
 import Dashboard from "./components/user/Dashboard";
+import Profile from "./components/user/Profile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -62,6 +63,7 @@ function App() {
                 element={<Login user={userLoginHandler} />}
               />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
           </Routes>
         </BrowserRouter>

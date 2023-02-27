@@ -31,6 +31,18 @@
   background-color: hsl(220, 61%, 20%);
 }
 
+/* input disbled styles */
+.form-input__container input:disabled {
+  border: 1px solid hsl(216, 100%, 25%);
+  background-color: hsl(221, 95%, 8%);
+  cursor: not-allowed;
+}
+
+.form-input__container input:disabled::placeholder {
+  color: hsl(216, 100%, 25%);
+}
+
+
 .form-input__container input::placeholder {
   color: hsl(220, 61%, 60%);
   font-size: 1rem;

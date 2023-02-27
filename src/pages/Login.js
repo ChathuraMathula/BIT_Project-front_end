@@ -28,7 +28,7 @@ const Login = (props) => {
       .then((loginResponseData) => {
         if (loginResponseData) {
           props.user(loginResponseData);
-          navigate("/", { replace: true });
+          navigate("/dashboard", { replace: true });
         } else {
           throw error;
         }

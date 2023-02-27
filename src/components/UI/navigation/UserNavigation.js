@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./UserNavigation.css";
 import UserNavigationButton from "./UserNavigationButton";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,6 +7,8 @@ const UserNavigation = (props) => {
   const [userNavListDropdown, setUserNavListDropdown] = useState(
     "user-navigation-list__container-display-none"
   );
+
+  const dropdownList = useRef(null);
 
   const navigate = useNavigate();
 
@@ -27,8 +29,7 @@ const UserNavigation = (props) => {
       credentials: "include",
     }).then((res) => {
       if (res.ok) {
-        navigate("/", { replace: true });
-        window.location.reload();
+        window.location.replace("/");
       }
     });
   };
@@ -36,7 +37,7 @@ const UserNavigation = (props) => {
   return (
     <>
       <UserNavigationButton onClick={onClickDropDownHandler} />
-      <nav className={userNavListDropdown}>
+      <nav ref={dropdownList} className={userNavListDropdown}>
         {props.children}
         <Link className="log-out__button" onClick={onlogOutHandler}>
           Log Out

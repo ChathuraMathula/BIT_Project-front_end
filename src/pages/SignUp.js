@@ -205,7 +205,7 @@ const SignUp = (props) => {
           </div>
         </div>
         <div className="sign-up-form-input__action">
-          <FormActionButton to="">Cancel</FormActionButton>
+          <FormActionButton to="/">Cancel</FormActionButton>
           <FormActionButton onClick={onClickRegisterHandler}>
             Register
           </FormActionButton>
