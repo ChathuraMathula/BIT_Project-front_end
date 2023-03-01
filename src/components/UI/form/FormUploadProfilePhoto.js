@@ -2,14 +2,6 @@ import React, { useState } from "react";
 import { isValidImageFile } from "../../../utils/Validator";
 import "./FormUploadProfilePhoto.css";
 
-/* 
-  Component Name: <FormUploadProfilePhoto />
-  Date Modified: 19.02.2023
-  Author: Chathura Ekanayake
-  Props:
-    value = function() --- returns the {image: file} or {imageWarning: "message string"}
-*/
-
 /**
  *
  * @param value function to lift up the value of the file

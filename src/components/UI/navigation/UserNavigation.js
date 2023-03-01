@@ -25,8 +25,11 @@ const UserNavigation = (props) => {
   const onlogOutHandler = async () => {
     await fetch("http://localhost:3001/logout", {
       method: "POST",
-      body: { logout: true },
+      body: JSON.stringify({ logout: true }),
       credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      }
     }).then((res) => {
       if (res.ok) {
         window.location.replace("/");

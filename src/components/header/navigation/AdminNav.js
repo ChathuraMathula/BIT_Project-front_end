@@ -31,7 +31,7 @@ const AdminNav = (props) => {
   useEffect(() => {
     if (location === "/dashboard") {
       setState({dashboard: "user-navigation-link__active"});
-    }
+    } 
   }, [location]);
 
   return (
