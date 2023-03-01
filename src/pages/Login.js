@@ -67,7 +67,7 @@ const Login = (props) => {
             //   JSON.stringify({ isLogged: true, user: data.user })
             // );
             // console.log(login);
-            // navigate("/dashboard", { replace: true });
+            navigate("/dashboard", { replace: true });
             // window.location.replace("/");
           }
         })
