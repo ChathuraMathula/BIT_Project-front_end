@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import { UserLoginContext } from "./context/Context";
 import Dashboard from "./components/user/Dashboard";
 import Profile from "./components/user/Profile";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,7 +36,20 @@ const router = createBrowserRouter(
 
 function App() {
   // useState hooks to manage user login
-  const [login, setLogin] = useState({
+  // const [login, setLogin] = useState({
+  //   isLogged: false,
+  //   user: null,
+  // });
+
+  // const userLoginHandler = (loginResponseData) => {
+  //   setLogin((prevState) => ({
+  //     ...prevState,
+  //     ...loginResponseData,
+  //     isLogged: true,
+  //   }));
+  // };
+
+  const [login, setLogin] = useLocalStorage("login", {
     isLogged: false,
     user: null,
   });
@@ -47,6 +61,7 @@ function App() {
       isLogged: true,
     }));
   };
+
   console.log("inside App.js: ", login);
 
   return (

@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../context/Context";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 import "./UserNavigationButton.css";
 
 /**
@@ -7,6 +8,9 @@ import "./UserNavigationButton.css";
  */
 const UserNavigationButton = (props) => {
   const login = useContext(UserLoginContext);
+  // const [login, setLogin] = useLocalStorage("login");
+
+  console.log("inside user navigation button", login);
   return (
     <>
       <div

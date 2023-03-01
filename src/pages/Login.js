@@ -4,6 +4,7 @@ import FormActionButton from "../components/UI/form/FormActionButton";
 import FormContainer from "../components/UI/form/FormContainer";
 import FormHeading from "../components/UI/form/FormHeading";
 import FormInput from "../components/UI/form/FormInput";
+import useLocalStorage from "../hooks/useLocalStorage";
 import { postLogin } from "../utils/post";
 import { sanitize } from "../utils/Sanitizer";
 import { isValid } from "../utils/Validator";
@@ -12,6 +13,7 @@ import "./Login.css";
 
 const Login = (props) => {
   const navigate = useNavigate();
+
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -53,9 +55,20 @@ const Login = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data) {
-            console.log(data);
+          if (data.error) {
             displayWarning(data.error);
+          } else if (data.user) {
+            props.user(data);
+            console.log("inside login.js: ", data);
+
+            // setLogin({ isLogged: true, user: data.user });
+            // localStorage.setItem(
+            //   "login",
+            //   JSON.stringify({ isLogged: true, user: data.user })
+            // );
+            // console.log(login);
+            // navigate("/dashboard", { replace: true });
+            // window.location.replace("/");
           }
         })
         .catch((error) => {

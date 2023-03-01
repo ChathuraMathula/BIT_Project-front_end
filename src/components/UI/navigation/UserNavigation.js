@@ -1,9 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./UserNavigation.css";
 import UserNavigationButton from "./UserNavigationButton";
 import { Link, useNavigate } from "react-router-dom";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import { UserLoginContext } from "../../../context/Context";
 
 const UserNavigation = (props) => {
+  const login = useContext(UserLoginContext);
+  // const [login, setLogin] = useLocalStorage("login");
+
   const [userNavListDropdown, setUserNavListDropdown] = useState(
     "user-navigation-list__container-display-none"
   );
@@ -23,15 +28,18 @@ const UserNavigation = (props) => {
   };
 
   const onlogOutHandler = async () => {
-    await fetch("http://localhost:3001/logout", {
-      method: "POST",
-      body: { logout: true },
-      credentials: "include",
-    }).then((res) => {
-      if (res.ok) {
-        window.location.replace("/");
-      }
-    });
+    if (login.isLogged) {
+      await fetch("http://localhost:3001/logout", {
+        method: "POST",
+        body: { logout: true },
+        credentials: "include",
+      }).then((res) => {
+        if (res.ok) {
+          localStorage.clear();
+          window.location.replace("/");
+        }
+      });
+    }
   };
 
   return (
