@@ -19,35 +19,8 @@ import Dashboard from "./components/user/Dashboard";
 import Profile from "./components/user/Profile";
 import useLocalStorage from "./hooks/useLocalStorage";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route element={<Layout />}>
-      <Route path="/" element={<Welcome />} />
-      <Route path="/dates" element={<Dates />} />
-      <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/login" element={<Login />} />
-    </Route>
-  )
-);
-
-{
-  /* <RouterProvider router={router} /> */
-}
 
 function App() {
-  // useState hooks to manage user login
-  // const [login, setLogin] = useState({
-  //   isLogged: false,
-  //   user: null,
-  // });
-
-  // const userLoginHandler = (loginResponseData) => {
-  //   setLogin((prevState) => ({
-  //     ...prevState,
-  //     ...loginResponseData,
-  //     isLogged: true,
-  //   }));
-  // };
 
   const [login, setLogin] = useLocalStorage("login", {
     isLogged: false,
