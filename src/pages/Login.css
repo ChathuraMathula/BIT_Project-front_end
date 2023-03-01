@@ -11,6 +11,16 @@
   }
 }
 
+
+@keyframes wipeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
 .login-form__container {
   animation-name: slideIn;
   animation-duration: 0.8s;
@@ -23,7 +33,24 @@
 }
 
 .login-form-action-btn__container {
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+}
+
+.login-form-action__message {
+  height: 1.5rem;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.login-form-warning__red {
+  color: red;
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
 }
 
 /* For Tablets & Laptops */
