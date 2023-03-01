@@ -1,0 +1,106 @@
+@keyframes wipeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+.user-profile__heading {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
+}
+
+.user-profile-form__container {
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
+}
+
+.user-profile-intro__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.user-profile-bio__container {
+  margin: 1.2rem 0;
+}
+
+.user-profile-bio__container span {
+  font-weight: bold;
+}
+
+.user-profile-bio__container div {
+  font-size: 1.1rem;
+}
+
+#user-profile__warning {
+  height: 1.5rem;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.user-profile-warning__red {
+  color: red;
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
+}
+
+.user-profile-warning__green {
+  color: rgb(9, 255, 0);
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
+}
+
+.user-profile-form__action {
+  margin: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .user-profile-intro__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .user-profile-bio__container {
+    margin: 0 2rem;
+  }
+
+  .user-profile-bio__container div {
+    font-size: 1.2rem;
+    margin: 0.3rem 0;
+  }
+
+  .user-profile__heading {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .user-profile-form__input {
+    width: 95%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .user-profile-form__container {
+    width: 80%;
+  }
+
+  .user-profile-bio__container div {
+    margin: 0.7rem 0;
+  }
+}

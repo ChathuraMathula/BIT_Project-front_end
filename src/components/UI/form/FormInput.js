@@ -19,7 +19,7 @@ import "./FormInput.css";
  * @returns 
  */
 const FormInput = (props) => {
-  const [value, setValue] = useState(props.initialValue);
+  const [value, setValue] = useState(props.value);
   const [placeholder, setPlaceholder] = useState(props.placeholder);
   const [placeholderStyles, setPlaceholderStyles] = useState("");
   const [notValidStyles, setNotValidStyles] = useState("");
@@ -68,7 +68,7 @@ const FormInput = (props) => {
         value={value}
         name={props.name}
         placeholder={placeholder}
-        onChange={onChangeValueHandler}
+        onChange={props.onChange}
         disabled={props.disabled}
       />
     </div>
