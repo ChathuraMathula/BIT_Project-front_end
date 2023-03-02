@@ -21,7 +21,7 @@
 /* For Laptops */
 @media (min-width: 992px) {
     .main-container {
-        width: 80%;
+        width: 70%;
         top: 5rem;
         margin: 1rem auto;
       }
