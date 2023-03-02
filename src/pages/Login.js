@@ -14,18 +14,17 @@ import "./Login.css";
 const Login = (props) => {
   const navigate = useNavigate();
 
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
 
   const onChangeUsernameHandler = (event) => {
-    setUsername(event.target.value);
+    setUsername(sanitize(event.target.value));
   };
 
   const onChangePasswordHandler = (event) => {
-    setPassword(event.target.value);
+    setPassword(sanitize(event.target.value));
   };
 
   const displayWarning = (message) => {
@@ -38,10 +37,15 @@ const Login = (props) => {
   };
 
   const onClickLoginHandler = async () => {
-    setUsername(sanitize(username.trim()));
-    setPassword(sanitize(password.trim()));
+    setUsername(username.trim());
+    setPassword(password.trim());
 
-    if (!isValid("username", username) && !isValid("password", password)) {
+    if (!username || !password) {
+      displayWarning("Please enter a valid username and password. 😏");
+    } else if (
+      !isValid("username", username) ||
+      !isValid("password", password)
+    ) {
       displayWarning("Username or password not valid. 🙁 Please check again.");
     } else {
       const formData = new FormData();

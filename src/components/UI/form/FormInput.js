@@ -14,11 +14,22 @@ import "./FormInput.css";
  * @param type string of input type
  * @param className string
  * @param name string
- * @param initialValue string to be displayed initially
  * @param disabled boolean
  * @returns
  */
 const FormInput = (props) => {
+  // const [warningMsg, setWariningMsg] = useState("");
+  // const [warningStyles, setWariningStyles] = useState("");
+
+  // const setWarining = (message) => {
+  //   setWariningMsg(message);
+  //   setWariningStyles("form-input__warining-red");
+  //   setTimeout(() => {
+  //     setWariningMsg("");
+  //     setWariningStyles("");
+  //   }, 5000);
+  // };
+
   return (
     <div className={"form-input__container " + props.className}>
       <label for={props.id}>
@@ -33,6 +44,7 @@ const FormInput = (props) => {
           disabled={props.disabled}
         />
       </label>
+      <div className={"form-input__warining"}>{props.warning}</div>
     </div>
   );
 };

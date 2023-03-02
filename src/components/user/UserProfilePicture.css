@@ -1,0 +1,44 @@
+
+.user-profile-picture__input-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-profile-picture__bio-container {
+  margin: 1rem;
+  font-size: 1.2rem;
+}
+
+.user-profile-picture__bio-container span {
+  font-weight: bold;
+}
+
+.user-profile-picture__bio-container > div {
+  margin: 0.6rem 0;
+}
+
+.user-profile-picture__action {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .user-profile-picture__input-container {
+        flex-direction: row;
+        margin-bottom: 1rem;
+    }
+
+    .user-profile-picture__bio-container {
+        margin: 1rem 2rem;
+        font-size: 1.2rem;
+      }
+}

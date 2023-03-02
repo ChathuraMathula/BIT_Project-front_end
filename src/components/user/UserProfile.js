@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { UserLoginContext } from "../../context/Context";
-import FormActionButton from "../UI/form/FormActionButton";
-import FormChangePassword from "../UI/form/FormChangePassword";
-import FormContainer from "../UI/form/FormContainer";
-import FormInput from "../UI/form/FormInput";
-import FormUploadProfilePhoto from "../UI/form/FormUploadProfilePhoto";
+import FormHeading from "../UI/form/FormHeading";
 import "./UserProfile.css";
+import UserProfileDetails from "./UserProfileDetails";
+import UserProfilePassword from "./UserProfilePassword";
+import UserProfilePicture from "./UserProfilePicture";
 
 const UserProfile = (props) => {
   const login = useContext(UserLoginContext);
@@ -17,26 +15,6 @@ const UserProfile = (props) => {
   let userData = {};
   let profilePicture;
 
-  useEffect(() => {
-    fetch("http://localhost:3001/user", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((userDocument) => {
-        if (Object.keys(user).length === 0) {
-          setUser({ ...userDocument });
-        }
-      });
-  }, [user, warningMsg, warningStyles]);
-
-  const inputValuesHandler = (inputValues) => {
-    userData = { ...userData, ...inputValues };
-    console.log("User Profile Inputs : ", userData);
-  };
-
-  const userProfilePictureHandler = (profilePic) => {
-    profilePicture = profilePic;
-  };
 
   const setSuccessMsg = (message) => {
     let warningMsg = "";
@@ -124,74 +102,11 @@ const UserProfile = (props) => {
 
   return (
     <>
-      <h2 className="user-profile__heading">
-        {login.user.role.toUpperCase()} PROFILE
-      </h2>
-      <FormContainer className="user-profile-form__container">
-        <div className="user-profile-intro__container">
-          <FormUploadProfilePhoto
-            value={userProfilePictureHandler}
-            src="http://localhost:3001/users/user/profile/picture/"
-          />
-          <div className="user-profile-bio__container">
-            <div>
-              Username: <span>{user.username}</span>
-            </div>
-            <div>
-              Fist Name: <span>{user.firstname}</span>
-            </div>
-            <div>
-              Last Name: <span>{user.lastname}</span>
-            </div>
-          </div>
-        </div>
-        <FormInput
-          className="user-profile-form__input"
-          type="text"
-          id="email"
-          name="email"
-          validateType="email"
-          placeholder="example@gmail.com"
-          initialValue={user.email}
-          value={inputValuesHandler}
-        >
-          Email:
-        </FormInput>
-        <FormInput
-          className="user-profile-form__input"
-          type="text"
-          id="phoneNo"
-          name="phoneNo"
-          validateType="phoneNo"
-          placeholder="070-XXXXXXX"
-          initialValue={user.phoneNo}
-          value={inputValuesHandler}
-        >
-          Phone No:
-        </FormInput>
-        <FormInput
-          className="user-profile-form__input"
-          type="text"
-          id="address"
-          name="address"
-          validateType="address"
-          placeholder="No 35, Kurunegala Rd, Polgahawela"
-          initialValue={user.address}
-          value={inputValuesHandler}
-        >
-          Address:
-        </FormInput>
-        <FormChangePassword values={inputValuesHandler}/>
-        <div id="user-profile__warning" className={warningStyles}>
-          {warningMsg}
-        </div>
-        <div className="user-profile-form__action">
-          <FormActionButton to="/dashboard">Cancel</FormActionButton>
-          <FormActionButton onClick={onClickSaveChangesHandler}>
-            Save Changes
-          </FormActionButton>
-        </div>
-      </FormContainer>
+      <FormHeading>{login.user.role.toUpperCase()} PROFILE</FormHeading>
+
+      <UserProfilePicture />
+      <UserProfileDetails />
+      <UserProfilePassword />
     </>
   );
 };

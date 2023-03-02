@@ -1,3 +1,13 @@
+@keyframes wipeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+
 .form-input__container {
   width: 100%;
   position: relative;
@@ -61,3 +71,17 @@ input.form-input__not-valid:focus-visible {
   outline: 1px solid hsl(0, 100%, 50%);
   border: 1px solid hsl(0, 100%, 50%);
 }
+
+.form-input__warining {
+  height: 1.2rem;
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  text-align: center;
+  width: 100%;
+  color: red;
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
+}
+/* 
+.form-input__warining__red {
+} */

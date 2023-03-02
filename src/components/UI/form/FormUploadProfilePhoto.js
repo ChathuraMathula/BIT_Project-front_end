@@ -25,7 +25,7 @@ const FormUploadProfilePhoto = (props) => {
       // if image is of type png/jpeg
       if (isValidImageFile(file)) {
         setFileUrl(URL.createObjectURL(event.target.files[0]));
-        props.value(file);
+        props.onChange(file);
       }
     } else {
       props.value(null);
@@ -39,7 +39,7 @@ const FormUploadProfilePhoto = (props) => {
 
   return (
     <div className="form-upload-profile-photo__container">
-      <img className="form-upload-profile-photo__pic" src={fileUrl}></img>
+      <img className="form-upload-profile-photo__pic" src={fileUrl} alt=""></img>
       <label
         className="form-upload-profile-photo__button"
         for="uploadProfilePhoto"

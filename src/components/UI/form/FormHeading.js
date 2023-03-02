@@ -4,7 +4,7 @@ import "./FormHeading.css";
 const FormHeading = (props) => {
   return (
     <>
-        <h1 className="form-heading">{props.children}</h1>
+        <h2 className="form-heading">{props.children}</h2>
     </>
   );
 };
