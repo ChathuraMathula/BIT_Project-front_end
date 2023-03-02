@@ -106,7 +106,7 @@ const UserProfile = (props) => {
 
       <UserProfilePicture user={login.user}/>
       <UserProfileDetails user={login.user}/>
-      <UserProfilePassword />
+      <UserProfilePassword user={login.user}/>
     </>
   );
 };

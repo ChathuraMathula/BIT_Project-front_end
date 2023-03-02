@@ -8,9 +8,9 @@ import FormSubHeading from "../UI/form/FormSubHeading";
 import "./UserProfileDetails.css";
 
 /**
- * 
+ *
  * @param {object} props.user user object with name and role attributes eg: {name: "janaka", role: "customer"}
- * @returns 
+ * @returns
  */
 const UserProfileDetails = (props) => {
   const [email, setEmail] = useState("");
@@ -44,8 +44,17 @@ const UserProfileDetails = (props) => {
     }
   }, []);
 
-  const displayWarning = (message) => {
-    setWarningStyles("login-form-warning__red");
+  const displayError = (message) => {
+    setWarningStyles("warning-msg-styles__red");
+    setWarningMessage(message);
+    setTimeout(() => {
+      setWarningStyles("");
+      setWarningMessage("");
+    }, 5000);
+  };
+
+  const displaySuccess = (message) => {
+    setWarningStyles("warning-msg-styles__green");
     setWarningMessage(message);
     setTimeout(() => {
       setWarningStyles("");
@@ -77,6 +86,49 @@ const UserProfileDetails = (props) => {
       setAddressWarning("🏘 Invalid Address.");
     } else {
       setAddressWarning("");
+    }
+  };
+
+  const onClickSaveHandler = async (event) => {
+    event.preventDefault();
+
+    if (props.user) {
+      if (
+        isValid("email", email) &&
+        isValid("phoneNo", phoneNo) &&
+        isValid("address", address)
+      ) {
+        const formData = new FormData();
+        formData.append("username", props.user.name);
+        formData.append("email", email);
+        formData.append("phoneNo", phoneNo);
+        formData.append("address", address);
+
+        await fetch("http://localhost:3001/user/update/contact/details", {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data) {
+              if (data.success) {
+                displaySuccess(data.success);
+              } else if (data.error) {
+                displayError(data.error);
+              }
+            } else {
+              throw "error";
+            }
+          })
+          .catch((error) => {
+            if (error) {
+              displayError("Sorry...! 😟 Save failed.");
+            }
+          });
+      } else {
+        displayError("Input data is invalid. Please check again. 😡");
+      }
     }
   };
 
@@ -126,8 +178,9 @@ const UserProfileDetails = (props) => {
         {warningMessage}
       </div>
       <div className="user-profile-details__action">
-        {/* <FormActionButton>REMOVE</FormActionButton> */}
-        <FormActionButton>SAVE CHANGES</FormActionButton>
+        <FormActionButton onClick={onClickSaveHandler}>
+          SAVE CHANGES
+        </FormActionButton>
       </div>
     </FormContainer>
   );

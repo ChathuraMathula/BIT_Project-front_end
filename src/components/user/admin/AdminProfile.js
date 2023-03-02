@@ -10,7 +10,7 @@ const AdminProfile = (props) => {
     <>
       <FormHeading>{login.user.role.toUpperCase()} PROFILE</FormHeading>
       <UserProfilePicture user={login.user}/>
-      <UserProfilePassword />
+      <UserProfilePassword user={login.user}/>
 
     </>
   );

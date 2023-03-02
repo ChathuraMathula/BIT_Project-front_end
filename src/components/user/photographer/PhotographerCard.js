@@ -30,7 +30,7 @@ const PhotographerCard = (props) => {
   return (
     <div className="photographer-card__container">
       <div className="photographer-card__img-container">
-        <img className="photographer-card__img"></img>
+        <img className="photographer-card__img" alt=""></img>
       </div>
       <div className="photographer-card__info-container">
         <h1 className="photographer-card__info-Heading">Hire Me!</h1>

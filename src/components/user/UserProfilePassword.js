@@ -32,9 +32,65 @@ const UserProfilePassword = (props) => {
     }
   };
 
-  const onClickSavePassword = (event) => {
+  const displayError = (message) => {
+    setWarningStyles("warning-msg-styles__red");
+    setWarningMessage(message);
+    setTimeout(() => {
+      setWarningStyles("");
+      setWarningMessage("");
+    }, 5000);
+  };
+
+  const displaySuccess = (message) => {
+    setWarningStyles("warning-msg-styles__green");
+    setWarningMessage(message);
+    setTimeout(() => {
+      setWarningStyles("");
+      setWarningMessage("");
+    }, 10000);
+  };
+
+  const onClickSavePassword = async (event) => {
     event.preventDefault();
 
+    if (props.user) {
+      if (
+        isValid("password", oldPassword) &&
+        isValid("password", newPassword) 
+      ) {
+        const formData = new FormData();
+        formData.append("username", props.user.name);
+        formData.append("oldPassword", oldPassword);
+        formData.append("newPassword", newPassword);
+
+        await fetch("http://localhost:3001/user/update/password", {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data) {
+              if (data.success) {
+                displaySuccess(data.success);
+                setOldPassword("");
+                setNewPassword("");
+              } else if (data.error) {
+                displayError(data.error);
+              }
+            } else {
+              throw "error";
+            }
+          })
+          .catch((error) => {
+            if (error) {
+              displayError("Sorry...! 😟 Save failed.");
+            }
+          });
+      } else {
+        displayError("Input data is invalid. Please check again. 😡");
+      }
+    }
   }
 
   return (
