@@ -7,7 +7,6 @@ import { UserLoginContext } from "../../../context/Context";
 
 const UserNavigation = (props) => {
   const login = useContext(UserLoginContext);
-  // const [login, setLogin] = useLocalStorage("login");
 
   const [userNavListDropdown, setUserNavListDropdown] = useState(
     "user-navigation-list__container-display-none"
@@ -44,7 +43,7 @@ const UserNavigation = (props) => {
 
   return (
     <>
-      <UserNavigationButton onClick={onClickDropDownHandler} />
+      <UserNavigationButton user={login.user} onClick={onClickDropDownHandler} />
       <nav ref={dropdownList} className={userNavListDropdown}>
         {props.children}
         <Link className="log-out__button" onClick={onlogOutHandler}>

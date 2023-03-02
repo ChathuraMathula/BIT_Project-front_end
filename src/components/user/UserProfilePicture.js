@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserLoginContext } from "../../context/Context";
 import FormActionButton from "../UI/form/FormActionButton";
 import FormContainer from "../UI/form/FormContainer";
 import FormSubHeading from "../UI/form/FormSubHeading";
@@ -6,6 +7,7 @@ import FormUploadProfilePhoto from "../UI/form/FormUploadProfilePhoto";
 import "./UserProfilePicture.css";
 
 const UserProfilePicture = (props) => {
+  const login = useContext(UserLoginContext);
   const [username, setUsername] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -13,17 +15,24 @@ const UserProfilePicture = (props) => {
   const [warningStyles, setWarningStyles] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3001/user", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((userDocument) => {
-        if (userDocument) {
-          setUsername(userDocument.username);
-          setFirstname(userDocument.firstname);
-          setLastname(userDocument.lastname);
-        }
-      });
+    if (props.user) {
+      const formData = new FormData();
+      formData.append("username", props.user.name);
+
+      fetch("http://localhost:3001/user", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((userDocument) => {
+          if (userDocument) {
+            setUsername(userDocument.username);
+            setFirstname(userDocument.firstname);
+            setLastname(userDocument.lastname);
+          }
+        });
+    }
   }, []);
 
   const displayWarning = (message) => {
@@ -39,7 +48,7 @@ const UserProfilePicture = (props) => {
     <FormContainer>
       <FormSubHeading>PROFILE PICTURE</FormSubHeading>
       <div className="user-profile-picture__input-container">
-        <FormUploadProfilePhoto src="http://localhost:3001/users/user/profile/picture/" />
+        <FormUploadProfilePhoto user={login.user}/>
         <div className="user-profile-picture__bio-container">
           <div>
             Username: <span>{username}</span>

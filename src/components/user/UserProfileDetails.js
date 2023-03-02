@@ -7,6 +7,11 @@ import FormInput from "../UI/form/FormInput";
 import FormSubHeading from "../UI/form/FormSubHeading";
 import "./UserProfileDetails.css";
 
+/**
+ * 
+ * @param {object} props.user user object with name and role attributes eg: {name: "janaka", role: "customer"}
+ * @returns 
+ */
 const UserProfileDetails = (props) => {
   const [email, setEmail] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
@@ -19,17 +24,24 @@ const UserProfileDetails = (props) => {
   const [addressWarning, setAddressWarning] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:3001/user", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((userDocument) => {
-        if (userDocument) {
-          setEmail(userDocument.email);
-          setPhoneNo(userDocument.phoneNo);
-          setAddress(userDocument.address);
-        }
-      });
+    if (props.user) {
+      const formData = new FormData();
+      formData.append("username", props.user.name);
+
+      fetch("http://localhost:3001/user", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((userDocument) => {
+          if (userDocument) {
+            setEmail(userDocument.email);
+            setPhoneNo(userDocument.phoneNo);
+            setAddress(userDocument.address);
+          }
+        });
+    }
   }, []);
 
   const displayWarning = (message) => {

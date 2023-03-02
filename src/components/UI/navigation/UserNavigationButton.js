@@ -8,9 +8,27 @@ import "./UserNavigationButton.css";
  */
 const UserNavigationButton = (props) => {
   const login = useContext(UserLoginContext);
-  // const [login, setLogin] = useLocalStorage("login");
+  const [fileUrl, setFileUrl] = useState("");
 
-  console.log("inside user navigation button", login);
+  useEffect(() => {
+    if (props.user) {
+      const formData = new FormData();
+      formData.append("username", props.user.name);
+
+      fetch("http://localhost:3001/users/user/profile/picture", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      })
+        .then((res) => res.blob())
+        .then((data) => {
+          if (data) {
+            setFileUrl(URL.createObjectURL(data));
+          }
+        });
+    }
+  }, []);
+
   return (
     <>
       <div
@@ -19,7 +37,7 @@ const UserNavigationButton = (props) => {
       >
         <div>{login.user.name}</div>
         <img
-          src="http://localhost:3001/users/user/profile/picture/"
+          src={fileUrl}
           alt=""
         ></img>
       </div>
