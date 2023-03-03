@@ -27,10 +27,13 @@ const AdminNav = (props) => {
   };
 
   useEffect(() => {
-    if (location === "/dashboard") {
-      setState({dashboard: "user-navigation-link__active"});
+    const pathName = window.location.pathname;
+    if (pathName === "/dashboard") {
+      setState({ dashboard: "user-navigation-link__active" });
+    } else if (pathName === "/profile") {
+      setState({ profile: "user-navigation-link__active" });
     }
-  }, [location]);
+  }, [window.location.pathname]);
 
   return (
     <>
