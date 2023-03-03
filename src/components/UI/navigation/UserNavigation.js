@@ -33,7 +33,12 @@ const UserNavigation = (props) => {
         body: { logout: true },
         credentials: "include",
       }).then((res) => {
-        if (res.ok) {
+        if (res) {
+          localStorage.clear();
+          window.location.replace("/");
+        }
+      }).catch(error => {
+        if (error) {
           localStorage.clear();
           window.location.replace("/");
         }

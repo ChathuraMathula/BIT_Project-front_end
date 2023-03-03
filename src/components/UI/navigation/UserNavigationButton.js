@@ -15,7 +15,7 @@ const UserNavigationButton = (props) => {
       const formData = new FormData();
       formData.append("username", props.user.name);
 
-      fetch("http://localhost:3001/users/user/profile/picture", {
+      fetch("http://localhost:3001/user/profile/picture", {
         method: "POST",
         credentials: "include",
         body: formData,
