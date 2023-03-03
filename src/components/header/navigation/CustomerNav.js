@@ -5,7 +5,6 @@ import "./CustomerNav.css";
 
 const CustomerNav = (props) => {
   const [state, setState] = useState({});
-  const [location, setLocation] = useState(window.location.pathname);
 
   const onClickDashboard = () => {
     setState({ dashboard: "user-navigation-link__active" });
@@ -17,10 +16,13 @@ const CustomerNav = (props) => {
 
 
   useEffect(() => {
-    if (location === "/dashboard") {
+    const pathName = window.location.pathname;
+    if (pathName === "/dashboard") {
       setState({dashboard: "user-navigation-link__active"});
+    } else if (pathName === "/profile") {
+      setState({ profile: "user-navigation-link__active" });
     }
-  }, [location]);
+  }, [window.location.pathname]);
 
   return (
     <>

@@ -3,6 +3,16 @@ blue => hsl(216, 100%, 5%);
 light blue => hsl(220, 61%, 80%);
 */
 
+@keyframes wipeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 100%;
+    }
+  }
+  
+
 .form-upload-profile-photo__container {
     position: relative;
     border-radius: 50%;
@@ -16,6 +26,8 @@ light blue => hsl(220, 61%, 80%);
     border-radius: 50%;
     border: 2px solid hsl(220, 61%, 80%);
     position: relative;
+    animation-name: wipeIn;
+    animation-duration: 1.2s;
 }
 
 .form-upload-profile-photo__button svg {

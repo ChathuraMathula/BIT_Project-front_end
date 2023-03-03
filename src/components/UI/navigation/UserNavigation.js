@@ -1,9 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./UserNavigation.css";
 import UserNavigationButton from "./UserNavigationButton";
 import { Link, useNavigate } from "react-router-dom";
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import { UserLoginContext } from "../../../context/Context";
 
 const UserNavigation = (props) => {
+  const login = useContext(UserLoginContext);
+
   const [userNavListDropdown, setUserNavListDropdown] = useState(
     "user-navigation-list__container-display-none"
   );
@@ -23,6 +27,7 @@ const UserNavigation = (props) => {
   };
 
   const onlogOutHandler = async () => {
+<<<<<<< HEAD
     await fetch("http://localhost:3001/logout", {
       method: "POST",
       body: JSON.stringify({ logout: true }),
@@ -35,11 +40,30 @@ const UserNavigation = (props) => {
         window.location.replace("/");
       }
     });
+=======
+    if (login.isLogged) {
+      await fetch("http://localhost:3001/logout", {
+        method: "POST",
+        body: { logout: true },
+        credentials: "include",
+      }).then((res) => {
+        if (res) {
+          localStorage.clear();
+          window.location.replace("/");
+        }
+      }).catch(error => {
+        if (error) {
+          localStorage.clear();
+          window.location.replace("/");
+        }
+      });
+    }
+>>>>>>> version02
   };
 
   return (
     <>
-      <UserNavigationButton onClick={onClickDropDownHandler} />
+      <UserNavigationButton user={login.user} onClick={onClickDropDownHandler} />
       <nav ref={dropdownList} className={userNavListDropdown}>
         {props.children}
         <Link className="log-out__button" onClick={onlogOutHandler}>

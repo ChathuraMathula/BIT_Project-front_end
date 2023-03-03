@@ -1,28 +1,39 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import React, { useEffect, useState } from "react";
+>>>>>>> version02
 import Sanitizer, { sanitize } from "../../../utils/Sanitizer";
 import Validator, { isEmpty, isValid } from "../../../utils/Validator";
 import "./FormInput.css";
 
 /**
  *
+<<<<<<< HEAD
  * @param value function to lift up the value taken from the input
+=======
+ * @param onChange function to lift up the value taken from the input
+>>>>>>> version02
  * @param required boolean value to be specified as the input component to be displayed as required if empty
+ * @param value input value
  * @param placeholder placeholder value to be displayed
  * @param validateType validation types ( username | password | name | email | phoneNo | address | url_path )
  * @param id
  * @param type string of input type
  * @param className string
  * @param name string
+<<<<<<< HEAD
  * @param initialValue string to be displayed initially
+=======
+>>>>>>> version02
  * @param disabled boolean
  * @returns
  */
 const FormInput = (props) => {
-  const [value, setValue] = useState(props.initialValue);
-  const [placeholder, setPlaceholder] = useState(props.placeholder);
-  const [placeholderStyles, setPlaceholderStyles] = useState("");
-  const [notValidStyles, setNotValidStyles] = useState("");
+  // const [warningMsg, setWariningMsg] = useState("");
+  // const [warningStyles, setWariningStyles] = useState("");
 
+<<<<<<< HEAD
   const inputValue = {};
 
   const setInputValue = async (value) => {
@@ -58,20 +69,32 @@ const FormInput = (props) => {
       }
     });
   };
+=======
+  // const setWarining = (message) => {
+  //   setWariningMsg(message);
+  //   setWariningStyles("form-input__warining-red");
+  //   setTimeout(() => {
+  //     setWariningMsg("");
+  //     setWariningStyles("");
+  //   }, 5000);
+  // };
+>>>>>>> version02
 
   return (
     <div className={"form-input__container " + props.className}>
-      <label for={props.id}>{props.children}</label>
-      <input
-        className={placeholderStyles + notValidStyles}
-        type={props.type}
-        id={props.id}
-        value={value}
-        name={props.name}
-        placeholder={placeholder}
-        onChange={onChangeValueHandler}
-        disabled={props.disabled}
-      />
+      <label for={props.id}>
+        {props.children}
+        <input
+          type={props.type}
+          id={props.id}
+          value={props.value}
+          name={props.name}
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+          disabled={props.disabled}
+        />
+      </label>
+      <div className={"form-input__warining"}>{props.warning}</div>
     </div>
   );
 };

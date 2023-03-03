@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { isValidImageFile } from "../../../utils/Validator";
 import "./FormUploadProfilePhoto.css";
 
 /**
  *
- * @param value function to lift up the value of the file
- * @param src optional image source url to display an initial image
+ * @param onChange function to lift up the value of the file
  * @returns object containing the image file or null { image : null } | { image: file }
  */
 const FormUploadProfilePhoto = (props) => {
@@ -17,21 +16,40 @@ const FormUploadProfilePhoto = (props) => {
       // if image is of type png/jpeg
       if (isValidImageFile(file)) {
         setFileUrl(URL.createObjectURL(event.target.files[0]));
-        props.value(file);
+        props.onChange(file);
       }
     } else {
-      props.value(null);
-      if (props.src) {
-        setFileUrl(props.src);
-      } else {
-        setFileUrl("");
-      }
+      props.onChange(null);
     }
   };
 
+  useEffect(() => {
+    if (props.user) {
+      const formData = new FormData();
+      formData.append("username", props.user.name);
+
+      fetch("http://localhost:3001/user/profile/picture", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      })
+        .then((res) => res.blob())
+        .then((data) => {
+          if (data) {
+            console.log("PICTURE", data)
+            setFileUrl(URL.createObjectURL(data));
+          }
+        });
+    }
+  }, []);
+
   return (
     <div className="form-upload-profile-photo__container">
-      <img className="form-upload-profile-photo__pic" src={fileUrl}></img>
+      <img
+        className="form-upload-profile-photo__pic"
+        src={fileUrl}
+        alt=""
+      ></img>
       <label
         className="form-upload-profile-photo__button"
         for="uploadProfilePhoto"

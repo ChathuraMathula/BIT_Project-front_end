@@ -1,4 +1,12 @@
 .form-heading {
-  font-size: 1.3rem;
-  margin-bottom: 0.1rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
+}
+@media (min-width: 768px) {
+  .form-heading {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
 }

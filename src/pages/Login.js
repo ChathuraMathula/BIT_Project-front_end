@@ -4,49 +4,93 @@ import FormActionButton from "../components/UI/form/FormActionButton";
 import FormContainer from "../components/UI/form/FormContainer";
 import FormHeading from "../components/UI/form/FormHeading";
 import FormInput from "../components/UI/form/FormInput";
+import useLocalStorage from "../hooks/useLocalStorage";
 import { postLogin } from "../utils/post";
+import { sanitize } from "../utils/Sanitizer";
+import { isValid } from "../utils/Validator";
 
 import "./Login.css";
 
 const Login = (props) => {
   const navigate = useNavigate();
 
-  const [userLoginData, setUserLoginData] = useState({});
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [warningMessage, setWarningMessage] = useState("");
+  const [warningStyles, setWarningStyles] = useState("");
 
-  const inputValuesHandler = (inputValues) => {
-    setUserLoginData(prevData => ({...prevData, ...inputValues}));
+  const onChangeUsernameHandler = (event) => {
+    setUsername(sanitize(event.target.value));
   };
 
-  const onClickLoginHandler = () => {
-    postLogin(userLoginData)
-      .then((res) => {
-        if (!res.ok) {
-          throw `${res.status} = ${res.statusText}`;
-        }
-        return res.json();
+  const onChangePasswordHandler = (event) => {
+    setPassword(sanitize(event.target.value));
+  };
+
+  const displayWarning = (message) => {
+    setWarningStyles("login-form-warning__red");
+    setWarningMessage(message);
+    setTimeout(() => {
+      setWarningStyles("");
+      setWarningMessage("");
+    }, 5000);
+  };
+
+  const onClickLoginHandler = async () => {
+    setUsername(username.trim());
+    setPassword(password.trim());
+
+    if (!username || !password) {
+      displayWarning("Please enter a valid username and password. 😏");
+    } else if (
+      !isValid("username", username) ||
+      !isValid("password", password)
+    ) {
+      displayWarning("Username or password not valid. 🙁 Please check again.");
+    } else {
+      const formData = new FormData();
+      formData.append("username", username);
+      formData.append("password", password);
+
+      await fetch("http://localhost:3001/login", {
+        method: "POST",
+        credentials: "include",
+        body: formData,
       })
-      .then((loginResponseData) => {
-        if (loginResponseData) {
-          props.user(loginResponseData);
-          navigate("/dashboard", { replace: true });
-        } else {
-          throw error;
-        }
-      })
-      .catch((error) => {
-        console.log("ERROR: => ", error);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            displayWarning(data.error);
+          } else if (data.user) {
+            props.user(data);
+            console.log("inside login.js: ", data);
+
+            // setLogin({ isLogged: true, user: data.user });
+            // localStorage.setItem(
+            //   "login",
+            //   JSON.stringify({ isLogged: true, user: data.user })
+            // );
+            // console.log(login);
+            navigate("/dashboard", { replace: true });
+            // window.location.replace("/");
+          }
+        })
+        .catch((error) => {
+          if (error) {
+            displayWarning("User login error... 😢 Please try again.");
+          }
+        });
+    }
   };
 
   return (
     <div className="login-form__container">
       <FormContainer>
-        <FormHeading>Login</FormHeading>
+        <FormHeading>LOGIN</FormHeading>
         <div className="login-form-inputs__container">
           <FormInput
-            value={inputValuesHandler}
-            validateType="username"
-            required={true}
+            onChange={onChangeUsernameHandler}
+            value={username}
             name="username"
             id="username"
             type="text"
@@ -55,9 +99,8 @@ const Login = (props) => {
             Username:
           </FormInput>
           <FormInput
-            value={inputValuesHandler}
-            validateType="password"
-            required={true}
+            onChange={onChangePasswordHandler}
+            value={password}
             name="password"
             id="password"
             type="password"
@@ -66,7 +109,9 @@ const Login = (props) => {
             Password:
           </FormInput>
         </div>
-        <div className="login-form-action__message"></div>
+        <div className={"login-form-action__message " + warningStyles}>
+          {warningMessage}
+        </div>
         <div className="login-form-action-btn__container">
           <FormActionButton to="/">Cancel</FormActionButton>
           <FormActionButton onClick={onClickLoginHandler}>
