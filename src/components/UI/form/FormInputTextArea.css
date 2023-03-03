@@ -1,0 +1,71 @@
+@keyframes wipeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 100%;
+    }
+  }
+  
+  
+  .form-input-text-area__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+  }
+  
+  .form-input-text-area__container label {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+  
+  .form-input-text-area__container textarea {
+    width: 100%;
+    margin: 0.2rem 0;
+    padding: 0.4rem;
+    line-height: 2rem;
+    border-radius: 0;
+    border: 1px solid hsl(220, 61%, 30%);
+    background-color: hsl(216, 100%, 15%);
+    color: hsl(216, 100%, 85%);
+    font-size: 1.2rem;
+  }
+  
+  .form-input-text-area__container textarea:focus-visible {
+    outline: 1px solid hsl(216, 100%, 75%);
+    border: 1px solid hsl(216, 100%, 75%);
+    background-color: hsl(220, 61%, 20%);
+  }
+  
+  /* input disbled styles */
+  .form-input-text-area__container textarea:disabled {
+    border: 1px solid hsl(216, 100%, 25%);
+    background-color: hsl(221, 95%, 8%);
+    cursor: not-allowed;
+  }
+  
+  .form-input-text-area__container textarea:disabled::placeholder {
+    color: hsl(216, 100%, 25%);
+  }
+  
+  
+  .form-input-text-area__container textarea::placeholder {
+    color: hsl(220, 61%, 60%);
+    font-size: 1rem;
+  }
+  
+  
+  
+  .form-input__warining {
+    height: 1.2rem;
+    font-size: 0.8rem;
+    padding: 0.2rem;
+    text-align: center;
+    width: 100%;
+    color: red;
+    animation-name: wipeIn;
+    animation-duration: 1.2s;
+  }

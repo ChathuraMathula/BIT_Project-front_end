@@ -17,7 +17,6 @@ import "./FormInput.css";
  * @param required boolean value to be specified as the input component to be displayed as required if empty
  * @param value input value
  * @param placeholder placeholder value to be displayed
- * @param validateType validation types ( username | password | name | email | phoneNo | address | url_path )
  * @param id
  * @param type string of input type
  * @param className string
@@ -27,9 +26,11 @@ import "./FormInput.css";
 =======
 >>>>>>> version02
  * @param disabled boolean
+ * @param warining string
  * @returns
  */
 const FormInput = (props) => {
+<<<<<<< HEAD
   // const [warningMsg, setWariningMsg] = useState("");
   // const [warningStyles, setWariningStyles] = useState("");
 
@@ -80,6 +81,8 @@ const FormInput = (props) => {
   // };
 >>>>>>> version02
 
+=======
+>>>>>>> version03
   return (
     <div className={"form-input__container " + props.className}>
       <label for={props.id}>

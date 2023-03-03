@@ -35,10 +35,19 @@
     .user-profile-picture__input-container {
         flex-direction: row;
         margin-bottom: 1rem;
+        justify-content: space-evenly;
     }
 
     .user-profile-picture__bio-container {
         margin: 1rem 2rem;
         font-size: 1.2rem;
       }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .user-profile-picture__bio-container {
+    margin: 1rem 3rem;
+    font-size: 1.2rem;
+  }
 }

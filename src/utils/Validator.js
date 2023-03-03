@@ -2,7 +2,7 @@ import Fetcher from "./Fetcher";
 import Sanitizer, { sanitize } from "./Sanitizer";
 
 /**
- * 
+ *
  * @param {string} str string of value to be matched against pattern
  * @param {RegExp} pattern RegEx pattern to be matched
  * @returns true if str is matched to pattern, else false.
@@ -16,7 +16,7 @@ const isMatched = (str, pattern) => {
 };
 
 /**
- * 
+ *
  * @param {string} str string to be validate
  * @returns true if the string is empty, else false.
  */
@@ -24,14 +24,14 @@ export const isEmpty = (str) => {
   if (typeof str === "string") {
     str = str.trim();
     if (str === "") {
-      return true; 
+      return true;
     }
   }
-  return false; 
+  return false;
 };
 
 /**
- * 
+ *
  * @param {string} type type of the string passed ( username | password | name | phoneNo | email | address | url_path )
  * @param {string} value string to be validated against type
  * @returns returns true if the value is of specified type, else false.
@@ -68,6 +68,18 @@ export const isValid = (type, value) => {
       // url path pattern eg: /profile/photo
       pattern = /\/[a-z0-9\.]+$/i;
       break;
+    case "summary":
+      // summary description
+      pattern = /^[a-z0-9\.\,\ \+\']+$/i;
+      break;
+    case "bankName":
+      // bank name
+      pattern = /^[a-z0-9\.\,\ \']+$/i;
+      break;
+    case "bankAccountNo":
+      // bank account no
+      pattern = /^[0-9]+$/i;
+      break;
     default:
       pattern = /./;
       break;
@@ -78,20 +90,18 @@ export const isValid = (type, value) => {
 };
 
 /**
-* 
-* @param {object} imageFile 
-* @returns true if image if of mime type "image/png" or "image/jpeg"
-*/
+ *
+ * @param {object} imageFile
+ * @returns true if image if of mime type "image/png" or "image/jpeg"
+ */
 export const isValidImageFile = (imageFile) => {
- if (imageFile) {
-   // match /image/png or /image/jpeg pattern
-   return /^image\/(png|jpeg)$/.test(imageFile.type);
- } else {
-   return false;
- }
+  if (imageFile) {
+    // match /image/png or /image/jpeg pattern
+    return /^image\/(png|jpeg)$/.test(imageFile.type);
+  } else {
+    return false;
+  }
 };
-
-
 
 // This Validator Class contains functions need to validate user inputs
 class Validator {
@@ -188,8 +198,8 @@ class Validator {
   }
 
   /**
-   * 
-   * @param {object} imageFile 
+   *
+   * @param {object} imageFile
    * @returns true if image if of mime type "image/png" or "image/jpeg"
    */
   static isValidImageFile(imageFile) {
@@ -201,10 +211,9 @@ class Validator {
     }
   }
 
-
   /**
-   * 
-   * @param {object} imageFile 
+   *
+   * @param {object} imageFile
    * @param {number} size defult 2000000 = 2MB
    * @returns true if image file less than the size
    */
@@ -217,7 +226,6 @@ class Validator {
       return false;
     }
   }
-
 
   /* ------------------------------------------------------------------------------- */
   /* ---------- These Functions use fetch API to get data from backend ------------- */

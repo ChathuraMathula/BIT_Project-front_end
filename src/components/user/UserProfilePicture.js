@@ -68,7 +68,7 @@ const UserProfilePicture = (props) => {
         if (image.size < 200000000) {
           const formData = new FormData();
 
-          formData.append("username", login.user.name);
+          formData.append("username", props.user.name);
           formData.append("image", image);
 
           await fetch("http://localhost:3001/user/update/profile/picture", {
@@ -102,9 +102,9 @@ const UserProfilePicture = (props) => {
 
     try {
       const formData = new FormData();
-      formData.append("username", login.user.name);
+      formData.append("username", props.user.name);
       formData.append("removeImage", true);
-      console.log(">>>>>>>>>>> ", login.user.name)
+      console.log(">>>>>>>>>>> ", props.user.name)
       
       await fetch("http://localhost:3001/user/remove/profile/picture", {
         method: "POST",
@@ -133,7 +133,7 @@ const UserProfilePicture = (props) => {
       <FormSubHeading>PROFILE PICTURE</FormSubHeading>
       <div className="user-profile-picture__input-container">
         <FormUploadProfilePhoto
-          user={login.user}
+          user={props.user}
           onChange={onChangeImageHandler}
         />
         <div className="user-profile-picture__bio-container">

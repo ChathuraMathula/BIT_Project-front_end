@@ -1,18 +1,5 @@
-@keyframes slideIn {
-  from {
-    transform: scaleY(0);
-    transform-origin: 0 top;
-    opacity: 0;
-}
-to {
-    transform: scaleY(1);
-    transform-origin: 0 top;
-    opacity: 100%;
-  }
-}
-
 .sign-up-form__container {
-  animation-name: slideIn;
+  animation-name: wipeIn;
   animation-duration: 0.8s;
 }
 

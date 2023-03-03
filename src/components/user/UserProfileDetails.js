@@ -140,7 +140,6 @@ const UserProfileDetails = (props) => {
         type="text"
         id="email"
         name="email"
-        validateType="email"
         placeholder="example@gmail.com"
         value={email}
         onChange={emailInputHandler}
@@ -153,7 +152,6 @@ const UserProfileDetails = (props) => {
         type="text"
         id="phoneNo"
         name="phoneNo"
-        validateType="phoneNo"
         placeholder="070-XXXXXXX"
         value={phoneNo}
         onChange={phoneNoInputHandler}
@@ -166,7 +164,6 @@ const UserProfileDetails = (props) => {
         type="text"
         id="address"
         name="address"
-        validateType="address"
         placeholder="No 35, Kurunegala Rd, Polgahawela"
         value={address}
         onChange={addressInputHandler}
