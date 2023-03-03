@@ -18,10 +18,9 @@ import { UserLoginContext } from "./context/Context";
 import Dashboard from "./components/user/Dashboard";
 import Profile from "./components/user/Profile";
 import useLocalStorage from "./hooks/useLocalStorage";
-
+import AdminPhotographerProfile from "./components/user/admin/AdminPhotographerProfile";
 
 function App() {
-
   const [login, setLogin] = useLocalStorage("login", {
     isLogged: false,
     user: null,
@@ -52,6 +51,10 @@ function App() {
               />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/photographer"
+                element={<AdminPhotographerProfile />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
