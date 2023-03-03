@@ -7,138 +7,248 @@ import FormUploadProfilePhoto from "../components/UI/form/FormUploadProfilePhoto
 import FormInput from "../components/UI/form/FormInput";
 import FormActionButton from "../components/UI/form/FormActionButton";
 import FormInputCheckBox from "../components/UI/form/FormInputCheckBox";
+import { sanitize } from "../utils/Sanitizer";
+import { isValid } from "../utils/Validator";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = (props) => {
+  const navigate = useNavigate();
 
-  const [warning, setWarning] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmedPassword, setConfirmedPassword] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [image, setImage] = useState("");
+  const [checked, setChecked] = useState("");
 
-  let customerData = {};
-  let checked = false;
-  let image = {};
+  const [warningMessage, setWarningMessage] = useState("");
+  const [warningStyles, setWarningStyles] = useState("");
+  const [firstnameWarning, setFirstnameWarning] = useState("");
+  const [lastnameWarning, setLastnameWarning] = useState("");
+  const [usernameWarning, setUsernameWarning] = useState("");
+  const [passwordWarning, setPasswordWarning] = useState("");
+  const [confirmedPasswordWarning, setConfirmedPasswordWarning] = useState("");
+  const [phoneNoWarning, setPhoneNoWarning] = useState("");
+  const [emailWarning, setEmailWarning] = useState("");
+  const [addressWarning, setAddressWarning] = useState("");
 
-  const inputValuesHandler = (inputValues) => {
-    customerData = { ...customerData, ...inputValues };
-    console.log("Customer Data: ", customerData);
+  const displayError = (message) => {
+    setWarningStyles("warning-msg-styles__red");
+    setWarningMessage(message);
+    setTimeout(() => {
+      setWarningStyles("");
+      setWarningMessage("");
+    }, 5000);
   };
 
-  const imageHandler = (imageFile) => {
-    image = imageFile;
-    console.log("Customer image: ", image);
+  const displaySuccess = (message) => {
+    setWarningStyles("warning-msg-styles__green");
+    setWarningMessage(message);
+    setTimeout(() => {
+      setWarningStyles("");
+      setWarningMessage("");
+    }, 5000);
   };
 
-  const isCheckedHandler = (isChecked) => {
-    checked = isChecked;
-    console.log("Customer is checked: ", checked);
+  const firstnameInputHandler = (event) => {
+    setFirstname(sanitize(event.target.value));
+    if (!isValid("name", event.target.value)) {
+      setFirstnameWarning("😡 Invalid First Name.");
+    } else {
+      setFirstnameWarning("");
+    }
+  };
+
+  const lastnameInputHandler = (event) => {
+    setLastname(sanitize(event.target.value));
+    if (!isValid("name", event.target.value)) {
+      setLastnameWarning("😡 Invalid Last Name.");
+    } else {
+      setLastnameWarning("");
+    }
+  };
+
+  const usernameInputHandler = (event) => {
+    setUsername(sanitize(event.target.value));
+    if (!isValid("username", event.target.value)) {
+      setUsernameWarning("😡 Invalid Username.");
+    } else {
+      setUsernameWarning("");
+    }
+  };
+
+  const passwordInputHandler = (event) => {
+    setPassword(sanitize(event.target.value));
+    if (!isValid("password", event.target.value)) {
+      setPasswordWarning("😡 Invalid Password.");
+    } else {
+      setPasswordWarning("");
+    }
+  };
+
+  const confirmedPasswordInputHandler = (event) => {
+    setConfirmedPassword(sanitize(event.target.value));
+    if (!isValid("password", event.target.value)) {
+      setConfirmedPasswordWarning("😡 Invalid Password.");
+    } else {
+      setConfirmedPasswordWarning("");
+    }
+  };
+
+  const emailInputHandler = (event) => {
+    setEmail(sanitize(event.target.value));
+    if (!isValid("email", event.target.value)) {
+      setEmailWarning("😡 Invalid Email.");
+    } else {
+      setEmailWarning("");
+    }
+  };
+
+  const phoneNoInputHandler = (event) => {
+    setPhoneNo(sanitize(event.target.value));
+    if (!isValid("phoneNo", event.target.value)) {
+      setPhoneNoWarning("😡 Invalid Phone Number.");
+    } else {
+      setPhoneNoWarning("");
+    }
+  };
+
+  const addressInputHandler = (event) => {
+    setAddress(sanitize(event.target.value));
+    if (!isValid("address", event.target.value)) {
+      setAddressWarning("😡 Invalid Address.");
+    } else {
+      setAddressWarning("");
+    }
+  };
+
+  const onChangeImageHandler = (file) => {
+    if (file) {
+      setImage(file);
+    }
+  };
+
+  const onClickCheckedHandler = (event) => {
+    setChecked(event.target.checked);
   };
 
   const onClickRegisterHandler = async () => {
-    if (!customerData | Object.keys(customerData).length !== 8) {
-      // all fields must be filled properly.
-      setWarning("all fields must be filled properly");
-    } else {
-      const isExistingUser = await fetch("http://localhost:3001/users")
-        .then((res) => res.json())
-        .then((users) => {
-          console.log("Users => ", users);
-          return users.some((user) => user.username === customerData.username);
-        })
-        .catch((err) => {
-          if (err) {
-            console.log("Sign-up error: (Existing Username) ", err);
-          }
-        });
-      console.log("Is existing user: ", isExistingUser);
-      if (isExistingUser) {
-        // Username Already Exists.
-        setWarning("Username Already Exists");
-      } else {
-        if (customerData.password !== customerData.confirmedPassword) {
-          // Passwords did not match.
-          setWarning("Passwords did not match");
-        } else {
-          if (!checked) {
-            // Please Confirm the Declaration.
-            setWarning("Please Confirm the Declaration");
-          } else {
-            const formData = new FormData();
+    try {
+      if (
+        isValid("firstname", firstname) &&
+        isValid("lastname", lastname) &&
+        isValid("username", username) &&
+        isValid("password", password) &&
+        isValid("email", email) &&
+        isValid("phoneNo", phoneNo) &&
+        isValid("address", address) &&
+        isValid("confirmedPassword", confirmedPassword)
+      ) {
+        if (!checked) {
+          displayError("Please confirm the declaration. 😒");
+          return;
+        } else if (password === confirmedPassword) {
+          const formData = new FormData();
+          formData.append("username", username.trim());
+          formData.append("firstname", firstname.trim());
+          formData.append("lastname", lastname.trim());
+          formData.append("password", password.trim());
+          formData.append("email", email.trim());
+          formData.append("phoneNo", phoneNo.trim());
+          formData.append("address", address.trim());
 
-            let keys = Object.keys(customerData);
-            for (let key of keys) {
-              formData.append(key, customerData[key]);
-            }
-
-            if (image) {
+          if (image) {
+            if (image.size < 200000000) {
               formData.append("image", image);
+            } else {
+              displayError("Image size should be less than 2MB. 😒");
+              return;
             }
-
-            await fetch("http://localhost:3001/users", {
-              method: "POST",
-              body: formData,
-              credentials: "include",
-              mode: "no-cors",
-            })
-              .then((res) => res.json())
-              .then((data) => console.log(data));
           }
+
+          await fetch("http://localhost:3001/signup", {
+            method: "POST",
+            credentials: "include",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data) {
+                if (data.success) {
+                  displaySuccess(data.success + " Redirecting to login page... 👉🏻");
+                  setTimeout(() => {
+                    navigate("/login", { replace: true });
+                  }, 7000);
+                } else if (data.error) {
+                  displayError(data.error);
+                }
+              }
+            });
+        } else {
+          displayError("Both passwords don't match. 😡");
         }
+      } else {
+        displayError("Input data is invalid. Please check again. 😡");
       }
-    }
+    } catch (error) {}
   };
 
   return (
     <>
+      <FormHeading>Customer Registration Form</FormHeading>
       <FormContainer className="sign-up-form__container">
-        <FormHeading>Customer Registration Form</FormHeading>
-        <FormSubHeading>
-          &#9888; Please enter your details to register as a customer
-        </FormSubHeading>
-        <FormUploadProfilePhoto value={imageHandler} />
+        <p>&#9888; Please enter your details to register as a customer</p>
+        <FormUploadProfilePhoto onChange={onChangeImageHandler} />
         <div className="sign-up-form-input__container">
           <div className="sign-up-form-input__col-container">
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="name"
+              value={firstname}
+              onChange={firstnameInputHandler}
               type="text"
-              id="customer-firstname"
+              id="firstname"
               name="firstname"
               placeholder="Janaka"
+              warning={firstnameWarning}
             >
               First Name:
             </FormInput>
 
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="name"
+              value={lastname}
+              onChange={lastnameInputHandler}
               type="text"
-              id="customer-lastname"
+              id="lastname"
               name="lastname"
               placeholder="Ranasinghe"
+              warning={lastnameWarning}
             >
               Last Name:
             </FormInput>
 
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="phoneNo"
+              value={phoneNo}
+              onChange={phoneNoInputHandler}
               type="text"
-              id="customer-phone_number"
+              id="phoneNo"
               name="phoneNo"
               placeholder="070-XXXXXXX"
+              warning={phoneNoWarning}
             >
               Phone No:
             </FormInput>
 
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="address"
+              value={address}
+              onChange={addressInputHandler}
               type="text"
-              id="customer-address"
+              id="address"
               name="address"
               placeholder="No 35, Kurunegala Rd, Polgahawela"
+              warning={addressWarning}
             >
               Address:
             </FormInput>
@@ -146,57 +256,64 @@ const SignUp = (props) => {
 
           <div className="sign-up-form-input__col-container">
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="username"
+              value={username}
+              onChange={usernameInputHandler}
               type="text"
-              id="customer-username"
+              id="username"
               name="username"
               placeholder="janakaran12"
+              warning={usernameWarning}
             >
               Username:
             </FormInput>
 
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="password"
+              value={password}
+              onChange={passwordInputHandler}
               type="password"
-              id="customer-password"
+              id="password"
               name="password"
               placeholder="your password"
+              warning={passwordWarning}
             >
               Password:
             </FormInput>
 
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="password"
+              value={confirmedPassword}
+              onChange={confirmedPasswordInputHandler}
               type="password"
-              id="customer-password-confirm"
+              id="confirmedPassword"
               name="confirmedPassword"
               placeholder="your password"
+              warning={confirmedPasswordWarning}
             >
               Confirm Password:
             </FormInput>
 
             <FormInput
-              value={inputValuesHandler}
-              required={true}
-              validateType="email"
+              value={email}
+              onChange={emailInputHandler}
               type="text"
-              id="customer-email"
+              id="email"
               name="email"
               placeholder="example@gmail.com"
+              warning={emailWarning}
             >
               Email:
             </FormInput>
           </div>
         </div>
-        <div id="sign-up-form__warning">{warning}</div>
+
+        <div className={"warning-msg__container " + warningStyles}>
+          {warningMessage}
+        </div>
+
         <div className="sign-up-form-input__declaration">
-          <FormInputCheckBox isChecked={isCheckedHandler} accentColor="red">
+          <FormInputCheckBox
+            onClick={onClickCheckedHandler}
+            accentColor="green"
+          >
             Confirm
           </FormInputCheckBox>
           <div>
@@ -204,6 +321,7 @@ const SignUp = (props) => {
             accurate to the best of my knowledge.
           </div>
         </div>
+
         <div className="sign-up-form-input__action">
           <FormActionButton to="/">Cancel</FormActionButton>
           <FormActionButton onClick={onClickRegisterHandler}>

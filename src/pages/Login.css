@@ -22,7 +22,7 @@
 }
 
 .login-form__container {
-  animation-name: slideIn;
+  animation-name: wipeIn;
   animation-duration: 0.8s;
   width: 90%;
 }
