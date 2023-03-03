@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UserLoginContext } from "../../../context/Context";
 import FormHeading from "../../UI/form/FormHeading";
+import UpdatePersonalDetails from "../photographer/UpdatePersonalDetails";
 import UserProfileDetails from "../UserProfileDetails";
 import UserProfilePassword from "../UserProfilePassword";
 import UserProfilePicture from "../UserProfilePicture";
@@ -14,6 +15,7 @@ const AdminPhotographerProfile = (props) => {
       <>
         <FormHeading>PHOTOGRAPHER PROFILE</FormHeading>
         <UserProfilePicture user={user} />
+        <UpdatePersonalDetails />
         <UserProfileDetails user={user} />
         <UserProfilePassword user={user} />
       </>

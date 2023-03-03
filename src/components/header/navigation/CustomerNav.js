@@ -21,7 +21,7 @@ const CustomerNav = (props) => {
       setState({dashboard: "user-navigation-link__active"});
     } else if (pathName === "/profile") {
       setState({ profile: "user-navigation-link__active" });
-    }
+    } 
   }, [window.location.pathname]);
 
   return (

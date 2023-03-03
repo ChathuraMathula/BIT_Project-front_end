@@ -1,0 +1,22 @@
+.photographer-personal-details__action {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.photographer-summary__input textarea {
+  resize: none;
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .photographer-personal-details__input {
+    width: 95%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

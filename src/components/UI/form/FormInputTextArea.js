@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sanitizer, { sanitize } from "../../../utils/Sanitizer";
 import Validator, { isEmpty, isValid } from "../../../utils/Validator";
-import "./FormInput.css";
+import "./FormInputTextArea.css";
 
 /**
  *
@@ -15,26 +15,30 @@ import "./FormInput.css";
  * @param className string
  * @param name string
  * @param disabled boolean
+ * @param rows Specifies the visible number of lines in a text area
+ * @param cols Specifies the visible width of a text area
+ * @param maxLength Specifies the maximum number of characters allowed in the text area
  * @returns
  */
-const FormInput = (props) => {
+const FormInputTextArea = (props) => {
   return (
-    <div className={"form-input__container " + props.className}>
-      <label for={props.id}>
-        {props.children}
-        <input
-          type={props.type}
-          id={props.id}
-          value={props.value}
-          name={props.name}
-          placeholder={props.placeholder}
-          onChange={props.onChange}
-          disabled={props.disabled}
-        />
-      </label>
+    <div className={"form-input-text-area__container " + props.className}>
+      <label for={props.id}>{props.children}</label>
+      <textarea
+        type={props.type}
+        id={props.id}
+        value={props.value}
+        name={props.name}
+        placeholder={props.placeholder}
+        onChange={props.onChange}
+        disabled={props.disabled}
+        rows={props.rows}
+        cols={props.cols}
+        maxLength={props.maxLength}
+      ></textarea>
       <div className={"form-input__warining"}>{props.warning}</div>
     </div>
   );
 };
 
-export default FormInput;
+export default FormInputTextArea;
