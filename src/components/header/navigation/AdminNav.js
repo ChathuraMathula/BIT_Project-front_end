@@ -34,6 +34,8 @@ const AdminNav = (props) => {
       setState({ profile: "user-navigation-link__active" });
     } else if (pathName === "/photographer") {
       setState({ photographer: "user-navigation-link__active" });
+    } else if (pathName === "/packages") {
+      setState({ packages: "user-navigation-link__active" });
     }
   }, [window.location.pathname]);
 
@@ -57,7 +59,11 @@ const AdminNav = (props) => {
         >
           Photographer
         </Link>
-        <Link className={state.packages} onClick={onClickPackages}>
+        <Link
+          className={state.packages}
+          onClick={onClickPackages}
+          to="/packages"
+        >
           Packages
         </Link>
         <Link className={state.portfolio} onClick={onClickPortfolio}>

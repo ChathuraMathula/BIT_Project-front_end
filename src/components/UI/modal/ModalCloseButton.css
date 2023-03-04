@@ -1,0 +1,21 @@
+.modal-close-button {
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 50%;
+  text-align: center;
+  background-color: hsl(216, 100%, 5%);
+  border: 1px solid hsl(220, 61%, 80%);
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5rem 0.5rem 0 0;
+}
+
+.modal-close-button:hover {
+    background-color: hsl(220, 61%, 80%);
+    color: hsl(216, 100%, 5%);
+    transition: all 0.3s ease-out;
+}

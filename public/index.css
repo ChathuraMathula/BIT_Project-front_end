@@ -38,3 +38,8 @@ body {
   animation-name: wipeIn;
   animation-duration: 1.2s;
 }
+
+#modal-root {
+  display: flex;
+  flex-direction: column;
+}

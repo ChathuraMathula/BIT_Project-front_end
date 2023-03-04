@@ -19,6 +19,7 @@ import Dashboard from "./components/user/Dashboard";
 import Profile from "./components/user/Profile";
 import useLocalStorage from "./hooks/useLocalStorage";
 import AdminPhotographerProfile from "./components/user/admin/AdminPhotographerProfile";
+import Packages from "./pages/Packages";
 
 function App() {
   const [login, setLogin] = useLocalStorage("login", {
@@ -54,6 +55,10 @@ function App() {
               <Route
                 path="/photographer"
                 element={<AdminPhotographerProfile />}
+              />
+              <Route
+                path="/packages"
+                element={<Packages />}
               />
             </Route>
           </Routes>
