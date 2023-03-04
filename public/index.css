@@ -16,7 +16,11 @@ body {
   color: hsl(220, 61%, 80%);
   background-color: hsl(216, 100%, 5%);
   overflow-y: scroll;
-  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .warning-msg__container {
@@ -35,6 +39,12 @@ body {
 
 .warning-msg-styles__green {
   color: rgb(0, 255, 0);
+  animation-name: wipeIn;
+  animation-duration: 1.2s;
+}
+
+.warning-msg-styles__white {
+  color: rgb(255, 255, 255);
   animation-name: wipeIn;
   animation-duration: 1.2s;
 }

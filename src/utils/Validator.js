@@ -80,6 +80,22 @@ export const isValid = (type, value) => {
       // bank account no
       pattern = /^[0-9]+$/i;
       break;
+    case "packageCategoryName":
+      // eg: Wedding Packages
+      pattern = /^[a-zA-Z\ ]+$/i;
+      break;
+    case "packageServices":
+      // eg: comma seperated list (allowd characters are "&,()×")
+      pattern = /^[a-zA-Z0-9\ \,\&\(\)\×\x]+$/i;
+      break;
+    case "integer":
+      // integer numbers
+      pattern = /^[0-9]+$/i;
+      break;
+    case "float":
+      // floating point numbers
+      pattern = /^[0-9\.]+$/i;
+      break;
     default:
       pattern = /./;
       break;
