@@ -1,0 +1,26 @@
+.form-select-options__container {
+  width: 100%;
+  margin: 0 0 1rem 0;
+}
+
+.form-select-options__container label {
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.form-select-options__container select {
+  width: 100%;
+  margin: 0.2rem 0;
+  padding: 0.4rem;
+  line-height: 2rem;
+  border-radius: 0;
+  border: 1px solid hsl(220, 61%, 30%);
+  background-color: hsl(216, 100%, 15%);
+  color: hsl(216, 100%, 85%);
+  font-size: 1.2rem;
+}
+
+.form-select-options__container select:focus-visible {
+  outline: 1px solid hsl(216, 100%, 75%);
+  border: 1px solid hsl(216, 100%, 75%);
+}

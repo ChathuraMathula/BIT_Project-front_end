@@ -1,0 +1,8 @@
+.update-package-body__names {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+}
+
+.update-package-body__names span {
+    font-weight: bold;
+}
