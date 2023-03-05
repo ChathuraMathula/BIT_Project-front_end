@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AddNewPackage from "./packages/AddNewPackage";
+import CategoryContainer from "./packages/CategoryContainer";
 
 const AdminPackages = (props) => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/package/categories")
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories([...data]);
+      });
+  }, []);
+
+  const categoriesHandler = (data) => {
+    setCategories([...data]);
+  };
+
   return (
     <>
-      <AddNewPackage />
+      <AddNewPackage categories={categoriesHandler} />
+
+      {categories.map((value, index) => {
+        return (
+          <CategoryContainer
+            category={value.name}
+            packages={value.packages}
+            key={index}
+            categories={categoriesHandler}
+          />
+        );
+      })}
     </>
   );
 };

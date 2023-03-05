@@ -1,0 +1,20 @@
+.update-package__title {
+    cursor: pointer;
+    padding: 1rem;
+    margin: 0.5rem;
+    width: 60%;
+    text-align: center;
+    border: 2px solid hsl(220, 61%, 80%);
+    background-color: hsl(220, 61%, 5%);
+    color: hsl(220, 61%, 80%);
+    border-radius: 1rem;
+    font-weight: bold;
+}
+
+.update-package__title:hover {
+    transition: all 0.3s;
+    background-color: hsl(220, 61%, 80%);
+    color: hsl(220, 61%, 5%);
+    border-radius: 1rem;
+    font-weight: bold;
+}

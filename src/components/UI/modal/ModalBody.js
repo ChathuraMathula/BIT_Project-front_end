@@ -42,19 +42,24 @@ const ModalBody = (props) => {
             <div className={"warning-msg__container " + props.warningStyles}>
               {props.warningMessage}
             </div>
-            {props.leftButton ? (
-              <div className="modal-action__button" onClick={props.onClickLeft}>
-                {props.leftButton}
-              </div>
-            ) : null}
-            {props.rightButton ? (
-              <div
-                className="modal-action__button"
-                onClick={props.onClickRight}
-              >
-                {props.rightButton}
-              </div>
-            ) : null}
+            <div className="modal-action-button__container">
+              {props.leftButton ? (
+                <div
+                  className="modal-action__button"
+                  onClick={props.onClickLeft}
+                >
+                  {props.leftButton}
+                </div>
+              ) : null}
+              {props.rightButton ? (
+                <div
+                  className="modal-action__button"
+                  onClick={props.onClickRight}
+                >
+                  {props.rightButton}
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </CSSTransition>

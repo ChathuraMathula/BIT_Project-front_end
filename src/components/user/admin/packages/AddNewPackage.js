@@ -5,6 +5,11 @@ import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import FormSelectOptions from "../../../UI/form/FormSelectOptions";
 import Modal from "../../../UI/modal/Modal";
 
+/**
+ * 
+ * @param categories (array) category documents 
+ * @returns 
+ */
 const AddNewPackage = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [category, setCategory] = useState("new");
@@ -83,16 +88,13 @@ const AddNewPackage = (props) => {
         isValid("float", price) &&
         isValid("packageServices", packageServices)
       ) {
-        const services = packageServices.split(",");
-
         const packageCategoryDocument = {
           category: categoryName,
           package: packageName,
           price: price,
-          services: services,
+          services: packageServices,
         };
 
-        console.log(JSON.stringify(packageCategoryDocument));
 
         await fetch("http://localhost:3001/admin/add/package", {
           method: "POST",
@@ -106,7 +108,12 @@ const AddNewPackage = (props) => {
           .then((data) => {
             if (data) {
               console.log(data);
-              displayWarning(data.success);
+              if (data.success) {
+                props.categories(data.categories);
+                setShowModal(false);
+              } else if (data.error) {
+                displayWarning(data.error);
+              }
             }
           });
       } else {
@@ -162,6 +169,7 @@ const AddNewPackage = (props) => {
         <FormInputTextArea
           onChange={packageServicesInputHandler}
           placeholder="Please add comma separated list of services to be included in the package"
+          value={packageServices}
         >
           Package Services:
         </FormInputTextArea>
