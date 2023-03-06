@@ -13,13 +13,17 @@ const AdminPackages = (props) => {
       });
   }, []);
 
+  const onAddCategoryHandler = (data) => {
+    setCategories([...data]);
+  };
+
   const categoriesHandler = (data) => {
     setCategories([...data]);
   };
 
   return (
     <>
-      <AddNewPackage categories={categoriesHandler} />
+      <AddNewPackage categories={categories} onAddCategory={onAddCategoryHandler}/>
 
       {categories.map((value, index) => {
         return (

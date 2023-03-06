@@ -4,11 +4,13 @@ import FormInput from "../../../UI/form/FormInput";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import FormSelectOptions from "../../../UI/form/FormSelectOptions";
 import Modal from "../../../UI/modal/Modal";
+import "./AddNewPackage.css";
 
 /**
- * 
- * @param categories (array) category documents 
- * @returns 
+ *
+ * @param categories (array) category documents
+ * @param onAddCategory (function) handler retrieve categories once add them
+ * @returns
  */
 const AddNewPackage = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -95,7 +97,6 @@ const AddNewPackage = (props) => {
           services: packageServices,
         };
 
-
         await fetch("http://localhost:3001/admin/add/package", {
           method: "POST",
           credentials: "include",
@@ -109,7 +110,7 @@ const AddNewPackage = (props) => {
             if (data) {
               console.log(data);
               if (data.success) {
-                props.categories(data.categories);
+                props.onAddCategory(data.categories);
                 setShowModal(false);
               } else if (data.error) {
                 displayWarning(data.error);
@@ -124,7 +125,12 @@ const AddNewPackage = (props) => {
 
   return (
     <>
-      <button onClick={onClickAddPackageModalHandler}>Add New Package</button>
+      <div
+        onClick={onClickAddPackageModalHandler}
+        className="add-new-package__button"
+      >
+        ADD NEW PACKAGE
+      </div>
       <Modal
         show={showModal}
         onClose={onCloseAddPackageHandler}
@@ -141,6 +147,9 @@ const AddNewPackage = (props) => {
           onChange={onChangePackageCategoryHandler}
         >
           <option value="new">Add New Category</option>
+          {props.categories.map((value, index) => {
+            return <option value={value.name} key={value.name}>{value.name}</option>
+          })}
         </FormSelectOptions>
 
         {category === "new" ? (
