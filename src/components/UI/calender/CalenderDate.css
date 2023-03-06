@@ -1,0 +1,17 @@
+.calender-date__object {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid hsl(220, 61%, 80%);
+    cursor: pointer;
+}
+
+.calender-date__object:hover {
+    border: 1px solid hsl(220, 61%, 80%);
+    background-color: hsl(220, 61%, 80%);
+    font-weight: bold;
+    color: hsl(216, 100%, 5%);
+    transition: all 0.5s;
+}

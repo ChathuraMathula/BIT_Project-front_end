@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
+import AdminDates from "../components/user/admin/dates/AdminDates";
+import { UserLoginContext } from "../context/Context";
 
 const Dates = () => {
+  const login = useContext(UserLoginContext);
 
+  if (login.user.name === "admin") {
     return (
-        <h1>This is Dates Page</h1>
+      <>
+        <AdminDates />
+      </>
     );
+  }
 };
 
 export default Dates;

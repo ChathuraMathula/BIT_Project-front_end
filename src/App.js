@@ -44,7 +44,6 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Welcome />} />
-              <Route path="/dates" element={<Dates />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route
                 path="/login"
@@ -59,6 +58,10 @@ function App() {
               <Route
                 path="/packages"
                 element={<Packages />}
+              />
+               <Route
+                path="/dates"
+                element={<Dates />}
               />
             </Route>
           </Routes>

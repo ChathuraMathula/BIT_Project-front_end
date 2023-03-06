@@ -26,6 +26,10 @@ const AdminNav = (props) => {
     setState({ portfolio: "user-navigation-link__active" });
   };
 
+  const onClickDates = () => {
+    setState({ dates: "user-navigation-link__active" });
+  };
+
   useEffect(() => {
     const pathName = window.location.pathname;
     if (pathName === "/dashboard") {
@@ -36,6 +40,8 @@ const AdminNav = (props) => {
       setState({ photographer: "user-navigation-link__active" });
     } else if (pathName === "/packages") {
       setState({ packages: "user-navigation-link__active" });
+    } else if (pathName === "/dates") {
+      setState({ dates: "user-navigation-link__active" });
     }
   }, [window.location.pathname]);
 
@@ -65,6 +71,13 @@ const AdminNav = (props) => {
           to="/packages"
         >
           Packages
+        </Link>
+        <Link
+          className={state.dates}
+          onClick={onClickDates}
+          to="/dates"
+        >
+          Dates
         </Link>
         <Link className={state.portfolio} onClick={onClickPortfolio}>
           Portfolio
