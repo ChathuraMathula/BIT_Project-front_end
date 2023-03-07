@@ -7,6 +7,8 @@ export const THIS_YEAR = +new Date().getFullYear();
 /** Current Day */
 export const THIS_DAY = +new Date().getDay();
 
+export const THIS_DATE = +new Date().getDate();
+
 export const CALENDER_ROWS = 6;
 
 export const CALENDER_MONTHS = {
@@ -121,10 +123,23 @@ export default (month = THIS_MONTH, year = THIS_YEAR) => {
   const currentMonthDates = [...new Array(daysFromCurrentMonth)].map(
     (v, index) => {
       const day = index + 1;
-      return {
-        date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
-        disabled: false,
-      };
+      if (year === THIS_YEAR && month === THIS_MONTH && day < THIS_DATE) {
+        return {
+          date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
+          disabled: true,
+        };
+      } else if (year === THIS_YEAR && month === THIS_MONTH && day === THIS_DATE) {
+        return {
+          date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
+          disabled: false,
+          today: true,
+        };
+      } else {
+        return {
+          date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
+          disabled: false,
+        };
+      }
     }
   );
 

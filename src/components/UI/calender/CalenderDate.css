@@ -11,13 +11,30 @@
     background-color: hsl(216, 100%, 35%);
     font-weight: bold;
     cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
-.calender-date__object:hover {
+.calender-date__object:hover, .calender-date-object__today:hover {
     background-color: hsl(220, 61%, 80%);
     font-weight: bold;
     color: hsl(216, 100%, 5%);
     transition: all 0.5s;
+}
+
+.calender-date-object__today {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(216, 100%, 5%);
+    background-color: hsl(216, 100%, 65%);
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
 }
 
 .calender-date-object__disabled {
