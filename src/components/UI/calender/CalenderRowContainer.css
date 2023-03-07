@@ -5,3 +5,14 @@
     align-items: center;
     justify-content: center;
 }
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .calender-row__container  {
+        justify-content: space-evenly;
+    }
+  }
+  
+  /* For Laptops */
+  @media (min-width: 992px) {
+  }

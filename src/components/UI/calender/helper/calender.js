@@ -73,7 +73,7 @@ export const getMonthDays = (month = THIS_MONTH, year = THIS_YEAR) => {
  * @returns The day of the first day of the given month. eg: 1 for Sunday
  */
 export const getMonthFirstDay = (month = THIS_MONTH, year = THIS_YEAR) => {
-  return +(new Date(`${year}-${padZero(month, 2)}-01`).getDay()) + 1;
+  return +new Date(`${year}-${padZero(month, 2)}-01`).getDay() + 1;
 };
 
 export const getPreviousMonth = (month, year) => {
@@ -92,29 +92,57 @@ export default (month = THIS_MONTH, year = THIS_YEAR) => {
   const firstDayOfCurrentMonth = getMonthFirstDay(month, year); // eg: 1 for Sunday
   const daysFromCurrentMonth = getMonthDays(month, year); // eg: 31
   const daysFromPrevMonth = firstDayOfCurrentMonth - 1;
-  const daysFromNextMonth = CALENDER_ROWS * 7 - (daysFromCurrentMonth + daysFromPrevMonth);
+  const daysFromNextMonth =
+    CALENDER_ROWS * 7 - (daysFromCurrentMonth + daysFromPrevMonth);
 
-  const { month: previousMonth, year: previousMonthYear } = getPreviousMonth(month, year);
+  const { month: previousMonth, year: previousMonthYear } = getPreviousMonth(
+    month,
+    year
+  );
   const { month: nextMonth, year: nextMonthYear } = getNextMonth(month, year);
 
-  const numberOfPreviousMonthDays = getMonthDays(previousMonth, previousMonthYear);
+  const numberOfPreviousMonthDays = getMonthDays(
+    previousMonth,
+    previousMonthYear
+  );
 
-  const previousMonthDates = [...new Array(daysFromPrevMonth)].map((v, index) => {
-    const day = index + 1 + (numberOfPreviousMonthDays - daysFromPrevMonth);
-    return new Date(`${previousMonthYear}-${padZero(previousMonth, 2)}-${day}`);
-  });
+  const previousMonthDates = [...new Array(daysFromPrevMonth)].map(
+    (v, index) => {
+      const day = index + 1 + (numberOfPreviousMonthDays - daysFromPrevMonth);
+      return {
+        date: new Date(
+          `${previousMonthYear}-${padZero(previousMonth, 2)}-${day}`
+        ),
+        disabled: true,
+      };
+    }
+  );
 
-  const currentMonthDates = [...new Array(daysFromCurrentMonth)].map((v, index) => {
-    const day = index + 1;
-    return new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`);
-  });
+  const currentMonthDates = [...new Array(daysFromCurrentMonth)].map(
+    (v, index) => {
+      const day = index + 1;
+      return {
+        date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
+        disabled: false,
+      };
+    }
+  );
 
   const nextMonthDates = [...new Array(daysFromNextMonth)].map((v, index) => {
     const day = index + 1;
-    return new Date(`${nextMonthYear}-${padZero(nextMonth, 2)}-${padZero(day, 2)}`);
+    return {
+      date: new Date(
+        `${nextMonthYear}-${padZero(nextMonth, 2)}-${padZero(day, 2)}`
+      ),
+      disabled: true,
+    };
   });
 
-  const datesArray = [ ...previousMonthDates, ...currentMonthDates, ...nextMonthDates ];
+  const datesArray = [
+    ...previousMonthDates,
+    ...currentMonthDates,
+    ...nextMonthDates,
+  ];
 
   let dates = [];
 

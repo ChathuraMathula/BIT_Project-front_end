@@ -1,6 +1,6 @@
 .calender-date__container {
     height: 3rem;
-    width: 3rem;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
