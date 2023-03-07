@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import DatePicker from "../../../UI/calender/DatePicker";
 import Modal from "../../../UI/modal/Modal";
 import DateAvailabilityController from "./DateAvailabilityController";
 
-const AdminDates = (props) => {
+const AdminDateController = (props) => {
   const [date, setDate] = useState({ date: new Date() });
   const [showModal, setShowModal] = useState(false);
   const [checked, setChecked] = useState(false);
-
-  const onClickPickDateHandler = (date) => {
-    setDate({ ...date });
-    setShowModal(true);
-  };
 
   const closeModalHandler = () => {
     setShowModal(false);
@@ -43,11 +37,9 @@ const AdminDates = (props) => {
         });
     }
   };
-
   return (
     <>
-      <DatePicker onClickDate={onClickPickDateHandler} />
-      {/* <Modal
+      <Modal
         show={showModal}
         onBackdropClick={closeModalHandler}
         onClose={closeModalHandler}
@@ -56,9 +48,9 @@ const AdminDates = (props) => {
         onClickLeft={saveAvailabilityHandler}
       >
         <DateAvailabilityController date={date} onChecked={onCheckedHandler} />
-      </Modal> */}
+      </Modal>
     </>
   );
 };
 
-export default AdminDates;
+export default AdminDateController;

@@ -1,0 +1,70 @@
+.date-availability-controller__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.date-availability-controller__state {
+  margin: 0.5rem;
+  width: 75%;
+  padding: 0.6rem;
+  font-weight: bold;
+  text-align: center;
+  background-color: hsl(216, 100%, 5%);
+  border-radius: 1rem;
+}
+
+.date-availability-controller-button__container {
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+.date-availability-controller-button__title {
+  font-size: 1rem;
+  margin: 0 0.5rem;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .date-availability-controller__state {
+    width: 55%;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+  }
+
+  .date-availability-controller-button__title {
+    font-size: 1.3rem;
+    margin: 0 0.8rem;
+  }
+
+  .date-availability-controller-button__container {
+    margin: 0.8rem;
+  }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .date-availability-controller__state {
+    width: 45%;
+    font-size: 1.4rem;
+  }
+
+  .date-availability-controller-button__title {
+    font-size: 1.4rem;
+    margin: 0 1rem;
+  }
+
+  .date-availability-controller-button__container {
+    margin: 1rem;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import calenderDays, { THIS_MONTH, THIS_YEAR } from "./helper/calender";
 import "./Calender.css";
 import CalenderRowContainer from "./CalenderRowContainer";
@@ -6,9 +6,9 @@ import CalenderDateContainer from "./CalenderDateContainer";
 import CalenderDate from "./CalenderDate";
 
 /**
- * 
- * @param {object} onClickDate (function) handler to handle click event of the date 
- * @returns 
+ *
+ * @param {object} onClickDate (function) handler to handle click event of the date
+ * @returns
  */
 const Calender = (props) => {
   const [days, setDays] = useState(calenderDays());
@@ -51,6 +51,14 @@ const Calender = (props) => {
       setDays([...calenderDays(month + 1, year)]);
     }
   };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/available/dates")
+      .then((res) => res.json())
+      .then((datesCollection) => {
+        console.log(datesCollection)
+      });
+  }, []);
 
   return (
     <div className="calender-body__container">
@@ -104,7 +112,7 @@ const Calender = (props) => {
             {value.map((date, index) => {
               return (
                 <CalenderDateContainer key={index}>
-                  <CalenderDate date={date} onClickDate={props.onClickDate}/>
+                  <CalenderDate date={date} onClickDate={props.onClickDate} />
                 </CalenderDateContainer>
               );
             })}
