@@ -1,0 +1,18 @@
+.calender-row__container {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+    .calender-row__container  {
+        justify-content: space-evenly;
+    }
+  }
+  
+  /* For Laptops */
+  @media (min-width: 992px) {
+  }

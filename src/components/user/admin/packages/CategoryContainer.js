@@ -10,22 +10,23 @@ import UpdatePackage from "./UpdatePackage";
  * @returns
  */
 const CategoryContainer = (props) => {
-
   return (
     <div className="package-category__container">
       <div className="package-category__title">{props.category}</div>
-      {props.packages.map((value, index) => {
-        return (
-          <UpdatePackage
-            category={props.category}
-            price={value.price}
-            package={value.name}
-            services={value.services.join(", ")}
-            key={index}
-            categories={props.categories}
-          />
-        );
-      })}
+      <div className="package-category-update-package__container">
+        {props.packages.map((value, index) => {
+          return (
+            <UpdatePackage
+              category={props.category}
+              price={value.price}
+              package={value.name}
+              services={value.services.join(", ")}
+              key={index}
+              categories={props.categories}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
