@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import Backdrop from "./Backdrop";
 import "./Modal.css";
@@ -23,10 +23,14 @@ const modalRoot = document.getElementById("modal-root");
  * @returns
  */
 const Modal = (props) => {
+
   return (
     <>
       {createPortal(
-        <Backdrop show={props.show} onClick={props.onBackdropClick} />,
+        <Backdrop
+          show={props.show}
+          onClick={props.onBackdropClick}
+        />,
         backdropRoot
       )}
       {createPortal(

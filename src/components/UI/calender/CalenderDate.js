@@ -1,22 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserLoginContext } from "../../../context/Context";
+import AdminDateController from "../../user/admin/dates/AdminDateController";
 import "./CalenderDate.css";
 
+/**
+ *
+ * @param {object} date date object eg: {date: Date(), disabled: boolean}
+ * @returns
+ */
 const CalenderDate = (props) => {
-  const onClickDateHandler = (event) => {
-    console.log(props.date);
-  };
-
+  const login = useContext(UserLoginContext);
   return (
-    <div
-      className={
-        props.date.disabled
-          ? "calender-date-object__disabled"
-          : "calender-date__object"
-      }
-      onClick={onClickDateHandler}
-    >
-      {props.date.date.getDate()}
-    </div>
+    <>
+      {login.user.name === "admin" ? <AdminDateController date={props.date}/> : null}
+    </>
   );
 };
 

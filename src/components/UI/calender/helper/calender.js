@@ -7,6 +7,8 @@ export const THIS_YEAR = +new Date().getFullYear();
 /** Current Day */
 export const THIS_DAY = +new Date().getDay();
 
+export const THIS_DATE = +new Date().getDate();
+
 export const CALENDER_ROWS = 6;
 
 export const CALENDER_MONTHS = {
@@ -74,6 +76,7 @@ export const getMonthDays = (month = THIS_MONTH, year = THIS_YEAR) => {
  */
 export const getMonthFirstDay = (month = THIS_MONTH, year = THIS_YEAR) => {
   return +new Date(`${year}-${padZero(month, 2)}-01`).getDay() + 1;
+  // return +new Date(`${year}-${month}-01`).getDay() + 1;
 };
 
 export const getPreviousMonth = (month, year) => {
@@ -111,8 +114,10 @@ export default (month = THIS_MONTH, year = THIS_YEAR) => {
       const day = index + 1 + (numberOfPreviousMonthDays - daysFromPrevMonth);
       return {
         date: new Date(
-          `${previousMonthYear}-${padZero(previousMonth, 2)}-${day}`
+          `${previousMonthYear}-${padZero(previousMonth, 2)}-${padZero(day, 2)}`
         ),
+
+        // date: new Date(`${previousMonthYear}-${previousMonth}-${day}`),
         disabled: true,
       };
     }
@@ -121,10 +126,31 @@ export default (month = THIS_MONTH, year = THIS_YEAR) => {
   const currentMonthDates = [...new Array(daysFromCurrentMonth)].map(
     (v, index) => {
       const day = index + 1;
-      return {
-        date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
-        disabled: false,
-      };
+      if (year === THIS_YEAR && month === THIS_MONTH && day < THIS_DATE) {
+        return {
+          date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
+          // date: new Date(`${year}-${month}-${day}`),
+          disabled: true,
+        };
+      } else if (
+        year === THIS_YEAR &&
+        month === THIS_MONTH &&
+        day === THIS_DATE
+      ) {
+        return {
+          date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
+          // date: new Date(`${year}-${month}-${day}`),
+          disabled: false,
+          today: true,
+        };
+      } else {
+        return {
+          date: new Date(`${year}-${padZero(month, 2)}-${padZero(day, 2)}`),
+
+          // date: new Date(`${year}-${month}-${day}`),
+          disabled: false,
+        };
+      }
     }
   );
 
@@ -134,6 +160,8 @@ export default (month = THIS_MONTH, year = THIS_YEAR) => {
       date: new Date(
         `${nextMonthYear}-${padZero(nextMonth, 2)}-${padZero(day, 2)}`
       ),
+
+      // date: new Date(`${nextMonthYear}-${nextMonth}-${day}`),
       disabled: true,
     };
   });

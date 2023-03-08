@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import calenderDays, { THIS_MONTH, THIS_YEAR } from "./helper/calender";
 import "./Calender.css";
 import CalenderRowContainer from "./CalenderRowContainer";
 import CalenderDateContainer from "./CalenderDateContainer";
 import CalenderDate from "./CalenderDate";
 
+/**
+ *
+ * @param {object} onClickDate (function) handler to handle click event of the date
+ * @returns
+ */
 const Calender = (props) => {
   const [days, setDays] = useState(calenderDays());
   const [month, setMonth] = useState(THIS_MONTH);
@@ -38,26 +43,39 @@ const Calender = (props) => {
 
   const navigationNextHandler = (event) => {
     if (month === 12) {
-        setMonth(1);
-        setYear(year + 1);
-        setDays([...calenderDays(1, year + 1)]);
-      } else {
-        setMonth(month + 1);
-        setDays([...calenderDays(month + 1, year)]);
-      }
+      setMonth(1);
+      setYear(year + 1);
+      setDays([...calenderDays(1, year + 1)]);
+    } else {
+      setMonth(month + 1);
+      setDays([...calenderDays(month + 1, year)]);
+    }
   };
 
-  console.log(days);
+  useEffect(() => {
+    fetch("http://localhost:3001/available/dates")
+      .then((res) => res.json())
+      .then((datesCollection) => {
+        console.log(datesCollection)
+      });
+  }, []);
+
   return (
     <div className="calender-body__container">
       <div className="calender-navigation__container">
         <div
-          className="calender-navigation__button"
+          className={
+            month === THIS_MONTH && year === THIS_YEAR
+              ? "calender-navigation-button__disabled"
+              : "calender-navigation__button"
+          }
           onClick={navigationBackHandler}
         >
           ◀
         </div>
-        <div>{`${monthNames[month - 1]}, ${year}`}</div>
+        <div className="calender-navigation-display__date">{`${
+          monthNames[month - 1]
+        }, ${year}`}</div>
         <div
           className="calender-navigation__button"
           onClick={navigationNextHandler}
