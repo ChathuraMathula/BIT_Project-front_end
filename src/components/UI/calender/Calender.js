@@ -112,7 +112,7 @@ const Calender = (props) => {
             {value.map((date, index) => {
               return (
                 <CalenderDateContainer key={index}>
-                  <CalenderDate date={date} onClickDate={props.onClickDate} />
+                  <CalenderDate date={date} />
                 </CalenderDateContainer>
               );
             })}

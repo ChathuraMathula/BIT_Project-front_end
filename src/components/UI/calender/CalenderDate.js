@@ -5,31 +5,14 @@ import "./CalenderDate.css";
 
 /**
  *
- * @param {object} onClickDate (function) handler to handle click event of the date
+ * @param {object} date date object eg: {date: Date(), disabled: boolean}
  * @returns
  */
 const CalenderDate = (props) => {
   const login = useContext(UserLoginContext);
-
-  const onClickDateHandler = (event) => {
-    props.onClickDate(props.date);
-  };
-
   return (
     <>
-      <div
-        className={
-          props.date.disabled
-            ? "calender-date-object__disabled"
-            : props.date.today
-            ? "calender-date-object__today"
-            : "calender-date__object"
-        }
-        onClick={onClickDateHandler}
-      >
-        {props.date.date.getDate()}
-      </div>
-      {login.user.name === "admin" ? <AdminDateController /> : null}
+      {login.user.name === "admin" ? <AdminDateController date={props.date}/> : null}
     </>
   );
 };

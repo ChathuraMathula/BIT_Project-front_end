@@ -114,7 +114,7 @@ export default (month = THIS_MONTH, year = THIS_YEAR) => {
       const day = index + 1 + (numberOfPreviousMonthDays - daysFromPrevMonth);
       return {
         date: new Date(
-          `${previousMonthYear}-${padZero(previousMonth, 2)}-${day}`
+          `${previousMonthYear}-${padZero(previousMonth, 2)}-${padZero(day, 2)}`
         ),
 
         // date: new Date(`${previousMonthYear}-${previousMonth}-${day}`),
