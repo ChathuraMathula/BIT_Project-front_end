@@ -1,17 +1,13 @@
-import React, { useContext } from "react";
-import AdminDates from "../components/user/admin/dates/AdminDates";
-import { UserLoginContext } from "../context/Context";
+import React from "react";
+import DatePicker from "../components/UI/calender/DatePicker";
 
 const Dates = () => {
-  const login = useContext(UserLoginContext);
 
-  if (login.user.name === "admin") {
     return (
       <>
-        <AdminDates />
+        <DatePicker />
       </>
     );
-  }
 };
 
 export default Dates;

@@ -97,9 +97,14 @@ const AdminDateController = (props) => {
           });
 
           if (availableDate.length > 0) {
-            console.log("<=== available date ===> ", availableDate);
             if (availableDate[0].reservation) {
-              setState("Reserved");
+              const reservation = availableDate[0].reservation;
+              if (reservation.state === "confirmed") {
+                setState("Reserved");
+              } else if (reservation.state === "pending") {
+                setState("Pending");
+              }
+              // setState("Reserved");
             } else {
               setState("Available");
               setChecked(true);
@@ -122,6 +127,8 @@ const AdminDateController = (props) => {
             ? "admin-date-controller-object__today"
             : state === "Reserved"
             ? "admin-date-controller-object__reserved"
+            : state === "Pending"
+            ? "admin-date-controller-object__pending"
             : state === "Available"
             ? "admin-date-controller-object__available"
             : "admin-date-controller__object"
