@@ -2,10 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../context/Context";
 import socket from "../../../utils/socket";
 import "./CustomerDateController.css";
+import CustomerSendRequestModal from "./CustomerSendRequestModal";
+import CustomerSendRequest from "./CustomerSendRequestModal";
 
 const CustomerDateController = (props) => {
   const login = useContext(UserLoginContext);
   const [state, setState] = useState("");
+
+  const [showModal, setShowModal] = useState(false);
 
   const thisDay = props.date.date.getDate();
   const thisMonth = props.date.date.getMonth();
@@ -77,7 +81,13 @@ const CustomerDateController = (props) => {
     });
   }, [props.date.date]);
 
-  const onClickDateHandler = (event) => {};
+  const onClickDateHandler = (event) => {
+    setShowModal(true);
+  };
+
+  const onCloseSendRequestModalHandler = () => {
+    setShowModal(false);
+  }
 
   return (
     <>
@@ -99,6 +109,13 @@ const CustomerDateController = (props) => {
       >
         {props.date.date.getDate()}
       </div>
+      {state === "Available" ? (
+        <CustomerSendRequestModal
+          show={showModal}
+          onClose={onCloseSendRequestModalHandler}
+          date={props.date.date}
+        />
+      ) : null}
     </>
   );
 };

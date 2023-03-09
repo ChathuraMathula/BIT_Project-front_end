@@ -15,6 +15,7 @@ import ModalCloseButton from "./ModalCloseButton";
  * @param rightButton name of the right button if any
  * @param onClickLeft left button click event handler function if left button available
  * @param onClickRight right button click event handler function if right button available
+ * @param className
  * @returns
  */
 const ModalBody = (props) => {
@@ -37,7 +38,7 @@ const ModalBody = (props) => {
         <div className="modal-body">
           <div className="modal-body__heading">{props.heading}</div>
           <ModalCloseButton onClick={props.onClose} />
-          <div className="modal-body__container">{props.children}</div>
+          <div className={"modal-body__container " + props.className}>{props.children}</div>
           <div className="modal-body__action">
             <div className={"warning-msg__container " + props.warningStyles}>
               {props.warningMessage}
