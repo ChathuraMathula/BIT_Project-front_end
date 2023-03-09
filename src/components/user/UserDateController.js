@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import socket from "../../utils/socket";
 import "./UserDateController.css";
 
 const UserDateController = (props) => {
@@ -34,6 +35,28 @@ const UserDateController = (props) => {
           }
         }
       });
+
+    socket.on("dates", (dates) => {
+      if (dates) {
+        const availableDate = dates.filter((dateDocument) => {
+          return (
+            dateDocument.date.year === thisYear &&
+            dateDocument.date.month === thisMonth &&
+            dateDocument.date.day === thisDay
+          );
+        });
+
+        if (availableDate.length > 0) {
+          if (availableDate[0].reservation) {
+            setState("Reserved");
+          } else {
+            setState("Available");
+          }
+        } else {
+          setState("Not Available");
+        }
+      }
+    });
   }, [props.date.date]);
 
   const onClickDateHandler = (event) => {

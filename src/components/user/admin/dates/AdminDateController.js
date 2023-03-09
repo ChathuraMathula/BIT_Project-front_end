@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../../../UI/modal/Modal";
 import DateAvailabilityController from "./DateAvailabilityController";
+import socket from "../../../../utils/socket";
 import "./AdminDateController.css";
 
 /**
@@ -85,10 +86,8 @@ const AdminDateController = (props) => {
     fetch("http://localhost:3001/available/dates")
       .then((res) => res.json())
       .then((dates) => {
-        // console.log(dates);
         if (dates) {
           const availableDate = dates.filter((dateDocument) => {
-            // console.log("<=== dateDocument ===> ", dateDocument);
             return (
               dateDocument.date.year === thisYear &&
               dateDocument.date.month === thisMonth &&
@@ -115,6 +114,36 @@ const AdminDateController = (props) => {
           }
         }
       });
+
+    socket.on("dates", (dates) => {
+      if (dates) {
+        const availableDate = dates.filter((dateDocument) => {
+          return (
+            dateDocument.date.year === thisYear &&
+            dateDocument.date.month === thisMonth &&
+            dateDocument.date.day === thisDay
+          );
+        });
+
+        if (availableDate.length > 0) {
+          if (availableDate[0].reservation) {
+            const reservation = availableDate[0].reservation;
+            if (reservation.state === "confirmed") {
+              setState("Reserved");
+            } else if (reservation.state === "pending") {
+              setState("Pending");
+            }
+            // setState("Reserved");
+          } else {
+            setState("Available");
+            setChecked(true);
+          }
+        } else {
+          setState("Not Available");
+          setChecked(false);
+        }
+      }
+    });
   }, [props.date.date]);
 
   return (

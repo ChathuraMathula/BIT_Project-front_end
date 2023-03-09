@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../context/Context";
+import socket from "../../../utils/socket";
 import "./CustomerDateController.css";
 
 const CustomerDateController = (props) => {
@@ -43,6 +44,37 @@ const CustomerDateController = (props) => {
           }
         }
       });
+
+    socket.on("dates", (dates) => {
+      if (dates) {
+        const availableDate = dates.filter((dateDocument) => {
+          return (
+            dateDocument.date.year === thisYear &&
+            dateDocument.date.month === thisMonth &&
+            dateDocument.date.day === thisDay
+          );
+        });
+
+        if (availableDate.length > 0) {
+          if (availableDate[0].reservation) {
+            const reservation = availableDate[0].reservation;
+            if (reservation.customer === login.user?.name) {
+              if (reservation.state === "confirmed") {
+                setState("confirmedReservation");
+              } else if (reservation.state === "pending") {
+                setState("pendingReservation");
+              }
+            } else {
+              setState("Reserved");
+            }
+          } else {
+            setState("Available");
+          }
+        } else {
+          setState("Not Available");
+        }
+      }
+    });
   }, [props.date.date]);
 
   const onClickDateHandler = (event) => {};

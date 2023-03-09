@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: hsl(32, 100%, 34%);
+  background-color: hsl(0, 100%, 36%);
   color: hsl(220, 61%, 80%);
   -webkit-user-select: none;
   user-select: none;
@@ -71,7 +71,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: hsl(0, 100%, 36%);
+  background-color: hsl(122, 100%, 30%);
   color: hsl(220, 61%, 80%);
   -webkit-user-select: none;
   user-select: none;
@@ -85,7 +85,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: hsl(116, 100%, 29%);
+  background-color: hsl(216, 100%, 50%);
   color: hsl(220, 61%, 80%);
   -webkit-user-select: none;
   user-select: none;
