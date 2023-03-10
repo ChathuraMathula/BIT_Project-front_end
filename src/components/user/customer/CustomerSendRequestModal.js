@@ -14,6 +14,7 @@ import { sanitize } from "../../../utils/Sanitizer";
  * @param show (boolean)
  * @param onClose  (function)
  * @param date (object)
+ * @param onSuccess (boolean) function handler when success sending the request
  * @returns
  */
 const CustomerSendRequestModal = (props) => {
@@ -174,7 +175,11 @@ const CustomerSendRequestModal = (props) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            if (data.success) {
+              props.success(true);
+            } else if (data.error) {
+              displayWarning(data.error);
+            }
           });
       } else {
         displayWarning("Input data is invalid. Please check again. 😡");

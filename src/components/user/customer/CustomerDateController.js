@@ -89,6 +89,10 @@ const CustomerDateController = (props) => {
     setShowModal(false);
   }
 
+  const onSuccesSendRequestHandler = (success) => {
+    setShowModal(false)
+  }
+
   return (
     <>
       <div
@@ -114,6 +118,7 @@ const CustomerDateController = (props) => {
           show={showModal}
           onClose={onCloseSendRequestModalHandler}
           date={props.date.date}
+          onSuccess={onSuccesSendRequestHandler}
         />
       ) : null}
     </>
