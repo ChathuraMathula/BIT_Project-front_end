@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { UserLoginContext } from "../../context/Context";
-import AdminDashboard from "./admin/AdminDashboard";
-import CustomerDashboard from "./customer/CustomerDashboard";
-import PhotographerDashboard from "./photographer/PhotographerDashboard";
+import { UserLoginContext } from "../context/Context";
+import AdminDashboard from "../components/user/admin/AdminDashboard";
+import CustomerDashboard from "../components/user/customer/CustomerDashboard";
+import PhotographerDashboard from "../components/user/photographer/PhotographerDashboard";
 
 const Dashboard = (props) => {
   const login = useContext(UserLoginContext);

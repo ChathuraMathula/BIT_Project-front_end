@@ -20,6 +20,7 @@ const modalRoot = document.getElementById("modal-root");
  * @param rightButton name of the right button if any
  * @param onClickLeft left button click event handler function if left button available
  * @param onClickRight right button click event handler function if right button available
+ * @param className
  * @returns
  */
 const Modal = (props) => {
@@ -44,6 +45,7 @@ const Modal = (props) => {
           onClickRight={props.onClickRight}
           warningStyles={props.warningStyles}
           warningMessage={props.warningMessage}
+          className={props.className}
         >
           {props.children}
         </ModalBody>,

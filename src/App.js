@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   createBrowserRouter,
@@ -15,11 +15,12 @@ import SignUp from "./pages/SignUp";
 import Layout from "./Layout";
 import Login from "./pages/Login";
 import { UserLoginContext } from "./context/Context";
-import Dashboard from "./components/user/Dashboard";
-import Profile from "./components/user/Profile";
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import useLocalStorage from "./hooks/useLocalStorage";
 import AdminPhotographerProfile from "./components/user/admin/AdminPhotographerProfile";
 import Packages from "./pages/Packages";
+import socket from "./utils/socket";
 
 function App() {
   const [login, setLogin] = useLocalStorage("login", {
@@ -35,7 +36,9 @@ function App() {
     }));
   };
 
-  console.log("inside App.js: ", login);
+  useEffect(() => {
+    socket;
+  },[]);
 
   return (
     <>

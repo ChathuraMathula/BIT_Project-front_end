@@ -1,11 +1,14 @@
 import React from "react";
+import DatePicker from "../../UI/calender/DatePicker";
+import FormHeading from "../../UI/form/FormHeading";
 
 const AdminDashboard = () => {
-    return (
-        <>
-            <h1>Admin Dashboard</h1>
-        </>
-    );
+  return (
+    <>
+      <FormHeading>DASHBOARD</FormHeading>
+      <DatePicker />
+    </>
+  );
 };
 
 export default AdminDashboard;

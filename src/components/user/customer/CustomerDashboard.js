@@ -1,11 +1,14 @@
 import React from "react";
+import DatePicker from "../../UI/calender/DatePicker";
+import FormHeading from "../../UI/form/FormHeading";
 
-const CustomerDashboard = () => {
-    return (
-        <>
-            <h1>Customer Dashboard</h1>
-        </>
-    );
+const CustomerDashboard = (props) => {
+  return (
+    <>
+      <FormHeading>DASHBOARD</FormHeading>
+      <DatePicker />
+    </>
+  );
 };
 
 export default CustomerDashboard;

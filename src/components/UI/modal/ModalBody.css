@@ -103,11 +103,14 @@
 }
 
 .modal-action__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: hsl(220, 61%, 80%);
   border: 1px solid hsl(220, 61%, 80%);
   border-radius: 0.5rem;
   color: hsl(216, 100%, 50%);
-  padding: 0.4rem;
+  padding: 0.5rem;
   font-weight: bold;
   margin: 0 0.3rem;
   font-size: 0.8rem;
@@ -120,6 +123,13 @@
   color: hsl(220, 61%, 80%);
   background-color: hsl(216, 100%, 50%);
   transition: all 0.3s ease-out;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .modal-body__container {
+    padding: 1rem;
+  }
 }
 
 /* For Tablets */

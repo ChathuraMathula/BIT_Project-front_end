@@ -96,6 +96,10 @@ export const isValid = (type, value) => {
       // floating point numbers
       pattern = /^[0-9\.]+$/i;
       break;
+    case "message":
+      // message string
+      pattern = /./i;
+      break;
     default:
       pattern = /./;
       break;

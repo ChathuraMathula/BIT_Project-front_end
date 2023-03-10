@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { UserLoginContext } from "../../context/Context";
-import AdminProfile from "./admin/AdminProfile";
-import UserProfile from "./UserProfile";
+import { UserLoginContext } from "../context/Context";
+import AdminProfile from "../components/user/admin/AdminProfile";
+import UserProfile from "../components/user/UserProfile";
 
 const Profile = (props) => {
   const login = useContext(UserLoginContext);

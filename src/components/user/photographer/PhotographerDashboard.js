@@ -1,11 +1,14 @@
 import React from "react";
+import DatePicker from "../../UI/calender/DatePicker";
+import FormHeading from "../../UI/form/FormHeading";
 
 const PhotographerDashboard = () => {
     return (
         <>
-            <h1>Photographer Dashboard</h1>
+          <FormHeading>DASHBOARD</FormHeading>
+          <DatePicker />
         </>
-    );
+      );
 };
 
 export default PhotographerDashboard;
