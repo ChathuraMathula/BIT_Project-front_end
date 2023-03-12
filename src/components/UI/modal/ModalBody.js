@@ -38,11 +38,21 @@ const ModalBody = (props) => {
         <div className="modal-body">
           <div className="modal-body__heading">{props.heading}</div>
           <ModalCloseButton onClick={props.onClose} />
-          <div className={"modal-body__container " + props.className}>{props.children}</div>
+          <div
+            className={
+              !props.warningMessage
+                ? "modal-body-no-warning__container"
+                : "modal-body__container " + props.className
+            }
+          >
+            {props.children}
+          </div>
           <div className="modal-body__action">
-            <div className={"warning-msg__container " + props.warningStyles}>
-              {props.warningMessage}
-            </div>
+            {props.warningMessage ? (
+              <div className={"warning-msg__container " + props.warningStyles}>
+                {props.warningMessage}
+              </div>
+            ) : null}
             <div className="modal-action-button__container">
               {props.leftButton ? (
                 <div

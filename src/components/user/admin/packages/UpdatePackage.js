@@ -116,7 +116,6 @@ const UpdatePackage = (props) => {
               console.log(data);
               if (data.success) {
                 setShowModal(false);
-                // props.categories(data.categories);
               } else if (data.error) {
                 displayWarning(data.error);
               }

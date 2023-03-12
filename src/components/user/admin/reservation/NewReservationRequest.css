@@ -1,0 +1,234 @@
+.new-request-state__titile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+}
+
+.new-reservation-request-main__container {
+  width: 100%;
+  animation-name: wipeIn;
+  animation-duration: 0.4s;
+}
+
+.new-reservation-request-column__container {
+  width: 100%;
+}
+
+.new-reservation-request-details__container {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.new-reservation-request-details__container span {
+  font-weight: bold;
+}
+
+.new-reservation-request-details__container div {
+  margin: 0.2rem 0;
+}
+
+.new-reservation-request-details__title {
+  text-decoration: underline;
+  padding-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.new-reservation-request__message {
+  padding: 0.5rem;
+  border: 1px dashed hsl(220, 61%, 80%);
+  background-color: hsl(220, 61%, 30%);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  -webkit-user-select: none;
+  user-select: none;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.new-reservation-request__message-title {
+  margin-top: 2rem;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.new-reservation-request__payment-details {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.new-reservation-request-payment-details__titile {
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.new-reservation-request-payment-details__total {
+  margin: 1rem 0;
+  border: 1px dotted hsl(220, 61%, 80%);
+  text-align: center;
+  font-weight: bold;
+  padding: 0.5rem;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.new-reservation-request-button__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.new-reservation-request-button__container button {
+  width: 5rem;
+  padding: 0.5rem;
+  margin: 0 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  border: none;
+  background-color: hsl(216, 100%, 50%);
+  color: hsl(220, 61%, 80%);
+}
+
+.new-reservation-request-reject__button:hover {
+  background-color: hsl(0, 100%, 41%);
+  transition: all 0.5s;
+}
+
+.new-reservation-request-send__button:hover {
+  background-color: hsl(128, 100%, 34%);
+  transition: all 0.5s;
+}
+
+.reservation-request-reject-warning__container {
+  padding: 0.8rem;
+  border: 1px dashed hsl(0, 100%, 41%);
+  border-radius: 0.5rem;
+  background-color: hsla(0, 100%, 30%, 20%);
+  -webkit-user-select: none;
+  user-select: none;
+  color: hsla(0, 100%, 50%, 100%);
+  text-align: center;
+  animation-name: wipeIn;
+  animation-duration: 0.4s;
+  margin-bottom: 1rem;
+}
+
+.reservation-request-reject-warning__container h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+
+.reservation-request-reject-warning__container div {
+  text-align: justify;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .new-reservation-request-details__container {
+    font-size: 1rem;
+  }
+
+  .new-reservation-request__message {
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .new-reservation-request-button__container button {
+    width: 6.2rem;
+  }
+
+  .reservation-request-reject-warning__container {
+    text-align: center;
+  }
+  .reservation-request-reject-warning__container h2 {
+    text-align: center;
+    margin-bottom: 0.7rem;
+    font-weight: normal;
+  }
+  
+  .reservation-request-reject-warning__container div {
+    text-align: center;
+  }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .new-reservation-request-main__container {
+    display: flex;
+    justify-content: center;
+  }
+  .new-reservation-request-column__container {
+    width: 50%;
+    padding: 0 0.5rem;
+  }
+
+  .new-reservation-request__payment-details {
+    border-left: 1px solid hsl(220, 61%, 80%);
+    margin-top: 0;
+    padding-left: 1.5rem;
+  }
+
+  .new-reservation-request-payment-details__titile {
+    margin-top: 0;
+  }
+
+  .new-reservation-request-column__container-left {
+    padding-right: 1.5rem;
+  }
+
+  .new-reservation-request-button__container button {
+    width: 7rem;
+    font-size: 1.1rem;
+  }
+
+  .reservation-request-reject-warning__container {
+    width: 70%;
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .new-reservation-request__payment-details {
+    padding-left: 2rem;
+  }
+  .new-reservation-request-column__container-left {
+    padding-right: 2rem;
+  }
+
+  .new-reservation-request-details__container,
+  .new-reservation-request__message {
+    font-size: 1rem;
+  }
+
+  .new-reservation-request-details__container {
+    margin-bottom: 1.2rem;
+  }
+
+  .new-reservation-request__message {
+    padding: 1rem;
+  }
+
+  .reservation-request-reject-warning__container {
+    width: 60%;
+    margin: auto;
+  }
+}

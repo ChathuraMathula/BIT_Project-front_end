@@ -163,7 +163,7 @@ const CustomerSendRequestModal = (props) => {
           },
         };
 
-        console.log(data);
+        
 
         await fetch("http://localhost:3001/customer/send/reservation/request", {
           method: "POST",
@@ -175,16 +175,19 @@ const CustomerSendRequestModal = (props) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            if (data.success) {
-              props.success(true);
-            } else if (data.error) {
-              displayWarning(data.error);
+            console.log(data);
+            if (!data.success) {
+              displayWarning("Sorry..! Sending reservation request failed. 😕");
+            } else if (data.success) {
+              props.onSuccess(true);
             }
           });
       } else {
         displayWarning("Input data is invalid. Please check again. 😡");
       }
-    } catch (error) {}
+    } catch (error) {
+      displayWarning("Sending failed. 😡");
+    }
   };
 
   return (
