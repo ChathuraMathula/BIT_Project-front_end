@@ -1,0 +1,128 @@
+.customer-payment-details-response__notice {
+  padding: 0.5rem;
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: center;
+}
+
+.customer-payment-details-response__notice span {
+  padding: 0.4rem;
+  font-weight: bold;
+  color: red;
+  display: inline-block;
+}
+
+.customer-payment-details__photographer-message {
+  padding: 0.5rem;
+  border: 1px dashed hsl(220, 61%, 80%);
+  background-color: hsl(220, 61%, 30%);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  -webkit-user-select: none;
+  user-select: none;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.customer-payment-details__photographer-message-title {
+  margin-top: 2rem;
+  text-align: center;
+  margin-bottom: 0.4rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.customer-payment-details-costs__container {
+  padding: 0.6rem;
+  margin: 1rem 0;
+  width: 100%;
+  background-color: hsl(216, 100%, 30%);
+  border-radius: 1rem;
+  box-shadow: 0 0 8px 0 hsl(216, 100%, 10%);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.customer-payment-details-costs__title {
+  margin: 0.4rem auto;
+  font-weight: bold;
+  text-align: center;
+}
+
+.customer-payment-details-costs__row {
+  display: flex;
+  margin: 0;
+  padding: 0.5rem 0;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid hsl(220, 61%, 80%);
+}
+
+.customer-payment-details-costs__name {
+  width: 70%;
+  /* border-right: 1px solid hsl(220, 61%, 80%); */
+}
+
+.customer-payment-details-costs__price {
+  width: 30%;
+  text-align: end;
+}
+
+.customer-payment-details__bank-details {
+  margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0 0 1rem 1rem;
+  background-color: hsl(216, 100%, 50%);
+  font-size: 0.9rem;
+}
+
+.customer-payment-details__bank-details span {
+  font-weight: bold;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .customer-payment-details__photographer-message {
+    font-size: 1rem;
+    padding: 1rem;
+    width: 80%;
+    margin: auto;
+  }
+
+  .customer-payment-details-costs__container {
+    width: 80%;
+    margin: 1.3rem auto;
+    padding: 1rem;
+  }
+
+  .customer-payment-details__bank-details {
+    font-size: 1rem;
+  }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .customer-payment-details__photographer-message {
+    width: 70%;
+    padding: 1rem;
+    margin: auto;
+  }
+
+  .customer-payment-details-costs__container {
+    width: 70%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .customer-payment-details__photographer-message {
+    width: 60%;
+    padding: 1rem;
+    margin: auto;
+  }
+
+  .customer-payment-details-costs__container {
+    width: 60%;
+  }
+}

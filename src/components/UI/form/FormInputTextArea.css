@@ -33,7 +33,14 @@
     color: hsl(216, 100%, 85%);
     font-size: 1.2rem;
     resize: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+
+  .form-input-text-area__container textarea::-webkit-scrollbar {
+    display: none;
+  }
+  
   
   .form-input-text-area__container textarea:focus-visible {
     outline: 1px solid hsl(216, 100%, 75%);

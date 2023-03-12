@@ -163,8 +163,6 @@ const CustomerSendRequestModal = (props) => {
           },
         };
 
-        
-
         await fetch("http://localhost:3001/customer/send/reservation/request", {
           method: "POST",
           credentials: "include",
@@ -192,85 +190,87 @@ const CustomerSendRequestModal = (props) => {
 
   return (
     <>
-      <Modal
-        show={props.show}
-        onClose={props.onClose}
-        onBackdropClick={props.onClose}
-        heading={props.date.toDateString()}
-        leftButton="SEND REQUEST"
-        onClickLeft={onClickSendRequestHandler}
-        warningMessage={warningMessage}
-        warningStyles={warningStyles}
+      <div className="customer-send-request-state__container">
+        <CalenderDateState>Reservation Request</CalenderDateState>
+      </div>
+      <FormSelectOptions
+        id="package-category"
+        label="Select Package Category"
+        onChange={onSelectCategoryHandler}
       >
-        <div className="customer-send-request-state__container">
-          <CalenderDateState>Reservation Request</CalenderDateState>
+        <option value="">-- Select --</option>
+        {categories.map((categoryDocument, index) => {
+          return (
+            <option value={categoryDocument.name} key={index}>
+              {categoryDocument.name}
+            </option>
+          );
+        })}
+      </FormSelectOptions>
+      <FormSelectOptions
+        id="package"
+        label="Select Package"
+        onChange={onSelectPackageHandler}
+      >
+        <option value="">-- Select --</option>
+        {packages.map((packageDocument, index) => {
+          return (
+            <option value={packageDocument.name} key={index}>
+              {packageDocument.name}
+            </option>
+          );
+        })}
+      </FormSelectOptions>
+      <FormInput
+        value={event}
+        onChange={eventInputHandler}
+        placeholder="eg: Wedding / Birthday Party / Other"
+      >
+        Event
+      </FormInput>
+      <FormInputTime
+        hours={beginHours}
+        minutes={beginMinutes}
+        onChangeHours={onChangeBeginHoursHandler}
+        onChangeMinutes={onChangeBeginMinutesHandler}
+      >
+        Event Begin Time:
+      </FormInputTime>
+      <FormInputTime
+        hours={endHours}
+        minutes={endMinutes}
+        onChangeHours={onChangeEndHoursHandler}
+        onChangeMinutes={onChangeEndMinutesHandler}
+      >
+        Event End Time:
+      </FormInputTime>
+      <FormInputTextArea
+        value={location}
+        onChange={onChangeLocationHandler}
+        placeholder="Please type the address of the location where the event is planned to be held."
+      >
+        Location Address
+      </FormInputTextArea>
+      <FormInputTextArea
+        value={message}
+        onChange={onChangeMessageHandler}
+        placeholder="Your additional requests can be asked via this message box."
+      >
+        Your Message:
+      </FormInputTextArea>
+      <div className={"warning-msg__container " + warningStyles}>
+        {warningMessage}
+      </div>
+      <div>
+        <div className="customer-send-reservation-request-button__container">
+          <button
+            onClick={onClickSendRequestHandler}
+            className="customer-send-reservation-request__button"
+          >
+            Send Request
+          </button>
         </div>
-        <FormSelectOptions
-          id="package-category"
-          label="Select Package Category"
-          onChange={onSelectCategoryHandler}
-        >
-          <option value="">-- Select --</option>
-          {categories.map((categoryDocument, index) => {
-            return (
-              <option value={categoryDocument.name} key={index}>
-                {categoryDocument.name}
-              </option>
-            );
-          })}
-        </FormSelectOptions>
-        <FormSelectOptions
-          id="package"
-          label="Select Package"
-          onChange={onSelectPackageHandler}
-        >
-          <option value="">-- Select --</option>
-          {packages.map((packageDocument, index) => {
-            return (
-              <option value={packageDocument.name} key={index}>
-                {packageDocument.name}
-              </option>
-            );
-          })}
-        </FormSelectOptions>
-        <FormInput
-          value={event}
-          onChange={eventInputHandler}
-          placeholder="eg: Wedding / Birthday Party / Other"
-        >
-          Event
-        </FormInput>
-        <FormInputTime
-          hours={beginHours}
-          minutes={beginMinutes}
-          onChangeHours={onChangeBeginHoursHandler}
-          onChangeMinutes={onChangeBeginMinutesHandler}
-        >
-          Event Begin Time:
-        </FormInputTime>
-        <FormInputTime
-          hours={endHours}
-          minutes={endMinutes}
-          onChangeHours={onChangeEndHoursHandler}
-          onChangeMinutes={onChangeEndMinutesHandler}
-        >
-          Event End Time:
-        </FormInputTime>
-        <FormInputTextArea
-          value={location}
-          onChange={onChangeLocationHandler}
-          placeholder="Please type the address of the location where the event is planned to be held."
-        >
-          Location Address
-        </FormInputTextArea>
-        <FormInputTextArea
-          value={message}
-          onChange={onChangeMessageHandler}
-          placeholder="Your additional requests can be asked via this message box."
-        >
-          Your Message:
-        </FormInputTextArea>
-      </Modal>
+      </div>
     </>
   );
 };

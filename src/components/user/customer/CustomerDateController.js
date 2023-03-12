@@ -3,9 +3,8 @@ import { UserLoginContext } from "../../../context/Context";
 import socket from "../../../utils/socket";
 import Modal from "../../UI/modal/Modal";
 import "./CustomerDateController.css";
-import CustomerPaymentDetailsModal from "./CustomerPaymentDetailsModal";
+import CustomerPaymentDetails from "./CustomerPaymentDetails";
 import CustomerSendRequestModal from "./CustomerSendRequestModal";
-import CustomerSendRequest from "./CustomerSendRequestModal";
 
 const CustomerDateController = (props) => {
   const login = useContext(UserLoginContext);
@@ -65,6 +64,8 @@ const CustomerDateController = (props) => {
         });
 
         if (availableDate.length > 0) {
+          setDateDocument(availableDate[0]);
+          
           if (availableDate[0].reservation) {
             const reservation = availableDate[0].reservation;
             if (reservation.customer === login.user?.name) {
@@ -120,29 +121,26 @@ const CustomerDateController = (props) => {
       >
         {props.date.date.getDate()}
       </div>
-      {/* <Modal
+      <Modal
         show={showModal}
-        onClose={props.onClose}
-        onBackdropClick={props.onClose}
-        heading={props.date.toDateString()}
-      ></Modal> */}
+        onClose={onCloseModalHandler}
+        onBackdropClick={onCloseModalHandler}
+        heading={props.date.date.toDateString()}
+      >
       {state === "Available" ? (
         <CustomerSendRequestModal
-          show={showModal}
-          onClose={onCloseModalHandler}
           date={props.date.date}
           onSuccess={onSuccesHandler}
         />
       ) : null}
-      {state === "pendingReservation" ? (
-        <CustomerPaymentDetailsModal
-          show={showModal}
-          onClose={onCloseModalHandler}
+      {state === "pendingReservation" && dateDocument.reservation?.costs ? (
+        <CustomerPaymentDetails
           date={props.date.date}
           onSuccess={onSuccesHandler}
           reservation={dateDocument.reservation}
         />
       ) : null}
+      </Modal>
     </>
   );
 };
