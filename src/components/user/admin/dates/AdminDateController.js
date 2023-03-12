@@ -3,6 +3,7 @@ import Modal from "../../../UI/modal/Modal";
 import DateAvailabilityController from "./DateAvailabilityController";
 import socket from "../../../../utils/socket";
 import "./AdminDateController.css";
+import ReservationRequestController from "../reservation/ReservationRequestController";
 
 /**
  *
@@ -13,6 +14,7 @@ const AdminDateController = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [checked, setChecked] = useState(false);
   const [state, setState] = useState("");
+  const [dateDocument, setDateDocument] = useState({});
 
   const thisDay = props.date.date.getDate();
   const thisMonth = props.date.date.getMonth();
@@ -96,6 +98,8 @@ const AdminDateController = (props) => {
           });
 
           if (availableDate.length > 0) {
+            setDateDocument(availableDate[0]);
+
             if (availableDate[0].reservation) {
               const reservation = availableDate[0].reservation;
               if (reservation.state === "confirmed") {
@@ -103,7 +107,6 @@ const AdminDateController = (props) => {
               } else if (reservation.state === "pending") {
                 setState("Pending");
               }
-              // setState("Reserved");
             } else {
               setState("Available");
               setChecked(true);
@@ -126,6 +129,8 @@ const AdminDateController = (props) => {
         });
 
         if (availableDate.length > 0) {
+          setDateDocument(availableDate[0]);
+
           if (availableDate[0].reservation) {
             const reservation = availableDate[0].reservation;
             if (reservation.state === "confirmed") {
@@ -133,7 +138,6 @@ const AdminDateController = (props) => {
             } else if (reservation.state === "pending") {
               setState("Pending");
             }
-            // setState("Reserved");
           } else {
             setState("Available");
             setChecked(true);
@@ -145,6 +149,13 @@ const AdminDateController = (props) => {
       }
     });
   }, [props.date.date]);
+
+  const onCussessNewReservationRequestSendHandler = (success) => {
+    if (success) {
+      setShowModal(false);
+    }
+  }
+
 
   return (
     <>
@@ -187,6 +198,14 @@ const AdminDateController = (props) => {
             onChecked={onCheckedAvailabilityHandler}
             checked={checked}
             state={state}
+          />
+        ) : null}
+
+        {state === "Pending" ? (
+          <ReservationRequestController
+            reservation={dateDocument.reservation}
+            date={props.date.date}
+            onSuccess={onCussessNewReservationRequestSendHandler}
           />
         ) : null}
       </Modal>

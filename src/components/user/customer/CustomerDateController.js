@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../context/Context";
 import socket from "../../../utils/socket";
+import Modal from "../../UI/modal/Modal";
 import "./CustomerDateController.css";
+import CustomerPaymentDetails from "./CustomerPaymentDetails";
 import CustomerSendRequestModal from "./CustomerSendRequestModal";
-import CustomerSendRequest from "./CustomerSendRequestModal";
 
 const CustomerDateController = (props) => {
   const login = useContext(UserLoginContext);
   const [state, setState] = useState("");
+  const [dateDocument, setDateDocument] = useState({});
 
   const [showModal, setShowModal] = useState(false);
 
@@ -29,6 +31,8 @@ const CustomerDateController = (props) => {
           });
 
           if (availableDate.length > 0) {
+            setDateDocument(availableDate[0]);
+
             if (availableDate[0].reservation) {
               const reservation = availableDate[0].reservation;
               if (reservation.customer === login.user?.name) {
@@ -60,6 +64,8 @@ const CustomerDateController = (props) => {
         });
 
         if (availableDate.length > 0) {
+          setDateDocument(availableDate[0]);
+          
           if (availableDate[0].reservation) {
             const reservation = availableDate[0].reservation;
             if (reservation.customer === login.user?.name) {
@@ -85,13 +91,15 @@ const CustomerDateController = (props) => {
     setShowModal(true);
   };
 
-  const onCloseSendRequestModalHandler = () => {
+  const onCloseModalHandler = () => {
     setShowModal(false);
-  }
+  };
 
-  const onSuccesSendRequestHandler = (success) => {
-    setShowModal(false)
-  }
+  const onSuccesHandler = (success) => {
+    if (success) {
+      setShowModal(false);
+    }
+  };
 
   return (
     <>
@@ -113,14 +121,26 @@ const CustomerDateController = (props) => {
       >
         {props.date.date.getDate()}
       </div>
+      <Modal
+        show={showModal}
+        onClose={onCloseModalHandler}
+        onBackdropClick={onCloseModalHandler}
+        heading={props.date.date.toDateString()}
+      >
       {state === "Available" ? (
         <CustomerSendRequestModal
-          show={showModal}
-          onClose={onCloseSendRequestModalHandler}
           date={props.date.date}
-          onSuccess={onSuccesSendRequestHandler}
+          onSuccess={onSuccesHandler}
         />
       ) : null}
+      {state === "pendingReservation" && dateDocument.reservation?.costs ? (
+        <CustomerPaymentDetails
+          date={props.date.date}
+          onSuccess={onSuccesHandler}
+          reservation={dateDocument.reservation}
+        />
+      ) : null}
+      </Modal>
     </>
   );
 };

@@ -1,8 +1,32 @@
 .customer-send-request-state__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-    -webkit-user-select: none;
-    margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  margin-bottom: 0.5rem;
+}
+
+.customer-send-reservation-request-button__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.customer-send-reservation-request__button {
+  width: 10rem;
+  padding: 0.6rem;
+  background-color: hsl(216, 100%, 50%);
+  color: hsl(220, 61%, 80%);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.customer-send-reservation-request__button:hover {
+  background-color: hsl(128, 100%, 34%);
+  transition: all 0.5s;
 }
