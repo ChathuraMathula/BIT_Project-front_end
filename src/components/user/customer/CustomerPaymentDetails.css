@@ -31,7 +31,8 @@
   text-decoration: underline;
 }
 
-.customer-payment-details-costs__container {
+.customer-payment-details-costs__container,
+.customer-payment-details-payment__container {
   padding: 0.6rem;
   margin: 1rem 0;
   width: 100%;
@@ -42,7 +43,8 @@
   user-select: none;
 }
 
-.customer-payment-details-costs__title {
+.customer-payment-details-costs__title,
+.customer-payment-details-payment__title {
   margin: 0.4rem auto;
   font-weight: bold;
   text-align: center;
@@ -81,6 +83,63 @@
   font-weight: bold;
 }
 
+.customer-payment-details-payment__method-notice {
+    margin: 0.4rem auto;
+    text-align: center;
+}
+
+.customer-payment-details-payment-method__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0.4rem 0;
+}
+
+.customer-payment-details-payment-method__container div {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 2rem;
+    border: 1px dashed hsl(216, 100%, 50%);
+}
+
+.customer-payment-details-payment-method__container div:hover {
+    background-color: hsl(216, 100%, 50%);
+    transition: all 0.5s;
+}
+
+.selected-payment-method {
+    background-color: hsl(216, 100%, 50%);
+    transition: all 0.5s;
+}
+
+.customer-payment-details-screenshot__upload input {
+    display: none;
+}
+
+label.customer-payment-details-screenshot__upload {
+    border: 2px solid hsl(220, 61%, 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 3.1rem;
+    width: 3.1rem;
+    border-radius: 50%;
+}
+
+label.customer-payment-details-screenshot__upload:hover {
+    background-color: hsl(216, 100%, 50%);
+    border: 2px solid hsl(216, 100%, 50%);
+    transition: all 0.4s;
+}
+
+.customer-payment-details-screenshot__upload svg {
+    height: 3rem;
+    width: 3rem;
+}
+
+
 /* For medium size phones */
 @media (min-width: 576px) {
   .customer-payment-details__photographer-message {
@@ -90,7 +149,8 @@
     margin: auto;
   }
 
-  .customer-payment-details-costs__container {
+  .customer-payment-details-costs__container,
+  .customer-payment-details-payment__container {
     width: 80%;
     margin: 1.3rem auto;
     padding: 1rem;
@@ -109,7 +169,8 @@
     margin: auto;
   }
 
-  .customer-payment-details-costs__container {
+  .customer-payment-details-costs__container,
+  .customer-payment-details-payment__container {
     width: 70%;
   }
 }
@@ -122,7 +183,8 @@
     margin: auto;
   }
 
-  .customer-payment-details-costs__container {
+  .customer-payment-details-costs__container,
+  .customer-payment-details-payment__container {
     width: 60%;
   }
 }
