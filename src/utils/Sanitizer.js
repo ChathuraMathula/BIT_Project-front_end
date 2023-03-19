@@ -7,7 +7,7 @@
  */
 export const sanitize = (input) => {
   if (typeof input === "string") {
-    return input.replace(/\<script\>/gi, ""); // Remove <script> tags
+    return input.replace(/(\<script\>|\<\/script\>)/gi, ""); // Remove <script> tags
   }
   return input;
 };

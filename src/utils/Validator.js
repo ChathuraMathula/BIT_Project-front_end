@@ -32,7 +32,9 @@ export const isEmpty = (str) => {
 
 /**
  *
- * @param {string} type type of the string passed ( username | password | name | phoneNo | email | address | url_path )
+ * @param {string} type type of the string passed
+ * ( username | password | name | phoneNo | email | address
+ * | url_path | bankBranchName | paidAmount | date | time )
  * @param {string} value string to be validated against type
  * @returns returns true if the value is of specified type, else false.
  */
@@ -99,6 +101,22 @@ export const isValid = (type, value) => {
     case "message":
       // message string
       pattern = /./i;
+      break;
+    case "bankBranchName":
+      // branch name eg: POLGAHAWELA
+      pattern = /^[A-Z]+$/;
+      break;
+    case "paidAmount":
+      // paid amount eg: 10,000.00
+      pattern = /^[0-9\,]+\.\d{2}$/;
+      break;
+    case "date":
+      // valid date DD/MM/YYYY
+      pattern = /^(0?[1-9]|[12][0-9]|3[01])[\/](0?[1-9]|1[012])[\/]\d{4}$/;
+      break;
+    case "time":
+      // valid time in HH:MM format
+      pattern = /^(0?[0-9]|[1][0-9]|[2][0-3])\:(0?[0-9]|[12345][0-9])$/;
       break;
     default:
       pattern = /./;

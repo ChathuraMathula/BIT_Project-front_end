@@ -65,7 +65,7 @@ const CustomerDateController = (props) => {
 
         if (availableDate.length > 0) {
           setDateDocument(availableDate[0]);
-          
+
           if (availableDate[0].reservation) {
             const reservation = availableDate[0].reservation;
             if (reservation.customer === login.user?.name) {
@@ -127,19 +127,21 @@ const CustomerDateController = (props) => {
         onBackdropClick={onCloseModalHandler}
         heading={props.date.date.toDateString()}
       >
-      {state === "Available" ? (
-        <CustomerSendRequestModal
-          date={props.date.date}
-          onSuccess={onSuccesHandler}
-        />
-      ) : null}
-      {state === "pendingReservation" && dateDocument.reservation?.costs ? (
-        <CustomerPaymentDetails
-          date={props.date.date}
-          onSuccess={onSuccesHandler}
-          reservation={dateDocument.reservation}
-        />
-      ) : null}
+        {state === "Available" ? (
+          <CustomerSendRequestModal
+            date={props.date.date}
+            onSuccess={onSuccesHandler}
+          />
+        ) : null}
+        {state === "pendingReservation" &&
+        dateDocument.reservation?.costs &&
+        !dateDocument.reservation?.payment ? (
+          <CustomerPaymentDetails
+            date={props.date.date}
+            onSuccess={onSuccesHandler}
+            reservation={dateDocument.reservation}
+          />
+        ) : null}
       </Modal>
     </>
   );
