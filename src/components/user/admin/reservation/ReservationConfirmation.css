@@ -1,0 +1,120 @@
+.reservation-confirmation__container {
+  padding: 0.6rem;
+  margin: 1rem 0;
+  width: 100%;
+  background-color: hsl(216, 100%, 30%);
+  border-radius: 1rem;
+  box-shadow: 0 0 8px 0 hsl(216, 100%, 10%);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.reservation-confirmation__container span {
+  font-weight: bold;
+}
+
+.reservation-confirmation__title {
+  margin: 0.4rem auto;
+  font-weight: bold;
+  text-align: center;
+}
+
+.reservation-confirmation__item {
+  padding: 0.3rem;
+}
+
+.reservation-confirmation__download {
+  padding: 0.6rem;
+  padding-top: 1rem;
+  background-color: hsl(216, 100%, 50%);
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 0 0 1rem 1rem;
+  margin-top: 1rem;
+}
+
+.reservation-confirmation-download-button {
+  height: 3rem;
+  width: 3rem;
+  border: 1px solid hsl(220, 61%, 80%);
+  border-radius: 50%;
+  margin: 0.6rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.reservation-confirmation-download-button svg {
+  height: 3rem;
+  width: 3rem;
+}
+
+.reservation-confirmation-download-button:hover {
+  background-color: hsl(216, 100%, 30%);
+  border: 1px solid hsl(216, 100%, 30%);
+  transition: all 0.4s;
+}
+
+.reservation-confirmation-button__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0;
+}
+
+.reservation-confirmation-button__container button {
+  width: 6rem;
+  margin: 0 0.5rem;
+  font-weight: bold;
+  background-color: hsl(216, 100%, 50%);
+  color: hsl(220, 61%, 80%);
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+}
+
+.reservation-confirmation-button__red:hover {
+  background-color: hsl(0, 100%, 36%);
+  transition: all 0.4s;
+}
+
+.reservation-confirmation-button__green:hover {
+  background-color: hsl(125, 100%, 36%);
+  transition: all 0.4s;
+}
+
+.reservation-confirmation-warning__title {
+  margin-bottom: 0.5rem;
+  color: hsl(0, 100%, 46%);
+  text-align: center;
+}
+
+.reservation-confirmation-warning__notice {
+    text-align: center;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .reservation-confirmation__container {
+    width: 80%;
+    margin: 1.3rem auto;
+    padding: 1rem;
+  }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .reservation-confirmation__container {
+    width: 70%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .reservation-confirmation__container {
+    width: 60%;
+  }
+}

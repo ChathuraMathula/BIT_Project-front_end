@@ -23,12 +23,11 @@ const CustomerSendRequestModal = (props) => {
   const [categoryName, setCategoryName] = useState("");
   const [packageName, setPackageName] = useState("");
   const [event, setEvent] = useState("");
-  const [beginHours, setBeginHours] = useState("");
-  const [beginMinutes, setBeginMinutes] = useState("");
-  const [endHours, setEndHours] = useState("");
-  const [endMinutes, setEndMinutes] = useState("");
   const [location, setLocation] = useState("");
   const [message, setMessage] = useState("");
+
+  const [beginTime, setBeginTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
@@ -80,37 +79,6 @@ const CustomerSendRequestModal = (props) => {
     setEvent(event.target.value);
   };
 
-  const onChangeBeginHoursHandler = (event) => {
-    setBeginHours(validateHours(event.target.value));
-  };
-
-  const onChangeBeginMinutesHandler = (event) => {
-    setBeginMinutes(validateMinutes(event.target.value));
-  };
-
-  const onChangeEndHoursHandler = (event) => {
-    setEndHours(validateHours(event.target.value));
-  };
-
-  const onChangeEndMinutesHandler = (event) => {
-    setEndMinutes(validateMinutes(event.target.value));
-  };
-
-  const validateHours = (hour) => {
-    if (+hour >= 0 && +hour < 24) {
-      return +hour;
-    } else {
-      return 0;
-    }
-  };
-
-  const validateMinutes = (minutes) => {
-    if (+minutes >= 0 && +minutes < 60) {
-      return +minutes;
-    } else {
-      return 0;
-    }
-  };
 
   const onChangeLocationHandler = (event) => {
     setLocation(event.target.value);
@@ -118,6 +86,14 @@ const CustomerSendRequestModal = (props) => {
 
   const onChangeMessageHandler = (event) => {
     setMessage(event.target.value);
+  };
+
+  const onChangeBeginTime = (e) => {
+    setBeginTime(sanitize(e.target.value));
+  };
+
+  const onChangeEndTime = (e) => {
+    setEndTime(sanitize(e.target.value));
   };
 
   const onClickSendRequestHandler = async () => {
@@ -134,11 +110,8 @@ const CustomerSendRequestModal = (props) => {
         !isEmpty(location) &&
         !isEmpty(categoryName) &&
         !isEmpty(packageName) &&
-        !isEmpty(beginHours) &&
-        !isEmpty(beginMinutes) &&
-        !isEmpty(endHours) &&
-        !isEmpty(endMinutes) &&
-        beginHours < endHours
+        isValid("time", beginTime) &&
+        isValid("time", endTime)
       ) {
         console.log("sent");
         const data = {
@@ -153,8 +126,8 @@ const CustomerSendRequestModal = (props) => {
             event: {
               type: sanitize(event),
               location: sanitize(location),
-              beginTime: `${beginHours} : ${beginMinutes}`,
-              endTime: `${endHours} : ${endMinutes}`,
+              beginTime: beginTime,
+              endTime: endTime,
             },
             message: {
               customer:
@@ -190,74 +163,74 @@ const CustomerSendRequestModal = (props) => {
 
   return (
     <>
-      <div className="customer-send-request-state__container">
-        <CalenderDateState>Reservation Request</CalenderDateState>
+      <CalenderDateState>Reservation Request</CalenderDateState>
+
+      <div className="customer-send-reservation-request__container">
+        <FormSelectOptions
+          id="package-category"
+          label="Select Package Category"
+          onChange={onSelectCategoryHandler}
+        >
+          <option value="">-- Select --</option>
+          {categories.map((categoryDocument, index) => {
+            return (
+              <option value={categoryDocument.name} key={index}>
+                {categoryDocument.name}
+              </option>
+            );
+          })}
+        </FormSelectOptions>
+        <FormSelectOptions
+          id="package"
+          label="Select Package"
+          onChange={onSelectPackageHandler}
+        >
+          <option value="">-- Select --</option>
+          {packages.map((packageDocument, index) => {
+            return (
+              <option value={packageDocument.name} key={index}>
+                {packageDocument.name}
+              </option>
+            );
+          })}
+        </FormSelectOptions>
+        <FormInput
+          value={event}
+          onChange={eventInputHandler}
+          placeholder="eg: Wedding / Birthday Party / Other"
+        >
+          Event
+        </FormInput>
+        <FormInput
+          value={beginTime}
+          onChange={onChangeBeginTime}
+          placeholder="HH:MM"
+        >
+          Event Begin Time:
+        </FormInput>
+        <FormInput
+          value={endTime}
+          onChange={onChangeEndTime}
+          placeholder="HH:MM"
+        >
+          Event End Time:
+        </FormInput>
+        
+        <FormInputTextArea
+          value={location}
+          onChange={onChangeLocationHandler}
+          placeholder="Please type the address of the location where the event is planned to be held."
+        >
+          Location Address
+        </FormInputTextArea>
+        <FormInputTextArea
+          value={message}
+          onChange={onChangeMessageHandler}
+          placeholder="Your additional requests can be asked via this message box."
+        >
+          Your Message:
+        </FormInputTextArea>
       </div>
-      <FormSelectOptions
-        id="package-category"
-        label="Select Package Category"
-        onChange={onSelectCategoryHandler}
-      >
-        <option value="">-- Select --</option>
-        {categories.map((categoryDocument, index) => {
-          return (
-            <option value={categoryDocument.name} key={index}>
-              {categoryDocument.name}
-            </option>
-          );
-        })}
-      </FormSelectOptions>
-      <FormSelectOptions
-        id="package"
-        label="Select Package"
-        onChange={onSelectPackageHandler}
-      >
-        <option value="">-- Select --</option>
-        {packages.map((packageDocument, index) => {
-          return (
-            <option value={packageDocument.name} key={index}>
-              {packageDocument.name}
-            </option>
-          );
-        })}
-      </FormSelectOptions>
-      <FormInput
-        value={event}
-        onChange={eventInputHandler}
-        placeholder="eg: Wedding / Birthday Party / Other"
-      >
-        Event
-      </FormInput>
-      <FormInputTime
-        hours={beginHours}
-        minutes={beginMinutes}
-        onChangeHours={onChangeBeginHoursHandler}
-        onChangeMinutes={onChangeBeginMinutesHandler}
-      >
-        Event Begin Time:
-      </FormInputTime>
-      <FormInputTime
-        hours={endHours}
-        minutes={endMinutes}
-        onChangeHours={onChangeEndHoursHandler}
-        onChangeMinutes={onChangeEndMinutesHandler}
-      >
-        Event End Time:
-      </FormInputTime>
-      <FormInputTextArea
-        value={location}
-        onChange={onChangeLocationHandler}
-        placeholder="Please type the address of the location where the event is planned to be held."
-      >
-        Location Address
-      </FormInputTextArea>
-      <FormInputTextArea
-        value={message}
-        onChange={onChangeMessageHandler}
-        placeholder="Your additional requests can be asked via this message box."
-      >
-        Your Message:
-      </FormInputTextArea>
       <div className={"warning-msg__container " + warningStyles}>
         {warningMessage}
       </div>

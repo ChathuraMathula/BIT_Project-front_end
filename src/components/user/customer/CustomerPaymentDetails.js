@@ -125,6 +125,34 @@ const CustomerPaymentDetails = (props) => {
     setRejected(false);
   };
 
+  const onClickRejectYesHandler = async (e) => {
+    await fetch("http://localhost:3001/remove/reservation", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        date: {
+          year: thisYear,
+          month: thisMonth,
+          day: thisDay,
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          if (!data.success) {
+            displayWarning("Removing reservation failed. 😐");
+          } else if (data.success) {
+            props.onSuccess(true);
+          }
+        }
+      });
+  };
+
   const onChangePaymentSlipHandler = (e) => {
     const file = e.target.files[0];
     if (file.type === "image/jpeg" && file.size <= 200000000) {
@@ -399,7 +427,10 @@ const CustomerPaymentDetails = (props) => {
           </div>
           <div>
             <div className="custmer-payment-details-action__container">
-              <button className="customer-payment-details-action__reject">
+              <button
+                onClick={onClickRejectYesHandler}
+                className="customer-payment-details-action__reject"
+              >
                 Yes
               </button>
               <button

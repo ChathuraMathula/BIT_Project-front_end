@@ -96,7 +96,7 @@ const NewReservationRequest = (props) => {
   };
 
   const onClickYesHandler = (e) => {
-    fetch("http://localhost:3001/photographer/remove/reservation", {
+    fetch("http://localhost:3001/remove/reservation", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({

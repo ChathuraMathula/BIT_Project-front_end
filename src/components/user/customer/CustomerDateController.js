@@ -2,9 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../context/Context";
 import socket from "../../../utils/socket";
 import Modal from "../../UI/modal/Modal";
+import ConfirmedReservation from "../admin/reservation/ConfirmedReservation";
 import "./CustomerDateController.css";
 import CustomerPaymentDetails from "./CustomerPaymentDetails";
 import CustomerSendRequestModal from "./CustomerSendRequestModal";
+import PendingConfirmation from "./PendingConfirmation";
 
 const CustomerDateController = (props) => {
   const login = useContext(UserLoginContext);
@@ -95,7 +97,7 @@ const CustomerDateController = (props) => {
     setShowModal(false);
   };
 
-  const onSuccesHandler = (success) => {
+  const onSuccessHandler = (success) => {
     if (success) {
       setShowModal(false);
     }
@@ -130,7 +132,7 @@ const CustomerDateController = (props) => {
         {state === "Available" ? (
           <CustomerSendRequestModal
             date={props.date.date}
-            onSuccess={onSuccesHandler}
+            onSuccess={onSuccessHandler}
           />
         ) : null}
         {state === "pendingReservation" &&
@@ -138,8 +140,20 @@ const CustomerDateController = (props) => {
         !dateDocument.reservation?.payment ? (
           <CustomerPaymentDetails
             date={props.date.date}
-            onSuccess={onSuccesHandler}
+            onSuccess={onSuccessHandler}
             reservation={dateDocument.reservation}
+          />
+        ) : null}
+        {state === "pendingReservation" &&
+        dateDocument.reservation?.costs &&
+        dateDocument.reservation?.payment ? (
+          <PendingConfirmation />
+        ) : null}
+        {state === "confirmedReservation" ? (
+          <ConfirmedReservation
+            reservation={dateDocument.reservation}
+            date={props.date.date}
+            onSuccess={onSuccessHandler}
           />
         ) : null}
       </Modal>
