@@ -1,6 +1,8 @@
 import React from "react";
 import NewReservationRequest from "./NewReservationRequest";
+import ReservationConfirmation from "./ReservationConfirmation";
 import "./ReservationRequestController.css";
+import WaitingCustomerPaymentDetails from "./WaitingCustomerPaymentDetails";
 
 /**
  *
@@ -19,8 +21,14 @@ const ReservationRequestController = (props) => {
       />
     );
   } else if (!props.reservation.hasOwnProperty("payment")) {
+    return <WaitingCustomerPaymentDetails reservation={props.reservation} />;
+  } else if (props.reservation.hasOwnProperty("payment")) {
     return (
-      <div>Payment</div>
+      <ReservationConfirmation
+        reservation={props.reservation}
+        date={props.date}
+        onSuccess={props.onSuccess}
+      />
     );
   }
 };

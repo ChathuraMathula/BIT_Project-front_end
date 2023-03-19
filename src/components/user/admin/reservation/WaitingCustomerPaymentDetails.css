@@ -1,0 +1,11 @@
+.waiting-customer-payment-details-notice {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.waiting-customer-payment-details-notice span {
+    display: inline-block;
+    font-size: 2rem;
+    margin: 1rem 0;
+    color: hsl(112, 100%, 50%);
+}

@@ -4,6 +4,7 @@ import DateAvailabilityController from "./DateAvailabilityController";
 import socket from "../../../../utils/socket";
 import "./AdminDateController.css";
 import ReservationRequestController from "../reservation/ReservationRequestController";
+import ConfirmedReservation from "../reservation/ConfirmedReservation";
 
 /**
  *
@@ -150,7 +151,7 @@ const AdminDateController = (props) => {
     });
   }, [props.date.date]);
 
-  const onCussessNewReservationRequestSendHandler = (success) => {
+  const onSuccessHandler = (success) => {
     if (success) {
       setShowModal(false);
     }
@@ -205,7 +206,14 @@ const AdminDateController = (props) => {
           <ReservationRequestController
             reservation={dateDocument.reservation}
             date={props.date.date}
-            onSuccess={onCussessNewReservationRequestSendHandler}
+            onSuccess={onSuccessHandler}
+          />
+        ) : null}
+        {state === "Reserved" ? (
+          <ConfirmedReservation
+            reservation={dateDocument.reservation}
+            date={props.date.date}
+            onSuccess={onSuccessHandler}
           />
         ) : null}
       </Modal>
