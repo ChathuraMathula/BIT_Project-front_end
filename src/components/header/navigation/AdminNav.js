@@ -42,6 +42,8 @@ const AdminNav = (props) => {
       setState({ packages: "user-navigation-link__active" });
     } else if (pathName === "/dates") {
       setState({ dates: "user-navigation-link__active" });
+    } else if (pathName === "/portfolio") {
+      setState({ portfolio: "user-navigation-link__active" });
     }
   }, [window.location.pathname]);
 
@@ -72,14 +74,14 @@ const AdminNav = (props) => {
         >
           Packages
         </Link>
-        <Link
-          className={state.dates}
-          onClick={onClickDates}
-          to="/dates"
-        >
+        <Link className={state.dates} onClick={onClickDates} to="/dates">
           Dates
         </Link>
-        <Link className={state.portfolio} onClick={onClickPortfolio}>
+        <Link
+          className={state.portfolio}
+          onClick={onClickPortfolio}
+          to="/portfolio"
+        >
           Portfolio
         </Link>
       </UserNavigation>

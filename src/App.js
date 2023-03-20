@@ -21,6 +21,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import AdminPhotographerProfile from "./components/user/admin/AdminPhotographerProfile";
 import Packages from "./pages/Packages";
 import socket from "./utils/socket";
+import Portfolio from "./pages/Portfolio";
 
 function App() {
   const [login, setLogin] = useLocalStorage("login", {
@@ -65,6 +66,10 @@ function App() {
                <Route
                 path="/dates"
                 element={<Dates />}
+              />
+              <Route
+                path="/portfolio"
+                element={<Portfolio />}
               />
             </Route>
           </Routes>

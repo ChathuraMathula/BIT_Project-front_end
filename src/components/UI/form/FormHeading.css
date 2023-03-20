@@ -3,6 +3,8 @@
   font-size: 1.2rem;
   animation-name: wipeIn;
   animation-duration: 1.2s;
+  -webkit-user-select: none;
+  user-select: none;
 }
 @media (min-width: 768px) {
   .form-heading {
