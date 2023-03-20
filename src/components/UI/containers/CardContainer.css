@@ -1,0 +1,6 @@
+.card__container {
+    background-color: hsl(216, 100%, 10%);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+}

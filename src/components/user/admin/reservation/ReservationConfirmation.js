@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { sanitize } from "../../../../utils/Sanitizer";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
 import FormInputCheckBox from "../../../UI/form/FormInputCheckBox";
@@ -18,6 +18,7 @@ const ReservationConfirmation = (props) => {
   const [warningStyles, setWarningStyles] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
   const [photographerMsg, setPhotographerMsg] = useState("");
+  const [fileUrl, setFileUrl] = useState("");
 
   const payment = props.reservation.payment;
   const thisYear = props.date.getFullYear();
@@ -44,6 +45,32 @@ const ReservationConfirmation = (props) => {
       setWarningMessage("");
     }, 5000);
   };
+
+  useEffect(() => {
+    fetch("http://localhost:3001/payment/slip/photo", {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({
+        year: thisYear,
+        month: thisMonth,
+        day: thisDay,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.blob())
+      .then((data) => {
+        if (data) {
+          console.log("PICTURE", data);
+          if (data.type === "image/jpeg") {
+            setFileUrl(URL.createObjectURL(data));
+          } else {
+            setFileUrl("");
+          }
+        }
+      });
+  }, []);
 
   const onClickRejectYesHandler = (e) => {
     fetch("http://localhost:3001/remove/reservation", {
@@ -101,14 +128,16 @@ const ReservationConfirmation = (props) => {
       });
   };
 
+  const onClickDownloadPaymentSlip = async (e) => {};
+
   return (
     <>
-      <CalenderDateState>Payment Details</CalenderDateState>
+      <CalenderDateState>Confirm Reservation</CalenderDateState>
       {!rejected ? (
         <>
           <div className="reservation-confirmation__container">
             <div className="reservation-confirmation__title">
-              Payment Details
+              PAYMENT DETAILS
             </div>
             <div className="reservation-confirmation__item">
               <span>Paid Method: </span>
@@ -134,9 +163,14 @@ const ReservationConfirmation = (props) => {
             </div>
             <div className="reservation-confirmation__download">
               Download Bank Payment Slip/Screenshot of payment
-              <div className="reservation-confirmation-download-button">
+              <a
+                download={`${thisYear}_${thisMonth}_${thisDay}_payment_slip.jpeg`}
+                href={fileUrl}
+                onClick={onClickDownloadPaymentSlip}
+                className="reservation-confirmation-download-button"
+              >
                 <DownloadSVG />
-              </div>
+              </a>
             </div>
           </div>
           <div className={"warning-msg__container " + warningStyles}>
