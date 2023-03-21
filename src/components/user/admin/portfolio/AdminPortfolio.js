@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CardContainer from "../../../UI/containers/CardContainer";
 import FormHeading from "../../../UI/form/FormHeading";
+import PortfolioImagesGallary from "../../../UI/gallary/PortfolioImagesGallary";
 import Modal from "../../../UI/modal/Modal";
 import UploadSVG from "../../../UI/SVG/UploadSVG";
 import "./AdminPortfolio.css";
@@ -115,6 +116,8 @@ const AdminPortfolio = (props) => {
           </>
         ) : null}
       </Modal>
+      <br />
+      <PortfolioImagesGallary />
     </>
   );
 };

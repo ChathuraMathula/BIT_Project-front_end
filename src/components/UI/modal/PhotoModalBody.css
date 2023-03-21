@@ -1,0 +1,211 @@
+@keyframes openPhotoModal {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes closePhotoModal {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.PhotoModalOpen {
+  animation: openPhotoModal 1s ease-out forwards;
+}
+
+.PhotoModalClose {
+  animation: closePhotoModal 1s ease-out forwards;
+}
+
+.photo-modal-body {
+  position: fixed;
+  width: 90%;
+  max-height: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  /* top: 1rem; */
+  top: 50%;
+  transform: translateY(-50%);
+  /* bottom: 1rem; */
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 250;
+  margin: auto;
+  box-shadow: 0 0 10px 0 hsl(216, 100%, 5%);
+  border-radius: 1rem;
+}
+
+.photo-modal-body__container {
+  width: 100%;
+  border-radius: 1rem;
+  position: relative;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  overscroll-behavior: contain;
+}
+
+.photo-modal-body img {
+  border-radius: 1rem;
+  width: 100%;
+}
+
+.photo-modal-body__container::-webkit-scrollbar {
+  display: none;
+}
+
+.photo-modal-close__button {
+  height: 2rem;
+  width: 2rem;
+  background-color: hsl(216, 100%, 5%);
+  color: hsl(220, 61%, 80%);
+  position: absolute;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.photo-modal-close__button:hover {
+  background-color: hsl(216, 100%, 50%);
+  transition: all 0.4s;
+}
+
+.photo-modal-body__action {
+  animation-name: wipeIn;
+  animation-duration: 0.4s;
+  width: 100%;
+  border-radius: 0 0 1rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsla(0, 0%, 0%, 0.6);
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  padding: 0.5rem 0;
+}
+
+.photo-modal-body__action button,
+.photo-modal-body-warning__action button {
+  padding: 0.3rem;
+  font-weight: bold;
+  width: 6rem;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  margin: 0 0.5rem;
+}
+
+.photo-modal-body__action button,
+.photo-modal-body-warning__action button:nth-child(1) {
+  background-color: hsla(0, 100%, 36%, 0.6);
+  color: hsla(220, 61%, 80%, 0.8);
+}
+
+.photo-modal-body__action button:hover,
+.photo-modal-body-warning__action button:nth-child(1):hover {
+  background-color: hsl(0, 100%, 50%);
+  color: white;
+  border: none;
+  transition: all 0.4s;
+}
+
+.photo-modal-body-warning__action {
+  animation-name: wipeIn;
+  animation-duration: 0.4s;
+  height: 100%;
+  width: 100%;
+  background-color: hsla(0, 0%, 0%, 0.7);
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+}
+
+.photo-modal-body-warning__action p {
+  width: 100%;
+  padding: 1rem;
+  margin: 2rem 0;
+  background-color: hsla(0, 0%, 0%, 0.8);
+  color: hsl(220, 61%, 80%);
+  text-align: center;
+  border-radius: 1rem;
+  
+}
+
+.photo-modal-body-warning__action div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-modal-body-warning__action button:nth-child(2) {
+  background-color: hsla(126, 100%, 36%, 0.6);
+  color: hsla(220, 61%, 80%, 0.8);
+}
+
+.photo-modal-body-warning__action button:nth-child(2):hover {
+  background-color: hsl(126, 100%, 50%);
+  color: white;
+  border: none;
+  transition: all 0.4s;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .photo-modal-body {
+    width: 80%;
+  }
+
+  .photo-modal-body-warning__action {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* For Tablets */
+@media (min-width: 768px) {
+  .photo-modal-body {
+    width: 70%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .photo-modal-body {
+    width: 50%;
+  }
+}

@@ -53,3 +53,8 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
 }
+
+#photo-modal-root {
+  width: 100%;
+  position: relative;
+}
