@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import "./PhotoModalBody.css";
 import ModalCloseButton from "./ModalCloseButton";
@@ -28,6 +28,12 @@ const PhotoModalBody = (props) => {
   const onClickDeleteNoHandler = (e) => {
     setDeleteImage(false);
   };
+
+  useEffect(() => {
+    if (!props.show) {
+      setDeleteImage(false);
+    }
+  }, [props.show]);
 
   return (
     <>

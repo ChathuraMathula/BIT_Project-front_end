@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import socket from "../../../utils/socket";
 import CardContainer from "../containers/CardContainer";
 import PhotoModal from "../modal/PhotoModal";
 import "./PortfolioImagesGallary.css";
@@ -16,6 +17,11 @@ const PortfolioImagesGallary = (props) => {
         // setImages([...data]);
         setImages([...devideIntoFourArrays(data)]);
       });
+
+    socket.on("portfolio", (data) => {
+      console.log("-------->>>>>>>", data)
+      setImages([...devideIntoFourArrays(data)]);
+    });
   }, []);
 
   const devideIntoFourArrays = (array) => {
@@ -51,16 +57,18 @@ const PortfolioImagesGallary = (props) => {
     await fetch("http://localhost:3001/remove/portfolio/image", {
       method: "POST",
       credentials: "include",
-      body: JSON.stringify({imageName: imageName}),
+      body: JSON.stringify({ imageName: imageName }),
       headers: {
         "Content-Type": "application/json",
-      }
-    }).then(res => res.json()).then(data => {
-      if (data.success) {
-        setShowPhotoModal(false);
-      }
+      },
     })
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setShowPhotoModal(false);
+        }
+      });
+  };
 
   return (
     <>
@@ -88,7 +96,7 @@ const PortfolioImagesGallary = (props) => {
         </div>
       </CardContainer>
       <PhotoModal
-        onDelete={event => onDeleteImageHandler(event, image)}
+        onDelete={(event) => onDeleteImageHandler(event, image)}
         show={showPhotoModal}
         onClose={onClosePhotoModalHandler}
         onBackdropClick={onClosePhotoModalHandler}

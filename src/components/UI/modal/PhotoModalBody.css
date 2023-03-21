@@ -40,20 +40,26 @@
   justify-content: center;
   left: 0;
   right: 0;
-  top: 1rem;
+  /* top: 1rem; */
+  top: 50%;
+  transform: translateY(-50%);
   /* bottom: 1rem; */
   -webkit-user-select: none;
   user-select: none;
   z-index: 250;
   margin: auto;
+  box-shadow: 0 0 10px 0 hsl(216, 100%, 5%);
+  border-radius: 1rem;
 }
 
 .photo-modal-body__container {
+  width: 100%;
   border-radius: 1rem;
   position: relative;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  overscroll-behavior: contain;
 }
 
 .photo-modal-body img {
@@ -142,7 +148,9 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 2rem;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
 }
 
 .photo-modal-body-warning__action p {
@@ -153,9 +161,15 @@
   color: hsl(220, 61%, 80%);
   text-align: center;
   border-radius: 1rem;
-  border: 1px dashed hsl(220, 61%, 80%);
+  
 }
 
+.photo-modal-body-warning__action div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .photo-modal-body-warning__action button:nth-child(2) {
   background-color: hsla(126, 100%, 36%, 0.6);
@@ -169,11 +183,16 @@
   transition: all 0.4s;
 }
 
-
 /* For medium size phones */
 @media (min-width: 576px) {
   .photo-modal-body {
     width: 80%;
+  }
+
+  .photo-modal-body-warning__action {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
   }
 }
 
