@@ -7,6 +7,7 @@ import "./CustomerDateController.css";
 import CustomerPaymentDetails from "./CustomerPaymentDetails";
 import CustomerSendRequestModal from "./CustomerSendRequestModal";
 import PendingConfirmation from "./PendingConfirmation";
+import PendingPhotographerCosts from "./PendingPhotographerCosts";
 
 const CustomerDateController = (props) => {
   const login = useContext(UserLoginContext);
@@ -134,6 +135,10 @@ const CustomerDateController = (props) => {
             date={props.date.date}
             onSuccess={onSuccessHandler}
           />
+        ) : null}
+        {state === "pendingReservation" &&
+        !dateDocument.reservation?.costs ? (
+          <PendingPhotographerCosts />
         ) : null}
         {state === "pendingReservation" &&
         dateDocument.reservation?.costs &&

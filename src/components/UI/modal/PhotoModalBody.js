@@ -54,7 +54,7 @@ const PhotoModalBody = (props) => {
           <div className="photo-modal-body__container">
             <img src={props.src}></img>
           </div>
-          {login.user.name === "admin" && !deleteImage ? (
+          {login.user?.name === "admin" && !deleteImage ? (
             <div className="photo-modal-body__action">
               <button onClick={onClickDeleteHandler}>Delete</button>
             </div>

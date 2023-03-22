@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { sanitize } from "../../../utils/Sanitizer";
 import { isValid } from "../../../utils/Validator";
 import CalenderDateState from "../../UI/calender/CalenderDateState";
+import ModalCardContainer from "../../UI/containers/ModalCardContainer";
 import FormInput from "../../UI/form/FormInput";
 import UploadSVG from "../../UI/SVG/UploadSVG";
 import "./CustomerPaymentDetails.css";
@@ -246,19 +247,21 @@ const CustomerPaymentDetails = (props) => {
       <CalenderDateState>Send Payment Details</CalenderDateState>
       {!rejected ? (
         <>
-          <div className="customer-payment-details-response__notice">
-            Please add valid payment details to get reserved a date within
-            <span>{` ${hours} : ${minutes} : ${seconds} `}</span> <br />
-            Otherwise your request is rejected...! 🙂
-          </div>
-          <div className="customer-payment-details__photographer-message-title">
-            Photographer Message
-          </div>
-          <div className="customer-payment-details__photographer-message">
-            {props.reservation.message.photographer[0]
-              ? props.reservation.message.photographer[0]
-              : "No message to preview"}
-          </div>
+          <ModalCardContainer>
+            <div className="customer-payment-details-response__notice">
+              Please add valid payment details to get reserved a date within
+              <span>{` ${hours} : ${minutes} : ${seconds} `}</span> <br />
+              Otherwise your request is rejected...! 🙂
+            </div>
+            <div className="customer-payment-details__photographer-message-title">
+              Photographer Message
+            </div>
+            <div className="customer-payment-details__photographer-message">
+              {props.reservation.message.photographer[0]
+                ? props.reservation.message.photographer[0]
+                : "No message to preview"}
+            </div>
+          </ModalCardContainer>
           <div className="customer-payment-details-costs__container">
             <div className="customer-payment-details-costs__title">COSTS</div>
             <div className="customer-payment-details-costs__row">

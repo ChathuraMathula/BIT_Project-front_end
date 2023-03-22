@@ -1,0 +1,37 @@
+.package-categories__container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation-name: wipeIn;
+  animation-duration: 0.5s;
+}
+
+.packages__container {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .package-categories__container {
+    width: 90%;
+  }
+  .packages__container {
+    width: 50%;
+  }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .package-categories__container {
+    width: 90%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .package-categories__container {
+    width: 80%;
+  }
+}
