@@ -34,13 +34,13 @@ const Welcome = () => {
         </div>
         <div className="welcome-options__option welcome-package">
           <PackagesSVG className="welcome-options__option-svg" />
-          <Link className="welcome-options__option-link select-package">
+          <Link to="/packages" className="welcome-options__option-link select-package">
             Select A Package
           </Link>
         </div>
         <div className="welcome-options__option welcome-portfolio">
           <PortfolioSVG className="welcome-options__option-svg" />
-          <Link className="welcome-options__option-link see-portfolio">
+          <Link to="/portfolio" className="welcome-options__option-link see-portfolio">
             See Portfolio
           </Link>
         </div>

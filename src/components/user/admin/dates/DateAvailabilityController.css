@@ -22,7 +22,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: hsl(216, 100%, 30%);
+  border-radius: 1rem;
+  box-shadow: 0 0 6px 0 hsl(216, 100%, 10%);
+
 }
 
 .date-availability-controller-button__title {

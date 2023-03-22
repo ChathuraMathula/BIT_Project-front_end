@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { sanitize } from "../../../../utils/Sanitizer";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
+import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInput from "../../../UI/form/FormInput";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import "./NewReservationRequest.css";
@@ -178,114 +179,117 @@ const NewReservationRequest = (props) => {
       {!rejected ? (
         <>
           <div className="new-reservation-request-main__container">
-            <div className="new-reservation-request-column__container new-reservation-request-column__container-left">
-              <div className="new-reservation-request-details__container">
-                <div className="new-reservation-request-details__title">
-                  EVENT DETAILS
+            <ModalCardContainer>
+              <div className="new-reservation-request-column__container new-reservation-request-column__container-left">
+                <div className="new-reservation-request-details__container">
+                  <div className="new-reservation-request-details__title">
+                    EVENT DETAILS
+                  </div>
+                  <div>
+                    <span>Event Type:</span> {event.type}
+                  </div>
+                  <div>
+                    <span>Event Location:</span> {event.location}
+                  </div>
+                  <div>
+                    <span>Event Time:</span>{" "}
+                    {`form ${event.beginTime} to ${event.endTime}`}
+                  </div>
                 </div>
-                <div>
-                  <span>Event Type:</span> {event.type}
+                <div className="new-reservation-request-details__container">
+                  <div className="new-reservation-request-details__title">
+                    CUSTOMER DETAILS
+                  </div>
+                  <div>
+                    <span>Name:</span>{" "}
+                    {`${customer.firstname} ${customer.lastname}`}
+                  </div>
+                  <div>
+                    <span>Phone:</span> {customer.phoneNo}
+                  </div>
+                  <div>
+                    <span>Email:</span> {customer.email}
+                  </div>
+                  <div>
+                    <span>Address:</span> {customer.address}
+                  </div>
                 </div>
-                <div>
-                  <span>Event Location:</span> {event.location}
+                <div className="new-reservation-request-details__container">
+                  <div className="new-reservation-request-details__title">
+                    PACKAGE DETAILS
+                  </div>
+                  <div>
+                    <span>Category:</span> {props.reservation.category}
+                  </div>
+                  <div>
+                    <span>Package:</span> {packageDocument.name}
+                  </div>
+                  <div>
+                    <span>Price:</span> {packageDocument.price}
+                  </div>
+                  <div>
+                    <span>Services:</span>{" "}
+                    {packageDocument.services.map((service, index) => {
+                      return <li key={index}>{service}</li>;
+                    })}
+                  </div>
                 </div>
-                <div>
-                  <span>Event Time:</span>{" "}
-                  {`form ${event.beginTime} to ${event.endTime}`}
+                <div className="new-reservation-request__message-title">
+                  Customer Message
+                </div>
+                <div className="new-reservation-request__message">
+                  {props.reservation.message.customer
+                    ? props.reservation.message.customer
+                    : "No message to preview"}
                 </div>
               </div>
-              <div className="new-reservation-request-details__container">
-                <div className="new-reservation-request-details__title">
-                  CUSTOMER DETAILS
+            </ModalCardContainer>
+            <ModalCardContainer>
+              <div className="new-reservation-request-column__container new-reservation-request__payment-details">
+                <div className="new-reservation-request-payment-details__titile">
+                  ADD PAYMENT DETAILS
                 </div>
-                <div>
-                  <span>Name:</span>{" "}
-                  {`${customer.firstname} ${customer.lastname}`}
-                </div>
-                <div>
-                  <span>Phone:</span> {customer.phoneNo}
-                </div>
-                <div>
-                  <span>Email:</span> {customer.email}
-                </div>
-                <div>
-                  <span>Address:</span> {customer.address}
+                <FormInput
+                  onChange={onChangeTransportCostHandler}
+                  value={transportCost}
+                  type="number"
+                  placeholder="LKR"
+                >
+                  Transport Cost:{" "}
+                </FormInput>
+                <FormInput
+                  onChange={onChangeExtraServicesCostHandler}
+                  value={extraServicesCost}
+                  type="number"
+                  placeholder="LKR"
+                >
+                  Extra Services Cost:{" "}
+                </FormInput>
+                <FormInput
+                  onChange={onChangeAdvancePaymentHandler}
+                  value={advancePayment}
+                  type="number"
+                  placeholder="LKR"
+                >
+                  Advance Payment:{" "}
+                </FormInput>
+                <FormInputTextArea
+                  onChange={onChangePhotographerMessageHandler}
+                  value={message}
+                  placeholder="Message to the customer"
+                >
+                  Message:{" "}
+                </FormInputTextArea>
+                <div className="new-reservation-request-payment-details__total">
+                  Estimated Total Price
+                  <br />
+                  {+packageDocument.price +
+                    +advancePayment +
+                    +extraServicesCost +
+                    +transportCost}
                 </div>
               </div>
-              <div className="new-reservation-request-details__container">
-                <div className="new-reservation-request-details__title">
-                  PACKAGE DETAILS
-                </div>
-                <div>
-                  <span>Category:</span> {props.reservation.category}
-                </div>
-                <div>
-                  <span>Package:</span> {packageDocument.name}
-                </div>
-                <div>
-                  <span>Price:</span> {packageDocument.price}
-                </div>
-                <div>
-                  <span>Services:</span>{" "}
-                  {packageDocument.services.map((service, index) => {
-                    return <li key={index}>{service}</li>;
-                  })}
-                </div>
-              </div>
-              <div className="new-reservation-request__message-title">
-                Customer Message
-              </div>
-              <div className="new-reservation-request__message">
-                {props.reservation.message.customer
-                  ? props.reservation.message.customer
-                  : "No message to preview"}
-              </div>
-            </div>
-
-            <div className="new-reservation-request-column__container new-reservation-request__payment-details">
-              <div className="new-reservation-request-payment-details__titile">
-                ADD PAYMENT DETAILS
-              </div>
-              <FormInput
-                onChange={onChangeTransportCostHandler}
-                value={transportCost}
-                type="number"
-                placeholder="LKR"
-              >
-                Transport Cost:{" "}
-              </FormInput>
-              <FormInput
-                onChange={onChangeExtraServicesCostHandler}
-                value={extraServicesCost}
-                type="number"
-                placeholder="LKR"
-              >
-                Extra Services Cost:{" "}
-              </FormInput>
-              <FormInput
-                onChange={onChangeAdvancePaymentHandler}
-                value={advancePayment}
-                type="number"
-                placeholder="LKR"
-              >
-                Advance Payment:{" "}
-              </FormInput>
-              <FormInputTextArea
-                onChange={onChangePhotographerMessageHandler}
-                value={message}
-                placeholder="Message to the customer"
-              >
-                Message:{" "}
-              </FormInputTextArea>
-              <div className="new-reservation-request-payment-details__total">
-                Estimated Total Price
-                <br />
-                {+packageDocument.price +
-                  +advancePayment +
-                  +extraServicesCost +
-                  +transportCost}
-              </div>
-            </div>
+            </ModalCardContainer>
           </div>
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
