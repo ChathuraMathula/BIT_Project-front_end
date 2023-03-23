@@ -6,6 +6,8 @@
   margin: 0.3rem;
   border-radius: 50%;
   background-color: hsl(216, 100%, 15%);
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .toggle-button__input {

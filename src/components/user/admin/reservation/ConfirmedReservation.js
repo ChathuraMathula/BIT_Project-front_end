@@ -1,8 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../../context/Context";
+import GreenButton from "../../../UI/buttons/GreenButton";
+import OrangeButton from "../../../UI/buttons/OrangeButton";
+import RedButton from "../../../UI/buttons/RedButton";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
+import WarningCard from "../../../UI/cards/WarningCard";
+import ButtonContainer from "../../../UI/containers/ButtonContainer";
+import DetailsContainer from "../../../UI/containers/DetailsContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
+import NameValueString from "../../../UI/other/NameValueString";
+import NameValueTitle from "../../../UI/other/NameValueTitle";
 import "./ConfirmedReservation.css";
+import UpdateReservation from "./UpdateReservation";
 
 /**
  *
@@ -20,6 +29,8 @@ const ConfirmedReservation = (props) => {
 
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
+
+  const [update, setUpdate] = useState(false);
 
   const reservation = props.reservation;
 
@@ -58,14 +69,17 @@ const ConfirmedReservation = (props) => {
             return category.name === props.reservation.category;
           });
 
-          const packageArray = packageCategory[0].packages.filter(
+          const packageArray = packageCategory[0]?.packages.filter(
             (packageDoc) => packageDoc.name === props.reservation.package
           );
 
-          setPackageDocument(packageArray[0]);
+          setPackageDocument({
+            ...packageArray[0],
+            category: packageCategory[0].name,
+          });
         }
       });
-  }, []);
+  }, [props.reservation]);
 
   const onClickDeleteNoHandler = (e) => {
     setDeleteReservation(false);
@@ -103,117 +117,119 @@ const ConfirmedReservation = (props) => {
     setDeleteReservation(true);
   };
 
+  const onClickUpdateHandler = (e) => {
+    setUpdate(true);
+  };
+
   return (
     <>
       <CalenderDateState>Reserved</CalenderDateState>
-      {!deleteReservation ? (
+      {!deleteReservation && !update ? (
         <>
           <ModalCardContainer>
-            <div className="confirmed-reservation-details__container">
-              <h2>EVENT DETAILS</h2>
-              <div>
-                <span>Event Type: </span>
-                {reservation.event.type}
-              </div>
-              <div>
-                <span>Event Location: </span>
-                {reservation.event.location}
-              </div>
-              <div>
-                <span>Event Time: </span>
-                {`From ${reservation.event.beginTime} to ${reservation.event.endTime}`}
-              </div>
-            </div>
+            <DetailsContainer>
+              <NameValueTitle>EVENT DETAILS</NameValueTitle>
+              <NameValueString
+                name="Event Type:"
+                value={reservation.event.type}
+              />
+              <NameValueString
+                name="Event Location:"
+                value={reservation.event.location}
+              />
+              <NameValueString
+                name="Event Time:"
+                value={`From ${reservation.event.beginTime} to ${reservation.event.endTime}`}
+              />
+            </DetailsContainer>
             {login.user.name === "admin" ||
             login.user.name === "photographer" ? (
-              <div className="confirmed-reservation-details__container">
-                <h2>CUSTOMER DETAILS</h2>
-                <div>
-                  <span>Name: </span>
-                  {`${customer.firstname} ${customer.lastname}`}
-                </div>
-                <div>
-                  <span>Phone No: </span>
-                  {customer.phoneNo}
-                </div>
-                <div>
-                  <span>Email: </span>
-                  {customer.email}
-                </div>
-                <div>
-                  <span>Address: </span>
-                  {customer.address}
-                </div>
-              </div>
+              <DetailsContainer>
+                <NameValueTitle>CUSTOMER DETAILS</NameValueTitle>
+                <NameValueString
+                  name="Name:"
+                  value={`${customer.firstname} ${customer.lastname}`}
+                />
+                <NameValueString name="Phone No:" value={customer.phoneNo} />
+                <NameValueString name="Email:" value={customer.email} />
+                <NameValueString name="Address:" value={customer.address} />
+              </DetailsContainer>
             ) : null}
-            <div className="confirmed-reservation-details__container">
-              <h2>RESERVATION DETAILS</h2>
-              <div>
-                <span>Package: </span>
-                {packageDocument.name}
-              </div>
-              <div>
-                <span>Services: </span> <br />
-                {packageDocument.services.map((service, index) => {
-                  return <li key={index}>{service}</li>;
-                })}
-              </div>
-              <div>
-                <span>Estimated Total Cost: </span>
-                {+reservation.costs.transport +
+            <DetailsContainer>
+              <NameValueTitle>RESERVATION DETAILS</NameValueTitle>
+              <NameValueString
+                name="Category:"
+                value={
+                  packageDocument.category
+                    ? packageDocument.category
+                    : "Package Has been Removed"
+                }
+              />
+              <NameValueString
+                name="Package:"
+                value={
+                  packageDocument.name
+                    ? packageDocument.name
+                    : "Package Has been Removed"
+                }
+              />
+              <NameValueString
+                name="Services:"
+                value={
+                  packageDocument.services.length > 0
+                    ? packageDocument.services.map((service, index) => {
+                        return <li key={index}>{service}</li>;
+                      })
+                    : "Package Has been Removed"
+                }
+              />
+              <NameValueString
+                name="Estimated Total Cost:"
+                value={`${
+                  +reservation.costs.transport +
                   +reservation.costs.extraServices +
-                  +reservation.costs.package}{" "}
-                LKR
-              </div>
-              <div>
-                <span>Advance Payment: </span>
-                {+reservation.costs.advance} LKR
-              </div>
-            </div>
+                  +reservation.costs.package
+                } LKR`}
+              />
+              <NameValueString
+                name="Advance Payment:"
+                value={`${+reservation.costs.advance} LKR`}
+              />
+            </DetailsContainer>
           </ModalCardContainer>
           {login.user.name === "admin" ? (
             <>
-              <div
-                onClick={onClickDeleteHandler}
-                className="resrvation-delete-button"
-              >
-                Delete Reservation
-              </div>
+              <ButtonContainer>
+                <RedButton onClick={onClickDeleteHandler}>Delete</RedButton>
+                <OrangeButton onClick={onClickUpdateHandler}>
+                  Update
+                </OrangeButton>
+              </ButtonContainer>
             </>
           ) : null}
         </>
       ) : null}
       {deleteReservation ? (
         <>
-          <ModalCardContainer>
-            <div className="delete-reservation-warning__container">
-              <h2>WARNING...! ⚠</h2>
-              <div>
-                Please make sure that you cannot recover once you delete a
-                reservation. Do you really want to delete? 🙄
-              </div>
-            </div>
-          </ModalCardContainer>
+          <WarningCard
+            warning={`Please make sure that you cannot recover once you delete a
+                reservation. Do you really want to delete? 🙄`}
+          />
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
-          <div>
-            <div className="delete-action-button__container">
-              <button
-                onClick={onClickDeleteYesHandler}
-                className="delete-yes__button"
-              >
-                Yes
-              </button>
-              <button
-                onClick={onClickDeleteNoHandler}
-                className="delete-no__button"
-              >
-                No
-              </button>
-            </div>
-          </div>
+          <ButtonContainer>
+            <RedButton onClick={onClickDeleteYesHandler}>Yes</RedButton>
+            <GreenButton onClick={onClickDeleteNoHandler}>No</GreenButton>
+          </ButtonContainer>
         </>
+      ) : null}
+      {update ? (
+        <UpdateReservation
+          onSuccess={props.onSuccess}
+          date={props.date}
+          reservation={props.reservation}
+        />
       ) : null}
     </>
   );
