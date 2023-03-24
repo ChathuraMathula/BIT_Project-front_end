@@ -9,7 +9,7 @@ const Header = (props) => {
   return (
     <nav className="main-header">
       <Link className="main-header__title" to="/">
-        ABC Photography
+        Reserve4U
       </Link>
 
       <HeaderOptions />

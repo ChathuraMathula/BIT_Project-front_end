@@ -11,12 +11,10 @@ import "./WarningCard.css";
 const WarningCard = (props) => {
   return (
     <>
-      {/* <ModalCardContainer> */}
         <WarningContainer>
           <h2 className="warning-card__title">WARNING...! ⚠</h2>
           <div className="warning-card__warning-message">{props.warning}</div>
         </WarningContainer>
-      {/* </ModalCardContainer> */}
     </>
   );
 };

@@ -58,3 +58,10 @@ body::-webkit-scrollbar {
   width: 100%;
   position: relative;
 }
+
+body {
+  background-image: url("./static/images/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}

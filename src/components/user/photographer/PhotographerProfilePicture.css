@@ -1,0 +1,21 @@
+.photographer-profile__picture {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  margin: 1rem auto;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.photographer-profile__picture img {
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  border: 2px solid hsl(220, 61%, 80%);
+}
