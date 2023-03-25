@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import socket from "../../../../utils/socket";
 import FlexCenterRowContainer from "../../../UI/containers/FlexCenterRowContainer";
 import DisplayCount from "../../../UI/other/DisplayCount";
+import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import "./ReservationCounter.css";
 
 const ReservationCounter = () => {
@@ -53,6 +54,7 @@ const ReservationCounter = () => {
   }, [dates]);
   return (
     <>
+      <CardContainerTitle>RESERVATIONS</CardContainerTitle>
       <FlexCenterRowContainer>
         <DisplayCount count={newCount} name="New" />
         <DisplayCount count={pendingCount} name="Pending" />

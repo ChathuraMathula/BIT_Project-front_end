@@ -24,9 +24,8 @@ const UserPackages = (props) => {
 
   return (
     <>
-      <CardContainer>
-        <CardContainerTitle>PACKAGES</CardContainerTitle>
-      </CardContainer>
+      <CardContainerTitle>PACKAGES</CardContainerTitle>
+
       <div className="package-categories__container">
         {packageCategories.map((category, index) => {
           if (category.packages?.length > 0) {

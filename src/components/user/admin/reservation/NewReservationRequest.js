@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { sanitize } from "../../../../utils/Sanitizer";
+import GreenButton from "../../../UI/buttons/GreenButton";
+import RedButton from "../../../UI/buttons/RedButton";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
+import WarningCard from "../../../UI/cards/WarningCard";
+import ButtonContainer from "../../../UI/containers/ButtonContainer";
+import DetailsContainer from "../../../UI/containers/DetailsContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInput from "../../../UI/form/FormInput";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
+import NameValueString from "../../../UI/other/NameValueString";
+import NameValueTitle from "../../../UI/other/NameValueTitle";
+import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import "./NewReservationRequest.css";
 
 /**
@@ -73,19 +81,19 @@ const NewReservationRequest = (props) => {
   };
 
   const onChangeTransportCostHandler = (e) => {
-    setTransportCost(e.target.value);
+    setTransportCost(sanitize(e.target.value));
   };
 
   const onChangeExtraServicesCostHandler = (e) => {
-    setExtraServicesCost(e.target.value);
+    setExtraServicesCost(sanitize(e.target.value));
   };
 
   const onChangeAdvancePaymentHandler = (e) => {
-    setAdvancePayment(e.target.value);
+    setAdvancePayment(sanitize(e.target.value));
   };
 
   const onChangePhotographerMessageHandler = (e) => {
-    setMessage(e.target.value);
+    setMessage(sanitize(e.target.value));
   };
 
   const onClickRejectReservationHandler = (e) => {
@@ -173,171 +181,126 @@ const NewReservationRequest = (props) => {
 
   return (
     <>
-      <div className="new-request-state__titile">
-        <CalenderDateState>New Request</CalenderDateState>
-      </div>
+      <CalenderDateState>New Request</CalenderDateState>
+
       {!rejected ? (
         <>
-          <div className="new-reservation-request-main__container">
-            <ModalCardContainer>
-              <div className="new-reservation-request-column__container new-reservation-request-column__container-left">
-                <div className="new-reservation-request-details__container">
-                  <div className="new-reservation-request-details__title">
-                    EVENT DETAILS
-                  </div>
-                  <div>
-                    <span>Event Type:</span> {event.type}
-                  </div>
-                  <div>
-                    <span>Event Location:</span> {event.location}
-                  </div>
-                  <div>
-                    <span>Event Time:</span>{" "}
-                    {`form ${event.beginTime} to ${event.endTime}`}
-                  </div>
-                </div>
-                <div className="new-reservation-request-details__container">
-                  <div className="new-reservation-request-details__title">
-                    CUSTOMER DETAILS
-                  </div>
-                  <div>
-                    <span>Name:</span>{" "}
-                    {`${customer.firstname} ${customer.lastname}`}
-                  </div>
-                  <div>
-                    <span>Phone:</span> {customer.phoneNo}
-                  </div>
-                  <div>
-                    <span>Email:</span> {customer.email}
-                  </div>
-                  <div>
-                    <span>Address:</span> {customer.address}
-                  </div>
-                </div>
-                <div className="new-reservation-request-details__container">
-                  <div className="new-reservation-request-details__title">
-                    PACKAGE DETAILS
-                  </div>
-                  <div>
-                    <span>Category:</span> {props.reservation.category}
-                  </div>
-                  <div>
-                    <span>Package:</span> {packageDocument.name}
-                  </div>
-                  <div>
-                    <span>Price:</span> {packageDocument.price}
-                  </div>
-                  <div>
-                    <span>Services:</span>{" "}
-                    {packageDocument.services.map((service, index) => {
-                      return <li key={index}>{service}</li>;
-                    })}
-                  </div>
-                </div>
-                <div className="new-reservation-request__message-title">
-                  Customer Message
-                </div>
-                <div className="new-reservation-request__message">
-                  {props.reservation.message.customer
-                    ? props.reservation.message.customer
-                    : "No message to preview"}
-                </div>
-              </div>
-            </ModalCardContainer>
-            <ModalCardContainer>
-              <div className="new-reservation-request-column__container new-reservation-request__payment-details">
-                <div className="new-reservation-request-payment-details__titile">
-                  ADD PAYMENT DETAILS
-                </div>
-                <FormInput
-                  onChange={onChangeTransportCostHandler}
-                  value={transportCost}
-                  type="number"
-                  placeholder="LKR"
-                >
-                  Transport Cost:{" "}
-                </FormInput>
-                <FormInput
-                  onChange={onChangeExtraServicesCostHandler}
-                  value={extraServicesCost}
-                  type="number"
-                  placeholder="LKR"
-                >
-                  Extra Services Cost:{" "}
-                </FormInput>
-                <FormInput
-                  onChange={onChangeAdvancePaymentHandler}
-                  value={advancePayment}
-                  type="number"
-                  placeholder="LKR"
-                >
-                  Advance Payment:{" "}
-                </FormInput>
-                <FormInputTextArea
-                  onChange={onChangePhotographerMessageHandler}
-                  value={message}
-                  placeholder="Message to the customer"
-                >
-                  Message:{" "}
-                </FormInputTextArea>
-                <div className="new-reservation-request-payment-details__total">
-                  Estimated Total Price
-                  <br />
-                  {+packageDocument.price +
-                    +advancePayment +
-                    +extraServicesCost +
-                    +transportCost}
-                </div>
-              </div>
-            </ModalCardContainer>
-          </div>
+          <ModalCardContainer>
+            <DetailsContainer>
+              <NameValueTitle>EVENT DETAILS</NameValueTitle>
+              <NameValueString name="Event Type:" value={event.type} />
+              <NameValueString name="Event Location:" value={event.location} />
+              <NameValueString
+                name="Event Time:"
+                value={`From ${event.beginTime} to ${event.endTime}`}
+              />
+            </DetailsContainer>
+            <DetailsContainer>
+              <NameValueTitle>CUSTOMER DETAILS</NameValueTitle>
+              <NameValueString
+                name="Name:"
+                value={`${customer.firstname} ${customer.lastname}`}
+              />
+              <NameValueString name="Phone No:" value={customer.phoneNo} />
+              <NameValueString name="Email:" value={customer.email} />
+              <NameValueString name="Address:" value={customer.address} />
+            </DetailsContainer>
+            <DetailsContainer>
+              <NameValueTitle>PACKAGE DETAILS</NameValueTitle>
+              <NameValueString
+                name="Category:"
+                value={props.reservation.category}
+              />
+              <NameValueString name="Package:" value={packageDocument.name} />
+              <NameValueString name="Price:" value={packageDocument.price} />
+              <NameValueString
+                name="Services:"
+                value={
+                  packageDocument.services.length > 0
+                    ? packageDocument.services.map((service, index) => {
+                        return <li key={index}>{service}</li>;
+                      })
+                    : "Package Has been Removed"
+                }
+              />
+            </DetailsContainer>
+            <div className="new-reservation-request__message-title">
+              Customer Message
+            </div>
+            <div className="new-reservation-request__message">
+              {props.reservation.message.customer
+                ? props.reservation.message.customer
+                : "No message to preview"}
+            </div>
+          </ModalCardContainer>
+
+          <ModalCardContainer>
+            <CardContainerTitle>ADD PAYMENT DETAILS</CardContainerTitle>
+
+            <FormInput
+              onChange={onChangeTransportCostHandler}
+              value={transportCost}
+              type="text"
+              placeholder="LKR"
+            >
+              Transport Cost:{" "}
+            </FormInput>
+            <FormInput
+              onChange={onChangeExtraServicesCostHandler}
+              value={extraServicesCost}
+              type="text"
+              placeholder="LKR"
+            >
+              Extra Services Cost:{" "}
+            </FormInput>
+            <FormInput
+              onChange={onChangeAdvancePaymentHandler}
+              value={advancePayment}
+              type="text"
+              placeholder="LKR"
+            >
+              Advance Payment:{" "}
+            </FormInput>
+            <FormInputTextArea
+              onChange={onChangePhotographerMessageHandler}
+              value={message}
+              placeholder="Message to the customer"
+            >
+              Message:{" "}
+            </FormInputTextArea>
+            <div className="new-reservation-request-payment-details__total">
+              Estimated Total Price
+              <br />
+              {+packageDocument.price + +extraServicesCost + +transportCost}
+            </div>
+          </ModalCardContainer>
+
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
-          <div className="new-reservation-request-button__container">
-            <button
-              onClick={onClickRejectReservationHandler}
-              className="new-reservation-request-reject__button"
-            >
-              REJECT
-            </button>
-            <button
-              onClick={onClickSendPaymentDetailsHandler}
-              className="new-reservation-request-send__button"
-            >
-              SEND
-            </button>
-          </div>
+          <ButtonContainer>
+            <RedButton onClick={onClickRejectReservationHandler}>
+              Reject
+            </RedButton>
+            <GreenButton onClick={onClickSendPaymentDetailsHandler}>
+              Send
+            </GreenButton>
+          </ButtonContainer>
         </>
       ) : null}
       {rejected ? (
         <>
-          <div className="reservation-request-reject-warning__container">
-            <h2>WARNING...! ⚠</h2>
-            <div>
-              Please make sure that you cannot recover once you reject a
-              reservation. Do you really want to reject? 🙄
-            </div>
-          </div>
+          <WarningCard
+            warning={`Please make sure that you cannot recover once you reject a
+            reservation. Do you really want to reject? 🙄`}
+          />
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
-          <div>
-            <div className="new-reservation-request-button__container">
-              <button
-                onClick={onClickYesHandler}
-                className="new-reservation-request-reject__button"
-              >
-                Yes
-              </button>
-              <button
-                onClick={onClickNoHandler}
-                className="new-reservation-request-send__button"
-              >
-                No
-              </button>
-            </div>
-          </div>
+          <ButtonContainer>
+            <RedButton onClick={onClickYesHandler}>Yes</RedButton>
+            <GreenButton onClick={onClickNoHandler}>No</GreenButton>
+          </ButtonContainer>
         </>
       ) : null}
     </>

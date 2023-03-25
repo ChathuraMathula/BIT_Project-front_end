@@ -8,6 +8,9 @@ import Modal from "../../UI/modal/Modal";
 import "./CustomerSendRequestModal.css";
 import { isEmpty, isValid } from "../../../utils/Validator";
 import { sanitize } from "../../../utils/Sanitizer";
+import ButtonContainer from "../../UI/containers/ButtonContainer";
+import GreenButton from "../../UI/buttons/GreenButton";
+import ModalCardContainer from "../../UI/containers/ModalCardContainer";
 
 /**
  *
@@ -79,7 +82,6 @@ const CustomerSendRequestModal = (props) => {
     setEvent(event.target.value);
   };
 
-
   const onChangeLocationHandler = (event) => {
     setLocation(event.target.value);
   };
@@ -96,7 +98,7 @@ const CustomerSendRequestModal = (props) => {
     setEndTime(sanitize(e.target.value));
   };
 
-  const onClickSendRequestHandler = async () => {
+  const onClickSendRequestHandler = async (e) => {
     let messageString = "NotFound";
     if (message) {
       messageString = message;
@@ -165,7 +167,7 @@ const CustomerSendRequestModal = (props) => {
     <>
       <CalenderDateState>Reservation Request</CalenderDateState>
 
-      <div className="customer-send-reservation-request__container">
+      <ModalCardContainer>
         <FormSelectOptions
           id="package-category"
           label="Select Package Category"
@@ -215,7 +217,7 @@ const CustomerSendRequestModal = (props) => {
         >
           Event End Time:
         </FormInput>
-        
+
         <FormInputTextArea
           value={location}
           onChange={onChangeLocationHandler}
@@ -230,20 +232,14 @@ const CustomerSendRequestModal = (props) => {
         >
           Your Message:
         </FormInputTextArea>
-      </div>
+      </ModalCardContainer>
+
       <div className={"warning-msg__container " + warningStyles}>
         {warningMessage}
       </div>
-      <div>
-        <div className="customer-send-reservation-request-button__container">
-          <button
-            onClick={onClickSendRequestHandler}
-            className="customer-send-reservation-request__button"
-          >
-            Send Request
-          </button>
-        </div>
-      </div>
+      <ButtonContainer>
+        <GreenButton  onClick={onClickSendRequestHandler}>Send</GreenButton>
+      </ButtonContainer>
     </>
   );
 };

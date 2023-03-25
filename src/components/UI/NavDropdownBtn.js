@@ -1,5 +1,6 @@
 import React from "react";
 import "./NavDropdownBtn.css";
+import NavigationSVG from "./SVG/NavigationSVG";
 
 const NavDropdownBtn = (props) => {
 
@@ -8,9 +9,7 @@ const NavDropdownBtn = (props) => {
   return (
     <>
       <div className={"nav-dropdown__btn " + props.className} onClick={onClickHandler}>
-        <div className="nav-dropdown__dash"></div>
-        <div className="nav-dropdown__dash"></div>
-        <div className="nav-dropdown__dash"></div>
+        <NavigationSVG />
       </div>
     </>
   );

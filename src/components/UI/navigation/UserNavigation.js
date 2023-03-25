@@ -1,60 +1,83 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./UserNavigation.css";
 import UserNavigationButton from "./UserNavigationButton";
-import { Link, useNavigate } from "react-router-dom";
-import useLocalStorage from "../../../hooks/useLocalStorage";
+import { Link } from "react-router-dom";
 import { UserLoginContext } from "../../../context/Context";
+import { CSSTransition } from "react-transition-group";
+import NavigationDropdownButton from "../buttons/NavigationDropdownButton";
+import LogoutButton from "../buttons/LogoutButton";
 
+/**
+ *
+ * @param show (boolean) show dropdown nav
+ * @returns
+ */
 const UserNavigation = (props) => {
   const login = useContext(UserLoginContext);
-
-  const [userNavListDropdown, setUserNavListDropdown] = useState(
-    "user-navigation-list__container-display-none"
-  );
-
+  const [showDropdown, setShowDropdown] = useState(false);
   const dropdownList = useRef(null);
+  const navigationButton = useRef(null);
 
-  const navigate = useNavigate();
+  const animationTiming = {
+    enter: 500,
+    exit: 500,
+  };
 
   const onClickDropDownHandler = (event) => {
-    if (
-      userNavListDropdown === "user-navigation-list__container-display-none"
-    ) {
-      setUserNavListDropdown("user-navigation-list__container");
+    if (showDropdown) {
+      setShowDropdown(false);
     } else {
-      setUserNavListDropdown("user-navigation-list__container-display-none");
+      setShowDropdown(true);
     }
   };
 
-  const onlogOutHandler = async () => {
-    if (login.isLogged) {
-      await fetch("http://localhost:3001/logout", {
-        method: "POST",
-        body: { logout: true },
-        credentials: "include",
-      }).then((res) => {
-        if (res) {
-          localStorage.clear();
-          window.location.replace("/");
-        }
-      }).catch(error => {
-        if (error) {
-          localStorage.clear();
-          window.location.replace("/");
-        }
-      });
+
+  useEffect(() => {
+    document.addEventListener("click", outsideClickHandler, true);
+  }, []);
+
+  const outsideClickHandler = (e) => {
+    if (dropdownList.current && navigationButton.current) {
+      if (
+        !dropdownList.current.contains(e.target) &&
+        !navigationButton.current.contains(e.target)
+      ) {
+        setShowDropdown(false);
+      }
     }
   };
 
   return (
     <>
-      <UserNavigationButton user={login.user} onClick={onClickDropDownHandler} />
-      <nav ref={dropdownList} className={userNavListDropdown}>
-        {props.children}
-        <Link className="log-out__button" onClick={onlogOutHandler}>
-          Log Out
-        </Link>
-      </nav>
+      {login.isLogged ? (
+        <UserNavigationButton
+          ref={navigationButton}
+          user={login.user}
+          onClick={onClickDropDownHandler}
+        />
+      ) : (
+        <NavigationDropdownButton
+          ref={navigationButton}
+          onClick={onClickDropDownHandler}
+        />
+      )}
+      <CSSTransition
+        mountOnEnter
+        unmountOnExit
+        in={showDropdown}
+        timeout={animationTiming}
+        classNames={{
+          enterActive: "DropdownOpen",
+          exitActive: "DropdownClose",
+        }}
+      >
+        <nav ref={dropdownList} className="user-navigation-list__container">
+          {props.children}
+          {login.isLogged ? (
+            <LogoutButton>Log Out</LogoutButton>
+          ) : null}
+        </nav>
+      </CSSTransition>
     </>
   );
 };

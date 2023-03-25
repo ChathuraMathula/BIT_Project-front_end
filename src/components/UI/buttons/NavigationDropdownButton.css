@@ -1,0 +1,33 @@
+.navigation-dropdown-button {
+  width: 2.8rem;
+  height: 2.8rem;
+  cursor: pointer;
+}
+
+.navigation-dropdown-button:hover {
+  transform: scale(1.2);
+  background-color: hsl(216, 100%, 50%);
+  border-radius: 50%;
+  transition: all 0.4s;
+}
+
+.navigation-dropdown-button svg {
+  width: inherit;
+  height: inherit;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .navigation-dropdown-button {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}
