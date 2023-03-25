@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserLoginContext } from "../../context/Context";
@@ -8,17 +7,6 @@ import FormContainer from "../UI/form/FormContainer";
 import FormInput from "../UI/form/FormInput";
 import FormUploadProfilePhoto from "../UI/form/FormUploadProfilePhoto";
 import "./UserProfile.css";
-=======
-import React, { useContext, useState } from "react";
-import { UserLoginContext } from "../../context/Context";
-import CardContainer from "../UI/containers/CardContainer";
-import FormHeading from "../UI/form/FormHeading";
-import CardContainerTitle from "../UI/titles/CardContainerTitle";
-import "./UserProfile.css";
-import UserProfileDetails from "./UserProfileDetails";
-import UserProfilePassword from "./UserProfilePassword";
-import UserProfilePicture from "./UserProfilePicture";
->>>>>>> version02
 
 const UserProfile = (props) => {
   const login = useContext(UserLoginContext);
@@ -29,7 +17,6 @@ const UserProfile = (props) => {
   let userData = {};
   let profilePicture;
 
-<<<<<<< HEAD
   useEffect(() => {
     fetch("http://localhost:3001/user", {
       credentials: "include",
@@ -50,8 +37,6 @@ const UserProfile = (props) => {
   const userProfilePictureHandler = (profilePic) => {
     profilePicture = profilePic;
   };
-=======
->>>>>>> version02
 
   const setSuccessMsg = (message) => {
     let warningMsg = "";
@@ -139,7 +124,6 @@ const UserProfile = (props) => {
 
   return (
     <>
-<<<<<<< HEAD
       <h2 className="user-profile__heading">
         {login.user.role.toUpperCase()} PROFILE
       </h2>
@@ -208,13 +192,6 @@ const UserProfile = (props) => {
           </FormActionButton>
         </div>
       </FormContainer>
-=======
-      <FormHeading>{login.user.role.toUpperCase()} PROFILE</FormHeading>
-
-      <UserProfilePicture user={login.user}/>
-      <UserProfileDetails user={login.user}/>
-      <UserProfilePassword user={login.user}/>
->>>>>>> version02
     </>
   );
 };
