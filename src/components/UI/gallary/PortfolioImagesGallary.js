@@ -75,7 +75,6 @@ const PortfolioImagesGallary = (props) => {
   return (
     <>
       <CardContainer>
-        <CardContainerTitle>PORTFOLIO</CardContainerTitle>
         <div className="portfolio-gallary__row">
           {images.map((imageArray, index) => {
             return (

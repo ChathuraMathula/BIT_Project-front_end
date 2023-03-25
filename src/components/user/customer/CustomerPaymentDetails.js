@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { sanitize } from "../../../utils/Sanitizer";
 import { isValid } from "../../../utils/Validator";
+import GreenButton from "../../UI/buttons/GreenButton";
+import RedButton from "../../UI/buttons/RedButton";
 import CalenderDateState from "../../UI/calender/CalenderDateState";
+import WarningCard from "../../UI/cards/WarningCard";
+import ButtonContainer from "../../UI/containers/ButtonContainer";
 import ModalCardContainer from "../../UI/containers/ModalCardContainer";
 import FormInput from "../../UI/form/FormInput";
 import UploadSVG from "../../UI/SVG/UploadSVG";
@@ -400,50 +404,27 @@ const CustomerPaymentDetails = (props) => {
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
-          <div className="custmer-payment-details-action__container">
-            <button
-              onClick={onClickRejectHandler}
-              className="customer-payment-details-action__reject"
-            >
-              Reject
-            </button>
-            <button
-              onClick={onClickSendPaymentDetailsHandler}
-              className="customer-payment-details-action__send"
-            >
+          <ButtonContainer>
+            <RedButton onClick={onClickRejectHandler}>Reject</RedButton>
+            <GreenButton onClick={onClickSendPaymentDetailsHandler}>
               Send
-            </button>
-          </div>
+            </GreenButton>
+          </ButtonContainer>
         </>
       ) : null}
       {rejected ? (
         <>
-          <div className="customer-payment-details-reject-warning__container">
-            <h2>WARNING...! ⚠</h2>
-            <div>
-              Please make sure that you cannot recover once you reject a
-              reservation. Do you really want to reject? 🙄
-            </div>
-          </div>
+          <WarningCard
+            warning={`Please make sure that you cannot recover once you reject a
+            reservation. Do you really want to reject? 🙄`}
+          />
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
-          <div>
-            <div className="custmer-payment-details-action__container">
-              <button
-                onClick={onClickRejectYesHandler}
-                className="customer-payment-details-action__reject"
-              >
-                Yes
-              </button>
-              <button
-                onClick={onClickRejectNoHandler}
-                className="customer-payment-details-action__send"
-              >
-                No
-              </button>
-            </div>
-          </div>
+          <ButtonContainer>
+            <RedButton onClick={onClickRejectYesHandler}>Yes</RedButton>
+            <GreenButton onClick={onClickRejectNoHandler}>No</GreenButton>
+          </ButtonContainer>
         </>
       ) : null}
     </>

@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { sanitize } from "../../../../utils/Sanitizer";
+import GreenButton from "../../../UI/buttons/GreenButton";
+import RedButton from "../../../UI/buttons/RedButton";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
+import WarningCard from "../../../UI/cards/WarningCard";
+import ButtonContainer from "../../../UI/containers/ButtonContainer";
+import DetailsContainer from "../../../UI/containers/DetailsContainer";
+import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInputCheckBox from "../../../UI/form/FormInputCheckBox";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
+import NameValueString from "../../../UI/other/NameValueString";
+import NameValueTitle from "../../../UI/other/NameValueTitle";
 import DownloadSVG from "../../../UI/SVG/DownloadSVG";
 import "./ReservationConfirmation.css";
 
@@ -17,17 +25,12 @@ const ReservationConfirmation = (props) => {
   const [rejected, setRejected] = useState(false);
   const [warningStyles, setWarningStyles] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
-  const [photographerMsg, setPhotographerMsg] = useState("");
   const [fileUrl, setFileUrl] = useState("");
 
   const payment = props.reservation.payment;
   const thisYear = props.date.getFullYear();
   const thisMonth = props.date.getMonth();
   const thisDay = props.date.getDate();
-
-  const onChangePhotographerMsgHandler = (e) => {
-    setPhotographerMsg(sanitize(e.target.value));
-  };
 
   const onClickRejectHandler = (e) => {
     setRejected(true);
@@ -135,32 +138,26 @@ const ReservationConfirmation = (props) => {
       <CalenderDateState>Confirm Reservation</CalenderDateState>
       {!rejected ? (
         <>
-          <div className="reservation-confirmation__container">
-            <div className="reservation-confirmation__title">
-              PAYMENT DETAILS
-            </div>
-            <div className="reservation-confirmation__item">
-              <span>Paid Method: </span>
-              {`by ${payment.method}`}
-            </div>
-            {payment.method === "bank" ? (
-              <div className="reservation-confirmation__item">
-                <span>Paid Bank Branch: </span>
-                {payment.branch}
-              </div>
-            ) : null}
-            <div className="reservation-confirmation__item">
-              <span>Paid Amount: </span>
-              {payment.amount} LKR
-            </div>
-            <div className="reservation-confirmation__item">
-              <span>Paid Date: </span>
-              {payment.date}
-            </div>
-            <div className="reservation-confirmation__item">
-              <span>Paid time: </span>
-              {payment.time}
-            </div>
+          <ModalCardContainer>
+            <DetailsContainer>
+              <NameValueTitle>PAYMENT DETAILS</NameValueTitle>
+              <NameValueString
+                name="Paid Method:"
+                value={`By ${payment.method}`}
+              />
+              {payment.method === "bank" ? (
+                <NameValueString
+                  name="Paid Bank Branch:"
+                  value={payment.branch}
+                />
+              ) : null}
+              <NameValueString
+                name="Paid Amount:"
+                value={`${payment.amount} LKR`}
+              />
+              <NameValueString name="Paid Date:" value={payment.date} />
+              <NameValueString name="Paid Time:" value={payment.time} />
+            </DetailsContainer>
             <div className="reservation-confirmation__download">
               Download Bank Payment Slip/Screenshot of payment
               <a
@@ -172,56 +169,29 @@ const ReservationConfirmation = (props) => {
                 <DownloadSVG />
               </a>
             </div>
-          </div>
+          </ModalCardContainer>
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
-          <div className="reservation-confirmation-button__container">
-            <button
-              onClick={onClickRejectHandler}
-              className="reservation-confirmation-button__red"
-            >
-              Reject
-            </button>
-            <button
-              onClick={onClickConfirmHandler}
-              className="reservation-confirmation-button__green"
-            >
-              Confirm
-            </button>
-          </div>
+          <ButtonContainer>
+            <RedButton onClick={onClickRejectHandler}>Reject</RedButton>
+            <GreenButton onClick={onClickConfirmHandler}>Confirm</GreenButton>
+          </ButtonContainer>
         </>
       ) : null}
       {rejected ? (
         <>
-          <div className="reservation-confirmation__container">
-            <h2 className="reservation-confirmation-warning__title">
-              WARNING...! ⚠
-            </h2>
-            <div className="reservation-confirmation-warning__notice">
-              Please make sure that you cannot recover once you reject a
-              reservation. Do you really want to reject? 🙄
-            </div>
-          </div>
+          <WarningCard
+            warning={`Please make sure that you cannot recover once you reject a
+            reservation. Do you really want to reject? 🙄`}
+          />
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
-          <div>
-            <div className="reservation-confirmation-button__container">
-              <button
-                onClick={onClickRejectYesHandler}
-                className="reservation-confirmation-button__red"
-              >
-                Yes
-              </button>
-              <button
-                onClick={onClickRejectNoHandler}
-                className="reservation-confirmation-button__green"
-              >
-                No
-              </button>
-            </div>
-          </div>
+          <ButtonContainer>
+            <RedButton onClick={onClickRejectYesHandler}>Yes</RedButton>
+            <GreenButton onClick={onClickRejectNoHandler}>No</GreenButton>
+          </ButtonContainer>
         </>
       ) : null}
     </>
