@@ -5,6 +5,8 @@ import socket from "../../../../utils/socket";
 import "./AdminDateController.css";
 import ReservationRequestController from "../reservation/ReservationRequestController";
 import ConfirmedReservation from "../reservation/ConfirmedReservation";
+import ButtonContainer from "../../../UI/containers/ButtonContainer";
+import GreenButton from "../../../UI/buttons/GreenButton";
 
 /**
  *
@@ -155,8 +157,7 @@ const AdminDateController = (props) => {
     if (success) {
       setShowModal(false);
     }
-  }
-
+  };
 
   return (
     <>
@@ -183,23 +184,18 @@ const AdminDateController = (props) => {
         onBackdropClick={closeModalHandler}
         onClose={closeModalHandler}
         heading={`${props.date.date.toDateString()}`}
-        leftButton={
-          state === "Available" || state === "Not Available"
-            ? "SAVE CHANGES"
-            : null
-        }
-        onClickLeft={
-          state === "Available" || state === "Not Available"
-            ? saveAvailabilityHandler
-            : null
-        }
       >
         {state === "Available" || state === "Not Available" ? (
-          <DateAvailabilityController
-            onChecked={onCheckedAvailabilityHandler}
-            checked={checked}
-            state={state}
-          />
+          <>
+            <DateAvailabilityController
+              onChecked={onCheckedAvailabilityHandler}
+              checked={checked}
+              state={state}
+            />
+            <ButtonContainer>
+              <GreenButton onClick={saveAvailabilityHandler}>Save</GreenButton>
+            </ButtonContainer>
+          </>
         ) : null}
 
         {state === "Pending" ? (

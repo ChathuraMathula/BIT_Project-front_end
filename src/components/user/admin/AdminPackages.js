@@ -25,10 +25,12 @@ const AdminPackages = (props) => {
 
   return (
     <>
-      <CardContainer>
-        <CardContainerTitle>PACKAGES</CardContainerTitle>
-      </CardContainer>
-      <AddNewPackage categories={categories} onAddCategory={onAddCategoryHandler}/>
+      <CardContainerTitle>PACKAGES</CardContainerTitle>
+
+      <AddNewPackage
+        categories={categories}
+        onAddCategory={onAddCategoryHandler}
+      />
 
       {categories.map((value, index) => {
         return (

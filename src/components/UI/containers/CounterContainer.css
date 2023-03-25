@@ -1,0 +1,27 @@
+.counter__container {
+    background-color: hsl(216, 100%, 15%);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    animation-name: wipeIn;
+    animation-duration: 0.5s;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+    .counter__container {
+      width: 70%;
+    }
+  }
+  
+  /* For Tablets & Laptops */
+  @media (min-width: 768px) {
+  }
+  
+  /* For Laptops */
+  @media (min-width: 992px) {
+  }
+  
