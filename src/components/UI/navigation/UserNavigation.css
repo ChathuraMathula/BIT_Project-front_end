@@ -49,8 +49,8 @@
   margin: auto;
   background-color: hsla(216, 100%, 10%, 0.9);
   border-top: none;
-  /* animation-name: dropdownIn; */
-  /* animation-duration: 0.4s; */
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .user-navigation-list__container-display-none {
