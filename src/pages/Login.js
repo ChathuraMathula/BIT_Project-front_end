@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import GreenButton from "../components/UI/buttons/GreenButton";
+import LoginButton from "../components/UI/buttons/LoginButton";
+import ButtonContainer from "../components/UI/containers/ButtonContainer";
+import LoginCardContainer from "../components/UI/containers/LoginCardContainer";
 import FormActionButton from "../components/UI/form/FormActionButton";
 import FormContainer from "../components/UI/form/FormContainer";
 import FormHeading from "../components/UI/form/FormHeading";
 import FormInput from "../components/UI/form/FormInput";
+import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { postLogin } from "../utils/post";
 import { sanitize } from "../utils/Sanitizer";
@@ -84,42 +89,35 @@ const Login = (props) => {
   };
 
   return (
-    <div className="login-form__container">
-      <FormContainer>
-        <FormHeading>LOGIN</FormHeading>
-        <div className="login-form-inputs__container">
-          <FormInput
-            onChange={onChangeUsernameHandler}
-            value={username}
-            name="username"
-            id="username"
-            type="text"
-            placeholder="janakaran12"
-          >
-            Username:
-          </FormInput>
-          <FormInput
-            onChange={onChangePasswordHandler}
-            value={password}
-            name="password"
-            id="password"
-            type="password"
-            placeholder="your password"
-          >
-            Password:
-          </FormInput>
-        </div>
+    <>
+      <LoginCardContainer>
+        <CardContainerTitle>LOGIN</CardContainerTitle>
+        <FormInput
+          onChange={onChangeUsernameHandler}
+          value={username}
+          name="username"
+          id="username"
+          type="text"
+          placeholder="janakaran12"
+        >
+          Username:
+        </FormInput>
+        <FormInput
+          onChange={onChangePasswordHandler}
+          value={password}
+          name="password"
+          id="password"
+          type="password"
+          placeholder="your password"
+        >
+          Password:
+        </FormInput>
         <div className={"login-form-action__message " + warningStyles}>
           {warningMessage}
         </div>
-        <div className="login-form-action-btn__container">
-          <FormActionButton to="/">Cancel</FormActionButton>
-          <FormActionButton onClick={onClickLoginHandler}>
-            Login
-          </FormActionButton>
-        </div>
-      </FormContainer>
-    </div>
+        <LoginButton onClick={onClickLoginHandler}>Login</LoginButton>
+      </LoginCardContainer>
+    </>
   );
 };
 

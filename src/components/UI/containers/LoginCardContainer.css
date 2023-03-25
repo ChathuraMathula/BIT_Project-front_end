@@ -1,0 +1,33 @@
+.login-card__container {
+    background-color: hsl(216, 100%, 10%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 90%;
+    margin-bottom: 1.5rem;
+    animation-name: wipeIn;
+    animation-duration: 0.5s;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+    .login-card__container {
+      width: 20rem;
+    }
+  }
+  
+  /* For Tablets & Laptops */
+  @media (min-width: 768px) {
+    .login-card__container {
+     
+    }
+  }
+  
+  /* For Laptops */
+  @media (min-width: 992px) {
+    .login-card__container {
+      
+    }
+  }
+  

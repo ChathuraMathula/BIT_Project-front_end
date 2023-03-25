@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../context/Context";
+import GreenButton from "../UI/buttons/GreenButton";
+import RedButton from "../UI/buttons/RedButton";
+import ButtonContainer from "../UI/containers/ButtonContainer";
+import CardContainer from "../UI/containers/CardContainer";
 import FormActionButton from "../UI/form/FormActionButton";
 import FormContainer from "../UI/form/FormContainer";
 import FormSubHeading from "../UI/form/FormSubHeading";
 import FormUploadProfilePhoto from "../UI/form/FormUploadProfilePhoto";
+import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import "./UserProfilePicture.css";
 
 const UserProfilePicture = (props) => {
@@ -104,8 +109,8 @@ const UserProfilePicture = (props) => {
       const formData = new FormData();
       formData.append("username", props.user.name);
       formData.append("removeImage", true);
-      console.log(">>>>>>>>>>> ", props.user.name)
-      
+      console.log(">>>>>>>>>>> ", props.user.name);
+
       await fetch("http://localhost:3001/user/remove/profile/picture", {
         method: "POST",
         credentials: "include",
@@ -129,37 +134,36 @@ const UserProfilePicture = (props) => {
   };
 
   return (
-    <FormContainer>
-      <FormSubHeading>PROFILE PICTURE</FormSubHeading>
-      <div className="user-profile-picture__input-container">
-        <FormUploadProfilePhoto
-          user={props.user}
-          onChange={onChangeImageHandler}
-        />
-        <div className="user-profile-picture__bio-container">
-          <div>
-            Username: <span>{username}</span>
-          </div>
-          <div>
-            Fist Name: <span>{firstname}</span>
-          </div>
-          <div>
-            Last Name: <span>{lastname}</span>
+    <>
+      <CardContainer>
+        <CardContainerTitle>PROFILE PICTURE</CardContainerTitle>
+        <div className="user-profile-picture__input-container">
+          <FormUploadProfilePhoto
+            user={props.user}
+            onChange={onChangeImageHandler}
+          />
+          <div className="user-profile-picture__bio-container">
+            <div>
+              Username: <span>{username}</span>
+            </div>
+            <div>
+              Fist Name: <span>{firstname}</span>
+            </div>
+            <div>
+              Last Name: <span>{lastname}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div className={"warning-msg__container " + warningStyles}>
-        {warningMessage}
-      </div>
-      <div className="user-profile-picture__action">
-        <FormActionButton onClick={onClickRemovePictureHandler}>
-          REMOVE
-        </FormActionButton>
-        <FormActionButton onClick={onClickAddPictureHandler}>
-          ADD
-        </FormActionButton>
-      </div>
-    </FormContainer>
+        <div className={"warning-msg__container " + warningStyles}>
+          {warningMessage}
+        </div>
+
+        <ButtonContainer>
+          <RedButton onClick={onClickRemovePictureHandler}>Remove</RedButton>
+          <GreenButton onClick={onClickAddPictureHandler}>Add</GreenButton>
+        </ButtonContainer>
+      </CardContainer>
+    </>
   );
 };
 

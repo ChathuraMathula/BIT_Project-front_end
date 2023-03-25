@@ -10,6 +10,10 @@ import FormInputCheckBox from "../components/UI/form/FormInputCheckBox";
 import { sanitize } from "../utils/Sanitizer";
 import { isValid } from "../utils/Validator";
 import { useNavigate } from "react-router-dom";
+import CardContainer from "../components/UI/containers/CardContainer";
+import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
+import ButtonContainer from "../components/UI/containers/ButtonContainer";
+import GreenButton from "../components/UI/buttons/GreenButton";
 
 const SignUp = (props) => {
   const navigate = useNavigate();
@@ -179,7 +183,9 @@ const SignUp = (props) => {
             .then((data) => {
               if (data) {
                 if (data.success) {
-                  displaySuccess(data.success + " Redirecting to login page... 👉🏻");
+                  displaySuccess(
+                    data.success + " Redirecting to login page... 👉🏻"
+                  );
                   setTimeout(() => {
                     navigate("/login", { replace: true });
                   }, 7000);
@@ -199,9 +205,8 @@ const SignUp = (props) => {
 
   return (
     <>
-      <FormHeading>Customer Registration Form</FormHeading>
-      <FormContainer className="sign-up-form__container">
-        <p>&#9888; Please enter your details to register as a customer</p>
+      <CardContainer>
+        <CardContainerTitle>CUSTOMER REGISTRATION</CardContainerTitle>
         <FormUploadProfilePhoto onChange={onChangeImageHandler} />
         <div className="sign-up-form-input__container">
           <div className="sign-up-form-input__col-container">
@@ -322,13 +327,10 @@ const SignUp = (props) => {
           </div>
         </div>
 
-        <div className="sign-up-form-input__action">
-          <FormActionButton to="/">Cancel</FormActionButton>
-          <FormActionButton onClick={onClickRegisterHandler}>
-            Register
-          </FormActionButton>
-        </div>
-      </FormContainer>
+        <ButtonContainer>
+          <GreenButton onClick={onClickRegisterHandler}>Register</GreenButton>
+        </ButtonContainer>
+      </CardContainer>
     </>
   );
 };

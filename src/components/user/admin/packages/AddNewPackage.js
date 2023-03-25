@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { isValid } from "../../../../utils/Validator";
+import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInput from "../../../UI/form/FormInput";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import FormSelectOptions from "../../../UI/form/FormSelectOptions";
@@ -141,47 +142,53 @@ const AddNewPackage = (props) => {
         warningMessage={warningMessage}
         warningStyles={warningStyles}
       >
-        <FormSelectOptions
-          id="packageCategories"
-          label="Package Category:"
-          onChange={onChangePackageCategoryHandler}
-        >
-          <option value="new">Add New Category</option>
-          {props.categories.map((value, index) => {
-            return <option value={value.name} key={value.name}>{value.name}</option>
-          })}
-        </FormSelectOptions>
-
-        {category === "new" ? (
-          <FormInput
-            placeholder="eg: Weddig Photography"
-            onChange={newCategoryInputHandler}
-            value={newCategory}
+        <ModalCardContainer>
+          <FormSelectOptions
+            id="packageCategories"
+            label="Package Category:"
+            onChange={onChangePackageCategoryHandler}
           >
-            Add a new category:
+            <option value="new">Add New Category</option>
+            {props.categories.map((value, index) => {
+              return (
+                <option value={value.name} key={value.name}>
+                  {value.name}
+                </option>
+              );
+            })}
+          </FormSelectOptions>
+
+          {category === "new" ? (
+            <FormInput
+              placeholder="eg: Weddig Photography"
+              onChange={newCategoryInputHandler}
+              value={newCategory}
+            >
+              Add a new category:
+            </FormInput>
+          ) : null}
+          <FormInput
+            placeholder="eg: Platinum"
+            onChange={packageNameInputHandler}
+            value={packageName}
+          >
+            Package Name:
           </FormInput>
-        ) : null}
-        <FormInput
-          placeholder="eg: Platinum"
-          onChange={packageNameInputHandler}
-          value={packageName}
-        >
-          Package Name:
-        </FormInput>
-        <FormInput
-          placeholder="eg: 120000 (LKR)"
-          onChange={priceInputHandler}
-          value={price}
-        >
-          Package Price:
-        </FormInput>
-        <FormInputTextArea
-          onChange={packageServicesInputHandler}
-          placeholder="Please add comma separated list of services to be included in the package"
-          value={packageServices}
-        >
-          Package Services:
-        </FormInputTextArea>
+          <FormInput
+            placeholder="eg: 120000 (LKR)"
+            onChange={priceInputHandler}
+            value={price}
+          >
+            Package Price:
+          </FormInput>
+          <FormInputTextArea
+            onChange={packageServicesInputHandler}
+            placeholder="Please add comma separated list of services to be included in the package"
+            value={packageServices}
+          >
+            Package Services:
+          </FormInputTextArea>
+        </ModalCardContainer>
       </Modal>
     </>
   );

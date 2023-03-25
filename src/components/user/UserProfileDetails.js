@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { sanitize } from "../../utils/Sanitizer";
 import { isValid } from "../../utils/Validator";
+import GreenButton from "../UI/buttons/GreenButton";
+import ButtonContainer from "../UI/containers/ButtonContainer";
+import CardContainer from "../UI/containers/CardContainer";
+import FlexCenterColumnContainer from "../UI/containers/FlexCenterColumnContainer";
 import FormActionButton from "../UI/form/FormActionButton";
 import FormContainer from "../UI/form/FormContainer";
 import FormInput from "../UI/form/FormInput";
 import FormSubHeading from "../UI/form/FormSubHeading";
+import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import "./UserProfileDetails.css";
 
 /**
@@ -133,53 +138,53 @@ const UserProfileDetails = (props) => {
   };
 
   return (
-    <FormContainer>
-      <FormSubHeading>CONTACT DETAILS</FormSubHeading>
-      <FormInput
-        className="user-profile-details__input"
-        type="text"
-        id="email"
-        name="email"
-        placeholder="example@gmail.com"
-        value={email}
-        onChange={emailInputHandler}
-        warning={emailWarning}
-      >
-        Email:
-      </FormInput>
-      <FormInput
-        className="user-profile-details__input"
-        type="text"
-        id="phoneNo"
-        name="phoneNo"
-        placeholder="070-XXXXXXX"
-        value={phoneNo}
-        onChange={phoneNoInputHandler}
-        warning={phoneNoWarning}
-      >
-        Phone No:
-      </FormInput>
-      <FormInput
-        className="user-profile-details__input"
-        type="text"
-        id="address"
-        name="address"
-        placeholder="No 35, Kurunegala Rd, Polgahawela"
-        value={address}
-        onChange={addressInputHandler}
-        warning={addressWarning}
-      >
-        Address:
-      </FormInput>
+    <CardContainer>
+      <CardContainerTitle>CONTACT DETAILS</CardContainerTitle>
+      <FlexCenterColumnContainer>
+        <FormInput
+          className="user-profile-details__input"
+          type="text"
+          id="email"
+          name="email"
+          placeholder="example@gmail.com"
+          value={email}
+          onChange={emailInputHandler}
+          warning={emailWarning}
+        >
+          Email:
+        </FormInput>
+        <FormInput
+          className="user-profile-details__input"
+          type="text"
+          id="phoneNo"
+          name="phoneNo"
+          placeholder="070-XXXXXXX"
+          value={phoneNo}
+          onChange={phoneNoInputHandler}
+          warning={phoneNoWarning}
+        >
+          Phone No:
+        </FormInput>
+        <FormInput
+          className="user-profile-details__input"
+          type="text"
+          id="address"
+          name="address"
+          placeholder="No 35, Kurunegala Rd, Polgahawela"
+          value={address}
+          onChange={addressInputHandler}
+          warning={addressWarning}
+        >
+          Address:
+        </FormInput>
+      </FlexCenterColumnContainer>
       <div className={"warning-msg__container " + warningStyles}>
         {warningMessage}
       </div>
-      <div className="user-profile-details__action">
-        <FormActionButton onClick={onClickSaveHandler}>
-          SAVE CHANGES
-        </FormActionButton>
-      </div>
-    </FormContainer>
+      <ButtonContainer>
+        <GreenButton onClick={onClickSaveHandler}>Save</GreenButton>
+      </ButtonContainer>
+    </CardContainer>
   );
 };
 

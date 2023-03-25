@@ -6,4 +6,6 @@
     margin-bottom: 1.5rem;
     animation-name: wipeIn;
     animation-duration: 0.5s;
+    -webkit-user-select: none;
+    user-select: none;
 }

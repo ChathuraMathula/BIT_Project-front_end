@@ -27,9 +27,6 @@ const GeneralNav = (props) => {
             : "general-nav__list"
         }
       >
-        <Link className="general-nav__link" to={"tel:" + phoneNo}>
-          Call Me
-        </Link>
         <Link className="general-nav__link" to="/sign-up">
           Sign Up
         </Link>

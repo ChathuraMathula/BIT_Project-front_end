@@ -28,7 +28,19 @@
   margin: 1rem 0;
 }
 
+/* For medium size phones */
+@media (min-width: 576px) {
+  .user-profile-picture__input-container {
+    flex-direction: row;
+    margin-bottom: 1rem;
+    justify-content: space-evenly;
+}
 
+.user-profile-picture__bio-container {
+    margin: 1rem 2rem;
+    font-size: 1.2rem;
+  }
+}
 
 /* For Tablets & Laptops */
 @media (min-width: 768px) {

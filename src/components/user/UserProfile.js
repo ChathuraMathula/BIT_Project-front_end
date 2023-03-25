@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { UserLoginContext } from "../../context/Context";
+import CardContainer from "../UI/containers/CardContainer";
 import FormHeading from "../UI/form/FormHeading";
+import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import "./UserProfile.css";
 import UserProfileDetails from "./UserProfileDetails";
 import UserProfilePassword from "./UserProfilePassword";
@@ -14,7 +16,6 @@ const UserProfile = (props) => {
 
   let userData = {};
   let profilePicture;
-
 
   const setSuccessMsg = (message) => {
     let warningMsg = "";
@@ -102,11 +103,13 @@ const UserProfile = (props) => {
 
   return (
     <>
-      <FormHeading>{login.user.role.toUpperCase()} PROFILE</FormHeading>
+      <CardContainerTitle>
+        {login.user.role.toUpperCase()} PROFILE
+      </CardContainerTitle>
 
-      <UserProfilePicture user={login.user}/>
-      <UserProfileDetails user={login.user}/>
-      <UserProfilePassword user={login.user}/>
+      <UserProfilePicture user={login.user} />
+      <UserProfileDetails user={login.user} />
+      <UserProfilePassword user={login.user} />
     </>
   );
 };

@@ -3,6 +3,7 @@ import socket from "../../utils/socket";
 import CardContainer from "../UI/containers/CardContainer";
 import FormHeading from "../UI/form/FormHeading";
 import FormSubHeading from "../UI/form/FormSubHeading";
+import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import UserPackage from "./UserPackage";
 import "./UserPackages.css";
 
@@ -23,7 +24,9 @@ const UserPackages = (props) => {
 
   return (
     <>
-      <FormHeading>PACKAGES</FormHeading>
+      <CardContainer>
+        <CardContainerTitle>PACKAGES</CardContainerTitle>
+      </CardContainer>
       <div className="package-categories__container">
         {packageCategories.map((category, index) => {
           if (category.packages?.length > 0) {
