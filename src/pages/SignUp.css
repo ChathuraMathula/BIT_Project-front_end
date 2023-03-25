@@ -28,6 +28,26 @@
   width: 100%;
 }
 
+/* For medium size phones */
+@media (min-width: 576px) {
+  .sign-up-form-input__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sign-up-form-input__col-container {
+    width: 100%;
+    margin: 1rem;
+  }
+
+  .sign-up-form-input__declaration {
+    width: 100%;
+    padding: 0.4rem 1rem;
+  }
+}
+
 /* For Tablets */
 @media (min-width: 768px) {
   .sign-up-form-input__container {
@@ -44,7 +64,7 @@
 
   .sign-up-form-input__declaration {
     width: 100%;
-    padding: 1rem;
+    padding: 0.4rem 1rem;
   }
 }
 

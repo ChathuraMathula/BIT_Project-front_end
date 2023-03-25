@@ -15,7 +15,6 @@ const Portfolio = (props) => {
     );
   } else {
     return <>
-      <FormHeading>PORTFOLIO</FormHeading>
       <PortfolioImagesGallary />
     </>;
   }

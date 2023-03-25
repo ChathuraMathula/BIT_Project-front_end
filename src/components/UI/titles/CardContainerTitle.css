@@ -1,0 +1,8 @@
+.card-container-title__container {
+    width: 100%;
+    text-align: center;
+}
+
+.card-container-title__container h1 {
+    font-size: 1.2rem;
+}

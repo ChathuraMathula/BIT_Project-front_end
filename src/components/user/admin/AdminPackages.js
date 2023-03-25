@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import CardContainer from "../../UI/containers/CardContainer";
+import CardContainerTitle from "../../UI/titles/CardContainerTitle";
 import AddNewPackage from "./packages/AddNewPackage";
 import CategoryContainer from "./packages/CategoryContainer";
 
@@ -23,6 +25,9 @@ const AdminPackages = (props) => {
 
   return (
     <>
+      <CardContainer>
+        <CardContainerTitle>PACKAGES</CardContainerTitle>
+      </CardContainer>
       <AddNewPackage categories={categories} onAddCategory={onAddCategoryHandler}/>
 
       {categories.map((value, index) => {

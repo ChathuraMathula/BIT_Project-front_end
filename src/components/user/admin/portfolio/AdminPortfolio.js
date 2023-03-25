@@ -53,7 +53,6 @@ const AdminPortfolio = (props) => {
 
   return (
     <>
-      <FormHeading>PORTFOLIO</FormHeading>
       <CardContainer>
         <div className="admin-portfolio-upload-button__container">
           <div>Upload Photos</div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { sanitize } from "../../../../utils/Sanitizer";
 import { isValid } from "../../../../utils/Validator";
+import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import Modal from "../../../UI/modal/Modal";
 import "./UpdatePackage.css";
 import UpdatePackageBody from "./UpdatePackageBody";
@@ -52,39 +53,39 @@ const UpdatePackage = (props) => {
 
   const onClickRemovePackageHandler = async (event) => {
     try {
-        if (
-          isValid("packageCategoryName", sanitize(props.category.trim())) &&
-          isValid("name", sanitize(props.package.trim())) 
-        ) {
-          const packageDocument = {
-            category: props.category,
-            package: props.package
-          };
-  
-          await fetch("http://localhost:3001/admin/remove/package", {
-            method: "POST",
-            credentials: "include",
-            body: JSON.stringify(packageDocument),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data) {
-                console.log(data);
-                if (data.success) {
-                  setShowModal(false);
-                  props.categories(data.categories);
-                } else if (data.error) {
-                  displayWarning(data.error);
-                }
+      if (
+        isValid("packageCategoryName", sanitize(props.category.trim())) &&
+        isValid("name", sanitize(props.package.trim()))
+      ) {
+        const packageDocument = {
+          category: props.category,
+          package: props.package,
+        };
+
+        await fetch("http://localhost:3001/admin/remove/package", {
+          method: "POST",
+          credentials: "include",
+          body: JSON.stringify(packageDocument),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data) {
+              console.log(data);
+              if (data.success) {
+                setShowModal(false);
+                props.categories(data.categories);
+              } else if (data.error) {
+                displayWarning(data.error);
               }
-            });
-        }
-      } catch (error) {
-        console.log(error);
+            }
+          });
       }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onClickUpdatePackageHandler = async (event) => {
@@ -146,14 +147,16 @@ const UpdatePackage = (props) => {
         warningMessage={warningMessage}
         warningStyles={warningStyles}
       >
-        <UpdatePackageBody
-          category={props.category}
-          package={props.package}
-          price={price}
-          services={services}
-          onChangePrice={priceInputHandler}
-          onChangeServices={packageServicesInputHandler}
-        />
+        <ModalCardContainer>
+          <UpdatePackageBody
+            category={props.category}
+            package={props.package}
+            price={price}
+            services={services}
+            onChangePrice={priceInputHandler}
+            onChangeServices={packageServicesInputHandler}
+          />
+        </ModalCardContainer>
       </Modal>
     </>
   );

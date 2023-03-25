@@ -1,0 +1,24 @@
+.display-count__main-container {
+    width: 30%;
+    padding: 0.5rem;
+}
+
+.display-count__container {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid hsl(216, 100%, 50%);
+    font-weight: bold;
+}
+
+.display-count__name {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+}

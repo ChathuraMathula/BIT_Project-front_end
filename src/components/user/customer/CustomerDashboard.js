@@ -1,11 +1,12 @@
 import React from "react";
 import DatePicker from "../../UI/calender/DatePicker";
 import FormHeading from "../../UI/form/FormHeading";
+import CardContainerTitle from "../../UI/titles/CardContainerTitle";
 
 const CustomerDashboard = (props) => {
   return (
     <>
-      <FormHeading>DASHBOARD</FormHeading>
+      <CardContainerTitle>DASHBOARD</CardContainerTitle>
       <DatePicker />
     </>
   );

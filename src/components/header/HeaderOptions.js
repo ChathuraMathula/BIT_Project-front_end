@@ -14,10 +14,6 @@ import useLoginContext from "../../hooks/useLoginContext";
 const HeaderOptions = (props) => {
   const login = useContext(UserLoginContext);
 
-  // const [login, setLogin] = useLocalStorage("login");
-
-  // const login = useLoginContext();
-
   console.log("Inside HeaderOptions.js: ", login);
 
   if (login?.isLogged) {

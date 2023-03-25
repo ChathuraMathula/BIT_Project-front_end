@@ -11,7 +11,9 @@ import "./UserProfile.css";
 =======
 import React, { useContext, useState } from "react";
 import { UserLoginContext } from "../../context/Context";
+import CardContainer from "../UI/containers/CardContainer";
 import FormHeading from "../UI/form/FormHeading";
+import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import "./UserProfile.css";
 import UserProfileDetails from "./UserProfileDetails";
 import UserProfilePassword from "./UserProfilePassword";

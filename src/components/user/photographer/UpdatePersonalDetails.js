@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { sanitize } from "../../../utils/Sanitizer";
 import { isValid } from "../../../utils/Validator";
+import GreenButton from "../../UI/buttons/GreenButton";
+import ButtonContainer from "../../UI/containers/ButtonContainer";
+import CardContainer from "../../UI/containers/CardContainer";
+import FlexCenterColumnContainer from "../../UI/containers/FlexCenterColumnContainer";
 import FormActionButton from "../../UI/form/FormActionButton";
 import FormContainer from "../../UI/form/FormContainer";
 import FormInput from "../../UI/form/FormInput";
 import FormInputTextArea from "../../UI/form/FormInputTextArea";
 import FormSubHeading from "../../UI/form/FormSubHeading";
+import CardContainerTitle from "../../UI/titles/CardContainerTitle";
 import "./UpdatePersonalDetails.css";
 
 const UpdatePersonalDetails = (props) => {
@@ -159,78 +164,79 @@ const UpdatePersonalDetails = (props) => {
   };
 
   return (
-    <FormContainer>
-      <FormSubHeading>PERSONAL DETAILS</FormSubHeading>
-      <FormInput
-        className="photographer-personal-details__input"
-        type="text"
-        id="firstname"
-        name="firstname"
-        placeholder="eg: John"
-        value={firstname}
-        onChange={firstnameInputHandler}
-        warning={firstnameWarning}
-      >
-        Firstname:
-      </FormInput>
-      <FormInput
-        className="photographer-personal-details__input"
-        type="text"
-        id="lastname"
-        name="lastname"
-        placeholder="eg: Doe"
-        value={lastname}
-        onChange={lastnameInputHandler}
-        warning={lastnameWarning}
-      >
-        Lastname:
-      </FormInput>
-      <FormInputTextArea
-        className="photographer-personal-details__input photographer-summary__input"
-        type="text"
-        id="summary"
-        name="summary"
-        placeholder="Summary description to display."
-        value={summary}
-        onChange={summaryInputHandler}
-        warning={summaryWarning}
-        rows="3"
-      >
-        Summary:
-      </FormInputTextArea>
-      <FormInput
-        className="photographer-personal-details__input"
-        type="text"
-        id="bankName"
-        name="bankName"
-        placeholder="eg: People's Bank"
-        value={bankName}
-        onChange={bankNameInputHandler}
-        warning={bankNameWarning}
-      >
-        Bank Name:
-      </FormInput>
-      <FormInput
-        className="photographer-personal-details__input"
-        type="text"
-        id="bankAccountNo"
-        name="bankAccountNo"
-        placeholder="eg: 8000000000"
-        value={bankAccountNo}
-        onChange={bankAccountNoInputHandler}
-        warning={bankAccountNoWarning}
-      >
-        Bank Account Number:
-      </FormInput>
+    <CardContainer>
+      <CardContainerTitle>PERSONAL DETAILS</CardContainerTitle>
+      <FlexCenterColumnContainer>
+        <FormInput
+          className="photographer-personal-details__input"
+          type="text"
+          id="firstname"
+          name="firstname"
+          placeholder="eg: John"
+          value={firstname}
+          onChange={firstnameInputHandler}
+          warning={firstnameWarning}
+        >
+          Firstname:
+        </FormInput>
+        <FormInput
+          className="photographer-personal-details__input"
+          type="text"
+          id="lastname"
+          name="lastname"
+          placeholder="eg: Doe"
+          value={lastname}
+          onChange={lastnameInputHandler}
+          warning={lastnameWarning}
+        >
+          Lastname:
+        </FormInput>
+        <FormInputTextArea
+          className="photographer-personal-details__input photographer-summary__input"
+          type="text"
+          id="summary"
+          name="summary"
+          placeholder="Summary description to display."
+          value={summary}
+          onChange={summaryInputHandler}
+          warning={summaryWarning}
+          rows="3"
+        >
+          Summary:
+        </FormInputTextArea>
+        <FormInput
+          className="photographer-personal-details__input"
+          type="text"
+          id="bankName"
+          name="bankName"
+          placeholder="eg: People's Bank"
+          value={bankName}
+          onChange={bankNameInputHandler}
+          warning={bankNameWarning}
+        >
+          Bank Name:
+        </FormInput>
+        <FormInput
+          className="photographer-personal-details__input"
+          type="text"
+          id="bankAccountNo"
+          name="bankAccountNo"
+          placeholder="eg: 8000000000"
+          value={bankAccountNo}
+          onChange={bankAccountNoInputHandler}
+          warning={bankAccountNoWarning}
+        >
+          Bank Account Number:
+        </FormInput>
+      </FlexCenterColumnContainer>
+
       <div className={"warning-msg__container " + warningStyles}>
         {warningMessage}
       </div>
-      <div className="photographer-personal-details__action">
-        <FormActionButton onClick={onClickSaveHandler}>
-          SAVE CHANGES
-        </FormActionButton>
-      </div>
-    </FormContainer>
+      <ButtonContainer>
+        <GreenButton onClick={onClickSaveHandler}>Save</GreenButton>
+      </ButtonContainer>
+    </CardContainer>
   );
 };
 
