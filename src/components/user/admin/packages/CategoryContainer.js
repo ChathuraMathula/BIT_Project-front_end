@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserLoginContext } from "../../../../context/Context";
 import MiniPlusButton from "../../../UI/buttons/MiniPlusButton";
 import PackageCard from "../../../UI/cards/PackageCard";
 import FlexCenterRowContainer from "../../../UI/containers/FlexCenterRowContainer";
 import RoundedCardContainer from "../../../UI/containers/RoundedCardContainer";
+import Modal from "../../../UI/modal/Modal";
 import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import "./CategoryContainer.css";
+import CategoryExtras from "./CategoryExtras";
 
 /**
  *
@@ -16,8 +18,11 @@ import "./CategoryContainer.css";
  */
 const CategoryContainer = (props) => {
   const login = useContext(UserLoginContext);
+  const [showModal, setShowModal] = useState(false);
 
-  
+  const onClickExtraServices = (e) => {
+    setShowModal(true);
+  };
 
   return (
     <>
@@ -25,7 +30,10 @@ const CategoryContainer = (props) => {
         {/* {login.user.name === "admin" ? <CloseButton /> : null} */}
         <CardContainerTitle>{props.category}</CardContainerTitle>
         {login.user.name === "admin" ? (
-          <MiniPlusButton onClick={onClickExtraServices} name="ADD EXTRA SERVICES" />
+          <MiniPlusButton
+            onClick={onClickExtraServices}
+            name="ADD EXTRA SERVICES"
+          />
         ) : null}
 
         <FlexCenterRowContainer>
@@ -43,6 +51,9 @@ const CategoryContainer = (props) => {
           })}
         </FlexCenterRowContainer>
       </RoundedCardContainer>
+      <Modal show={showModal}>
+        <CategoryExtras category={props.category}/>
+      </Modal>
     </>
   );
 };
