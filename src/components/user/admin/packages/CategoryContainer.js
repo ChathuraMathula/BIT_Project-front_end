@@ -24,6 +24,16 @@ const CategoryContainer = (props) => {
     setShowModal(true);
   };
 
+  const closeModalHandler = (e) => {
+    setShowModal(false);
+  };
+
+  const onSuccessHandler = (success) => {
+    if (success) {
+      setShowModal(false);
+    }
+  };
+
   return (
     <>
       <RoundedCardContainer>
@@ -51,8 +61,15 @@ const CategoryContainer = (props) => {
           })}
         </FlexCenterRowContainer>
       </RoundedCardContainer>
-      <Modal show={showModal}>
-        <CategoryExtras category={props.category}/>
+      <Modal
+        show={showModal}
+        onClose={closeModalHandler}
+        onBackdropClick={closeModalHandler}
+      >
+        <CategoryExtras
+          category={props.category}
+          onSuccess={onSuccessHandler}
+        />
       </Modal>
     </>
   );

@@ -35,7 +35,7 @@ const FormInputTextArea = (props) => {
         cols={props.cols}
         maxLength={props.maxLength}
       ></textarea>
-      <div className={"form-input__warining"}>{props.warning}</div>
+      {props.warning ? <div className={"form-input__warining"}>{props.warning}</div> : null}
     </div>
   );
 };

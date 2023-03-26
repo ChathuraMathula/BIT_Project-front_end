@@ -15,7 +15,7 @@ const PlusButton = (props) => {
         <div>
           <PlusSVG />
         </div>
-        <div>{props.name}</div>
+        {props.name ? <div>{props.name}</div> : null}
       </div>
     </>
   );

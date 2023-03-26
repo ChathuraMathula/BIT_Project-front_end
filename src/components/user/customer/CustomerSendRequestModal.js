@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import CalenderDateState from "../../UI/calender/CalenderDateState";
 import FormInput from "../../UI/form/FormInput";
-import FormInputTime from "../../UI/form/FormInputTime";
 import FormSelectOptions from "../../UI/form/FormSelectOptions";
 import FormInputTextArea from "../../UI/form/FormInputTextArea";
-import Modal from "../../UI/modal/Modal";
 import "./CustomerSendRequestModal.css";
 import { isEmpty, isValid } from "../../../utils/Validator";
 import { sanitize } from "../../../utils/Sanitizer";
 import ButtonContainer from "../../UI/containers/ButtonContainer";
 import GreenButton from "../../UI/buttons/GreenButton";
 import ModalCardContainer from "../../UI/containers/ModalCardContainer";
+import CardContainerTitle from "../../UI/titles/CardContainerTitle";
+import CustomerAddExtraServices from "./CustomerAddExtraServices";
+import ListContainer from "../../UI/containers/ListContainer";
 
 /**
  *
@@ -28,6 +29,9 @@ const CustomerSendRequestModal = (props) => {
   const [event, setEvent] = useState("");
   const [location, setLocation] = useState("");
   const [message, setMessage] = useState("");
+  const [extraServices, setExtraServices] = useState([]);
+  const [selectedExtraServices, setSelectedExtraServices] = useState([]);
+  const [extraService, setExtraService] = useState({});
 
   const [beginTime, setBeginTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -56,6 +60,17 @@ const CustomerSendRequestModal = (props) => {
       });
   }, []);
 
+  useEffect(() => {
+    if (categoryName) {
+      const categoryDoc = categories.find(
+        (categoryDocument) => categoryDocument.name === categoryName
+      );
+      if (categoryDoc.hasOwnProperty("extraServices")) {
+        setExtraServices([...categoryDoc.extraServices]);
+      }
+    }
+  }, [categoryName]);
+
   const onSelectCategoryHandler = (event) => {
     if (event.target.value) {
       setCategoryName(event.target.value);
@@ -76,6 +91,11 @@ const CustomerSendRequestModal = (props) => {
     } else {
       setPackageName("");
     }
+  };
+
+  const onSelectExtraServicesHandler = (event) => {
+    const extraServiceIndex = event.target.value;
+    setExtraService({ ...extraServices[extraServiceIndex] });
   };
 
   const eventInputHandler = (event) => {
@@ -163,11 +183,20 @@ const CustomerSendRequestModal = (props) => {
     }
   };
 
+  const onAddExtraServiceHandler = (extraServiceObject) => {
+    let addedServiceString = extraServiceObject.service;
+    if (extraServiceObject.hasOwnProperty("quantity")) {
+      addedServiceString += ` [Quantity: ${extraServiceObject.quantity}]`;
+    }
+    setSelectedExtraServices([...selectedExtraServices, addedServiceString]);
+  };
+
   return (
     <>
       <CalenderDateState>Reservation Request</CalenderDateState>
 
       <ModalCardContainer>
+        <CardContainerTitle>Package</CardContainerTitle>
         <FormSelectOptions
           id="package-category"
           label="Select Package Category"
@@ -196,6 +225,45 @@ const CustomerSendRequestModal = (props) => {
             );
           })}
         </FormSelectOptions>
+      </ModalCardContainer>
+      <ModalCardContainer>
+        <CardContainerTitle>Extra Services</CardContainerTitle>
+        <FormSelectOptions
+          id="category-extras"
+          label="Select Extra Services"
+          onChange={onSelectExtraServicesHandler}
+        >
+          <option value="">-- Select --</option>
+          {extraServices.map((extraServiceDocument, index) => {
+            return (
+              <>
+                <option value={index} key={index}>
+                  {extraServiceDocument.string}
+                </option>
+              </>
+            );
+          })}
+        </FormSelectOptions>
+        {extraService.string ? (
+          <>
+            <CustomerAddExtraServices
+              onAddExtraService={onAddExtraServiceHandler}
+              extraService={extraService}
+            />
+          </>
+        ) : null}
+        {selectedExtraServices.length > 0 ? (
+          <>
+            <ListContainer>
+              {selectedExtraServices.map((selectedService, index) => {
+                return <li key={index}>{selectedService}</li>;
+              })}
+            </ListContainer>
+          </>
+        ) : null}
+      </ModalCardContainer>
+      <ModalCardContainer>
+        <CardContainerTitle>About Your Event</CardContainerTitle>
         <FormInput
           value={event}
           onChange={eventInputHandler}
@@ -225,6 +293,9 @@ const CustomerSendRequestModal = (props) => {
         >
           Location Address
         </FormInputTextArea>
+      </ModalCardContainer>
+      <ModalCardContainer>
+        <CardContainerTitle>Message</CardContainerTitle>
         <FormInputTextArea
           value={message}
           onChange={onChangeMessageHandler}
@@ -238,7 +309,7 @@ const CustomerSendRequestModal = (props) => {
         {warningMessage}
       </div>
       <ButtonContainer>
-        <GreenButton  onClick={onClickSendRequestHandler}>Send</GreenButton>
+        <GreenButton onClick={onClickSendRequestHandler}>Send</GreenButton>
       </ButtonContainer>
     </>
   );
