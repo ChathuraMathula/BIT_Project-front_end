@@ -1,0 +1,24 @@
+.rounded-card__container {
+  background-color: hsl(216, 100%, 15%);
+  border-radius: 0.9rem;
+  padding: 0.5rem;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  animation-name: wipeIn;
+  animation-duration: 0.5s;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

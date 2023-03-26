@@ -1,5 +1,4 @@
 import React from "react";
-import ModalCardContainer from "../containers/ModalCardContainer";
 import WarningContainer from "../containers/WarningContainer";
 import "./WarningCard.css";
 

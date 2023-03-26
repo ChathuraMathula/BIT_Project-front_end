@@ -9,11 +9,6 @@ const AdminNav = (props) => {
   return (
     <>
       <UserNavigation>
-        <NavigationButton to="/dashboard">Dashboard</NavigationButton>
-        <NavigationButton to="/profile">Profile</NavigationButton>
-        <NavigationButton to="/photographer">Photographer</NavigationButton>
-        <NavigationButton to="/packages">Packages</NavigationButton>
-        <NavigationButton to="/portfolio">Portfolio</NavigationButton>
       </UserNavigation>
     </>
   );

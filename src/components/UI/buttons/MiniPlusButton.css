@@ -1,0 +1,53 @@
+.mini-plus-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.4rem;
+    margin: 0.4rem auto;
+    background-color: hsl(216, 100%, 10%);
+    border-radius: 2rem;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    width: 12rem;
+    border: 1px dashed hsl(220, 61%, 80%);
+}
+
+.mini-plus-button:hover {
+    background-color: hsl(216, 100%, 50%);
+    border: 1px dashed hsl(216, 100%, 50%);
+    transition: all 0.4s;
+}
+
+.mini-plus-button div:nth-child(1) {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid hsl(220, 61%, 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.4rem;
+}
+
+.mini-plus-button div:nth-child(1) svg {
+    width: inherit;
+    height: inherit;
+}
+
+.mini-plus-button div:nth-child(2) {
+    font-weight: bold;
+    font-size: 0.8rem;
+} 
+
+/* For medium size phones */
+@media (min-width: 576px) {
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}

@@ -1,6 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { UserLoginContext } from "../../../../context/Context";
+import MiniPlusButton from "../../../UI/buttons/MiniPlusButton";
+import PackageCard from "../../../UI/cards/PackageCard";
+import FlexCenterRowContainer from "../../../UI/containers/FlexCenterRowContainer";
+import RoundedCardContainer from "../../../UI/containers/RoundedCardContainer";
+import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import "./CategoryContainer.css";
-import UpdatePackage from "./UpdatePackage";
 
 /**
  *
@@ -10,24 +15,35 @@ import UpdatePackage from "./UpdatePackage";
  * @returns
  */
 const CategoryContainer = (props) => {
+  const login = useContext(UserLoginContext);
+
+  
+
   return (
-    <div className="package-category__container">
-      <div className="package-category__title">{props.category}</div>
-      <div className="package-category-update-package__container">
-        {props.packages.map((value, index) => {
-          return (
-            <UpdatePackage
-              category={props.category}
-              price={value.price}
-              package={value.name}
-              services={value.services.join(", ")}
-              key={index}
-              categories={props.categories}
-            />
-          );
-        })}
-      </div>
-    </div>
+    <>
+      <RoundedCardContainer>
+        {/* {login.user.name === "admin" ? <CloseButton /> : null} */}
+        <CardContainerTitle>{props.category}</CardContainerTitle>
+        {login.user.name === "admin" ? (
+          <MiniPlusButton onClick={onClickExtraServices} name="ADD EXTRA SERVICES" />
+        ) : null}
+
+        <FlexCenterRowContainer>
+          {props.packages.map((packageDocument, i) => {
+            return (
+              <>
+                <PackageCard
+                  key={i}
+                  category={props.category}
+                  packageDocument={packageDocument}
+                  categories={props.categories}
+                />
+              </>
+            );
+          })}
+        </FlexCenterRowContainer>
+      </RoundedCardContainer>
+    </>
   );
 };
 

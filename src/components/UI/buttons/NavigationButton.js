@@ -6,6 +6,7 @@ import "./NavigationButton.css";
  *
  * @param children
  * @param to
+ * @param onClick
  * @returns
  */
 const NavigationButton = (props) => {
@@ -18,6 +19,7 @@ const NavigationButton = (props) => {
 
   const onClickNavigateToHandler = (e) => {
     navigate(props.to, { replace: true });
+    props.onClick(true);
   };
 
   return (

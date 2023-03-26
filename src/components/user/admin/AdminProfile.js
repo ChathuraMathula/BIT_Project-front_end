@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { UserLoginContext } from "../../../context/Context";
-import CardContainer from "../../UI/containers/CardContainer";
-import FormHeading from "../../UI/form/FormHeading";
 import CardContainerTitle from "../../UI/titles/CardContainerTitle";
 import UserProfilePassword from "../UserProfilePassword";
 import UserProfilePicture from "../UserProfilePicture";
