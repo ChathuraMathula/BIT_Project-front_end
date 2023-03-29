@@ -8,8 +8,6 @@ const PhotograpehrNav = (props) => {
   return (
     <>
       <UserNavigation>
-        <NavigationButton to="/dashboard">Dashboard</NavigationButton>
-        <NavigationButton to="/profile">Profile</NavigationButton>
       </UserNavigation>
     </>
   );

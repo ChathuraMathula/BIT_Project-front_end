@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { isValid } from "../../../../utils/Validator";
+import PlusButton from "../../../UI/buttons/PlusButton";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInput from "../../../UI/form/FormInput";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
@@ -126,12 +127,10 @@ const AddNewPackage = (props) => {
 
   return (
     <>
-      <div
+      <PlusButton
         onClick={onClickAddPackageModalHandler}
-        className="add-new-package__button"
-      >
-        ADD NEW PACKAGE
-      </div>
+        name="ADD NEW PACKAGE"
+      />
       <Modal
         show={showModal}
         onClose={onCloseAddPackageHandler}

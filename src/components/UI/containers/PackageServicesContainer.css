@@ -1,0 +1,14 @@
+.package-services__container {
+  width: 100%;
+  height: 50vh;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  overscroll-behavior: contain;
+  padding: 1rem 0.5rem;
+  background-color: hsl(216, 100%, 10%);
+}
+
+
+.package-services__container::-webkit-scrollbar {
+    display: none;
+  }

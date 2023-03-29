@@ -11,8 +11,6 @@ const GeneralNav = (props) => {
   return (
     <>
       <UserNavigation>
-        <NavigationButton to="/sign-up">Sign Up</NavigationButton>
-        <NavigationButton to="/login">Login</NavigationButton>
       </UserNavigation>
     </>
   );

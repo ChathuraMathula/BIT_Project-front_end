@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./UserNavigation.css";
 import UserNavigationButton from "./UserNavigationButton";
-import { Link } from "react-router-dom";
 import { UserLoginContext } from "../../../context/Context";
 import { CSSTransition } from "react-transition-group";
 import NavigationDropdownButton from "../buttons/NavigationDropdownButton";
 import LogoutButton from "../buttons/LogoutButton";
+import NavigationButton from "../buttons/NavigationButton";
 
 /**
  *
@@ -31,7 +31,6 @@ const UserNavigation = (props) => {
     }
   };
 
-
   useEffect(() => {
     document.addEventListener("click", outsideClickHandler, true);
   }, []);
@@ -44,6 +43,12 @@ const UserNavigation = (props) => {
       ) {
         setShowDropdown(false);
       }
+    }
+  };
+
+  const onClickNavigationButtonHandler = (clicked) => {
+    if (clicked) {
+      setShowDropdown(false);
     }
   };
 
@@ -72,9 +77,60 @@ const UserNavigation = (props) => {
         }}
       >
         <nav ref={dropdownList} className="user-navigation-list__container">
-          {props.children}
           {login.isLogged ? (
-            <LogoutButton>Log Out</LogoutButton>
+            <>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/dashboard"
+              >
+                Dashboard
+              </NavigationButton>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/profile"
+              >
+                Profile
+              </NavigationButton>
+            </>
+          ) : null}
+          {login.user?.name === "admin" ? (
+            <>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/photographer"
+              >
+                Photographer
+              </NavigationButton>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/packages"
+              >
+                Packages
+              </NavigationButton>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/portfolio"
+              >
+                Portfolio
+              </NavigationButton>
+            </>
+          ) : null}
+          {login.isLogged ? <LogoutButton>Log Out</LogoutButton> : null}
+          {!login.isLogged ? (
+            <>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/sign-up"
+              >
+                Sign Up
+              </NavigationButton>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/login"
+              >
+                Login
+              </NavigationButton>
+            </>
           ) : null}
         </nav>
       </CSSTransition>

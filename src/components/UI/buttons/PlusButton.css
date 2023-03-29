@@ -1,0 +1,52 @@
+.plus-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.5rem;
+    margin: 0.5rem auto;
+    background-color: hsl(216, 100%, 10%);
+    border-radius: 2rem;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    width: 15rem;
+    margin-bottom: 1rem;
+}
+
+.plus-button:hover {
+    background-color: hsl(216, 100%, 30%);
+    transition: all 0.4s;
+}
+
+.plus-button div:nth-child(1) {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid hsl(220, 61%, 80%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+}
+
+.plus-button div:nth-child(1) svg {
+    width: inherit;
+    height: inherit;
+}
+
+.plus-button div:nth-child(2) {
+    font-weight: bold;
+    font-size: 1rem;
+} 
+
+/* For medium size phones */
+@media (min-width: 576px) {
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+}
