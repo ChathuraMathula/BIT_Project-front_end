@@ -31,7 +31,6 @@ const CustomerSendRequestModal = (props) => {
   const [message, setMessage] = useState("");
   const [extraServices, setExtraServices] = useState([]);
   const [selectedExtraServices, setSelectedExtraServices] = useState([]);
-  const [extraService, setExtraService] = useState({});
 
   const [beginTime, setBeginTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -60,17 +59,6 @@ const CustomerSendRequestModal = (props) => {
       });
   }, []);
 
-  useEffect(() => {
-    if (categoryName) {
-      const categoryDoc = categories.find(
-        (categoryDocument) => categoryDocument.name === categoryName
-      );
-      if (categoryDoc.hasOwnProperty("extraServices")) {
-        setExtraServices([...categoryDoc.extraServices]);
-      }
-    }
-  }, [categoryName]);
-
   const onSelectCategoryHandler = (event) => {
     if (event.target.value) {
       setCategoryName(event.target.value);
@@ -79,8 +67,10 @@ const CustomerSendRequestModal = (props) => {
         return categoryDoument.name === event.target.value;
       });
       setPackages([...selectedCategory[0].packages]);
+      setExtraServices([...selectedCategory[0]?.extraServices]);
     } else {
       setCategoryName("");
+      setExtraServices([]);
       setPackages([]);
     }
   };
@@ -91,11 +81,6 @@ const CustomerSendRequestModal = (props) => {
     } else {
       setPackageName("");
     }
-  };
-
-  const onSelectExtraServicesHandler = (event) => {
-    const extraServiceIndex = event.target.value;
-    setExtraService({ ...extraServices[extraServiceIndex] });
   };
 
   const eventInputHandler = (event) => {
@@ -155,6 +140,7 @@ const CustomerSendRequestModal = (props) => {
               customer:
                 messageString === "NotFound" ? "" : sanitize(messageString),
             },
+            extraServices: selectedExtraServices,
           },
         };
 
@@ -183,12 +169,9 @@ const CustomerSendRequestModal = (props) => {
     }
   };
 
-  const onAddExtraServiceHandler = (extraServiceObject) => {
-    let addedServiceString = extraServiceObject.service;
-    if (extraServiceObject.hasOwnProperty("quantity")) {
-      addedServiceString += ` [Quantity: ${extraServiceObject.quantity}]`;
-    }
-    setSelectedExtraServices([...selectedExtraServices, addedServiceString]);
+  const onAddExtraServiceHandler = (selectedExtraServicesArray) => {
+    console.log(selectedExtraServicesArray)
+    setSelectedExtraServices([...selectedExtraServicesArray]);
   };
 
   return (
@@ -226,42 +209,10 @@ const CustomerSendRequestModal = (props) => {
           })}
         </FormSelectOptions>
       </ModalCardContainer>
-      <ModalCardContainer>
-        <CardContainerTitle>Extra Services</CardContainerTitle>
-        <FormSelectOptions
-          id="category-extras"
-          label="Select Extra Services"
-          onChange={onSelectExtraServicesHandler}
-        >
-          <option value="">-- Select --</option>
-          {extraServices.map((extraServiceDocument, index) => {
-            return (
-              <>
-                <option value={index} key={index}>
-                  {extraServiceDocument.string}
-                </option>
-              </>
-            );
-          })}
-        </FormSelectOptions>
-        {extraService.string ? (
-          <>
-            <CustomerAddExtraServices
-              onAddExtraService={onAddExtraServiceHandler}
-              extraService={extraService}
-            />
-          </>
-        ) : null}
-        {selectedExtraServices.length > 0 ? (
-          <>
-            <ListContainer>
-              {selectedExtraServices.map((selectedService, index) => {
-                return <li key={index}>{selectedService}</li>;
-              })}
-            </ListContainer>
-          </>
-        ) : null}
-      </ModalCardContainer>
+      <CustomerAddExtraServices
+        extraServices={extraServices}
+        onAddExtraService={onAddExtraServiceHandler}
+      />
       <ModalCardContainer>
         <CardContainerTitle>About Your Event</CardContainerTitle>
         <FormInput

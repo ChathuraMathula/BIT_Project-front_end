@@ -183,6 +183,24 @@ const ConfirmedReservation = (props) => {
                     : "Package Has been Removed"
                 }
               />
+              {reservation?.extraServices.length > 0 ? (
+                <>
+                  <NameValueString
+                    name="Extra Services:"
+                    value={reservation?.extraServices.map((service, index) => {
+                      if (service.quantity) {
+                        return (
+                          <li
+                            key={index}
+                          >{`${service.name} [Quantity: ${service.quantity}]`}</li>
+                        );
+                      } else {
+                        return <li key={index}>{service.name}</li>;
+                      }
+                    })}
+                  />
+                </>
+              ) : null}
               <NameValueString
                 name="Estimated Total Cost:"
                 value={`${
