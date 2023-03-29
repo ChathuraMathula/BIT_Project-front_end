@@ -44,7 +44,7 @@ const PackageCard = (props) => {
   return (
     <>
       <div className="package-card__container">
-        {login.user.name === "admin" ? (
+        {login.user?.name === "admin" ? (
           <CloseButton onClick={onDeletePackageHandler} />
         ) : null}
         <PackageTitle>{props.packageDocument.name}</PackageTitle>
@@ -57,7 +57,7 @@ const PackageCard = (props) => {
         </PackageServicesContainer>
         <div className="package-card__price">{`${props.packageDocument.price} LKR`}</div>
 
-        {login.user.name === "admin" ? (
+        {login.user?.name === "admin" ? (
           <ButtonContainer>
             <OrangeButton onClick={onClickUpdatePackageHandler}>
               Update

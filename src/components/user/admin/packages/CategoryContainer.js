@@ -39,7 +39,7 @@ const CategoryContainer = (props) => {
       <RoundedCardContainer>
         {/* {login.user.name === "admin" ? <CloseButton /> : null} */}
         <CardContainerTitle>{props.category}</CardContainerTitle>
-        {login.user.name === "admin" ? (
+        {login.user?.name === "admin" ? (
           <MiniPlusButton
             onClick={onClickExtraServices}
             name="ADD EXTRA SERVICES"

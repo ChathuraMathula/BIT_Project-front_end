@@ -52,7 +52,7 @@ const Packages = (props) => {
     <>
       <CardContainerTitle>PACKAGES</CardContainerTitle>
 
-      {login.user.name === "admin" ? (
+      {login.user?.name === "admin" ? (
         <AddNewPackage
           categories={categories}
           onAddCategory={onAddCategoryHandler}
