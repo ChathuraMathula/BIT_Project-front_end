@@ -28,6 +28,7 @@ const ReservationConfirmation = (props) => {
   const [fileUrl, setFileUrl] = useState("");
 
   const payment = props.reservation.payment;
+  const costs = props.reservation.costs;
   const thisYear = props.date.getFullYear();
   const thisMonth = props.date.getMonth();
   const thisDay = props.date.getDate();
@@ -139,6 +140,24 @@ const ReservationConfirmation = (props) => {
       {!rejected ? (
         <>
           <ModalCardContainer>
+            <DetailsContainer>
+              <NameValueTitle>COSTS DETAILS</NameValueTitle>
+              <NameValueString
+                name="Transport Cost:"
+                value={`${costs.transport} LKR`}
+              />
+
+              <NameValueString
+                name="Extra Services Cost:"
+                value={`${costs.extraServices} LKR`}
+              />
+
+              <NameValueString
+                name="Package Price:"
+                value={`${costs.package} LKR`}
+              />
+              <NameValueString name="Advance Payment:" value={`${costs.advance} LKR`} />
+            </DetailsContainer>
             <DetailsContainer>
               <NameValueTitle>PAYMENT DETAILS</NameValueTitle>
               <NameValueString

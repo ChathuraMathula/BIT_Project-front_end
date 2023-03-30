@@ -53,7 +53,7 @@ const FormUploadProfilePhoto = (props) => {
         ></img>
         <label
           className="form-upload-profile-photo__button"
-          for="uploadProfilePhoto"
+          htmlFor="uploadProfilePhoto"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

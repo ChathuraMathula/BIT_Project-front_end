@@ -223,6 +223,26 @@ const NewReservationRequest = (props) => {
                     : "Package Has been Removed"
                 }
               />
+              {props.reservation?.extraServices.length > 0 ? (
+                <>
+                  <NameValueString
+                    name="Extra Services:"
+                    value={props.reservation?.extraServices.map(
+                      (service, index) => {
+                        if (service.quantity) {
+                          return (
+                            <li
+                              key={index}
+                            >{`${service.name} [Quantity: ${service.quantity}]`}</li>
+                          );
+                        } else {
+                          return <li key={index}>{service.name}</li>;
+                        }
+                      }
+                    )}
+                  />
+                </>
+              ) : null}
             </DetailsContainer>
             <div className="new-reservation-request__message-title">
               Customer Message

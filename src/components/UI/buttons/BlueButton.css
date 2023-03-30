@@ -1,0 +1,22 @@
+.blue-button {
+    margin: 1rem 0.5rem;
+    width: 6rem;
+    text-align: center;
+    padding: 0.5rem;
+    border: none;
+    background-color: hsla(216, 100%, 50%);
+    color: hsla(220, 61%, 80%);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0.4rem;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  .blue-button:hover {
+      color: hsl(220, 61%, 80%);
+      background-color: hsl(216, 100%, 10%);
+      transition: all 0.4s;
+  }
+  

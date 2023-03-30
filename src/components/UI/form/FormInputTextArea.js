@@ -22,7 +22,7 @@ import "./FormInputTextArea.css";
 const FormInputTextArea = (props) => {
   return (
     <div className={"form-input-text-area__container " + props.className}>
-      <label for={props.id}>{props.children}</label>
+      <label htmlFor={props.id}>{props.children}</label>
       <textarea
         type={props.type}
         id={props.id}

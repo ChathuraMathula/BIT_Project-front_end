@@ -8,6 +8,7 @@ import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInput from "../../../UI/form/FormInput";
 import FormSelectOptions from "../../../UI/form/FormSelectOptions";
 import FormSubHeading from "../../../UI/form/FormSubHeading";
+import CustomerAddExtraServices from "../../customer/CustomerAddExtraServices";
 import "./UpdateReservation.css";
 
 /**
@@ -31,6 +32,8 @@ const UpdateReservation = (props) => {
   const [advancePayment, setAdvancePayment] = useState(costs.advance);
   const [packageName, setPackageName] = useState(props.reservation.package);
   const [categoryName, setCategoryName] = useState(props.reservation.category);
+  const [extraServices, setExtraServices] = useState([]);
+  const [selectedExtraServices, setSelectedExtraServices] = useState([]);
 
   const [categories, setCategories] = useState([]);
   const [packages, setPackages] = useState([]);
@@ -63,11 +66,13 @@ const UpdateReservation = (props) => {
         ) {
           for (let categoryDoc of categoryDocuments) {
             if (categoryDoc.name === categoryName) {
+              setExtraServices([...categoryDoc.extraServices]);
               setPackages([...categoryDoc.packages]);
               return;
             }
           }
         } else {
+          setExtraServices([...categoryDocuments[0].extraServices]);
           setPackages([...categoryDocuments[0].packages]);
           setCategoryName(categoryDocuments[0].name);
           setPackageName(categoryDocuments[0].packages[0].name);
@@ -78,6 +83,7 @@ const UpdateReservation = (props) => {
   useEffect(() => {
     for (let categoryDoc of categories) {
       if (categoryDoc.name === categoryName) {
+        setExtraServices([...categoryDoc.extraServices]);
         setPackages([...categoryDoc.packages]);
       }
     }
@@ -158,6 +164,7 @@ const UpdateReservation = (props) => {
           event: event,
           package: selectedPackage[0].name,
           category: categoryName,
+          extraServices: selectedExtraServices,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -175,8 +182,12 @@ const UpdateReservation = (props) => {
           }
         });
     } else {
-        displayWarning("Input data is invalid. 😐");
+      displayWarning("Input data is invalid. 😐");
     }
+  };
+
+  const onAddExtraServiceHandler = (extraServicesArray) => {
+    setSelectedExtraServices([...extraServicesArray]);
   };
 
   return (
@@ -246,9 +257,10 @@ const UpdateReservation = (props) => {
             return (
               <option
                 value={categoryDocument.name}
-                selected={
-                  categoryDocument.name === categoryName ? "selected" : null
-                }
+                defaultValue={categoryDocument.name === categoryName ? true : false}
+                // selected={
+                //   categoryDocument.name === categoryName ? "selected" : null
+                // }
                 key={i}
               >
                 {categoryDocument.name}
@@ -261,9 +273,10 @@ const UpdateReservation = (props) => {
             return (
               <option
                 value={packageDocument.name}
-                selected={
-                  packageDocument.name === packageName ? "selected" : null
-                }
+                defaultValue={packageDocument.name === packageName ? true : false}
+                // selected={
+                //   packageDocument.name === packageName ? "selected" : null
+                // }
                 key={i}
               >
                 {packageDocument.name}
@@ -272,6 +285,11 @@ const UpdateReservation = (props) => {
           })}
         </FormSelectOptions>
       </ModalCardContainer>
+      <CustomerAddExtraServices
+        extraServices={extraServices}
+        reservation={props.reservation}
+        onAddExtraService={onAddExtraServiceHandler}
+      />
       <div className={"warning-msg__container " + warningStyles}>
         {warningMessage}
       </div>
