@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../context/Context";
+import BlueButton from "../../UI/buttons/BlueButton";
 import GreenButton from "../../UI/buttons/GreenButton";
 import IncreaseButton from "../../UI/buttons/IncreaseButton";
 import ReduceButton from "../../UI/buttons/ReduceButton";
-import ButtonContainer from "../../UI/containers/ButtonContainer";
 import FlexCenterColumnContainer from "../../UI/containers/FlexCenterColumnContainer";
 import FlexCenterRowContainer from "../../UI/containers/FlexCenterRowContainer";
 import ModalCardContainer from "../../UI/containers/ModalCardContainer";
@@ -27,29 +27,27 @@ const CustomerAddExtraServices = (props) => {
   const [selectedExtraServices, setSelectedExtraServices] = useState([]);
 
   useEffect(() => {
-    setExtraServices([...props.extraServices]);
+    if (login.user?.role === "admin") {
+      const reservationExtraServices = props.reservation?.extraServices;
+      const categoryExtraServicesArray = [...props.extraServices].filter(
+        (categoryExtraServiceObject) => {
+          return !reservationExtraServices.some(
+            (reservationExtraService) =>
+              reservationExtraService.name === categoryExtraServiceObject.string
+          );
+        }
+      );
+      setExtraServices([...categoryExtraServicesArray]);
+    } else {
+      setExtraServices([...props.extraServices]);
+    }
   }, [props.extraServices]);
 
   useEffect(() => {
-    if (login.user?.role === "admin" && props.reservation) {
+    if (login.user?.role === "admin") {
       const reservationExtraServices = props.reservation?.extraServices;
-      const extraServicesArray = [...extraServices];
-      setSelectedExtraServices([...reservationExtraServices]);
-      for (let i = 0; i < reservationExtraServices.length; i++) {
-        for (let j = 0; j < extraServicesArray.length; j++) {
-          if (
-            reservationExtraServices[i].name === extraServicesArray[j].string
-          ) {
-            extraServicesArray.slice(j, 1);
-          }
-        }
-      }
-      console.log("-------> Test", extraServicesArray);
-      if (extraServicesArray.length === 0) {
-        setExtraServices([]);
-      } else {
-
-        setExtraServices([...extraServicesArray]);
+      if (props.reservation) {
+        setSelectedExtraServices([...reservationExtraServices]);
       }
       props.onAddExtraService([...reservationExtraServices]);
     }
@@ -77,7 +75,7 @@ const CustomerAddExtraServices = (props) => {
         quantity: selectedExtraService.quantifiable ? quantity : null,
       };
       const selectedServicesArray = [...selectedExtraServices, service];
-     
+
       const remainingServicesArray = extraServices.filter((serviceDocument) => {
         return serviceDocument.string !== selectedExtraService.string;
       });
@@ -154,18 +152,21 @@ const CustomerAddExtraServices = (props) => {
               </>
             ) : null}
             {selectedExtraService?.string ? (
-              <GreenButton onClick={onClickAddHandler}>Add</GreenButton>
+              <>
+                <BlueButton onClick={onClickAddHandler}>Add</BlueButton>
+              </>
             ) : null}
           </FlexCenterRowContainer>
 
           {selectedExtraServices.map((extraServiceDocument, index) => {
             return (
-              <CustomerDisplayExtraService
-                key={index}
-                index={index}
-                service={extraServiceDocument}
-                onRemove={onRemoveExtraServiceHandler}
-              />
+              <React.Fragment key={index}>
+                <CustomerDisplayExtraService
+                  index={index}
+                  service={extraServiceDocument}
+                  onRemove={onRemoveExtraServiceHandler}
+                />
+              </React.Fragment>
             );
           })}
         </FlexCenterColumnContainer>

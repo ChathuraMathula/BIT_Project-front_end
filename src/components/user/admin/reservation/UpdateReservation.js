@@ -257,9 +257,10 @@ const UpdateReservation = (props) => {
             return (
               <option
                 value={categoryDocument.name}
-                selected={
-                  categoryDocument.name === categoryName ? "selected" : null
-                }
+                defaultValue={categoryDocument.name === categoryName ? true : false}
+                // selected={
+                //   categoryDocument.name === categoryName ? "selected" : null
+                // }
                 key={i}
               >
                 {categoryDocument.name}
@@ -272,9 +273,10 @@ const UpdateReservation = (props) => {
             return (
               <option
                 value={packageDocument.name}
-                selected={
-                  packageDocument.name === packageName ? "selected" : null
-                }
+                defaultValue={packageDocument.name === packageName ? true : false}
+                // selected={
+                //   packageDocument.name === packageName ? "selected" : null
+                // }
                 key={i}
               >
                 {packageDocument.name}

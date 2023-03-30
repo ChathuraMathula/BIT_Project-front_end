@@ -11,7 +11,7 @@ import "./FormSelectOptions.css";
 const FormSelectOptions = (props) => {
   return (
     <div className={"form-select-options__container " + props.className}>
-      <label for={props.id}>{props.label}</label>
+      <label htmlFor={props.id}>{props.label}</label>
       <select id={props.id} name={props.id} onChange={props.onChange}>
         {props.children}
       </select>
