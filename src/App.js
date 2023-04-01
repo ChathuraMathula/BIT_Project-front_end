@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  Routes,
-  BrowserRouter,
-} from "react-router-dom";
+import { Route, Routes, BrowserRouter, Outlet } from "react-router-dom";
 
 import Welcome from "./pages/Welcome";
 import Dates from "./pages/Dates";
@@ -22,6 +16,7 @@ import AdminPhotographerProfile from "./components/user/admin/AdminPhotographerP
 import Packages from "./pages/Packages";
 import socket from "./utils/socket";
 import Portfolio from "./pages/Portfolio";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   const [login, setLogin] = useLocalStorage("login", {
@@ -39,7 +34,7 @@ function App() {
 
   useEffect(() => {
     socket;
-  },[]);
+  }, []);
 
   return (
     <>
@@ -59,18 +54,11 @@ function App() {
                 path="/photographer"
                 element={<AdminPhotographerProfile />}
               />
-              <Route
-                path="/packages"
-                element={<Packages />}
-              />
-               <Route
-                path="/dates"
-                element={<Dates />}
-              />
-              <Route
-                path="/portfolio"
-                element={<Portfolio />}
-              />
+              <Route path="/packages" element={<Packages />} />
+              <Route path="/dates" element={<Dates />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+
+              <Route path="/reset/password/:username/:token" element={<ResetPassword />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -4,10 +4,13 @@ import GreenButton from "../components/UI/buttons/GreenButton";
 import LoginButton from "../components/UI/buttons/LoginButton";
 import ButtonContainer from "../components/UI/containers/ButtonContainer";
 import LoginCardContainer from "../components/UI/containers/LoginCardContainer";
+import NormalCardContainer from "../components/UI/containers/NormalCardContainer";
+import WarningContainer from "../components/UI/containers/WarningContainer";
 import FormActionButton from "../components/UI/form/FormActionButton";
 import FormContainer from "../components/UI/form/FormContainer";
 import FormHeading from "../components/UI/form/FormHeading";
 import FormInput from "../components/UI/form/FormInput";
+import PadlockSVG from "../components/UI/SVG/PadlockSVG";
 import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { postLogin } from "../utils/post";
@@ -23,6 +26,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
+  const [isSentEmail, setIsSentEmail] = useState(false);
 
   const onChangeUsernameHandler = (event) => {
     setUsername(sanitize(event.target.value));
@@ -33,7 +37,7 @@ const Login = (props) => {
   };
 
   const displayWarning = (message) => {
-    setWarningStyles("login-form-warning__red");
+    setWarningStyles("login-form-warning__white");
     setWarningMessage(message);
     setTimeout(() => {
       setWarningStyles("");
@@ -88,35 +92,86 @@ const Login = (props) => {
     }
   };
 
+  const onClickForgotPasswordHandler = async (event) => {
+    if (username) {
+      await fetch("http://localhost:3001/forgot/password", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ username: username }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            setIsSentEmail(true);
+          } else {
+            displayWarning("Sending reset link failed. Please try again later. 😐")
+          }
+        });
+    } else {
+      displayWarning("Please add a valid username to generate a password reset link. 😐")
+    }
+  };
+
+  const onClickOkHandler = e => {
+    setIsSentEmail(false);
+  }
+
   return (
     <>
-      <LoginCardContainer>
-        <CardContainerTitle>LOGIN</CardContainerTitle>
-        <FormInput
-          onChange={onChangeUsernameHandler}
-          value={username}
-          name="username"
-          id="username"
-          type="text"
-          placeholder="janakaran12"
-        >
-          Username:
-        </FormInput>
-        <FormInput
-          onChange={onChangePasswordHandler}
-          value={password}
-          name="password"
-          id="password"
-          type="password"
-          placeholder="your password"
-        >
-          Password:
-        </FormInput>
-        <div className={"login-form-action__message " + warningStyles}>
-          {warningMessage}
-        </div>
-        <LoginButton onClick={onClickLoginHandler}>Login</LoginButton>
-      </LoginCardContainer>
+      {!isSentEmail ? (
+        <LoginCardContainer>
+          <CardContainerTitle>LOGIN</CardContainerTitle>
+          <FormInput
+            onChange={onChangeUsernameHandler}
+            value={username}
+            name="username"
+            id="username"
+            type="text"
+            placeholder="janakaran12"
+          >
+            Username:
+          </FormInput>
+          <FormInput
+            onChange={onChangePasswordHandler}
+            value={password}
+            name="password"
+            id="password"
+            type="password"
+            placeholder="your password"
+          >
+            Password:
+          </FormInput>
+          <div
+            onClick={onClickForgotPasswordHandler}
+            className="forgot-password-button__container"
+          >
+            <div>
+              <PadlockSVG />
+            </div>
+            <div>Forgot Password</div>
+          </div>
+          <div className={"login-form-action__message " + warningStyles}>
+            {warningMessage}
+          </div>
+          <LoginButton onClick={onClickLoginHandler}>Login</LoginButton>
+        </LoginCardContainer>
+      ) : isSentEmail ? (
+        <>
+          <NormalCardContainer>
+            <CardContainerTitle>NOTICE..!</CardContainerTitle>
+            <WarningContainer>
+              Password reset link is sent to your email. Please check your
+              inbox. 😊
+            </WarningContainer>
+            <ButtonContainer>
+              <GreenButton onClick={onClickOkHandler}>Ok</GreenButton>
+            </ButtonContainer>
+          </NormalCardContainer>
+        </>
+      ) : null}
     </>
   );
 };

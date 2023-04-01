@@ -13,7 +13,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "public"),
     },
-    historyApiFallback: true,
+    historyApiFallback: { disableDotRule: true },
     open: true,
     hot: true,
     liveReload: true,
@@ -30,11 +30,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
-      }
-    ]
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
 };
