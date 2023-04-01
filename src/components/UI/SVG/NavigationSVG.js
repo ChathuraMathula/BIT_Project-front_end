@@ -25,7 +25,7 @@ const NavigationSVG = (props) => {
             transform="translate(2336.5 -1078.5)"
             fill="none"
             stroke="#000a1a"
-            stroke-width="55"
+            strokeWidth="55"
           />
           <g
             id="Rectangle_29"
@@ -33,7 +33,7 @@ const NavigationSVG = (props) => {
             transform="translate(2195 -932)"
             fill="#adc2eb"
             stroke="#adc2eb"
-            stroke-width="1"
+            strokeWidth="1"
           >
             <rect width="283" height="46" rx="23" stroke="none" />
             <rect
@@ -60,7 +60,7 @@ const NavigationSVG = (props) => {
             transform="translate(2336.5 -1078.5)"
             fill="none"
             stroke="#000a1a"
-            stroke-width="55"
+            strokeWidth="55"
           />
           <g
             id="Rectangle_29-2"
@@ -68,7 +68,7 @@ const NavigationSVG = (props) => {
             transform="translate(2195 -823)"
             fill="#adc2eb"
             stroke="#adc2eb"
-            stroke-width="1"
+            strokeWidth="1"
           >
             <rect width="283" height="46" rx="23" stroke="none" />
             <rect
@@ -86,7 +86,7 @@ const NavigationSVG = (props) => {
             transform="translate(2195 -1041)"
             fill="#adc2eb"
             stroke="#adc2eb"
-            stroke-width="1"
+            strokeWidth="1"
           >
             <rect width="283" height="46" rx="23" stroke="none" />
             <rect
