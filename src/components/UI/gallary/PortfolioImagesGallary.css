@@ -8,6 +8,10 @@
   flex: 50%;
   max-width: 50%;
   padding: 0 4px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around; */
 }
 
 .portfolio-gallary__column img {
@@ -19,6 +23,7 @@
   user-select: none;
   -webkit-user-drag: none;
   cursor: pointer;
+  
 }
 
 .portfolio-gallary__column img:hover {

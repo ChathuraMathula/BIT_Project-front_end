@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import { Route, Routes, BrowserRouter, Outlet } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  BrowserRouter,
+  Outlet,
+  useNavigate,
+} from "react-router-dom";
 
 import Welcome from "./pages/Welcome";
 import Dates from "./pages/Dates";
@@ -24,16 +30,24 @@ function App() {
     user: null,
   });
 
+  const [loginEndsAt, setLoginEndsAt] = useLocalStorage("loginEndsAt", 0);
+
   const userLoginHandler = (loginResponseData) => {
     setLogin((prevState) => ({
       ...prevState,
       ...loginResponseData,
       isLogged: true,
     }));
+
+    setLoginEndsAt(Date.now() + 1000 * 60 * 60 * 24);
   };
 
   useEffect(() => {
     socket;
+    console.log(Date.now() > loginEndsAt, `${Date.now()} > ${loginEndsAt}`);
+    if (Date.now() > loginEndsAt) {
+      setLogin({});
+    }
   }, []);
 
   return (
@@ -58,7 +72,10 @@ function App() {
               <Route path="/dates" element={<Dates />} />
               <Route path="/portfolio" element={<Portfolio />} />
 
-              <Route path="/reset/password/:username/:token" element={<ResetPassword />} />
+              <Route
+                path="/reset/password/:username/:token"
+                element={<ResetPassword />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>

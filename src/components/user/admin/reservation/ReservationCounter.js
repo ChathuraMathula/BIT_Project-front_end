@@ -11,6 +11,11 @@ const ReservationCounter = () => {
   const [newCount, setNewCount] = useState(0);
   const [dates, setDates] = useState([]);
 
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDate();
+
   useEffect(() => {
     fetch("http://localhost:3001/available/dates")
       .then((res) => res.json())
@@ -34,14 +39,20 @@ const ReservationCounter = () => {
       let confirmedRequests = 0;
 
       for (let dateDocument of dates) {
-        if (dateDocument.hasOwnProperty("reservation")) {
-          const reservation = dateDocument.reservation;
-          if (reservation.state === "confirmed") {
-            confirmedRequests++;
-          } else if (reservation.state === "pending") {
-            pendingRequests++;
-            if (!reservation.hasOwnProperty("costs")) {
-              newRequests++;
+        if (
+          dateDocument.date.year >= year &&
+          dateDocument.date.month >= month &&
+          dateDocument.date.day > day
+        ) {
+          if (dateDocument.hasOwnProperty("reservation")) {
+            const reservation = dateDocument.reservation;
+            if (reservation.state === "confirmed") {
+              confirmedRequests++;
+            } else if (reservation.state === "pending") {
+              pendingRequests++;
+              if (!reservation.hasOwnProperty("costs")) {
+                newRequests++;
+              }
             }
           }
         }

@@ -74,14 +74,7 @@ const Login = (props) => {
             props.user(data);
             console.log("inside login.js: ", data);
 
-            // setLogin({ isLogged: true, user: data.user });
-            // localStorage.setItem(
-            //   "login",
-            //   JSON.stringify({ isLogged: true, user: data.user })
-            // );
-            // console.log(login);
             navigate("/dashboard", { replace: true });
-            // window.location.replace("/");
           }
         })
         .catch((error) => {
