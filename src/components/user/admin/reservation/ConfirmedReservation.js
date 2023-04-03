@@ -202,6 +202,18 @@ const ConfirmedReservation = (props) => {
                 </>
               ) : null}
               <NameValueString
+                name="Transport Cost:"
+                value={`${reservation.costs.transport} LKR`}
+              />
+              <NameValueString
+                name="Extra Services Cost:"
+                value={`${reservation.costs.extraServices} LKR`}
+              />
+              <NameValueString
+                name="Package Price:"
+                value={`${reservation.costs.package} LKR`}
+              />
+              <NameValueString
                 name="Estimated Total Cost:"
                 value={`${
                   +reservation.costs.transport +
@@ -212,6 +224,15 @@ const ConfirmedReservation = (props) => {
               <NameValueString
                 name="Advance Payment:"
                 value={`${+reservation.costs.advance} LKR`}
+              />
+              <NameValueString
+                name="Balance:"
+                value={`${
+                  +reservation.costs.transport +
+                  +reservation.costs.extraServices +
+                  +reservation.costs.package -
+                  +reservation.costs.advance
+                } LKR`}
               />
             </DetailsContainer>
           </ModalCardContainer>
