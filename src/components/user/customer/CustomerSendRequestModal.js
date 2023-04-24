@@ -12,6 +12,9 @@ import ModalCardContainer from "../../UI/containers/ModalCardContainer";
 import CardContainerTitle from "../../UI/titles/CardContainerTitle";
 import CustomerAddExtraServices from "./CustomerAddExtraServices";
 import ListContainer from "../../UI/containers/ListContainer";
+import TimeInput from "../../UI/inputs/TimeInput";
+import AddressInput from "../../UI/inputs/AddressInput";
+import MessageInput from "../../UI/inputs/MessageInput";
 
 /**
  *
@@ -27,13 +30,13 @@ const CustomerSendRequestModal = (props) => {
   const [categoryName, setCategoryName] = useState("");
   const [packageName, setPackageName] = useState("");
   const [event, setEvent] = useState("");
-  const [location, setLocation] = useState("");
-  const [message, setMessage] = useState("");
   const [extraServices, setExtraServices] = useState([]);
   const [selectedExtraServices, setSelectedExtraServices] = useState([]);
 
-  const [beginTime, setBeginTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  let beginTime;
+  let endTime;
+  let location;
+  let message;
 
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
@@ -87,20 +90,24 @@ const CustomerSendRequestModal = (props) => {
     setEvent(event.target.value);
   };
 
-  const onChangeLocationHandler = (event) => {
-    setLocation(event.target.value);
+  const onChangeLocationHandler = (address) => {
+    console.log(address);
+    location = address;
   };
 
-  const onChangeMessageHandler = (event) => {
-    setMessage(event.target.value);
+  const onChangeMessageHandler = (customerMessage) => {
+    console.log(customerMessage);
+    message = customerMessage;
   };
 
-  const onChangeBeginTime = (e) => {
-    setBeginTime(sanitize(e.target.value));
+  const onChangeBeginTime = (time) => {
+    console.log(time);
+    beginTime = time;
   };
 
-  const onChangeEndTime = (e) => {
-    setEndTime(sanitize(e.target.value));
+  const onChangeEndTime = (time) => {
+    console.log(time);
+    endTime = time;
   };
 
   const onClickSendRequestHandler = async (e) => {
@@ -111,14 +118,14 @@ const CustomerSendRequestModal = (props) => {
     try {
       if (
         /^[a-zA-Z\ ]+$/.test(event) && // valid name string with spaces
-        isValid("address", location) &&
         isValid("message", messageString) &&
         !isEmpty(event) &&
         !isEmpty(location) &&
         !isEmpty(categoryName) &&
         !isEmpty(packageName) &&
-        isValid("time", beginTime) &&
-        isValid("time", endTime)
+        !isEmpty(beginTime) &&
+        !isEmpty(endTime) &&
+        !isEmpty(location)
       ) {
         console.log("sent");
         const data = {
@@ -170,7 +177,7 @@ const CustomerSendRequestModal = (props) => {
   };
 
   const onAddExtraServiceHandler = (selectedExtraServicesArray) => {
-    console.log(selectedExtraServicesArray)
+    console.log(selectedExtraServicesArray);
     setSelectedExtraServices([...selectedExtraServicesArray]);
   };
 
@@ -222,38 +229,21 @@ const CustomerSendRequestModal = (props) => {
         >
           Event
         </FormInput>
-        <FormInput
-          value={beginTime}
-          onChange={onChangeBeginTime}
-          placeholder="HH:MM"
-        >
-          Event Begin Time:
-        </FormInput>
-        <FormInput
-          value={endTime}
-          onChange={onChangeEndTime}
-          placeholder="HH:MM"
-        >
-          Event End Time:
-        </FormInput>
+        <TimeInput onChange={onChangeBeginTime} name="Event Begin Time" />
+        <TimeInput onChange={onChangeEndTime} name="Event End Time" />
 
-        <FormInputTextArea
-          value={location}
+        <AddressInput
+          name="Location Address"
           onChange={onChangeLocationHandler}
-          placeholder="Please type the address of the location where the event is planned to be held."
-        >
-          Location Address
-        </FormInputTextArea>
+        />
       </ModalCardContainer>
       <ModalCardContainer>
         <CardContainerTitle>Message</CardContainerTitle>
-        <FormInputTextArea
-          value={message}
-          onChange={onChangeMessageHandler}
+        <MessageInput
+          name="Your Message"
           placeholder="Your additional requests can be asked via this message box."
-        >
-          Your Message:
-        </FormInputTextArea>
+          onChange={onChangeMessageHandler}
+        />
       </ModalCardContainer>
 
       <div className={"warning-msg__container " + warningStyles}>

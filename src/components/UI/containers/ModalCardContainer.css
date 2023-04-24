@@ -2,9 +2,10 @@
     padding: 0.6rem;
     margin: 1rem 0;
     width: 100%;
-    background-color: hsl(216, 100%, 30%);
+    /* background-color: hsl(216, 100%, 30%); */
+    background-color: hsl(216, 100%, 10%);
     border-radius: 1rem;
-    box-shadow: 0 0 8px 0 hsl(216, 100%, 10%);
+    /* box-shadow: 0 0 8px 0 hsl(216, 100%, 10%); */
     -webkit-user-select: none;
     user-select: none;
     animation-name: wipeIn;

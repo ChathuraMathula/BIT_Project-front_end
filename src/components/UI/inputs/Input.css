@@ -1,0 +1,21 @@
+input.input-tag {
+  margin: 0.2rem 0;
+  padding: 0.4rem;
+  line-height: 2rem;
+  border-radius: 0;
+  border: 1px solid hsl(220, 61%, 30%);
+  background-color: hsl(216, 100%, 15%);
+  color: hsl(216, 100%, 85%);
+  font-size: 1.2rem;
+}
+
+input.input-tag:focus-visible {
+  outline: 1px solid hsl(216, 100%, 75%);
+  border: 1px solid hsl(216, 100%, 75%);
+  background-color: hsl(220, 61%, 20%);
+}
+
+input.input-tag::placeholder {
+  color: hsl(220, 61%, 60%);
+  font-size: 1rem;
+}

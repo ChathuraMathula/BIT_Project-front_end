@@ -1,0 +1,10 @@
+.input-warning {
+    height: 1.2rem;
+    font-size: 0.8rem;
+    padding: 0.2rem;
+    text-align: center;
+    width: 100%;
+    color: red;
+    animation-name: wipeIn;
+    animation-duration: 1.2s;
+  }

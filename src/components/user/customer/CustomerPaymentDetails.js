@@ -266,7 +266,7 @@ const CustomerPaymentDetails = (props) => {
                 : "No message to preview"}
             </div>
           </ModalCardContainer>
-          <div className="customer-payment-details-costs__container">
+          <ModalCardContainer>
             <div className="customer-payment-details-costs__title">COSTS</div>
             <div className="customer-payment-details-costs__row">
               <div className="customer-payment-details-costs__name">
@@ -322,8 +322,9 @@ const CustomerPaymentDetails = (props) => {
                 {photographer.bankAccountNo}
               </div>
             </div>
-          </div>
-          <div className="customer-payment-details-payment__container">
+          </ModalCardContainer>
+
+          <ModalCardContainer>
             <div className="customer-payment-details-payment__title">
               PAYMENT DETAILS
             </div>
@@ -400,7 +401,7 @@ const CustomerPaymentDetails = (props) => {
                 </div>
               </div>
             </div>
-          </div>
+          </ModalCardContainer>
           <div className={"warning-msg__container " + warningStyles}>
             {warningMessage}
           </div>
