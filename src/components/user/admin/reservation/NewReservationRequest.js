@@ -201,7 +201,6 @@ const NewReservationRequest = (props) => {
           <ModalCardContainer>
             <DetailsContainer>
               <NameValueTitle>EVENT DETAILS</NameValueTitle>
-              <NameValueString name="Event Type:" value={event.type} />
               <NameValueString name="Event Location:" value={event.location} />
               <NameValueString
                 name="Event Time:"

@@ -10,6 +10,10 @@ import ModalCardContainer from "../../UI/containers/ModalCardContainer";
 import FormInput from "../../UI/form/FormInput";
 import UploadSVG from "../../UI/SVG/UploadSVG";
 import "./CustomerPaymentDetails.css";
+import TimeInput from "../../UI/inputs/TimeInput";
+import DateInput from "../../UI/inputs/DateInput";
+import AmountInput from "../../UI/inputs/AmountInput";
+import BranchInput from "../../UI/inputs/BranchInput";
 
 /**
  *
@@ -106,20 +110,24 @@ const CustomerPaymentDetails = (props) => {
     setScreenshotNotice(noticeString);
   };
 
-  const onChangePaidBranch = (e) => {
-    setPaidBranch(sanitize(e.target.value));
+  const onChangePaidBranch = (branch) => {
+    console.log("BRANCH: ", branch)
+    setPaidBranch(branch);
   };
 
-  const onChangePaidAmount = (e) => {
-    setPaidAmount(sanitize(e.target.value));
+  const onChangePaidAmount = (amount) => {
+    console.log("AMOUNT: ", amount);
+    setPaidAmount(amount);
   };
 
-  const onChangePaidDate = (e) => {
-    setPaidDate(sanitize(e.target.value));
+  const onChangePaidDate = (date) => {
+    console.log("DATE: ", date);
+    setPaidDate(date);
   };
 
-  const onChangePaidTime = (e) => {
-    setPaidTime(sanitize(e.target.value));
+  const onChangePaidTime = (time) => {
+    console.log("TIME: ", time);
+    setPaidTime(time);
   };
 
   const onClickRejectHandler = (e) => {
@@ -172,10 +180,10 @@ const CustomerPaymentDetails = (props) => {
   const onClickSendPaymentDetailsHandler = async (e) => {
     if (paymentMethod === "bank") {
       if (
-        isValid("bankBranchName", paidBranch) &&
-        isValid("paidAmount", paidAmount) &&
-        isValid("date", paidDate) &&
-        isValid("time", paidTime) &&
+        paidBranch !== "invalid" &&
+        paidAmount !== "invalid" &&
+        paidDate !== "invalid" &&
+        paidTime !== "invalid" &&
         paymentSlipPhoto
       ) {
         const formData = new FormData();
@@ -353,35 +361,16 @@ const CustomerPaymentDetails = (props) => {
             </div>
             <div>
               {paymentMethod === "bank" ? (
-                <FormInput
-                  value={paidBranch}
+                <BranchInput
+                  name="Paid Bank Branch"
                   onChange={onChangePaidBranch}
-                  placeholder="Example: POLGAHAWELA"
-                >
-                  Paid Bank Branch:
-                </FormInput>
+                />
               ) : null}
-              <FormInput
-                value={paidAmount}
-                onChange={onChangePaidAmount}
-                placeholder="Example: 10,000.00"
-              >
-                Paid Amount:
-              </FormInput>
-              <FormInput
-                value={paidDate}
-                onChange={onChangePaidDate}
-                placeholder="DD / MM / YYYY"
-              >
-                Paid Date:
-              </FormInput>
-              <FormInput
-                value={paidTime}
-                onChange={onChangePaidTime}
-                placeholder="HH:MM"
-              >
-                Paid Time:
-              </FormInput>
+
+              <AmountInput name="Paid Amount" onChange={onChangePaidAmount} />
+              <DateInput name="Paid Date" onChange={onChangePaidDate} />
+              <TimeInput name="Paid Time" onChange={onChangePaidTime} />
+
               <div className="customer-payment-details-screenshot__notice">
                 {screenshotNotice}
                 <div className="customer-payment-details-screenshot-upload__container">

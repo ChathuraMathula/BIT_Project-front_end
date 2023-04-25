@@ -29,14 +29,13 @@ const CustomerSendRequestModal = (props) => {
   const [packages, setPackages] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [packageName, setPackageName] = useState("");
-  const [event, setEvent] = useState("");
   const [extraServices, setExtraServices] = useState([]);
   const [selectedExtraServices, setSelectedExtraServices] = useState([]);
 
-  let beginTime;
-  let endTime;
-  let location;
-  let message;
+  const [beginTime, setBeginTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [location, setLocation] = useState("");
+  const [message, setMessage] = useState("");
 
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
@@ -92,22 +91,22 @@ const CustomerSendRequestModal = (props) => {
 
   const onChangeLocationHandler = (address) => {
     console.log(address);
-    location = address;
+    setLocation(address);
   };
 
   const onChangeMessageHandler = (customerMessage) => {
     console.log(customerMessage);
-    message = customerMessage;
+    setMessage(customerMessage);
   };
 
   const onChangeBeginTime = (time) => {
     console.log(time);
-    beginTime = time;
+    setBeginTime(time);
   };
 
   const onChangeEndTime = (time) => {
     console.log(time);
-    endTime = time;
+    setEndTime(time);
   };
 
   const onClickSendRequestHandler = async (e) => {
@@ -117,17 +116,17 @@ const CustomerSendRequestModal = (props) => {
     }
     try {
       if (
-        /^[a-zA-Z\ ]+$/.test(event) && // valid name string with spaces
-        isValid("message", messageString) &&
-        !isEmpty(event) &&
-        !isEmpty(location) &&
         !isEmpty(categoryName) &&
         !isEmpty(packageName) &&
+        !isEmpty(location) &&
         !isEmpty(beginTime) &&
         !isEmpty(endTime) &&
-        !isEmpty(location)
+        location !== "invalid" &&
+        beginTime !== "invalid" &&
+        endTime !== "invalid" &&
+        message !== "invalid"
       ) {
-        console.log("sent");
+        
         const data = {
           date: {
             year: sanitize(thisYear),
@@ -138,7 +137,6 @@ const CustomerSendRequestModal = (props) => {
             category: sanitize(categoryName),
             package: sanitize(packageName),
             event: {
-              type: sanitize(event),
               location: sanitize(location),
               beginTime: beginTime,
               endTime: endTime,
@@ -222,13 +220,7 @@ const CustomerSendRequestModal = (props) => {
       />
       <ModalCardContainer>
         <CardContainerTitle>About Your Event</CardContainerTitle>
-        <FormInput
-          value={event}
-          onChange={eventInputHandler}
-          placeholder="eg: Wedding / Birthday Party / Other"
-        >
-          Event
-        </FormInput>
+
         <TimeInput onChange={onChangeBeginTime} name="Event Begin Time" />
         <TimeInput onChange={onChangeEndTime} name="Event End Time" />
 

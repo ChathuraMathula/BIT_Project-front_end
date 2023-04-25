@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import Label from "./Label";
 import InputWarning from "../warnings/InputWarning";
@@ -10,6 +10,7 @@ import { isValid } from "../../../utils/Validator";
  *
  * @param name
  * @param onChange
+ * @param value
  * @returns
  */
 const CostInput = (props) => {
@@ -28,7 +29,11 @@ const CostInput = (props) => {
     }
   };
 
-  
+  useEffect(() => {
+    if (props.value) {
+      setCost(props.value);
+    }
+  }, []);
 
   return (
     <>

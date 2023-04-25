@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import Label from "./Label";
 import InputWarning from "../warnings/InputWarning";
@@ -9,6 +9,8 @@ import { isValid } from "../../../utils/Validator";
 /**
  *
  * @param name
+ * @param value
+ * @param onChange
  * @returns
  */
 const AddressInput = (props) => {
@@ -45,10 +47,19 @@ const AddressInput = (props) => {
         props.onChange("invalid");
       }
     } else {
-        setMessage("⚠ Please fill out all address fields properly");
-        props.onChange("invalid");
+      setMessage("⚠ Please fill out all address fields properly");
+      props.onChange("invalid");
     }
   };
+
+  useEffect(() => {
+    if (props.value) {
+      const addressArray = props.value.split(",");
+      setName(addressArray[0].trim());
+      setStreet(addressArray[1].trim());
+      setCity(addressArray[2].trim().replace(".", ""));
+    }
+  }, []);
 
   return (
     <>
@@ -74,7 +85,7 @@ const AddressInput = (props) => {
             style={{ width: "100%" }}
           />
         </FlexCenterColumnContainer>
-        <InputWarning message={message}/>
+        <InputWarning message={message} />
       </Label>
     </>
   );
