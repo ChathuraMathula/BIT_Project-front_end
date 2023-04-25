@@ -130,10 +130,6 @@ const ConfirmedReservation = (props) => {
             <DetailsContainer>
               <NameValueTitle>EVENT DETAILS</NameValueTitle>
               <NameValueString
-                name="Event Type:"
-                value={reservation.event.type}
-              />
-              <NameValueString
                 name="Event Location:"
                 value={reservation.event.location}
               />

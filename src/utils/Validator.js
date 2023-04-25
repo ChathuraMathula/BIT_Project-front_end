@@ -100,7 +100,7 @@ export const isValid = (type, value) => {
       break;
     case "message":
       // message string
-      pattern = /./i;
+      pattern = /^[a-z0-9\s\.\?]*$/i;
       break;
     case "bankBranchName":
       // branch name eg: POLGAHAWELA

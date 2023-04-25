@@ -10,6 +10,9 @@ import FormSelectOptions from "../../../UI/form/FormSelectOptions";
 import FormSubHeading from "../../../UI/form/FormSubHeading";
 import CustomerAddExtraServices from "../../customer/CustomerAddExtraServices";
 import "./UpdateReservation.css";
+import TimeInput from "../../../UI/inputs/TimeInput";
+import AddressInput from "../../../UI/inputs/AddressInput";
+import CostInput from "../../../UI/inputs/CostInput";
 
 /**
  *
@@ -89,30 +92,26 @@ const UpdateReservation = (props) => {
     }
   }, [categoryName]);
 
-  const onChangeEventTypeHandler = (e) => {
-    setEventType(sanitize(e.target.value));
+  const onChangeEventLocationHandler = (address) => {
+    setEventLocation(address);
   };
 
-  const onChangeEventLocationHandler = (e) => {
-    setEventLocation(sanitize(e.target.value));
+  const onChangeEventBeginTimeHandler = (time) => {
+    setEventBeginTime(time);
   };
 
-  const onChangeEventBeginTimeHandler = (e) => {
-    setEventBeginTime(sanitize(e.target.value));
+  const onChangeEventEndTimeHandler = (time) => {
+    setEventEndTime(time);
   };
 
-  const onChangeEventEndTimeHandler = (e) => {
-    setEventEndTime(sanitize(e.target.value));
+  const onChangeTransportCostHandler = (cost) => {
+    setTransportCost(cost);
   };
-
-  const onChangeTransportCostHandler = (e) => {
-    setTransportCost(sanitize(e.target.value));
+  const onChangeExtraServicesCostHandler = (cost) => {
+    setExtraServicesCost(cost);
   };
-  const onChangeExtraServicesCostHandler = (e) => {
-    setExtraServicesCost(sanitize(e.target.value));
-  };
-  const onChangeAdvancePaymentHandler = (e) => {
-    setAdvancePayment(sanitize(e.target.value));
+  const onChangeAdvancePaymentHandler = (payment) => {
+    setAdvancePayment(payment);
   };
 
   const onChangePackageCategoryHandler = (e) => {
@@ -125,14 +124,20 @@ const UpdateReservation = (props) => {
 
   const onClickUpdateHandler = async (e) => {
     if (
-      /^[a-zA-Z\ ]+$/.test(eventType) && // valid name string with spaces
-      isValid("address", eventLocation) &&
-      !isEmpty(eventType) &&
       !isEmpty(eventLocation) &&
       !isEmpty(categoryName) &&
       !isEmpty(packageName) &&
-      isValid("time", eventBeginTime) &&
-      isValid("time", eventEndTime)
+      !isEmpty(eventBeginTime) &&
+      !isEmpty(eventEndTime) &&
+      !isEmpty(transportCost) &&
+      !isEmpty(extraServicesCost) &&
+      !isEmpty(advancePayment) &&
+      eventBeginTime !== "invalid" &&
+      eventEndTime !== "invalid" &&
+      eventLocation !== "invalid" &&
+      transportCost !== "invalid" &&
+      extraServicesCost !== "invalid" &&
+      advancePayment !== "invalid" 
     ) {
       const selectedPackage = packages.filter((packageDoc) => {
         return packageDoc.name === packageName;
@@ -194,58 +199,40 @@ const UpdateReservation = (props) => {
     <>
       <ModalCardContainer>
         <FormSubHeading>EVENT DETAILS</FormSubHeading>
-        <FormInput
-          value={eventType}
-          onChange={onChangeEventTypeHandler}
-          type="text"
-        >
-          Event Type:
-        </FormInput>
-        <FormInput
+        <AddressInput
+          name="Event Location"
           value={eventLocation}
           onChange={onChangeEventLocationHandler}
-          type="text"
-        >
-          Event Location:
-        </FormInput>
-        <FormInput
-          value={eventBeginTime}
+        />
+        <TimeInput
+          name="Event Begin Time"
           onChange={onChangeEventBeginTimeHandler}
-          type="text"
-        >
-          Event Begin Time:
-        </FormInput>
-        <FormInput
-          value={eventEndTime}
+          value={eventBeginTime}
+        />
+        <TimeInput
+          name="Event End Time"
           onChange={onChangeEventEndTimeHandler}
-          type="text"
-        >
-          Event EndTime:
-        </FormInput>
+          value={eventEndTime}
+        />
       </ModalCardContainer>
       <ModalCardContainer>
         <FormSubHeading>COSTS DETAILS</FormSubHeading>
-        <FormInput
+
+        <CostInput
+          name="Transport Cost"
           value={transportCost}
           onChange={onChangeTransportCostHandler}
-          type="text"
-        >
-          Transport Cost:
-        </FormInput>
-        <FormInput
+        />
+        <CostInput
+          name="Extra Services Cost"
           value={extraServicesCost}
           onChange={onChangeExtraServicesCostHandler}
-          type="text"
-        >
-          Extra Services Cost:
-        </FormInput>
-        <FormInput
+        />
+        <CostInput
+          name="Advance Payment"
           value={advancePayment}
           onChange={onChangeAdvancePaymentHandler}
-          type="text"
-        >
-          Advance Payment:
-        </FormInput>
+        />
       </ModalCardContainer>
       <ModalCardContainer>
         <FormSubHeading>PACKAGE DETAILS</FormSubHeading>
@@ -257,7 +244,9 @@ const UpdateReservation = (props) => {
             return (
               <option
                 value={categoryDocument.name}
-                defaultValue={categoryDocument.name === categoryName ? true : false}
+                defaultValue={
+                  categoryDocument.name === categoryName ? true : false
+                }
                 // selected={
                 //   categoryDocument.name === categoryName ? "selected" : null
                 // }
@@ -273,7 +262,9 @@ const UpdateReservation = (props) => {
             return (
               <option
                 value={packageDocument.name}
-                defaultValue={packageDocument.name === packageName ? true : false}
+                defaultValue={
+                  packageDocument.name === packageName ? true : false
+                }
                 // selected={
                 //   packageDocument.name === packageName ? "selected" : null
                 // }
