@@ -18,6 +18,7 @@ const AddressInput = (props) => {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
+  const [invalid, setInvalid] = useState(false);
 
   const onChangeNameHandler = (event) => {
     const currentAddressName = sanitize(event.target.value);
@@ -42,12 +43,19 @@ const AddressInput = (props) => {
       if (isValid("address", address)) {
         props.onChange(address);
         setMessage("");
+        setInvalid(false);
       } else {
         setMessage("⚠ Please check again and enter a valid address");
+        setInvalid(true);
         props.onChange("invalid");
       }
+    } else if (!curName && !curStreet && !curCity) {
+      props.onChange("");
+      setMessage("");
+      setInvalid(false);
     } else {
       setMessage("⚠ Please fill out all address fields properly");
+      setInvalid(true);
       props.onChange("invalid");
     }
   };
@@ -58,8 +66,9 @@ const AddressInput = (props) => {
       setName(addressArray[0].trim());
       setStreet(addressArray[1].trim());
       setCity(addressArray[2].trim().replace(".", ""));
+      props.onChange(props.value);
     }
-  }, []);
+  }, [props.value]);
 
   return (
     <>
@@ -67,18 +76,21 @@ const AddressInput = (props) => {
         {props.name ? `${props.name}: ` : null}
         <FlexCenterColumnContainer>
           <Input
+            invalid={invalid}
             value={name}
             onChange={onChangeNameHandler}
             placeholder="Name / Number"
             style={{ width: "100%" }}
           />
           <Input
+            invalid={invalid}
             value={street}
             onChange={onChangeStreetHandler}
             placeholder="Street"
             style={{ width: "100%" }}
           />
           <Input
+            invalid={invalid}
             value={city}
             onChange={onChangeCityHandler}
             placeholder="City"

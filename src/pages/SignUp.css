@@ -34,7 +34,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
   }
 
   .sign-up-form-input__col-container {
@@ -42,10 +41,6 @@
     margin: 1rem;
   }
 
-  .sign-up-form-input__declaration {
-    width: 100%;
-    padding: 0.4rem 1rem;
-  }
 }
 
 /* For Tablets */
@@ -54,17 +49,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
   }
 
   .sign-up-form-input__col-container {
     width: 100%;
     margin: 1rem;
-  }
-
-  .sign-up-form-input__declaration {
-    width: 100%;
-    padding: 0.4rem 1rem;
   }
 }
 

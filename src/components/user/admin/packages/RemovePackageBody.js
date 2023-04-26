@@ -66,6 +66,7 @@ const RemovePackageBody = (props) => {
         <CardContainerTitle>Remove Package</CardContainerTitle>
         <NameValueString name="Category:" value={props.category} />
         <NameValueString name="Package:" value={props.package} />
+        <NameValueString name="Price:" value={`${props.price} LKR`} />
         <NameValueString
           name="Services:"
           value={

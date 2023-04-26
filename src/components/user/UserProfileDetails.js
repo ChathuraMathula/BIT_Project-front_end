@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { sanitize } from "../../utils/Sanitizer";
-import { isValid } from "../../utils/Validator";
+import { isEmpty } from "../../utils/Validator";
 import GreenButton from "../UI/buttons/GreenButton";
 import ButtonContainer from "../UI/containers/ButtonContainer";
 import CardContainer from "../UI/containers/CardContainer";
 import FlexCenterColumnContainer from "../UI/containers/FlexCenterColumnContainer";
-import FormActionButton from "../UI/form/FormActionButton";
-import FormContainer from "../UI/form/FormContainer";
 import FormInput from "../UI/form/FormInput";
-import FormSubHeading from "../UI/form/FormSubHeading";
 import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import "./UserProfileDetails.css";
+import EmailInput from "../UI/inputs/EmailInput";
+import PhoneInput from "../UI/inputs/PhoneInput";
+import AddressInput from "../UI/inputs/AddressInput";
 
 /**
  *
@@ -21,6 +20,9 @@ const UserProfileDetails = (props) => {
   const [email, setEmail] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [address, setAddress] = useState("");
+  const [initialEmail, setInitialEmail] = useState("");
+  const [initialPhoneNo, setInitialPhoneNo] = useState("");
+  const [initialAddress, setInitialAddress] = useState("");
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
 
@@ -41,9 +43,9 @@ const UserProfileDetails = (props) => {
         .then((res) => res.json())
         .then((userDocument) => {
           if (userDocument) {
-            setEmail(userDocument.email);
-            setPhoneNo(userDocument.phoneNo);
-            setAddress(userDocument.address);
+            setInitialEmail(userDocument.email);
+            setInitialPhoneNo(userDocument.phoneNo);
+            setInitialAddress(userDocument.address);
           }
         });
     }
@@ -67,31 +69,16 @@ const UserProfileDetails = (props) => {
     }, 5000);
   };
 
-  const emailInputHandler = (event) => {
-    setEmail(sanitize(event.target.value));
-    if (!isValid("email", event.target.value)) {
-      setEmailWarning("✉ Invalid Email.");
-    } else {
-      setEmailWarning("");
-    }
+  const emailInputHandler = (emailText) => {
+    setEmail(emailText);
   };
 
-  const phoneNoInputHandler = (event) => {
-    setPhoneNo(sanitize(event.target.value));
-    if (!isValid("phoneNo", event.target.value)) {
-      setPhoneNoWarning("✆ Invalid Phone Number.");
-    } else {
-      setPhoneNoWarning("");
-    }
+  const phoneNoInputHandler = (phoneNoText) => {
+    setPhoneNo(phoneNoText);
   };
 
-  const addressInputHandler = (event) => {
-    setAddress(sanitize(event.target.value));
-    if (!isValid("address", event.target.value)) {
-      setAddressWarning("🏘 Invalid Address.");
-    } else {
-      setAddressWarning("");
-    }
+  const addressInputHandler = (address) => {
+    setAddress(address);
   };
 
   const onClickSaveHandler = async (event) => {
@@ -99,9 +86,12 @@ const UserProfileDetails = (props) => {
 
     if (props.user) {
       if (
-        isValid("email", email) &&
-        isValid("phoneNo", phoneNo) &&
-        isValid("address", address)
+        email !== "invalid" &&
+        phoneNo !== "invalid" &&
+        address !== "invalid" &&
+        !isEmpty(email) &&
+        !isEmpty(phoneNo) &&
+        !isEmpty(address)
       ) {
         const formData = new FormData();
         formData.append("username", props.user.name);
@@ -128,11 +118,11 @@ const UserProfileDetails = (props) => {
           })
           .catch((error) => {
             if (error) {
-              displayError("Sorry...! 😟 Save failed.");
+              displayError("Sorry...! Save failed.");
             }
           });
       } else {
-        displayError("Input data is invalid. Please check again. 😡");
+        displayError("Input data is invalid. Please check again.");
       }
     }
   };
@@ -141,42 +131,21 @@ const UserProfileDetails = (props) => {
     <CardContainer>
       <CardContainerTitle>CONTACT DETAILS</CardContainerTitle>
       <FlexCenterColumnContainer>
-        <FormInput
-          className="user-profile-details__input"
-          type="text"
-          id="email"
-          name="email"
-          placeholder="example@gmail.com"
-          value={email}
+        <EmailInput
+          name="Email"
+          value={initialEmail}
           onChange={emailInputHandler}
-          warning={emailWarning}
-        >
-          Email:
-        </FormInput>
-        <FormInput
-          className="user-profile-details__input"
-          type="text"
-          id="phoneNo"
-          name="phoneNo"
-          placeholder="070-XXXXXXX"
-          value={phoneNo}
+        />
+        <PhoneInput
+          name="Phone No"
+          value={initialPhoneNo}
           onChange={phoneNoInputHandler}
-          warning={phoneNoWarning}
-        >
-          Phone No:
-        </FormInput>
-        <FormInput
-          className="user-profile-details__input"
-          type="text"
-          id="address"
-          name="address"
-          placeholder="No 35, Kurunegala Rd, Polgahawela"
-          value={address}
+        />
+        <AddressInput
+          name="Address"
+          value={initialAddress}
           onChange={addressInputHandler}
-          warning={addressWarning}
-        >
-          Address:
-        </FormInput>
+        />
       </FlexCenterColumnContainer>
       <div className={"warning-msg__container " + warningStyles}>
         {warningMessage}

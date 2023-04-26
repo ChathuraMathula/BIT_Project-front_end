@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { sanitize } from "../../../../utils/Sanitizer";
-import { isValid } from "../../../../utils/Validator";
+import { isEmpty, isValid } from "../../../../utils/Validator";
 import OrangeButton from "../../../UI/buttons/OrangeButton";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
@@ -9,6 +9,7 @@ import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import NameValueString from "../../../UI/other/NameValueString";
 import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import "./UpdatePackageBody.css";
+import CostInput from "../../../UI/inputs/CostInput";
 
 /**
  * @param category (string) name of the package category
@@ -21,7 +22,8 @@ import "./UpdatePackageBody.css";
  * @returns
  */
 const UpdatePackageBody = (props) => {
-  const [price, setPrice] = useState(props.price);
+  const [initialPrice, setInitialPrice] = useState(props.price);
+  const [price, setPrice] = useState("");
   const [services, setServices] = useState(props.services);
 
   const [warningMessage, setWarningMessage] = useState("");
@@ -39,9 +41,10 @@ const UpdatePackageBody = (props) => {
   const onUpdatePackageHandler = async (e) => {
     try {
       if (
+        price !== "invalid" &&
+        !isEmpty(price) &&
         isValid("packageCategoryName", sanitize(props.category.trim())) &&
         isValid("name", sanitize(props.package.trim())) &&
-        isValid("float", sanitize(price.trim())) &&
         isValid("packageServices", sanitize(services.trim()))
       ) {
         const packageDocument = {
@@ -78,8 +81,8 @@ const UpdatePackageBody = (props) => {
     }
   };
 
-  const onChangePriceHandler = (e) => {
-    setPrice(sanitize(e.target.value));
+  const onChangePriceHandler = (priceInputValue) => {
+    setPrice(priceInputValue);
   };
 
   const onChangeServicesHandler = (e) => {
@@ -93,13 +96,11 @@ const UpdatePackageBody = (props) => {
         <NameValueString name="Category:" value={props.category} />
         <NameValueString name="Package:" value={props.package} />
 
-        <FormInput
-          placeholder="eg: 120000 (LKR)"
+        <CostInput
+          name="Package Price"
+          value={initialPrice}
           onChange={onChangePriceHandler}
-          value={price}
-        >
-          Package Price:
-        </FormInput>
+        />
         <FormInputTextArea
           onChange={onChangeServicesHandler}
           placeholder="Please add comma separated list of services to be included in the package"

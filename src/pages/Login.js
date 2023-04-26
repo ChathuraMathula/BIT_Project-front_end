@@ -6,18 +6,13 @@ import ButtonContainer from "../components/UI/containers/ButtonContainer";
 import LoginCardContainer from "../components/UI/containers/LoginCardContainer";
 import NormalCardContainer from "../components/UI/containers/NormalCardContainer";
 import WarningContainer from "../components/UI/containers/WarningContainer";
-import FormActionButton from "../components/UI/form/FormActionButton";
-import FormContainer from "../components/UI/form/FormContainer";
-import FormHeading from "../components/UI/form/FormHeading";
-import FormInput from "../components/UI/form/FormInput";
 import PadlockSVG from "../components/UI/SVG/PadlockSVG";
 import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { postLogin } from "../utils/post";
-import { sanitize } from "../utils/Sanitizer";
 import { isValid } from "../utils/Validator";
 
 import "./Login.css";
+import UsernameInput from "../components/UI/inputs/UsernameInput";
+import PasswordInput from "../components/UI/inputs/PasswordInput";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -28,12 +23,12 @@ const Login = (props) => {
   const [warningStyles, setWarningStyles] = useState("");
   const [isSentEmail, setIsSentEmail] = useState(false);
 
-  const onChangeUsernameHandler = (event) => {
-    setUsername(sanitize(event.target.value));
+  const onChangeUsernameHandler = (usernameText) => {
+    setUsername(usernameText);
   };
 
-  const onChangePasswordHandler = (event) => {
-    setPassword(sanitize(event.target.value));
+  const onChangePasswordHandler = (passwordText) => {
+    setPassword(passwordText);
   };
 
   const displayWarning = (message) => {
@@ -50,12 +45,12 @@ const Login = (props) => {
     setPassword(password.trim());
 
     if (!username || !password) {
-      displayWarning("Please enter a valid username and password. 😏");
+      displayWarning("Please enter a valid username and password.");
     } else if (
       !isValid("username", username) ||
       !isValid("password", password)
     ) {
-      displayWarning("Username or password not valid. 🙁 Please check again.");
+      displayWarning("Username or password not valid. Please check again.");
     } else {
       const formData = new FormData();
       formData.append("username", username);
@@ -79,7 +74,7 @@ const Login = (props) => {
         })
         .catch((error) => {
           if (error) {
-            displayWarning("User login error... 😢 Please try again.");
+            displayWarning("User login error... Please try again.");
           }
         });
     }
@@ -100,43 +95,37 @@ const Login = (props) => {
           if (data.success) {
             setIsSentEmail(true);
           } else {
-            displayWarning("Sending reset link failed. Please try again later. 😐")
+            displayWarning(
+              "Sending reset link failed. Please try again later."
+            );
           }
         });
     } else {
-      displayWarning("Please add a valid username to generate a password reset link. 😐")
+      displayWarning(
+        "Please add a valid username to generate a password reset link."
+      );
     }
   };
 
-  const onClickOkHandler = e => {
+  const onClickOkHandler = (e) => {
     setIsSentEmail(false);
-  }
+  };
 
   return (
     <>
       {!isSentEmail ? (
         <LoginCardContainer>
           <CardContainerTitle>LOGIN</CardContainerTitle>
-          <FormInput
+          <UsernameInput
+            name="Username"
             onChange={onChangeUsernameHandler}
-            value={username}
-            name="username"
-            id="username"
-            type="text"
-            placeholder="janakaran12"
-          >
-            Username:
-          </FormInput>
-          <FormInput
+            placeholder="johndoe12"
+          />
+          <PasswordInput
+            name="Password"
             onChange={onChangePasswordHandler}
-            value={password}
-            name="password"
-            id="password"
-            type="password"
-            placeholder="your password"
-          >
-            Password:
-          </FormInput>
+            placeholder="Your password"
+          />
           <div
             onClick={onClickForgotPasswordHandler}
             className="forgot-password-button__container"
@@ -157,7 +146,7 @@ const Login = (props) => {
             <CardContainerTitle>NOTICE..!</CardContainerTitle>
             <WarningContainer>
               Password reset link is sent to your email. Please check your
-              inbox. 😊
+              inbox.
             </WarningContainer>
             <ButtonContainer>
               <GreenButton onClick={onClickOkHandler}>Ok</GreenButton>

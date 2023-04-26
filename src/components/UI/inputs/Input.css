@@ -19,3 +19,14 @@ input.input-tag::placeholder {
   color: hsl(220, 61%, 60%);
   font-size: 1rem;
 }
+
+input.input-tag-invalid:focus-visible, input.input-tag-invalid  {
+  color: hsl(0, 100%, 50%);
+  outline: 1px solid hsl(0, 100%, 50%);
+  border: 1px solid hsl(0, 63%, 25%);
+  background-color: hsl(0, 100%, 14%);
+}
+
+input.input-tag-invalid::placeholder  {
+  color: hsl(0, 100%, 60%);
+}

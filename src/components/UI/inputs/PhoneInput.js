@@ -13,29 +13,31 @@ import { isValid } from "../../../utils/Validator";
  * @param value
  * @returns
  */
-const CostInput = (props) => {
-  const [cost, setCost] = useState("");
+const PhoneInput = (props) => {
+  const [phoneNo, setPhoneNo] = useState("");
   const [message, setMessage] = useState("");
   const [invalid, setInvalid] = useState(false);
 
-  const onChangeCostHandler = (event) => {
-    const currentCost = sanitize(event.target.value);
-    setCost(currentCost);
-    if (isValid("integer", currentCost) || !currentCost) {
-      setMessage("");
-      setInvalid(false)
-      props.onChange(currentCost);
-    } else {
-      setMessage("⚠ Please enter a valid cost. (eg: 12000)");
-      setInvalid(true)
-      props.onChange("invalid");
+  const onChangePhoneNoHandler = (event) => {
+    if (event.target.value.length <= 10) {
+      const currentPhoneNo = sanitize(event.target.value);
+      setPhoneNo(currentPhoneNo);
+      if (isValid("phoneNo", currentPhoneNo) || !currentPhoneNo) {
+        setMessage("");
+        setInvalid(false);
+        props.onChange(currentPhoneNo);
+      } else {
+        setMessage("⚠ Please enter a valid phone number");
+        setInvalid(true);
+        props.onChange("invalid");
+      }
     }
   };
 
   useEffect(() => {
     if (props.value) {
-      setCost(props.value);
-      props.onChange(props.value)
+      setPhoneNo(props.value);
+      props.onChange(props.value);
     }
   }, [props.value]);
 
@@ -46,9 +48,9 @@ const CostInput = (props) => {
         <FlexCenterColumnContainer>
           <Input
             invalid={invalid}
-            value={cost}
-            onChange={onChangeCostHandler}
-            placeholder="LKR"
+            value={phoneNo}
+            onChange={onChangePhoneNoHandler}
+            placeholder="0701234567"
             style={{ width: "100%" }}
           />
         </FlexCenterColumnContainer>
@@ -58,4 +60,4 @@ const CostInput = (props) => {
   );
 };
 
-export default CostInput;
+export default PhoneInput;

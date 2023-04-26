@@ -11,33 +11,33 @@ import { isValid } from "../../../utils/Validator";
  * @param name
  * @param onChange
  * @param value
+ * @param placeholder
  * @returns
  */
-const CostInput = (props) => {
-  const [cost, setCost] = useState("");
+const UsernameInput = (props) => {
+  const [username, setUsername] = useState("");
   const [message, setMessage] = useState("");
   const [invalid, setInvalid] = useState(false);
 
-  const onChangeCostHandler = (event) => {
-    const currentCost = sanitize(event.target.value);
-    setCost(currentCost);
-    if (isValid("integer", currentCost) || !currentCost) {
+  const onChangeUsernameHandler = (event) => {
+    const currentUsername = sanitize(event.target.value);
+    setUsername(currentUsername);
+    if (isValid("username", currentUsername) || !currentUsername) {
       setMessage("");
-      setInvalid(false)
-      props.onChange(currentCost);
+      setInvalid(false);
+      props.onChange(currentUsername);
     } else {
-      setMessage("⚠ Please enter a valid cost. (eg: 12000)");
-      setInvalid(true)
+      setMessage("⚠ Please enter a valid username");
+      setInvalid(true);
       props.onChange("invalid");
     }
   };
 
   useEffect(() => {
     if (props.value) {
-      setCost(props.value);
-      props.onChange(props.value)
+      setUsername(props.value);
     }
-  }, [props.value]);
+  }, []);
 
   return (
     <>
@@ -46,9 +46,9 @@ const CostInput = (props) => {
         <FlexCenterColumnContainer>
           <Input
             invalid={invalid}
-            value={cost}
-            onChange={onChangeCostHandler}
-            placeholder="LKR"
+            value={username}
+            onChange={onChangeUsernameHandler}
+            placeholder={props.placeholder}
             style={{ width: "100%" }}
           />
         </FlexCenterColumnContainer>
@@ -58,4 +58,4 @@ const CostInput = (props) => {
   );
 };
 
-export default CostInput;
+export default UsernameInput;

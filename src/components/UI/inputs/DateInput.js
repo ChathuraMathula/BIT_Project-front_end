@@ -16,6 +16,7 @@ const DateInput = (props) => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [message, setMessage] = useState(null);
+  const [invalid, setInvalid] = useState(false);
 
   const onChangeDayHandler = (event) => {
     if (event.target.value.length <= 2) {
@@ -27,27 +28,29 @@ const DateInput = (props) => {
 
   const onChangeMonthHandler = (event) => {
     if (event.target.value.length <= 2) {
-        const currentMonth = sanitize(event.target.value);
-        setMonth(currentMonth);
-        onChangeDateHandler(day, currentMonth, year);
-      }
+      const currentMonth = sanitize(event.target.value);
+      setMonth(currentMonth);
+      onChangeDateHandler(day, currentMonth, year);
+    }
   };
 
   const onChangeYearHandler = (event) => {
     if (event.target.value.length <= 4) {
-        const currentYear = sanitize(event.target.value);
-        setYear(currentYear);
-        onChangeDateHandler(day, month, currentYear);
-      }
+      const currentYear = sanitize(event.target.value);
+      setYear(currentYear);
+      onChangeDateHandler(day, month, currentYear);
+    }
   };
 
   const onChangeDateHandler = (curDay, curMonth, curYear) => {
     const date = `${curDay}/${curMonth}/${curYear}`;
-    if (isValid("date", date)) {
+    if (isValid("date", date) || !date) {
       setMessage("");
+      setInvalid(false);
       props.onChange(date);
     } else {
       setMessage("⚠ Please enter a valid Date");
+      setInvalid(true);
       props.onChange("invalid");
     }
   };
@@ -57,6 +60,7 @@ const DateInput = (props) => {
       <Label>
         {props.name ? `${props.name}: ` : null}
         <Input
+          invalid={invalid}
           value={day}
           onChange={onChangeDayHandler}
           style={{ width: "2.5rem" }}
@@ -64,6 +68,7 @@ const DateInput = (props) => {
         />
         {" / "}
         <Input
+          invalid={invalid}
           value={month}
           onChange={onChangeMonthHandler}
           style={{ width: "2.5rem" }}
@@ -71,6 +76,7 @@ const DateInput = (props) => {
         />
         {" / "}
         <Input
+          invalid={invalid}
           value={year}
           onChange={onChangeYearHandler}
           style={{ width: "3.5rem" }}
