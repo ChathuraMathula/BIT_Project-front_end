@@ -13,29 +13,29 @@ import { isValid } from "../../../utils/Validator";
  * @param value
  * @returns
  */
-const CostInput = (props) => {
-  const [cost, setCost] = useState("");
+const EmailInput = (props) => {
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [invalid, setInvalid] = useState(false);
 
-  const onChangeCostHandler = (event) => {
-    const currentCost = sanitize(event.target.value);
-    setCost(currentCost);
-    if (isValid("integer", currentCost) || !currentCost) {
+  const onChangeEmailHandler = (event) => {
+    const currentEmail = sanitize(event.target.value);
+    setEmail(currentEmail);
+    if (isValid("email", currentEmail) || !currentEmail) {
       setMessage("");
-      setInvalid(false)
-      props.onChange(currentCost);
+      setInvalid(false);
+      props.onChange(currentEmail);
     } else {
-      setMessage("⚠ Please enter a valid cost. (eg: 12000)");
-      setInvalid(true)
+      setMessage("⚠ Please enter a valid email");
+      setInvalid(true);
       props.onChange("invalid");
     }
   };
 
   useEffect(() => {
     if (props.value) {
-      setCost(props.value);
-      props.onChange(props.value)
+      setEmail(props.value);
+      props.onChange(props.value);
     }
   }, [props.value]);
 
@@ -46,9 +46,9 @@ const CostInput = (props) => {
         <FlexCenterColumnContainer>
           <Input
             invalid={invalid}
-            value={cost}
-            onChange={onChangeCostHandler}
-            placeholder="LKR"
+            value={email}
+            onChange={onChangeEmailHandler}
+            placeholder="example@gmail.com"
             style={{ width: "100%" }}
           />
         </FlexCenterColumnContainer>
@@ -58,4 +58,4 @@ const CostInput = (props) => {
   );
 };
 
-export default CostInput;
+export default EmailInput;

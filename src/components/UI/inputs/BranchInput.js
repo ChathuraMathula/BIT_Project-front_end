@@ -15,17 +15,20 @@ import FlexCenterColumnContainer from "../containers/FlexCenterColumnContainer";
 const BranchInput = (props) => {
   const [bankBranch, setBankBranch] = useState("");
   const [message, setMessage] = useState(null);
+  const [invalid, setInvalid] = useState(false);
 
   const onChangeBankBranchHandler = (event) => {
     const curBranch = sanitize(event.target.value);
     setBankBranch(curBranch);
 
     const branch = `${curBranch}`;
-    if (isValid("bankBranchName", branch)) {
+    if (isValid("bankBranchName", branch) || !branch) {
       setMessage("");
+      setInvalid(false);
       props.onChange(branch);
     } else {
       setMessage("⚠ Please enter a valid bank branch name. (Eg: POLGAHAWELA)");
+      setInvalid(true);
       props.onChange("invalid");
     }
   };
@@ -36,6 +39,7 @@ const BranchInput = (props) => {
         {props.name ? `${props.name}: ` : null}
         <FlexCenterColumnContainer>
           <Input
+            invalid={invalid}
             value={bankBranch}
             onChange={onChangeBankBranchHandler}
             style={{ width: "100%" }}

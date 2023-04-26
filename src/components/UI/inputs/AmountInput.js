@@ -15,31 +15,31 @@ const AmountInput = (props) => {
   const [rupees, setRupees] = useState("");
   const [cents, setCents] = useState("");
   const [message, setMessage] = useState(null);
+  const [invalid, setInvalid] = useState(false);
 
   const onChangeRupeesHandler = (event) => {
-    
-      const currentRupees = sanitize(event.target.value);
-      setRupees(currentRupees);
-      onChangeAmountHandler(currentRupees, cents);
-    
+    const currentRupees = sanitize(event.target.value);
+    setRupees(currentRupees);
+    onChangeAmountHandler(currentRupees, cents);
   };
 
   const onChangeCentsHandler = (event) => {
     if (event.target.value.length <= 2) {
-        const currentCents = sanitize(event.target.value);
-        setCents(currentCents);
-        onChangeAmountHandler(rupees, currentCents);
-      }
+      const currentCents = sanitize(event.target.value);
+      setCents(currentCents);
+      onChangeAmountHandler(rupees, currentCents);
+    }
   };
-
 
   const onChangeAmountHandler = (curRupees, curCents) => {
     const paidAmount = `${curRupees}.${curCents}`;
-    if (isValid("paidAmount", paidAmount)) {
+    if (isValid("paidAmount", paidAmount) || !paidAmount) {
       setMessage("");
+      setInvalid(false);
       props.onChange(paidAmount);
     } else {
       setMessage("⚠ Please enter a valid Date");
+      setInvalid(true);
       props.onChange("invalid");
     }
   };
@@ -49,6 +49,7 @@ const AmountInput = (props) => {
       <Label>
         {props.name ? `${props.name}: ` : null}
         <Input
+          invalid={invalid}
           value={rupees}
           onChange={onChangeRupeesHandler}
           style={{ width: "5rem" }}
@@ -56,6 +57,7 @@ const AmountInput = (props) => {
         />
         {" . "}
         <Input
+          invalid={invalid}
           value={cents}
           onChange={onChangeCentsHandler}
           style={{ width: "2.5rem" }}

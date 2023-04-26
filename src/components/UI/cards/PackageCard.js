@@ -24,6 +24,7 @@ const PackageCard = (props) => {
   const [deletePackage, setDeletePackage] = useState(false);
 
   const onClickUpdatePackageHandler = (e) => {
+    setDeletePackage(false);
     setShowModal(true);
   };
 
@@ -82,6 +83,7 @@ const PackageCard = (props) => {
           <RemovePackageBody
             category={props.category}
             package={props.packageDocument.name}
+            price={props.packageDocument.price}
             services={props.packageDocument.services}
             onSuccess={onSuccessHandler}
           />

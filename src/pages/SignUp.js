@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import "./SignUp.css";
-import FormHeading from "../components/UI/form/FormHeading";
-import FormSubHeading from "../components/UI/form/FormSubHeading";
-import FormContainer from "../components/UI/form/FormContainer";
 import FormUploadProfilePhoto from "../components/UI/form/FormUploadProfilePhoto";
-import FormInput from "../components/UI/form/FormInput";
-import FormActionButton from "../components/UI/form/FormActionButton";
 import FormInputCheckBox from "../components/UI/form/FormInputCheckBox";
-import { sanitize } from "../utils/Sanitizer";
-import { isValid } from "../utils/Validator";
+import { isEmpty } from "../utils/Validator";
 import { useNavigate } from "react-router-dom";
 import CardContainer from "../components/UI/containers/CardContainer";
 import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
 import ButtonContainer from "../components/UI/containers/ButtonContainer";
 import GreenButton from "../components/UI/buttons/GreenButton";
+import NameInput from "../components/UI/inputs/NameInput";
+import PhoneInput from "../components/UI/inputs/PhoneInput";
+import AddressInput from "../components/UI/inputs/AddressInput";
+import UsernameInput from "../components/UI/inputs/UsernameInput";
+import PasswordInput from "../components/UI/inputs/PasswordInput";
+import EmailInput from "../components/UI/inputs/EmailInput";
 
 const SignUp = (props) => {
   const navigate = useNavigate();
@@ -31,14 +31,6 @@ const SignUp = (props) => {
 
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
-  const [firstnameWarning, setFirstnameWarning] = useState("");
-  const [lastnameWarning, setLastnameWarning] = useState("");
-  const [usernameWarning, setUsernameWarning] = useState("");
-  const [passwordWarning, setPasswordWarning] = useState("");
-  const [confirmedPasswordWarning, setConfirmedPasswordWarning] = useState("");
-  const [phoneNoWarning, setPhoneNoWarning] = useState("");
-  const [emailWarning, setEmailWarning] = useState("");
-  const [addressWarning, setAddressWarning] = useState("");
 
   const displayError = (message) => {
     setWarningStyles("warning-msg-styles__red");
@@ -58,76 +50,44 @@ const SignUp = (props) => {
     }, 5000);
   };
 
-  const firstnameInputHandler = (event) => {
-    setFirstname(sanitize(event.target.value));
-    if (!isValid("name", event.target.value)) {
-      setFirstnameWarning("😡 Invalid First Name.");
-    } else {
-      setFirstnameWarning("");
-    }
+  const firstnameInputHandler = (name) => {
+    console.log("FirstName: ", name);
+    setFirstname(name);
   };
 
-  const lastnameInputHandler = (event) => {
-    setLastname(sanitize(event.target.value));
-    if (!isValid("name", event.target.value)) {
-      setLastnameWarning("😡 Invalid Last Name.");
-    } else {
-      setLastnameWarning("");
-    }
+  const lastnameInputHandler = (name) => {
+    console.log("LastName: ", name);
+    setLastname(name);
   };
 
-  const usernameInputHandler = (event) => {
-    setUsername(sanitize(event.target.value));
-    if (!isValid("username", event.target.value)) {
-      setUsernameWarning("😡 Invalid Username.");
-    } else {
-      setUsernameWarning("");
-    }
+  const usernameInputHandler = (usernameText) => {
+    console.log("Username: ", usernameText);
+    setUsername(usernameText);
   };
 
-  const passwordInputHandler = (event) => {
-    setPassword(sanitize(event.target.value));
-    if (!isValid("password", event.target.value)) {
-      setPasswordWarning("😡 Invalid Password.");
-    } else {
-      setPasswordWarning("");
-    }
+  const passwordInputHandler = (passwordText) => {
+    console.log("Password: ", passwordText);
+    setPassword(passwordText);
   };
 
-  const confirmedPasswordInputHandler = (event) => {
-    setConfirmedPassword(sanitize(event.target.value));
-    if (!isValid("password", event.target.value)) {
-      setConfirmedPasswordWarning("😡 Invalid Password.");
-    } else {
-      setConfirmedPasswordWarning("");
-    }
+  const confirmedPasswordInputHandler = (passwordText) => {
+    console.log("Confirmed Password: ", passwordText);
+    setConfirmedPassword(passwordText);
   };
 
-  const emailInputHandler = (event) => {
-    setEmail(sanitize(event.target.value));
-    if (!isValid("email", event.target.value)) {
-      setEmailWarning("😡 Invalid Email.");
-    } else {
-      setEmailWarning("");
-    }
+  const emailInputHandler = (emailText) => {
+    setEmail(emailText);
+    console.log("email: ", emailText);
   };
 
-  const phoneNoInputHandler = (event) => {
-    setPhoneNo(sanitize(event.target.value));
-    if (!isValid("phoneNo", event.target.value)) {
-      setPhoneNoWarning("😡 Invalid Phone Number.");
-    } else {
-      setPhoneNoWarning("");
-    }
+  const phoneNoInputHandler = (phone) => {
+    console.log("Phone No: ", phone);
+    setPhoneNo(phone);
   };
 
-  const addressInputHandler = (event) => {
-    setAddress(sanitize(event.target.value));
-    if (!isValid("address", event.target.value)) {
-      setAddressWarning("😡 Invalid Address.");
-    } else {
-      setAddressWarning("");
-    }
+  const addressInputHandler = (address) => {
+    console.log("Address: ", address);
+    setAddress(address);
   };
 
   const onChangeImageHandler = (file) => {
@@ -143,62 +103,75 @@ const SignUp = (props) => {
   const onClickRegisterHandler = async () => {
     try {
       if (
-        isValid("firstname", firstname) &&
-        isValid("lastname", lastname) &&
-        isValid("username", username) &&
-        isValid("password", password) &&
-        isValid("email", email) &&
-        isValid("phoneNo", phoneNo) &&
-        isValid("address", address) &&
-        isValid("confirmedPassword", confirmedPassword)
+        !isEmpty(firstname) &&
+        !isEmpty(lastname) &&
+        !isEmpty(username) &&
+        !isEmpty(password) &&
+        !isEmpty(email) &&
+        !isEmpty(phoneNo) &&
+        !isEmpty(address) &&
+        !isEmpty(confirmedPassword)
       ) {
-        if (!checked) {
-          displayError("Please confirm the declaration. 😒");
-          return;
-        } else if (password === confirmedPassword) {
-          const formData = new FormData();
-          formData.append("username", username.trim());
-          formData.append("firstname", firstname.trim());
-          formData.append("lastname", lastname.trim());
-          formData.append("password", password.trim());
-          formData.append("email", email.trim());
-          formData.append("phoneNo", phoneNo.trim());
-          formData.append("address", address.trim());
+        if (
+          firstname !== "invalid" &&
+          lastname !== "invalid" &&
+          username !== "invalid" &&
+          password !== "invalid" &&
+          email !== "invalid" &&
+          phoneNo !== "invalid" &&
+          address !== "invalid" &&
+          confirmedPassword !== "invalid"
+        ) {
+          if (!checked) {
+            displayError("Please confirm the declaration.");
+            return;
+          } else if (password === confirmedPassword) {
+            const formData = new FormData();
+            formData.append("username", username.trim());
+            formData.append("firstname", firstname.trim());
+            formData.append("lastname", lastname.trim());
+            formData.append("password", password.trim());
+            formData.append("email", email.trim());
+            formData.append("phoneNo", phoneNo.trim());
+            formData.append("address", address.trim());
 
-          if (image) {
-            if (image.size < 200000000) {
-              formData.append("image", image);
-            } else {
-              displayError("Image size should be less than 2MB. 😒");
-              return;
-            }
-          }
-
-          await fetch("http://localhost:3001/signup", {
-            method: "POST",
-            credentials: "include",
-            body: formData,
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data) {
-                if (data.success) {
-                  displaySuccess(
-                    data.success + " Redirecting to login page... 👉🏻"
-                  );
-                  setTimeout(() => {
-                    navigate("/login", { replace: true });
-                  }, 7000);
-                } else if (data.error) {
-                  displayError(data.error);
-                }
+            if (image) {
+              if (image.size < 200000000) {
+                formData.append("image", image);
+              } else {
+                displayError("Image size should be less than 2MB.");
+                return;
               }
-            });
+            }
+
+            await fetch("http://localhost:3001/signup", {
+              method: "POST",
+              credentials: "include",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data) {
+                  if (data.success) {
+                    displaySuccess(
+                      data.success + " Redirecting to login page... 👉🏻"
+                    );
+                    setTimeout(() => {
+                      navigate("/login", { replace: true });
+                    }, 7000);
+                  } else if (data.error) {
+                    displayError(data.error);
+                  }
+                }
+              });
+          } else {
+            displayError("Both passwords must be same.");
+          }
         } else {
-          displayError("Both passwords don't match. 😡");
+          displayError("Input data is invalid. Please check again.");
         }
       } else {
-        displayError("Input data is invalid. Please check again. 😡");
+        displayError("Please fill out all fields properly.");
       }
     } catch (error) {}
   };
@@ -210,121 +183,55 @@ const SignUp = (props) => {
         <FormUploadProfilePhoto onChange={onChangeImageHandler} />
         <div className="sign-up-form-input__container">
           <div className="sign-up-form-input__col-container">
-            <FormInput
-              value={firstname}
+            <NameInput
+              name="First Name"
               onChange={firstnameInputHandler}
-              type="text"
-              id="firstname"
-              name="firstname"
-              placeholder="Janaka"
-              warning={firstnameWarning}
-            >
-              First Name:
-            </FormInput>
-
-            <FormInput
-              value={lastname}
+              placeholder="John"
+            />
+            <NameInput
+              name="Last Name"
               onChange={lastnameInputHandler}
-              type="text"
-              id="lastname"
-              name="lastname"
-              placeholder="Ranasinghe"
-              warning={lastnameWarning}
-            >
-              Last Name:
-            </FormInput>
-
-            <FormInput
-              value={phoneNo}
-              onChange={phoneNoInputHandler}
-              type="text"
-              id="phoneNo"
-              name="phoneNo"
-              placeholder="070-XXXXXXX"
-              warning={phoneNoWarning}
-            >
-              Phone No:
-            </FormInput>
-
-            <FormInput
-              value={address}
-              onChange={addressInputHandler}
-              type="text"
-              id="address"
-              name="address"
-              placeholder="No 35, Kurunegala Rd, Polgahawela"
-              warning={addressWarning}
-            >
-              Address:
-            </FormInput>
+              placeholder="Doe"
+            />
+            <PhoneInput name="Phone No" onChange={phoneNoInputHandler} />
+            <AddressInput name="Address" onChange={addressInputHandler} />
           </div>
 
           <div className="sign-up-form-input__col-container">
-            <FormInput
-              value={username}
+            <UsernameInput
+              name="Username"
+              placeholder="johndoe12"
               onChange={usernameInputHandler}
-              type="text"
-              id="username"
-              name="username"
-              placeholder="janakaran12"
-              warning={usernameWarning}
-            >
-              Username:
-            </FormInput>
-
-            <FormInput
-              value={password}
+            />
+            <PasswordInput
+              name="Password"
+              placeholder="Your Password"
               onChange={passwordInputHandler}
-              type="password"
-              id="password"
-              name="password"
-              placeholder="your password"
-              warning={passwordWarning}
-            >
-              Password:
-            </FormInput>
-
-            <FormInput
-              value={confirmedPassword}
+            />
+            <PasswordInput
+              name="Confirm Password"
+              placeholder="Your Password"
               onChange={confirmedPasswordInputHandler}
-              type="password"
-              id="confirmedPassword"
-              name="confirmedPassword"
-              placeholder="your password"
-              warning={confirmedPasswordWarning}
-            >
-              Confirm Password:
-            </FormInput>
+            />
+            <EmailInput name="Email" onChange={emailInputHandler} />
 
-            <FormInput
-              value={email}
-              onChange={emailInputHandler}
-              type="text"
-              id="email"
-              name="email"
-              placeholder="example@gmail.com"
-              warning={emailWarning}
-            >
-              Email:
-            </FormInput>
+            <div className="sign-up-form-input__declaration">
+              <FormInputCheckBox
+                onClick={onClickCheckedHandler}
+                accentColor="green"
+              >
+                Confirm
+              </FormInputCheckBox>
+              <div>
+                I hereby declare that the information given above is true and
+                accurate to the best of my knowledge.
+              </div>
+            </div>
           </div>
         </div>
 
         <div className={"warning-msg__container " + warningStyles}>
           {warningMessage}
-        </div>
-
-        <div className="sign-up-form-input__declaration">
-          <FormInputCheckBox
-            onClick={onClickCheckedHandler}
-            accentColor="green"
-          >
-            Confirm
-          </FormInputCheckBox>
-          <div>
-            I hereby declare that the information given above is true and
-            accurate to the best of my knowledge.
-          </div>
         </div>
 
         <ButtonContainer>
