@@ -1,17 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import NavigationButton from "../../UI/buttons/NavigationButton";
-import NavDropdownBtn from "../../UI/NavDropdownBtn";
-import UserNavigation from "../../UI/navigation/UserNavigation";
+import React from "react";
 import "./GeneralNav.css";
+import FlexCenterRowContainer from "../../UI/containers/FlexCenterRowContainer";
+import { useNavigate } from "react-router-dom";
 
 // This component renders the header navigation links that are general to all users
 
 const GeneralNav = (props) => {
+  const navigate = useNavigate();
+
+  const onClickNavigateToSignUpHandler = (event) => {
+    navigate("/sign-up", { replace: true });
+  };
+  const onClickNavigateToLoginHandler = (event) => {
+    navigate("/login", { replace: true });
+  };
+
   return (
     <>
-      <UserNavigation>
-      </UserNavigation>
+      <FlexCenterRowContainer>
+        <div
+          onClick={onClickNavigateToSignUpHandler}
+          className="header-sign-up__button"
+        >
+          Sign Up
+        </div>
+        <div
+          onClick={onClickNavigateToLoginHandler}
+          className="header-login__button"
+        >
+          Login
+        </div>
+      </FlexCenterRowContainer>
     </>
   );
 };

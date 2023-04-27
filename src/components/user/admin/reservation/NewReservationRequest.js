@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { sanitize } from "../../../../utils/Sanitizer";
 import GreenButton from "../../../UI/buttons/GreenButton";
 import RedButton from "../../../UI/buttons/RedButton";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
-import WarningCard from "../../../UI/cards/WarningCard";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import DetailsContainer from "../../../UI/containers/DetailsContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
-import FormInput from "../../../UI/form/FormInput";
-import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import NameValueString from "../../../UI/other/NameValueString";
 import NameValueTitle from "../../../UI/other/NameValueTitle";
 import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import CostInput from "../../../UI/inputs/CostInput";
-import "./NewReservationRequest.css";
 import MessageInput from "../../../UI/inputs/MessageInput";
-import { isEmpty, isValid } from "../../../../utils/Validator";
+import ReservationRejection from "./ReservationRejection";
+import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
+import "./NewReservationRequest.css";
 
 /**
  *
@@ -28,8 +26,7 @@ const NewReservationRequest = (props) => {
   const [customer, setCustomer] = useState({});
   const [packageDocument, setPackageDocument] = useState({ services: [] });
 
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
+  const [warningMessage, setWarningMessage] = useWarningMessage();
 
   const [rejected, setRejected] = useState(false);
   const [transportCost, setTransportCost] = useState("");
@@ -74,14 +71,6 @@ const NewReservationRequest = (props) => {
       });
   }, []);
 
-  const displayWarning = (message) => {
-    setWarningStyles("warning-msg-styles__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
 
   const onChangeTransportCostHandler = (cost) => {
     console.log(cost);
@@ -106,40 +95,8 @@ const NewReservationRequest = (props) => {
     setRejected(true);
   };
 
-  const onClickNoHandler = (e) => {
-    setRejected(false);
-  };
-
-  const onClickYesHandler = (e) => {
-    fetch("http://localhost:3001/remove/reservation", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({
-        date: {
-          year: thisYear,
-          month: thisMonth,
-          day: thisDay,
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          if (!data.success) {
-            displayWarning("Removing reservation failed. 😐");
-          } else if (data.success) {
-            props.onSuccess(true);
-          }
-        }
-      });
-  };
 
   const onClickSendPaymentDetailsHandler = async (e) => {
-    
     if (advancePayment && transportCost && extraServicesCost) {
       if (
         advancePayment !== "invalid" &&
@@ -178,17 +135,29 @@ const NewReservationRequest = (props) => {
             console.log(data);
             if (data) {
               if (!data.success) {
-                displayWarning("Sending payment details failed. 😐");
+                setWarningMessage("Sending payment details failed.")
               } else if (data.success) {
                 props.onSuccess(true);
               }
             }
           });
       } else {
-        displayWarning("Please add valid data to proceed. 😒");
+        setWarningMessage("Please add valid data to proceed.")
       }
     } else {
-      displayWarning("Cost data cannot be empty. 😒");
+      setWarningMessage("Cost data cannot be empty.")
+    }
+  };
+
+  const onSuccessRejectionHandler = (successRejection) => {
+    if (successRejection) {
+      props.onSuccess(true);
+    }
+  }
+
+  const onCancelRejectHandler = (cancelRejection) => {
+    if (cancelRejection) {
+      setRejected(false);
     }
   };
 
@@ -295,9 +264,7 @@ const NewReservationRequest = (props) => {
             </div>
           </ModalCardContainer>
 
-          <div className={"warning-msg__container " + warningStyles}>
-            {warningMessage}
-          </div>
+          <WarningMessageBox message={warningMessage}/>
           <ButtonContainer>
             <RedButton onClick={onClickRejectReservationHandler}>
               Reject
@@ -310,17 +277,14 @@ const NewReservationRequest = (props) => {
       ) : null}
       {rejected ? (
         <>
-          <WarningCard
-            warning={`Please make sure that you cannot recover once you reject a
-            reservation. Do you really want to reject? 🙄`}
+          <ReservationRejection
+            thisYear={thisYear}
+            thisMonth={thisMonth}
+            thisDay={thisDay}
+            onSuccess={onSuccessRejectionHandler}
+            onCancel={onCancelRejectHandler}
+            customer={customer.username}
           />
-          <div className={"warning-msg__container " + warningStyles}>
-            {warningMessage}
-          </div>
-          <ButtonContainer>
-            <RedButton onClick={onClickYesHandler}>Yes</RedButton>
-            <GreenButton onClick={onClickNoHandler}>No</GreenButton>
-          </ButtonContainer>
         </>
       ) : null}
     </>

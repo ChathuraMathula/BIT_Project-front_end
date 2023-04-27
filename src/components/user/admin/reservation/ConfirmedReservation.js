@@ -12,6 +12,8 @@ import NameValueString from "../../../UI/other/NameValueString";
 import NameValueTitle from "../../../UI/other/NameValueTitle";
 import "./ConfirmedReservation.css";
 import UpdateReservation from "./UpdateReservation";
+import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
 
 /**
  *
@@ -27,8 +29,7 @@ const ConfirmedReservation = (props) => {
   const [packageDocument, setPackageDocument] = useState({ services: [] });
   const [deleteReservation, setDeleteReservation] = useState(false);
 
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
+  const [warningMessage, setWarningMessage] = useWarningMessage();
 
   const [update, setUpdate] = useState(false);
 
@@ -37,15 +38,6 @@ const ConfirmedReservation = (props) => {
   const thisDay = props.date.getDate();
   const thisMonth = props.date.getMonth();
   const thisYear = props.date.getFullYear();
-
-  const displayWarning = (message) => {
-    setWarningStyles("warning-msg-styles__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
 
   useEffect(() => {
     fetch("http://localhost:3001/user", {
@@ -105,7 +97,7 @@ const ConfirmedReservation = (props) => {
         console.log(data);
         if (data) {
           if (!data.success) {
-            displayWarning("Removing reservation failed. 😐");
+            setWarningMessage("Removing reservation failed.")
           } else if (data.success) {
             props.onSuccess(true);
           }
@@ -250,9 +242,7 @@ const ConfirmedReservation = (props) => {
             warning={`Please make sure that you cannot recover once you delete a
                 reservation. Do you really want to delete? 🙄`}
           />
-          <div className={"warning-msg__container " + warningStyles}>
-            {warningMessage}
-          </div>
+          <WarningMessageBox message={warningMessage} />
           <ButtonContainer>
             <RedButton onClick={onClickDeleteYesHandler}>Yes</RedButton>
             <GreenButton onClick={onClickDeleteNoHandler}>No</GreenButton>

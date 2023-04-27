@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { sanitize } from "../../../utils/Sanitizer";
 import { isValid } from "../../../utils/Validator";
 import GreenButton from "../../UI/buttons/GreenButton";
 import RedButton from "../../UI/buttons/RedButton";
@@ -7,13 +6,14 @@ import CalenderDateState from "../../UI/calender/CalenderDateState";
 import WarningCard from "../../UI/cards/WarningCard";
 import ButtonContainer from "../../UI/containers/ButtonContainer";
 import ModalCardContainer from "../../UI/containers/ModalCardContainer";
-import FormInput from "../../UI/form/FormInput";
 import UploadSVG from "../../UI/SVG/UploadSVG";
-import "./CustomerPaymentDetails.css";
 import TimeInput from "../../UI/inputs/TimeInput";
 import DateInput from "../../UI/inputs/DateInput";
 import AmountInput from "../../UI/inputs/AmountInput";
 import BranchInput from "../../UI/inputs/BranchInput";
+import WarningMessageBox from "../../UI/warnings/WarningMessageBox";
+import useWarningMessage from "../../../hooks/useWarningMessage";
+import "./CustomerPaymentDetails.css";
 
 /**
  *
@@ -38,8 +38,7 @@ const CustomerPaymentDetails = (props) => {
   const [paidTime, setPaidTime] = useState("");
   const [paymentSlipPhoto, setPaymentSlipPhoto] = useState(null);
 
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
+  const [warningMessage, setWarningMessage] = useWarningMessage();
 
   const [rejected, setRejected] = useState(false);
 
@@ -88,15 +87,6 @@ const CustomerPaymentDetails = (props) => {
       });
   }, []);
 
-  const displayWarning = (message) => {
-    setWarningStyles("login-form-warning__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
-
   const onClickByBankHandler = (e) => {
     setPaymentMethod("bank");
     noticeString =
@@ -111,7 +101,7 @@ const CustomerPaymentDetails = (props) => {
   };
 
   const onChangePaidBranch = (branch) => {
-    console.log("BRANCH: ", branch)
+    console.log("BRANCH: ", branch);
     setPaidBranch(branch);
   };
 
@@ -158,7 +148,7 @@ const CustomerPaymentDetails = (props) => {
         console.log(data);
         if (data) {
           if (!data.success) {
-            displayWarning("Removing reservation failed. 😐");
+            setWarningMessage("Removing reservation failed.");
           } else if (data.success) {
             props.onSuccess(true);
           }
@@ -213,7 +203,7 @@ const CustomerPaymentDetails = (props) => {
             }
           });
       } else {
-        displayWarning("Input data is invalid. 😡 Please check and try again.");
+        setWarningMessage("Input data is invalid. Please check and try again.");
       }
     } else if (paymentMethod === "online banking") {
       if (
@@ -249,7 +239,7 @@ const CustomerPaymentDetails = (props) => {
             }
           });
       } else {
-        displayWarning("Input data is invalid. 😡 Please check and try again.");
+        setWarningMessage("Input data is invalid. Please check and try again.");
       }
     }
   };
@@ -391,9 +381,7 @@ const CustomerPaymentDetails = (props) => {
               </div>
             </div>
           </ModalCardContainer>
-          <div className={"warning-msg__container " + warningStyles}>
-            {warningMessage}
-          </div>
+          <WarningMessageBox message={warningMessage} />
           <ButtonContainer>
             <RedButton onClick={onClickRejectHandler}>Reject</RedButton>
             <GreenButton onClick={onClickSendPaymentDetailsHandler}>
@@ -408,9 +396,7 @@ const CustomerPaymentDetails = (props) => {
             warning={`Please make sure that you cannot recover once you reject a
             reservation. Do you really want to reject? 🙄`}
           />
-          <div className={"warning-msg__container " + warningStyles}>
-            {warningMessage}
-          </div>
+          <WarningMessageBox message={warningMessage} />
           <ButtonContainer>
             <RedButton onClick={onClickRejectYesHandler}>Yes</RedButton>
             <GreenButton onClick={onClickRejectNoHandler}>No</GreenButton>

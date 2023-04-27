@@ -12,9 +12,6 @@ const ReservationCounter = () => {
   const [dates, setDates] = useState([]);
 
   const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const day = today.getDate();
 
   useEffect(() => {
     fetch("http://localhost:3001/available/dates")
@@ -39,16 +36,20 @@ const ReservationCounter = () => {
       let confirmedRequests = 0;
 
       for (let dateDocument of dates) {
-        if (
-          dateDocument.date.year >= year &&
-          dateDocument.date.month >= month &&
-          dateDocument.date.day > day
-        ) {
+        const currentDate = new Date(
+          dateDocument.date.year,
+          dateDocument.date.month,
+          dateDocument.date.day
+        );
+
+        if (currentDate > today) {
+          console.log("------==>>> ", dateDocument);
           if (dateDocument.hasOwnProperty("reservation")) {
             const reservation = dateDocument.reservation;
             if (reservation.state === "confirmed") {
               confirmedRequests++;
-            } else if (reservation.state === "pending") {
+            }
+            if (reservation.state === "pending") {
               pendingRequests++;
               if (!reservation.hasOwnProperty("costs")) {
                 newRequests++;

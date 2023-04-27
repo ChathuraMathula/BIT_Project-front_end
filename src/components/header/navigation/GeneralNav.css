@@ -21,8 +21,45 @@
   display: none;
 }
 
+.header-sign-up__button,
+.header-login__button {
+  cursor: pointer;
+}
+
+.header-sign-up__button {
+  margin: 0 1rem;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.header-login__button {
+  padding: 0.5rem 0.6rem;
+  font-size: 1rem;
+  background-color: hsla(216, 100%, 50%, 0.8);
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
+.header-sign-up__button:hover {
+  opacity: 0.5;
+  transition: all 0.4s;
+}
+
+.header-login__button:hover {
+  background-color: hsla(216, 100%, 10%, 0.8);
+  transition: all 0.4s;
+}
+
 /* For Mobile Phones */
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .header-sign-up__button {
+    font-size: 1.1rem;
+  }
+
+  .header-login__button {
+    font-size: 1.2rem;
+  }
+
   .general-nav__list {
     display: flex;
     flex-direction: column;

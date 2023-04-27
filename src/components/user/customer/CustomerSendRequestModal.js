@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import CalenderDateState from "../../UI/calender/CalenderDateState";
-import FormInput from "../../UI/form/FormInput";
 import FormSelectOptions from "../../UI/form/FormSelectOptions";
-import FormInputTextArea from "../../UI/form/FormInputTextArea";
 import "./CustomerSendRequestModal.css";
-import { isEmpty, isValid } from "../../../utils/Validator";
+import { isEmpty } from "../../../utils/Validator";
 import { sanitize } from "../../../utils/Sanitizer";
 import ButtonContainer from "../../UI/containers/ButtonContainer";
 import GreenButton from "../../UI/buttons/GreenButton";
 import ModalCardContainer from "../../UI/containers/ModalCardContainer";
 import CardContainerTitle from "../../UI/titles/CardContainerTitle";
 import CustomerAddExtraServices from "./CustomerAddExtraServices";
-import ListContainer from "../../UI/containers/ListContainer";
 import TimeInput from "../../UI/inputs/TimeInput";
 import AddressInput from "../../UI/inputs/AddressInput";
 import MessageInput from "../../UI/inputs/MessageInput";
+import useWarningMessage from "../../../hooks/useWarningMessage";
+import WarningMessageBox from "../../UI/warnings/WarningMessageBox";
 
 /**
  *
@@ -37,21 +36,10 @@ const CustomerSendRequestModal = (props) => {
   const [location, setLocation] = useState("");
   const [message, setMessage] = useState("");
 
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
-
+  const [warningMessage, setWarningMessage] = useWarningMessage();
   const thisDay = props.date.getDate();
   const thisMonth = props.date.getMonth();
   const thisYear = props.date.getFullYear();
-
-  const displayWarning = (message) => {
-    setWarningStyles("warning-msg-styles__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
 
   useEffect(() => {
     fetch("http://localhost:3001/package/categories")
@@ -83,10 +71,6 @@ const CustomerSendRequestModal = (props) => {
     } else {
       setPackageName("");
     }
-  };
-
-  const eventInputHandler = (event) => {
-    setEvent(event.target.value);
   };
 
   const onChangeLocationHandler = (address) => {
@@ -126,7 +110,6 @@ const CustomerSendRequestModal = (props) => {
         endTime !== "invalid" &&
         message !== "invalid"
       ) {
-        
         const data = {
           date: {
             year: sanitize(thisYear),
@@ -161,16 +144,16 @@ const CustomerSendRequestModal = (props) => {
           .then((data) => {
             console.log(data);
             if (!data.success) {
-              displayWarning("Sorry..! Sending reservation request failed. 😕");
+              setWarningMessage("Sorry..! Sending reservation request failed.");
             } else if (data.success) {
               props.onSuccess(true);
             }
           });
       } else {
-        displayWarning("Input data is invalid. Please check again. 😡");
+        setWarningMessage("Input data is invalid. Please check again.");
       }
     } catch (error) {
-      displayWarning("Sending failed. 😡");
+      setWarningMessage("Sending failed.");
     }
   };
 
@@ -238,9 +221,7 @@ const CustomerSendRequestModal = (props) => {
         />
       </ModalCardContainer>
 
-      <div className={"warning-msg__container " + warningStyles}>
-        {warningMessage}
-      </div>
+      <WarningMessageBox message={warningMessage} />
       <ButtonContainer>
         <GreenButton onClick={onClickSendRequestHandler}>Send</GreenButton>
       </ButtonContainer>

@@ -9,7 +9,7 @@ const PendingPhotographerCosts = (props) => {
       <CalenderDateState>Pending Photographer's Costs</CalenderDateState>
       <ModalCardContainer>
         <div className="pending-reservation-photographer-costs-notice">
-          Please wait... 😊 Your photographer will respond soon.
+          Please wait... 😊 Your photographer will respond soon with cost details.
         </div>
       </ModalCardContainer>
     </>
