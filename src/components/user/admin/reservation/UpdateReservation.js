@@ -13,6 +13,8 @@ import "./UpdateReservation.css";
 import TimeInput from "../../../UI/inputs/TimeInput";
 import AddressInput from "../../../UI/inputs/AddressInput";
 import CostInput from "../../../UI/inputs/CostInput";
+import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
 
 /**
  *
@@ -41,21 +43,11 @@ const UpdateReservation = (props) => {
   const [categories, setCategories] = useState([]);
   const [packages, setPackages] = useState([]);
 
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
+  const [warningMessage, setWarningMessage] = useWarningMessage();
 
   const thisDay = props.date.getDate();
   const thisMonth = props.date.getMonth();
   const thisYear = props.date.getFullYear();
-
-  const displayWarning = (message) => {
-    setWarningStyles("warning-msg-styles__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
 
   useEffect(() => {
     fetch("http://localhost:3001/package/categories")
@@ -180,14 +172,14 @@ const UpdateReservation = (props) => {
           console.log(data);
           if (data) {
             if (!data.success) {
-              displayWarning("Updating reservation failed. 😐");
+              setWarningMessage("Updating reservation failed.");
             } else if (data.success) {
               props.onSuccess(true);
             }
           }
         });
     } else {
-      displayWarning("Input data is invalid. 😐");
+      setWarningMessage("Input data is invalid.");
     }
   };
 
@@ -247,9 +239,6 @@ const UpdateReservation = (props) => {
                 defaultValue={
                   categoryDocument.name === categoryName ? true : false
                 }
-                // selected={
-                //   categoryDocument.name === categoryName ? "selected" : null
-                // }
                 key={i}
               >
                 {categoryDocument.name}
@@ -265,9 +254,6 @@ const UpdateReservation = (props) => {
                 defaultValue={
                   packageDocument.name === packageName ? true : false
                 }
-                // selected={
-                //   packageDocument.name === packageName ? "selected" : null
-                // }
                 key={i}
               >
                 {packageDocument.name}
@@ -281,9 +267,7 @@ const UpdateReservation = (props) => {
         reservation={props.reservation}
         onAddExtraService={onAddExtraServiceHandler}
       />
-      <div className={"warning-msg__container " + warningStyles}>
-        {warningMessage}
-      </div>
+      <WarningMessageBox message={warningMessage}/>
       <ButtonContainer>
         <RedButton onClick={onClickUpdateHandler}>Update</RedButton>
       </ButtonContainer>

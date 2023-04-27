@@ -8,6 +8,8 @@ import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
 import { sanitize } from "../utils/Sanitizer";
 import { isValid } from "../utils/Validator";
 import "./ResetPassword.css";
+import PasswordInput from "../components/UI/inputs/PasswordInput";
+import FlexCenterColumnContainer from "../components/UI/containers/FlexCenterColumnContainer";
 
 const ResetPassword = (props) => {
   const params = useParams();
@@ -47,17 +49,22 @@ const ResetPassword = (props) => {
     }, 5000);
   };
 
-  const onChangePasswordHandler = (e) => {
-    setPassword(sanitize(e.target.value));
+  const onChangePasswordHandler = (passwordText) => {
+    setPassword(passwordText);
   };
 
-  const onChangeConfirmedPasswordHandler = (e) => {
-    setConfirmedPassword(sanitize(e.target.value));
+  const onChangeConfirmedPasswordHandler = (passwordText) => {
+    setConfirmedPassword(passwordText);
   };
 
   const onClickResetPassword = async (event) => {
     try {
-      if (password === confirmedPassword && isValid("password", password)) {
+      if (
+        password &&
+        confirmedPassword &&
+        password === confirmedPassword &&
+        password !== "invalid"
+      ) {
         fetch("http://localhost:3001/password/reset", {
           method: "POST",
           credentials: "include",
@@ -81,7 +88,7 @@ const ResetPassword = (props) => {
         displayWarning("Invalid password. please check again 😐");
       }
     } catch (error) {
-        displayWarning("Reset password failed. 😐");
+      displayWarning("Reset password failed. 😐");
     }
   };
 
@@ -92,26 +99,19 @@ const ResetPassword = (props) => {
           <CardContainerTitle>{`Username: ${params.username}`}</CardContainerTitle>
           <CardContainer>
             <CardContainerTitle>RESET PASSWORD</CardContainerTitle>
-            <div className="reset-password-inputs__container">
-              <FormInput
-                className="reset-password__input"
-                type="text"
+            <FlexCenterColumnContainer>
+              <PasswordInput
+                name="Password"
                 placeholder="New Password"
                 onChange={onChangePasswordHandler}
-                value={password}
-              >
-                Password:
-              </FormInput>
-              <FormInput
-                className="reset-password__input"
-                type="text"
+              />
+              <PasswordInput
+                name="Confirm Password"
                 placeholder="Confirm New Password"
                 onChange={onChangeConfirmedPasswordHandler}
-                value={confirmedPassword}
-              >
-                Confirm Password:
-              </FormInput>
-            </div>
+              />
+            </FlexCenterColumnContainer>
+
             <div className={"warning-msg__container " + warningStyles}>
               {warningMessage}
             </div>

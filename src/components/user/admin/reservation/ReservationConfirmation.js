@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { sanitize } from "../../../../utils/Sanitizer";
 import GreenButton from "../../../UI/buttons/GreenButton";
 import RedButton from "../../../UI/buttons/RedButton";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
-import WarningCard from "../../../UI/cards/WarningCard";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import DetailsContainer from "../../../UI/containers/DetailsContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
-import FormInputCheckBox from "../../../UI/form/FormInputCheckBox";
-import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import NameValueString from "../../../UI/other/NameValueString";
 import NameValueTitle from "../../../UI/other/NameValueTitle";
 import DownloadSVG from "../../../UI/SVG/DownloadSVG";
 import "./ReservationConfirmation.css";
+import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
+import ReservationRejection from "./ReservationRejection";
 
 /**
  *
@@ -23,12 +22,12 @@ import "./ReservationConfirmation.css";
  */
 const ReservationConfirmation = (props) => {
   const [rejected, setRejected] = useState(false);
-  const [warningStyles, setWarningStyles] = useState("");
-  const [warningMessage, setWarningMessage] = useState("");
+  const [warningMessage, setWarningMessage] = useWarningMessage();
   const [fileUrl, setFileUrl] = useState("");
 
   const payment = props.reservation.payment;
   const costs = props.reservation.costs;
+  const customer = props.reservation.customer;
   const thisYear = props.date.getFullYear();
   const thisMonth = props.date.getMonth();
   const thisDay = props.date.getDate();
@@ -37,17 +36,10 @@ const ReservationConfirmation = (props) => {
     setRejected(true);
   };
 
-  const onClickRejectNoHandler = (e) => {
-    setRejected(false);
-  };
-
-  const displayWarning = (message) => {
-    setWarningStyles("login-form-warning__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
+  const onCancelRejectHandler = (cancelRejection) => {
+    if (cancelRejection) {
+      setRejected(false);
+    }
   };
 
   useEffect(() => {
@@ -76,34 +68,7 @@ const ReservationConfirmation = (props) => {
       });
   }, []);
 
-  const onClickRejectYesHandler = (e) => {
-    fetch("http://localhost:3001/remove/reservation", {
-      method: "POST",
-      credentials: "include",
-      body: JSON.stringify({
-        date: {
-          year: thisYear,
-          month: thisMonth,
-          day: thisDay,
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data) {
-          if (!data.success) {
-            displayWarning("Removing reservation failed. 😐");
-          } else if (data.success) {
-            props.onSuccess(true);
-          }
-        }
-      });
-  };
-
+  
   const onClickConfirmHandler = async (e) => {
     await fetch("http://localhost:3001/confirm/reservation", {
       method: "POST",
@@ -124,7 +89,7 @@ const ReservationConfirmation = (props) => {
         console.log(data);
         if (data) {
           if (!data.success) {
-            displayWarning("Confirm reservation failed. 😐");
+            setWarningMessage("Confirm reservation failed.");
           } else if (data.success) {
             props.onSuccess(true);
           }
@@ -132,7 +97,11 @@ const ReservationConfirmation = (props) => {
       });
   };
 
-  const onClickDownloadPaymentSlip = async (e) => {};
+  const onSuccessRejectionHandler = (successRejection) => {
+    if (successRejection) {
+      props.onSuccess(true);
+    }
+  }
 
   return (
     <>
@@ -156,7 +125,10 @@ const ReservationConfirmation = (props) => {
                 name="Package Price:"
                 value={`${costs.package} LKR`}
               />
-              <NameValueString name="Advance Payment:" value={`${costs.advance} LKR`} />
+              <NameValueString
+                name="Advance Payment:"
+                value={`${costs.advance} LKR`}
+              />
             </DetailsContainer>
             <DetailsContainer>
               <NameValueTitle>PAYMENT DETAILS</NameValueTitle>
@@ -182,16 +154,13 @@ const ReservationConfirmation = (props) => {
               <a
                 download={`${thisYear}_${thisMonth}_${thisDay}_payment_slip.jpeg`}
                 href={fileUrl}
-                onClick={onClickDownloadPaymentSlip}
                 className="reservation-confirmation-download-button"
               >
                 <DownloadSVG />
               </a>
             </div>
           </ModalCardContainer>
-          <div className={"warning-msg__container " + warningStyles}>
-            {warningMessage}
-          </div>
+          <WarningMessageBox message={warningMessage} />
           <ButtonContainer>
             <RedButton onClick={onClickRejectHandler}>Reject</RedButton>
             <GreenButton onClick={onClickConfirmHandler}>Confirm</GreenButton>
@@ -200,17 +169,14 @@ const ReservationConfirmation = (props) => {
       ) : null}
       {rejected ? (
         <>
-          <WarningCard
-            warning={`Please make sure that you cannot recover once you reject a
-            reservation. Do you really want to reject? 🙄`}
+          <ReservationRejection
+            thisYear={thisYear}
+            thisMonth={thisMonth}
+            thisDay={thisDay}
+            onSuccess={onSuccessRejectionHandler}
+            onCancel={onCancelRejectHandler}
+            customer={customer}
           />
-          <div className={"warning-msg__container " + warningStyles}>
-            {warningMessage}
-          </div>
-          <ButtonContainer>
-            <RedButton onClick={onClickRejectYesHandler}>Yes</RedButton>
-            <GreenButton onClick={onClickRejectNoHandler}>No</GreenButton>
-          </ButtonContainer>
         </>
       ) : null}
     </>

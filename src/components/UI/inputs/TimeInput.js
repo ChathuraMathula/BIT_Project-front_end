@@ -16,19 +16,13 @@ const TimeInput = (props) => {
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [message, setMessage] = useState(null);
+  const [invalid, setInvalid] = useState(false);
 
   const onChangeHoursHandler = (event) => {
     if (event.target.value.length <= 2) {
       const currentHours = sanitize(event.target.value);
       setHours(currentHours);
-      const time = `${currentHours}:${minutes}`;
-      if (isValid("time", time)) {
-        setMessage("");
-        props.onChange(time);
-      } else {
-        setMessage("⚠ Please enter a valid time (eg: 12:00)");
-        props.onChange("invalid");
-      }
+      onChangeHandler(currentHours, minutes);
     }
   };
 
@@ -36,12 +30,24 @@ const TimeInput = (props) => {
     if (event.target.value.length <= 2) {
       const currentMins = sanitize(event.target.value);
       setMinutes(currentMins);
-      const time = `${hours}:${currentMins}`;
+      onChangeHandler(hours, currentMins);
+    }
+  };
+
+  const onChangeHandler = (curHours, curMins) => {
+    if (!curHours && !curMins) {
+      setMessage("");
+      setInvalid(false);
+      props.onChange("");
+    } else {
+      const time = `${curHours}:${curMins}`;
       if (isValid("time", time)) {
         setMessage("");
+        setInvalid(false);
         props.onChange(time);
       } else {
         setMessage("⚠ Please enter a valid time (eg: 12:00)");
+        setInvalid(true);
         props.onChange("invalid");
       }
     }
@@ -60,6 +66,7 @@ const TimeInput = (props) => {
       <Label>
         {props.name ? `${props.name}: ` : null}
         <Input
+          invalid={invalid}
           value={hours}
           onChange={onChangeHoursHandler}
           style={{ width: "2.5rem" }}
@@ -67,6 +74,7 @@ const TimeInput = (props) => {
         />
         {" : "}
         <Input
+          invalid={invalid}
           value={minutes}
           onChange={onChangeMinutesHandler}
           style={{ width: "2.5rem" }}

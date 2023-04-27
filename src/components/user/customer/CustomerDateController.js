@@ -108,12 +108,12 @@ const CustomerDateController = (props) => {
     <>
       <div
         className={
-          props.date.disabled ||
-          state === "Not Available" ||
-          state === "Reserved"
-            ? "customer-date-controller-object__disabled"
-            : props.date.today
+          props.date.today
             ? "customer-date-controller-object__today"
+            : props.date.disabled ||
+              state === "Not Available" ||
+              state === "Reserved"
+            ? "customer-date-controller-object__disabled"
             : state === "confirmedReservation"
             ? "customer-date-controller-object__reservation-confirmed"
             : state === "pendingReservation"
@@ -136,8 +136,7 @@ const CustomerDateController = (props) => {
             onSuccess={onSuccessHandler}
           />
         ) : null}
-        {state === "pendingReservation" &&
-        !dateDocument.reservation?.costs ? (
+        {state === "pendingReservation" && !dateDocument.reservation?.costs ? (
           <PendingPhotographerCosts />
         ) : null}
         {state === "pendingReservation" &&

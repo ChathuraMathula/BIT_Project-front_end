@@ -116,22 +116,6 @@ const UserNavigation = (props) => {
             </>
           ) : null}
           {login.isLogged ? <LogoutButton>Log Out</LogoutButton> : null}
-          {!login.isLogged ? (
-            <>
-              <NavigationButton
-                onClick={onClickNavigationButtonHandler}
-                to="/sign-up"
-              >
-                Sign Up
-              </NavigationButton>
-              <NavigationButton
-                onClick={onClickNavigationButtonHandler}
-                to="/login"
-              >
-                Login
-              </NavigationButton>
-            </>
-          ) : null}
         </nav>
       </CSSTransition>
     </>

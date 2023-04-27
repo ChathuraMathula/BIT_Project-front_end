@@ -26,10 +26,6 @@ const UserProfileDetails = (props) => {
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
 
-  const [emailWarning, setEmailWarning] = useState("");
-  const [phoneNoWarning, setPhoneNoWarning] = useState("");
-  const [addressWarning, setAddressWarning] = useState("");
-
   useEffect(() => {
     if (props.user) {
       const formData = new FormData();
