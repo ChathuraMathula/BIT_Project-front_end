@@ -4,6 +4,9 @@ import "./Calender.css";
 import CalenderRowContainer from "./CalenderRowContainer";
 import CalenderDateContainer from "./CalenderDateContainer";
 import CalenderDate from "./CalenderDate";
+import InfoButton from "../buttons/InfoButton";
+import InfoModal from "../modal/InfoModal";
+import CalenderInfo from "./CalenderInfo";
 
 /**
  *
@@ -11,6 +14,7 @@ import CalenderDate from "./CalenderDate";
  * @returns
  */
 const Calender = (props) => {
+  const [show, setShow] = useState(false);
   const [days, setDays] = useState(calenderDays());
   const [month, setMonth] = useState(THIS_MONTH);
   const [year, setYear] = useState(THIS_YEAR);
@@ -56,70 +60,87 @@ const Calender = (props) => {
     fetch("http://localhost:3001/available/dates")
       .then((res) => res.json())
       .then((datesCollection) => {
-        console.log(datesCollection)
+        console.log(datesCollection);
       });
   }, []);
 
+  const onClickCalendarInfoHandler = (event) => {
+    setShow(true);
+  };
+
+  const onCloseCalendarInfoHandler = (event) => {
+    setShow(false);
+  };
+
   return (
-    <div className="calender-body__container">
-      <div className="calender-navigation__container">
-        <div
-          className={
-            month === THIS_MONTH && year === THIS_YEAR
-              ? "calender-navigation-button__disabled"
-              : "calender-navigation__button"
-          }
-          onClick={navigationBackHandler}
-        >
-          ◀
+    <>
+      <InfoModal show={show} onClose={onCloseCalendarInfoHandler}>
+        <CalenderInfo />
+      </InfoModal>
+      <div className="calender-body__container">
+        <InfoButton
+          onClick={onClickCalendarInfoHandler}
+          className="calender-info__button"
+        />
+        <div className="calender-navigation__container">
+          <div
+            className={
+              month === THIS_MONTH && year === THIS_YEAR
+                ? "calender-navigation-button__disabled"
+                : "calender-navigation__button"
+            }
+            onClick={navigationBackHandler}
+          >
+            ◀
+          </div>
+          <div className="calender-navigation-display__date">{`${
+            monthNames[month - 1]
+          }, ${year}`}</div>
+          <div
+            className="calender-navigation__button"
+            onClick={navigationNextHandler}
+          >
+            ▶
+          </div>
         </div>
-        <div className="calender-navigation-display__date">{`${
-          monthNames[month - 1]
-        }, ${year}`}</div>
-        <div
-          className="calender-navigation__button"
-          onClick={navigationNextHandler}
-        >
-          ▶
-        </div>
+        <CalenderRowContainer>
+          <CalenderDateContainer>
+            <div className="calender-body-day__names">SUN</div>
+          </CalenderDateContainer>
+          <CalenderDateContainer>
+            <div className="calender-body-day__names">MON</div>
+          </CalenderDateContainer>
+          <CalenderDateContainer>
+            <div className="calender-body-day__names">TUE</div>
+          </CalenderDateContainer>
+          <CalenderDateContainer>
+            <div className="calender-body-day__names">WED</div>
+          </CalenderDateContainer>
+          <CalenderDateContainer>
+            <div className="calender-body-day__names">THU</div>
+          </CalenderDateContainer>
+          <CalenderDateContainer>
+            <div className="calender-body-day__names">FRI</div>
+          </CalenderDateContainer>
+          <CalenderDateContainer>
+            <div className="calender-body-day__names">SAT</div>
+          </CalenderDateContainer>
+        </CalenderRowContainer>
+        {days.map((value, index) => {
+          return (
+            <CalenderRowContainer key={index}>
+              {value.map((date, index) => {
+                return (
+                  <CalenderDateContainer key={index}>
+                    <CalenderDate date={date} />
+                  </CalenderDateContainer>
+                );
+              })}
+            </CalenderRowContainer>
+          );
+        })}
       </div>
-      <CalenderRowContainer>
-        <CalenderDateContainer>
-          <div className="calender-body-day__names">SUN</div>
-        </CalenderDateContainer>
-        <CalenderDateContainer>
-          <div className="calender-body-day__names">MON</div>
-        </CalenderDateContainer>
-        <CalenderDateContainer>
-          <div className="calender-body-day__names">TUE</div>
-        </CalenderDateContainer>
-        <CalenderDateContainer>
-          <div className="calender-body-day__names">WED</div>
-        </CalenderDateContainer>
-        <CalenderDateContainer>
-          <div className="calender-body-day__names">THU</div>
-        </CalenderDateContainer>
-        <CalenderDateContainer>
-          <div className="calender-body-day__names">FRI</div>
-        </CalenderDateContainer>
-        <CalenderDateContainer>
-          <div className="calender-body-day__names">SAT</div>
-        </CalenderDateContainer>
-      </CalenderRowContainer>
-      {days.map((value, index) => {
-        return (
-          <CalenderRowContainer key={index}>
-            {value.map((date, index) => {
-              return (
-                <CalenderDateContainer key={index}>
-                  <CalenderDate date={date} />
-                </CalenderDateContainer>
-              );
-            })}
-          </CalenderRowContainer>
-        );
-      })}
-    </div>
+    </>
   );
 };
 

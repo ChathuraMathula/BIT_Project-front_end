@@ -1,8 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
 import Backdrop from "./Backdrop";
-import "./Modal.css";
-import ModalBody from "./ModalBody";
 import PhotoModalBody from "./PhotoModalBody";
 
 const backdropRoot = document.getElementById("backdrop-root");

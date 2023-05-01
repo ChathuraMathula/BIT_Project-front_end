@@ -1,0 +1,21 @@
+.info-button {
+    height: 1.8rem;
+    width: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "MonotypeCorsiva, Monotype Corsiva";
+    border-radius: 50%;
+    border: 1px solid hsl(220, 61%, 80%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0.4rem;
+    cursor: pointer;
+}
+
+.info-button:hover {
+    /* background-color: hsl(216, 100%, 50%); */
+    opacity: 0.5;
+    transition: all 0.3s;
+}

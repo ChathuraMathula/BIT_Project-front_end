@@ -1,0 +1,58 @@
+.calender-info__heading {
+  text-align: center;
+}
+
+.calender-info__container {
+  padding: 0.5rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 35% auto;
+  gap: 1rem;
+}
+
+.calender-info-date__icon {
+  align-self: center;
+  justify-self: center;
+}
+
+.calender-info-date__description {
+  align-self: center;
+}
+
+.calender-date {
+  width: 6rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(216, 100%, 5%);
+  background-color: hsl(216, 100%, 35%);
+  font-weight: bold;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.calender-date.available {
+  background-color: hsl(216, 100%, 50%);
+  color: hsl(220, 61%, 80%);
+}
+
+.calender-date.disabled {
+  background-color: hsl(216, 100%, 5%);
+  color: hsl(216, 100%, 35%);
+}
+
+.calender-date.pending {
+  background-color: hsl(0, 100%, 36%);
+  color: hsl(220, 61%, 80%);
+}
+
+.calender-date.confirmed {
+  background-color: hsl(136, 100%, 36%);
+  color: hsl(220, 61%, 80%);
+}
+
+.calender-date.today {
+  color: hsl(216, 100%, 5%);
+  background-color: hsl(216, 100%, 65%);
+}

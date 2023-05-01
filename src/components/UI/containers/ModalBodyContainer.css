@@ -1,0 +1,33 @@
+.modal-body-main__container {
+  padding: 0.5rem;
+  position: fixed;
+  top: 1rem;
+  bottom: 1rem;
+  right: 1rem;
+  left: 1rem;
+  z-index: 250;
+  border-radius: 1rem 0 1rem 1rem;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .modal-body-main__container {
+    left: auto;
+    width: 60%;
+    max-height: 90%;
+  }
+}
+
+/* For Tablets & Laptops */
+@media (min-width: 768px) {
+  .modal-body-main__container {
+    width: 50%;
+  }
+}
+
+/* For Laptops */
+@media (min-width: 992px) {
+  .modal-body-main__container {
+    width: 40%;
+  }
+}
