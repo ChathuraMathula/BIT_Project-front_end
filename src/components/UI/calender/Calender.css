@@ -11,6 +11,13 @@
   margin-bottom: 2.2rem;
   animation-name: wipeIn;
   animation-duration: 0.5s;
+  position: relative;
+}
+
+.calender-info__button {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
 }
 
 .calender-body-day__names {
