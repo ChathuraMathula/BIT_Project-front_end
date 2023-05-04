@@ -13,7 +13,7 @@ const Input = (props) => {
   }, [props.invalid]);
   return (
     <>
-      <input className={"input-tag " + styles} {...props} />
+      <input className={"input-tag " + styles} {...props } />
     </>
   );
 };

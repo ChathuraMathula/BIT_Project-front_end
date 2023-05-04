@@ -82,19 +82,45 @@
 }
 
 .modal-body-no-warning__container {
+  height: calc(100% - 2.2rem);
   width: 100%;
-  margin: 0.5rem 0;
+  margin: 0;
   margin-bottom: 1rem;
   padding: 0.8rem;
   overflow-y: scroll;
   max-height: 100%;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  /* -ms-overflow-style: none;  */
+  scrollbar-width: 0.8rem;
+  scrollbar-color: hsla(216, 100%, 40%, 1) hsla(216, 100%, 10%, 1);
 }
 
 .modal-body-no-warning__container::-webkit-scrollbar {
+  /* display: none; */
+}
+
+
+.modal-body-no-warning__container::-webkit-scrollbar {
+  background-color: hsla(216, 100%, 10%);
+  width: 0.8rem;
+}
+
+.modal-body-no-warning__container::-webkit-scrollbar-track {
+  background-color: hsla(216, 100%, 15%, 1);
+}
+
+.modal-body-no-warning__container::-webkit-scrollbar-button {
   display: none;
 }
+
+.modal-body-no-warning__container::-webkit-scrollbar-thumb {
+  background-color: hsla(216, 100%, 40%, 1);
+  border-radius: 1rem;
+}
+
+.modal-body-no-warning__container::-webkit-scrollbar-thumb:hover {
+  background-color: hsla(216, 100%, 50%, 1);
+}
+
 
 .modal-body__action {
   border-radius: 0 0 1.2rem 1.2rem;

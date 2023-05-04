@@ -1,35 +1,51 @@
 @keyframes openInfoModal {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.8;
-    }
-    100% {
-      opacity: 1;
-    }
+  0% {
+    opacity: 0;
   }
-  
-  @keyframes closeInfoModal {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 0;
-    }
+  50% {
+    opacity: 0.8;
   }
-  
-  .InfoModalOpen {
-    animation: openInfoModal 1s ease-out forwards;
+  100% {
+    opacity: 1;
   }
-  
-  .InfoModalClose {
-    animation: closeInfoModal 1s ease-out forwards;
-  }
+}
 
-  .info-modal-body__container {
-    background-color: hsl(216, 100%, 15%);
+@keyframes closeInfoModal {
+  0% {
+    opacity: 1;
   }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.InfoModalOpen {
+  animation: openInfoModal 1s ease-out forwards;
+}
+
+.InfoModalClose {
+  animation: closeInfoModal 1s ease-out forwards;
+}
+
+.info-modal__heading {
+  position: absolute;
+  right: 2.2rem;
+  left: 0;
+  height: 2.2rem;
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(216, 100%, 15%);
+  z-index: 2;
+  border-radius: 1rem 0 0 0;
+}
+
+.info-modal-body__container {
+  background-color: hsl(216, 100%, 15%);
+}

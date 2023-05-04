@@ -5,7 +5,8 @@
   left: 0;
   width: 100%;
   font-size: 0.8rem;
-  background-color: hsla(216, 100%, 10%, 0.9);
+  height: 1.5rem;
+  background-color: hsl(216, 100%, 10%);
   display: flex;
   justify-content: center;
   padding: 0.3rem;

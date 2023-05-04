@@ -11,6 +11,7 @@ const modalRoot = document.getElementById("modal-root");
  * @param show boolean value to show or hide modal
  * @param onClose close event handler function
  * @param children modal body content
+ * @param heading
  * @param className
  * @returns
  */
@@ -22,7 +23,11 @@ const Modal = (props) => {
         backdropRoot
       )}
       {createPortal(
-        <InfoModalBody show={props.show} onClose={props.onClose}>
+        <InfoModalBody
+          heading={props.heading}
+          show={props.show}
+          onClose={props.onClose}
+        >
           {props.children}
         </InfoModalBody>,
         modalRoot

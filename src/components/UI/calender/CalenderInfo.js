@@ -7,9 +7,8 @@ const CalenderInfo = (props) => {
 
   return (
     <>
-      <h3 className="calender-info__heading">Calendar Date Indicators</h3>
       <div className="calender-info__container">
-        {login.user.role === "admin" || login.user.role === "photographer" ? (
+        {login.user?.role === "admin" || login.user?.role === "photographer" ? (
           <>
             <div className="calender-info-date__icon">
               <div className="calender-date available">01</div>
@@ -24,17 +23,23 @@ const CalenderInfo = (props) => {
           <div className="calender-date">01</div>
         </div>
         <div className="calender-info-date__description">
-          {login.user.role === "admin" || login.user.role === "photographer"
+          {login.user?.role === "admin" || login.user?.role === "photographer"
             ? "Clickable unavailable date. You can set the date to available by clicking on it."
-            : "Clickable available date. You can send a reservation request by clicking on it and get reserved this type of dates."}
+            : login.user?.role === "customer"
+            ? "Clickable available date. You can send a reservation request by clicking on it and get reserved this type of dates."
+            : "Clickable available date. You will be redirected to login page if you click on each of this type of date."}
         </div>
-        <div className="calender-info-date__icon">
-          <div className="calender-date today">01</div>
-        </div>
-        <div className="calender-info-date__description">
-          Inaccessible date. Today is indicated like this. You cannot access
-          this date.
-        </div>
+        {login.isLogged ? (
+          <>
+            <div className="calender-info-date__icon">
+              <div className="calender-date today">01</div>
+            </div>
+            <div className="calender-info-date__description">
+              Inaccessible date. Today is indicated like this. You cannot access
+              this date.
+            </div>
+          </>
+        ) : null}
         <div className="calender-info-date__icon">
           <div className="calender-date disabled">01</div>
         </div>
@@ -43,22 +48,54 @@ const CalenderInfo = (props) => {
           or next month's dates are indicated like this. These dates cannot be
           clicked.
         </div>
-        <div className="calender-info-date__icon">
-          <div className="calender-date pending">01</div>
-        </div>
-        <div className="calender-info-date__description">
-          Clickable pending date. All the dates that have already been requested
-          to get reserved but not confirmed are indicated like this. You can
-          check the state of the pending reservation by clicking on it.
-        </div>
-        <div className="calender-info-date__icon">
-          <div className="calender-date confirmed">01</div>
-        </div>
-        <div className="calender-info-date__description">
-          Clickable confirmed date. All the dates that have successfully been
-          reserved are indicated like this. You can click each on it to see the
-          reservation info.
-        </div>
+        {login.isLogged ? (
+          <>
+            <div className="calender-info-date__icon">
+              <div className="calender-date pending-yellow">01</div>
+            </div>
+            <div className="calender-info-date__description">
+              {login.user?.role === "customer"
+                ? `Clickable date. This indicates that you have sent a reservation request to the 
+                photographer and you have to wait untill the photographer responds with cost datails.`
+                : `Clickable date. This indicates that you have received a new reservation request. 
+                You can click on this date and send reservation cost details to the customer.`}
+            </div>
+
+            <div className="calender-info-date__icon">
+              <div className="calender-date pending-orange">01</div>
+            </div>
+            <div className="calender-info-date__description">
+              {login.user?.role === "customer"
+                ? `Clickable date. This indicates that you have received the cost details. 
+                You have to click on this date and send your valid payment details within 24 
+                hours after you received the cost details.`
+                : `Clickable date. This indicates that you have sent your cost details to the 
+                customer. You can click on this date and see the remaining time your customer
+                has to respond within.`}
+            </div>
+
+            <div className="calender-info-date__icon">
+              <div className="calender-date pending-red">01</div>
+            </div>
+            <div className="calender-info-date__description">
+              {login.user?.role === "customer"
+                ? `Clickable date. This indicates that you have sent your valid payment details 
+                and you have to wait until the photographer responds.`
+                : `Clickable date. This indicates that you have received the customer's valid 
+                paymet details. You can click on this date and download the payment slip sent by 
+                your customer and confirm or reject the reservation.`}
+            </div>
+
+            <div className="calender-info-date__icon">
+              <div className="calender-date confirmed">01</div>
+            </div>
+            <div className="calender-info-date__description">
+              Clickable date. All the dates that have successfully
+              been reserved are indicated like this. You can click on each of it to
+              see the reservation details.
+            </div>
+          </>
+        ) : null}
       </div>
     </>
   );

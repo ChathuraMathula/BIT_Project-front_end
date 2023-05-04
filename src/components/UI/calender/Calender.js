@@ -74,7 +74,11 @@ const Calender = (props) => {
 
   return (
     <>
-      <InfoModal show={show} onClose={onCloseCalendarInfoHandler}>
+      <InfoModal
+        heading="Calendar Date Indicators"
+        show={show}
+        onClose={onCloseCalendarInfoHandler}
+      >
         <CalenderInfo />
       </InfoModal>
       <div className="calender-body__container">
