@@ -3,10 +3,11 @@
 }
 
 .calender-info__container {
+  margin-top: 2.2rem;
   padding: 0.5rem;
   position: relative;
   display: grid;
-  grid-template-columns: 35% auto;
+  grid-template-columns: 20% auto;
   gap: 1rem;
 }
 
@@ -17,11 +18,14 @@
 
 .calender-info-date__description {
   align-self: center;
+  border-left: 3px solid hsl(220, 61%, 30%);
+  color: hsl(220, 61%, 70%);
+  padding-left: 0.6rem;
 }
 
 .calender-date {
-  width: 6rem;
-  height: 3rem;
+  width: 4rem;
+  height: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +46,17 @@
   color: hsl(216, 100%, 35%);
 }
 
-.calender-date.pending {
+.calender-date.pending-yellow {
+  background-color: hsl(61, 100%, 26%);
+  color: hsl(220, 61%, 80%);
+}
+
+.calender-date.pending-orange {
+  background-color: hsl(35, 100%, 30%);
+  color: hsl(220, 61%, 80%);
+}
+
+.calender-date.pending-red {
   background-color: hsl(0, 100%, 36%);
   color: hsl(220, 61%, 80%);
 }

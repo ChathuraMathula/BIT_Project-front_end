@@ -10,6 +10,7 @@ import ModalCloseButton from "./ModalCloseButton";
  * @param onClose
  * @param children
  * @param show
+ * @param heading
  * @returns
  */
 const InfoModalBody = (props) => {
@@ -32,7 +33,10 @@ const InfoModalBody = (props) => {
       >
         <ModalBodyContainer className="info-modal-body__container">
           <ModalCloseButton onClick={props.onClose} />
-          <ScrollableContainer>{props.children}</ScrollableContainer>
+          <ScrollableContainer>
+            <h3 className="info-modal__heading">{props.heading}</h3>
+            {props.children}
+          </ScrollableContainer>
         </ModalBodyContainer>
       </CSSTransition>
     </>

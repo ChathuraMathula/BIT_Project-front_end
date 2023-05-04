@@ -40,9 +40,17 @@ const CustomerDateController = (props) => {
               const reservation = availableDate[0].reservation;
               if (reservation.customer === login.user?.name) {
                 if (reservation.state === "confirmed") {
-                  setState("confirmedReservation");
+                  setState("confirmed");
                 } else if (reservation.state === "pending") {
-                  setState("pendingReservation");
+                  setState("pending_yellow");
+                  if (
+                    reservation.hasOwnProperty("costs") &&
+                    !reservation.hasOwnProperty("payment")
+                  ) {
+                    setState("pending_orange");
+                  } else if (reservation.hasOwnProperty("payment")) {
+                    setState("pending_red");
+                  }
                 }
               } else {
                 setState("Reserved");
@@ -73,9 +81,17 @@ const CustomerDateController = (props) => {
             const reservation = availableDate[0].reservation;
             if (reservation.customer === login.user?.name) {
               if (reservation.state === "confirmed") {
-                setState("confirmedReservation");
+                setState("confirmed");
               } else if (reservation.state === "pending") {
-                setState("pendingReservation");
+                setState("pending_yellow");
+                if (
+                  reservation.hasOwnProperty("costs") &&
+                  !reservation.hasOwnProperty("payment")
+                ) {
+                  setState("pending_orange");
+                } else if (reservation.hasOwnProperty("payment")) {
+                  setState("pending_red");
+                }
               }
             } else {
               setState("Reserved");
@@ -107,19 +123,23 @@ const CustomerDateController = (props) => {
   return (
     <>
       <div
-        className={
+        className={`customer-date-controller-object__general ${
           props.date.today
             ? "customer-date-controller-object__today"
             : props.date.disabled ||
               state === "Not Available" ||
               state === "Reserved"
             ? "customer-date-controller-object__disabled"
-            : state === "confirmedReservation"
+            : state === "confirmed"
             ? "customer-date-controller-object__reservation-confirmed"
-            : state === "pendingReservation"
-            ? "customer-date-controller-object__reservation-pending"
+            : state === "pending_yellow"
+            ? "customer-date-controller-object__reservation-pending-yellow"
+            : state === "pending_orange"
+            ? "customer-date-controller-object__reservation-pending-orange"
+            : state === "pending_red"
+            ? "customer-date-controller-object__reservation-pending-red"
             : "customer-date-controller__object"
-        }
+        }`}
         onClick={onClickDateHandler}
       >
         {props.date.date.getDate()}
@@ -136,24 +156,16 @@ const CustomerDateController = (props) => {
             onSuccess={onSuccessHandler}
           />
         ) : null}
-        {state === "pendingReservation" && !dateDocument.reservation?.costs ? (
-          <PendingPhotographerCosts />
-        ) : null}
-        {state === "pendingReservation" &&
-        dateDocument.reservation?.costs &&
-        !dateDocument.reservation?.payment ? (
+        {state === "pending_yellow" ? <PendingPhotographerCosts /> : null}
+        {state === "pending_orange" ? (
           <CustomerPaymentDetails
             date={props.date.date}
             onSuccess={onSuccessHandler}
             reservation={dateDocument.reservation}
           />
         ) : null}
-        {state === "pendingReservation" &&
-        dateDocument.reservation?.costs &&
-        dateDocument.reservation?.payment ? (
-          <PendingConfirmation />
-        ) : null}
-        {state === "confirmedReservation" ? (
+        {state === "pending_red" ? <PendingConfirmation /> : null}
+        {state === "confirmed" ? (
           <ConfirmedReservation
             reservation={dateDocument.reservation}
             date={props.date.date}

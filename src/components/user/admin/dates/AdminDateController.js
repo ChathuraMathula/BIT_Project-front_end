@@ -109,6 +109,14 @@ const AdminDateController = (props) => {
                 setState("Reserved");
               } else if (reservation.state === "pending") {
                 setState("Pending");
+                if (
+                  reservation.hasOwnProperty("costs") &&
+                  !reservation.hasOwnProperty("payment")
+                ) {
+                  setState("Pending_orange");
+                } else if (reservation.hasOwnProperty("payment")) {
+                  setState("Pending_red");
+                }
               }
             } else {
               setState("Available");
@@ -140,6 +148,14 @@ const AdminDateController = (props) => {
               setState("Reserved");
             } else if (reservation.state === "pending") {
               setState("Pending");
+              if (
+                reservation.hasOwnProperty("costs") &&
+                !reservation.hasOwnProperty("payment")
+              ) {
+                setState("Pending_orange");
+              } else if (reservation.hasOwnProperty("payment")) {
+                setState("Pending_red");
+              }
             }
           } else {
             setState("Available");
@@ -162,7 +178,7 @@ const AdminDateController = (props) => {
   return (
     <>
       <div
-        className={
+        className={`admin-date-controller-object__general ${
           props.date.disabled
             ? "admin-date-controller-object__disabled"
             : props.date.today
@@ -171,10 +187,14 @@ const AdminDateController = (props) => {
             ? "admin-date-controller-object__reserved"
             : state === "Pending"
             ? "admin-date-controller-object__pending"
+            : state === "Pending_orange"
+            ? "admin-date-controller-object__pending-orange"
+            : state === "Pending_red"
+            ? "admin-date-controller-object__pending-red"
             : state === "Available"
             ? "admin-date-controller-object__available"
             : "admin-date-controller__object"
-        }
+        }`}
         onClick={onClickDateHandler}
       >
         {props.date.date.getDate()}
@@ -198,7 +218,9 @@ const AdminDateController = (props) => {
           </>
         ) : null}
 
-        {state === "Pending" ? (
+        {state === "Pending" ||
+        state === "Pending_orange" ||
+        state === "Pending_red" ? (
           <ReservationRequestController
             reservation={dateDocument.reservation}
             date={props.date.date}

@@ -8,6 +8,24 @@
 
 .list-container__container ul {
   list-style: square;
-  padding-left: 1rem;
+  padding-left: 0;
   list-style-position: outside;
+}
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  
+}
+
+/* For Tablets */
+@media (min-width: 768px)  {
+  .list-container__container ul {
+    list-style: square;
+    padding-left: 1rem;
+    list-style-position: outside;
+  }
+}
+
+@media (max-width: 992px) {
+  
 }
