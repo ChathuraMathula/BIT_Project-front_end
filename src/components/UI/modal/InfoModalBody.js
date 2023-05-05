@@ -35,6 +35,7 @@ const InfoModalBody = (props) => {
           <ModalCloseButton onClick={props.onClose} />
           <ScrollableContainer>
             <h3 className="info-modal__heading">{props.heading}</h3>
+            <div className="info-modal__behind-heading"></div>
             {props.children}
           </ScrollableContainer>
         </ModalBodyContainer>

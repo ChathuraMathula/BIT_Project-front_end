@@ -1,12 +1,36 @@
-import React, { useEffect } from "react";
+import React from "react";
+import NotificationAdminCard from "./NotificationAdminCard";
 
+/**
+ *
+ * @param dates Array of date documents
+ * @param onClickNotification
+ * @returns
+ */
 const NotificationAdmin = (props) => {
-    
-  useEffect(() => {
-    console.log("my dates are ", props.dates);
-  }, [props.dates]);
+  const onClickNotificationHandler = (notificattionData) => {
+    props.onClickNotification(notificattionData);
+  };
+
   return (
     <>
+      {props.dates.length > 0
+        ? props.dates.map((dateDocument, index) => {
+            const year = dateDocument.date.year;
+            const month = dateDocument.date.month;
+            const day = dateDocument.date.day;
+            return (
+              <>
+                <NotificationAdminCard
+                  key={`${year}${month}${day}`}
+                  date={dateDocument.date}
+                  reservation={dateDocument.reservation}
+                  onClickNotification={onClickNotificationHandler}
+                />
+              </>
+            );
+          })
+        : null}
     </>
   );
 };

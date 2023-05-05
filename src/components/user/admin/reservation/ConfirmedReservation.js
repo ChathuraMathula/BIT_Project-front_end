@@ -14,6 +14,7 @@ import "./ConfirmedReservation.css";
 import UpdateReservation from "./UpdateReservation";
 import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
 import useWarningMessage from "../../../../hooks/useWarningMessage";
+import ListContainer from "../../../UI/containers/ListContainer";
 
 /**
  *
@@ -97,7 +98,7 @@ const ConfirmedReservation = (props) => {
         console.log(data);
         if (data) {
           if (!data.success) {
-            setWarningMessage("Removing reservation failed.")
+            setWarningMessage("Removing reservation failed.");
           } else if (data.success) {
             props.onSuccess(true);
           }
@@ -164,28 +165,38 @@ const ConfirmedReservation = (props) => {
               <NameValueString
                 name="Services:"
                 value={
-                  packageDocument.services.length > 0
-                    ? packageDocument.services.map((service, index) => {
-                        return <li key={index}>{service}</li>;
-                      })
-                    : "Package Has been Removed"
+                  <>
+                    <ListContainer>
+                      {packageDocument.services.length > 0
+                        ? packageDocument.services.map((service, index) => {
+                            return <li key={index}>{service}</li>;
+                          })
+                        : "Package Has been Removed"}
+                    </ListContainer>
+                  </>
                 }
               />
               {reservation?.extraServices.length > 0 ? (
                 <>
                   <NameValueString
                     name="Extra Services:"
-                    value={reservation?.extraServices.map((service, index) => {
-                      if (service.quantity) {
-                        return (
-                          <li
-                            key={index}
-                          >{`${service.name} [Quantity: ${service.quantity}]`}</li>
-                        );
-                      } else {
-                        return <li key={index}>{service.name}</li>;
-                      }
-                    })}
+                    value={
+                      <>
+                        <ListContainer>
+                          {reservation?.extraServices.map((service, index) => {
+                            if (service.quantity) {
+                              return (
+                                <li
+                                  key={index}
+                                >{`${service.name} [Quantity: ${service.quantity}]`}</li>
+                              );
+                            } else {
+                              return <li key={index}>{service.name}</li>;
+                            }
+                          })}
+                        </ListContainer>
+                      </>
+                    }
                   />
                 </>
               ) : null}

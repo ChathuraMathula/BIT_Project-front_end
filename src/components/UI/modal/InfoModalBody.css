@@ -46,6 +46,11 @@
   border-radius: 1rem 0 0 0;
 }
 
+.info-modal__behind-heading {
+  width: 100%;
+  height: 2.2rem;
+}
+
 .info-modal-body__container {
   background-color: hsl(216, 100%, 15%);
 }

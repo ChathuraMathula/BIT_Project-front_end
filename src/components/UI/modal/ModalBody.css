@@ -40,12 +40,13 @@
   background-color: hsl(216, 100%, 25%);
   position: fixed;
   width: 90%;
-  height: 90%;
+  /* height: 90%; */
   border-radius: 1.2rem;
   z-index: 250;
   justify-self: center;
   align-self: center;
-  top: 2rem;
+  top: 1rem;
+  bottom: 1rem;
   display: flex;
   flex-direction: column;
 }
@@ -181,7 +182,7 @@
 @media (min-width: 768px) and (max-width: 992px) {
   .modal-body {
     width: 80%;
-    height: 80%;
+    /* height: 80%; */
   }
 
   .modal-body__container {
@@ -204,7 +205,7 @@
 @media (min-width: 992px) {
   .modal-body {
     width: 70%;
-    height: 80%;
+    /* height: 80%; */
   }
 
   .modal-action__button {

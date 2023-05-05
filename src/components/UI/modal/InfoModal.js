@@ -1,10 +1,10 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import Backdrop from "./Backdrop";
 import InfoModalBody from "./InfoModalBody";
+import InfoBackdrop from "./InfoBackdrop";
 
-const backdropRoot = document.getElementById("backdrop-root");
-const modalRoot = document.getElementById("modal-root");
+const backdropRoot = document.getElementById("info-backdrop-root");
+const modalRoot = document.getElementById("info-modal-root");
 
 /**
  *
@@ -19,7 +19,12 @@ const Modal = (props) => {
   return (
     <>
       {createPortal(
-        <Backdrop show={props.show} onClick={props.onClose} />,
+        <InfoBackdrop
+          show={props.show}
+          onClick={
+            props.onBackdropClose ? props.onBackdropClose : props.onClose
+          }
+        />,
         backdropRoot
       )}
       {createPortal(
