@@ -1,0 +1,41 @@
+@keyframes openBackdrop {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes closeBackdrop {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.BackdropOpen {
+  animation: openBackdrop 0.4s ease-out forwards;
+}
+
+.BackdropClose {
+  animation: closeBackdrop 1s ease-out forwards;
+}
+
+.info-backdrop {
+  display: block;
+  position: fixed;
+  top: 0;
+  z-index: 190;
+  height: 100%;
+  width: 100%;
+  background-color: hsla(0, 0%, 0%, 0.6);
+}

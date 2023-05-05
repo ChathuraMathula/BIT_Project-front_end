@@ -81,7 +81,7 @@ const BellSVG = (props) => {
               transform="translate(-2529 -1246)"
               fill="none"
               stroke="#adc2eb"
-              stroke-width="20"
+              strokeWidth="20"
             />
           </g>
         </g>
