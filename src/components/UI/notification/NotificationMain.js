@@ -28,13 +28,15 @@ const NotificationMain = (props) => {
     fetch("http://localhost:3001/available/dates")
       .then((res) => res.json())
       .then((dates) => {
+        console.log("Normal Dates TEST >>>")
         setDatesArray([...getFutureDates(dates)]);
       });
 
     socket.on("dates", (dates) => {
+      console.log("Socket Dates TEST >>>")
       setDatesArray([...getFutureDates(dates)]);
     });
-  }, []);
+  }, [state]);
 
   const getFutureDates = (arrayOfDates) => {
     const today = new Date();
@@ -51,7 +53,6 @@ const NotificationMain = (props) => {
         currentArrayOfDates.push(dateDocument);
       }
     });
-
     return currentArrayOfDates;
   };
 
@@ -99,7 +100,7 @@ const NotificationMain = (props) => {
         setNumberOfNotifications(currentCustomerNotificationDatesArray.length);
       }
     }
-  }, [datesArray]);
+  }, [datesArray, state]);
 
   const onClickNotificationButtonHandler = (event) => {
     setShowNotificationModal(true);
@@ -110,6 +111,7 @@ const NotificationMain = (props) => {
   };
 
   const onClickNotificationHandler = (notificationData) => {
+    console.log("TEST >>>>>>>>>>>> ", notificationData)
     setState(notificationData.state);
     const currentDate = notificationData.date;
     setDate(new Date(currentDate.year, currentDate.month, currentDate.day));
@@ -181,6 +183,7 @@ const NotificationMain = (props) => {
               state={state}
               date={date}
               reservation={reservation}
+              rejection={rejection}
               onSuccess={onSuccessHandler}
             />
           </>

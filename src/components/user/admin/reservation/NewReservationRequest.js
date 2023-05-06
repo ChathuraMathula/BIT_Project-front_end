@@ -14,6 +14,9 @@ import ReservationRejection from "./ReservationRejection";
 import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
 import useWarningMessage from "../../../../hooks/useWarningMessage";
 import "./NewReservationRequest.css";
+import EventDetails from "../../customer/EventDetaills";
+import CustomerDetails from "../../customer/CustomerDetails";
+import PackageDetails from "../../customer/PackageDetails";
 
 /**
  *
@@ -71,7 +74,6 @@ const NewReservationRequest = (props) => {
       });
   }, []);
 
-
   const onChangeTransportCostHandler = (cost) => {
     console.log(cost);
     setTransportCost(cost);
@@ -94,7 +96,6 @@ const NewReservationRequest = (props) => {
   const onClickRejectReservationHandler = (e) => {
     setRejected(true);
   };
-
 
   const onClickSendPaymentDetailsHandler = async (e) => {
     if (advancePayment && transportCost && extraServicesCost) {
@@ -135,17 +136,17 @@ const NewReservationRequest = (props) => {
             console.log(data);
             if (data) {
               if (!data.success) {
-                setWarningMessage("Sending payment details failed.")
+                setWarningMessage("Sending payment details failed.");
               } else if (data.success) {
                 props.onSuccess(true);
               }
             }
           });
       } else {
-        setWarningMessage("Please add valid data to proceed.")
+        setWarningMessage("Please add valid data to proceed.");
       }
     } else {
-      setWarningMessage("Cost data cannot be empty.")
+      setWarningMessage("Cost data cannot be empty.");
     }
   };
 
@@ -153,7 +154,7 @@ const NewReservationRequest = (props) => {
     if (successRejection) {
       props.onSuccess(true);
     }
-  }
+  };
 
   const onCancelRejectHandler = (cancelRejection) => {
     if (cancelRejection) {
@@ -168,63 +169,15 @@ const NewReservationRequest = (props) => {
       {!rejected ? (
         <>
           <ModalCardContainer>
-            <DetailsContainer>
-              <NameValueTitle>EVENT DETAILS</NameValueTitle>
-              <NameValueString name="Event Location:" value={event.location} />
-              <NameValueString
-                name="Event Time:"
-                value={`From ${event.beginTime} to ${event.endTime}`}
-              />
-            </DetailsContainer>
-            <DetailsContainer>
-              <NameValueTitle>CUSTOMER DETAILS</NameValueTitle>
-              <NameValueString
-                name="Name:"
-                value={`${customer.firstname} ${customer.lastname}`}
-              />
-              <NameValueString name="Phone No:" value={customer.phoneNo} />
-              <NameValueString name="Email:" value={customer.email} />
-              <NameValueString name="Address:" value={customer.address} />
-            </DetailsContainer>
-            <DetailsContainer>
-              <NameValueTitle>PACKAGE DETAILS</NameValueTitle>
-              <NameValueString
-                name="Category:"
-                value={props.reservation.category}
-              />
-              <NameValueString name="Package:" value={packageDocument.name} />
-              <NameValueString name="Price:" value={packageDocument.price} />
-              <NameValueString
-                name="Services:"
-                value={
-                  packageDocument.services.length > 0
-                    ? packageDocument.services.map((service, index) => {
-                        return <li key={index}>{service}</li>;
-                      })
-                    : "Package Has been Removed"
-                }
-              />
-              {props.reservation?.extraServices.length > 0 ? (
-                <>
-                  <NameValueString
-                    name="Extra Services:"
-                    value={props.reservation?.extraServices.map(
-                      (service, index) => {
-                        if (service.quantity) {
-                          return (
-                            <li
-                              key={index}
-                            >{`${service.name} [Quantity: ${service.quantity}]`}</li>
-                          );
-                        } else {
-                          return <li key={index}>{service.name}</li>;
-                        }
-                      }
-                    )}
-                  />
-                </>
-              ) : null}
-            </DetailsContainer>
+            <EventDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <CustomerDetails username={props.reservation.customer} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <PackageDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          <ModalCardContainer>
             <div className="new-reservation-request__message-title">
               Customer Message
             </div>
@@ -264,7 +217,7 @@ const NewReservationRequest = (props) => {
             </div>
           </ModalCardContainer>
 
-          <WarningMessageBox message={warningMessage}/>
+          <WarningMessageBox message={warningMessage} />
           <ButtonContainer>
             <RedButton onClick={onClickRejectReservationHandler}>
               Reject

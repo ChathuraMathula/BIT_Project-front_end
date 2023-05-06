@@ -19,6 +19,7 @@ const NotificationAdmin = (props) => {
             const year = dateDocument.date.year;
             const month = dateDocument.date.month;
             const day = dateDocument.date.day;
+
             return (
               <>
                 <NotificationAdminCard

@@ -15,6 +15,11 @@ import UpdateReservation from "./UpdateReservation";
 import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
 import useWarningMessage from "../../../../hooks/useWarningMessage";
 import ListContainer from "../../../UI/containers/ListContainer";
+import EventDetails from "../../customer/EventDetaills";
+import CustomerDetails from "../../customer/CustomerDetails";
+import PackageDetails from "../../customer/PackageDetails";
+import CostDetails from "../../customer/CostDetails";
+import PaymentDetails from "../../customer/PaymentDetails";
 
 /**
  *
@@ -120,121 +125,21 @@ const ConfirmedReservation = (props) => {
       {!deleteReservation && !update ? (
         <>
           <ModalCardContainer>
-            <DetailsContainer>
-              <NameValueTitle>EVENT DETAILS</NameValueTitle>
-              <NameValueString
-                name="Event Location:"
-                value={reservation.event.location}
-              />
-              <NameValueString
-                name="Event Time:"
-                value={`From ${reservation.event.beginTime} to ${reservation.event.endTime}`}
-              />
-            </DetailsContainer>
-            {login.user.name === "admin" ||
-            login.user.name === "photographer" ? (
-              <DetailsContainer>
-                <NameValueTitle>CUSTOMER DETAILS</NameValueTitle>
-                <NameValueString
-                  name="Name:"
-                  value={`${customer.firstname} ${customer.lastname}`}
-                />
-                <NameValueString name="Phone No:" value={customer.phoneNo} />
-                <NameValueString name="Email:" value={customer.email} />
-                <NameValueString name="Address:" value={customer.address} />
-              </DetailsContainer>
-            ) : null}
-            <DetailsContainer>
-              <NameValueTitle>RESERVATION DETAILS</NameValueTitle>
-              <NameValueString
-                name="Category:"
-                value={
-                  packageDocument.category
-                    ? packageDocument.category
-                    : "Package Has been Removed"
-                }
-              />
-              <NameValueString
-                name="Package:"
-                value={
-                  packageDocument.name
-                    ? packageDocument.name
-                    : "Package Has been Removed"
-                }
-              />
-              <NameValueString
-                name="Services:"
-                value={
-                  <>
-                    <ListContainer>
-                      {packageDocument.services.length > 0
-                        ? packageDocument.services.map((service, index) => {
-                            return <li key={index}>{service}</li>;
-                          })
-                        : "Package Has been Removed"}
-                    </ListContainer>
-                  </>
-                }
-              />
-              {reservation?.extraServices.length > 0 ? (
-                <>
-                  <NameValueString
-                    name="Extra Services:"
-                    value={
-                      <>
-                        <ListContainer>
-                          {reservation?.extraServices.map((service, index) => {
-                            if (service.quantity) {
-                              return (
-                                <li
-                                  key={index}
-                                >{`${service.name} [Quantity: ${service.quantity}]`}</li>
-                              );
-                            } else {
-                              return <li key={index}>{service.name}</li>;
-                            }
-                          })}
-                        </ListContainer>
-                      </>
-                    }
-                  />
-                </>
-              ) : null}
-              <NameValueString
-                name="Transport Cost:"
-                value={`${reservation.costs.transport} LKR`}
-              />
-              <NameValueString
-                name="Extra Services Cost:"
-                value={`${reservation.costs.extraServices} LKR`}
-              />
-              <NameValueString
-                name="Package Price:"
-                value={`${reservation.costs.package} LKR`}
-              />
-              <NameValueString
-                name="Estimated Total Cost:"
-                value={`${
-                  +reservation.costs.transport +
-                  +reservation.costs.extraServices +
-                  +reservation.costs.package
-                } LKR`}
-              />
-              <NameValueString
-                name="Advance Payment:"
-                value={`${+reservation.costs.advance} LKR`}
-              />
-              <NameValueString
-                name="Balance:"
-                value={`${
-                  +reservation.costs.transport +
-                  +reservation.costs.extraServices +
-                  +reservation.costs.package -
-                  +reservation.costs.advance
-                } LKR`}
-              />
-            </DetailsContainer>
+            <EventDetails reservation={props.reservation} />
           </ModalCardContainer>
+          <ModalCardContainer>
+            <CustomerDetails username={props.reservation?.customer} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <PackageDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <CostDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <PaymentDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          
           {login.user.name === "admin" ? (
             <>
               <ButtonContainer>
