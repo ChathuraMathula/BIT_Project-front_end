@@ -68,7 +68,7 @@ const AddressInput = (props) => {
       setCity(addressArray[2].trim().replace(".", ""));
       props.onChange(props.value);
     }
-  }, [props.value]);
+  }, []);
 
   return (
     <>

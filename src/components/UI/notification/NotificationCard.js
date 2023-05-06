@@ -33,7 +33,7 @@ const NotificationCard = (props) => {
       if (state === "rejected") {
         props.onClickNotification({
           date: props.date,
-          rejections: props.rejections[0],
+          rejections: [props.rejections[0]],
           state: state,
         });
       } else {

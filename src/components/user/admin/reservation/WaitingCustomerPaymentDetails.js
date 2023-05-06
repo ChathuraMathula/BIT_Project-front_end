@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import "./WaitingCustomerPaymentDetails.css";
+import CustomerDetails from "../../customer/CustomerDetails";
+import EventDetails from "../../customer/EventDetaills";
+import PackageDetails from "../../customer/PackageDetails";
+import CostDetails from "../../customer/CostDetails";
 
 /**
  *
@@ -53,6 +57,18 @@ const WaitingCustomerPaymentDetails = (props) => {
           <br />
           <span>{`${hours}:${minutes}:${seconds}`}</span>
         </div>
+      </ModalCardContainer>
+      <ModalCardContainer>
+        <EventDetails reservation={props.reservation} />
+      </ModalCardContainer>
+      <ModalCardContainer>
+        <CustomerDetails username={props.reservation?.customer} />
+      </ModalCardContainer>
+      <ModalCardContainer>
+        <PackageDetails reservation={props.reservation} />
+      </ModalCardContainer>
+      <ModalCardContainer>
+        <CostDetails reservation={props.reservation} />
       </ModalCardContainer>
     </>
   );

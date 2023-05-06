@@ -38,7 +38,7 @@ const NotificationCardContainer = (props) => {
         
       }
     }
-  }, []);
+  }, [props.reservation, props.rejections]);
 
   const reservationStateHandler = (reservation) => {
     if (reservation) {

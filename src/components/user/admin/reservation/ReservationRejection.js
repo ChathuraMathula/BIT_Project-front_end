@@ -35,7 +35,7 @@ const ReservationRejection = (props) => {
 
   const onClickSendHandler = async (e) => {
     if (isConfirmedRejection && !isEmpty(message) && message !== "invalid") {
-      await fetch("http://localhost:3001/remove/reservation", {
+      await fetch("http://localhost:3001/reject/reservation", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify({

@@ -156,7 +156,9 @@ const CustomerDateController = (props) => {
             onSuccess={onSuccessHandler}
           />
         ) : null}
-        {state === "pending_yellow" ? <PendingPhotographerCosts /> : null}
+        {state === "pending_yellow" ? (
+          <PendingPhotographerCosts reservation={dateDocument.reservation} />
+        ) : null}
         {state === "pending_orange" ? (
           <CustomerPaymentDetails
             date={props.date.date}
@@ -164,7 +166,9 @@ const CustomerDateController = (props) => {
             reservation={dateDocument.reservation}
           />
         ) : null}
-        {state === "pending_red" ? <PendingConfirmation /> : null}
+        {state === "pending_red" ? (
+          <PendingConfirmation reservation={dateDocument.reservation} />
+        ) : null}
         {state === "confirmed" ? (
           <ConfirmedReservation
             reservation={dateDocument.reservation}

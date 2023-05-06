@@ -18,7 +18,8 @@ const NotificationCustomer = (props) => {
         ? props.dates.map((dateDocument, index) => {
           const year = dateDocument.date.year;
           const month = dateDocument.date.month;
-          const day = dateDocument.date.day;      
+          const day = dateDocument.date.day;
+          
             return (
               <>
                 <NotificationCustomerCard

@@ -12,6 +12,11 @@ import "./ReservationConfirmation.css";
 import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
 import useWarningMessage from "../../../../hooks/useWarningMessage";
 import ReservationRejection from "./ReservationRejection";
+import EventDetails from "../../customer/EventDetaills";
+import CustomerDetails from "../../customer/CustomerDetails";
+import PackageDetails from "../../customer/PackageDetails";
+import CostDetails from "../../customer/CostDetails";
+import PaymentDetails from "../../customer/PaymentDetails";
 
 /**
  *
@@ -68,7 +73,6 @@ const ReservationConfirmation = (props) => {
       });
   }, []);
 
-  
   const onClickConfirmHandler = async (e) => {
     await fetch("http://localhost:3001/confirm/reservation", {
       method: "POST",
@@ -101,7 +105,7 @@ const ReservationConfirmation = (props) => {
     if (successRejection) {
       props.onSuccess(true);
     }
-  }
+  };
 
   return (
     <>
@@ -109,46 +113,22 @@ const ReservationConfirmation = (props) => {
       {!rejected ? (
         <>
           <ModalCardContainer>
-            <DetailsContainer>
-              <NameValueTitle>COSTS DETAILS</NameValueTitle>
-              <NameValueString
-                name="Transport Cost:"
-                value={`${costs.transport} LKR`}
-              />
+            <EventDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <CustomerDetails username={props.reservation?.customer} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <PackageDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <CostDetails reservation={props.reservation} />
+          </ModalCardContainer>
+          <ModalCardContainer>
+            <PaymentDetails reservation={props.reservation} />
+          </ModalCardContainer>
 
-              <NameValueString
-                name="Extra Services Cost:"
-                value={`${costs.extraServices} LKR`}
-              />
-
-              <NameValueString
-                name="Package Price:"
-                value={`${costs.package} LKR`}
-              />
-              <NameValueString
-                name="Advance Payment:"
-                value={`${costs.advance} LKR`}
-              />
-            </DetailsContainer>
-            <DetailsContainer>
-              <NameValueTitle>PAYMENT DETAILS</NameValueTitle>
-              <NameValueString
-                name="Paid Method:"
-                value={`By ${payment.method}`}
-              />
-              {payment.method === "bank" ? (
-                <NameValueString
-                  name="Paid Bank Branch:"
-                  value={payment.branch}
-                />
-              ) : null}
-              <NameValueString
-                name="Paid Amount:"
-                value={`${payment.amount} LKR`}
-              />
-              <NameValueString name="Paid Date:" value={payment.date} />
-              <NameValueString name="Paid Time:" value={payment.time} />
-            </DetailsContainer>
+          <ModalCardContainer>
             <div className="reservation-confirmation__download">
               Download Bank Payment Slip/Screenshot of payment
               <a
