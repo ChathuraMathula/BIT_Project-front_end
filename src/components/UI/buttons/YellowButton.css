@@ -1,6 +1,6 @@
 .yellow-button {
     margin: 1rem 0.5rem;
-    width: 6rem;
+    width: 10rem;
     text-align: center;
     padding: 0.5rem;
     border: none;
@@ -18,5 +18,20 @@
       color: hsl(220, 61%, 90%);
       background-color: hsl(65, 100%, 36%);
       transition: all 0.4s;
+  }
+
+  /* For medium size phones */
+@media (min-width: 576px) {
+    .yellow-button {
+      width: 6rem;
+    }
+  }
+  
+  /* For Tablets */
+  @media (min-width: 768px) {
+  }
+  
+  /* For Laptops */
+  @media (min-width: 992px) {
   }
   

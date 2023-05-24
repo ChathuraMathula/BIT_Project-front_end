@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { sanitize } from "../../../../utils/Sanitizer";
+import { sanitize } from "../../../../utils/sanitize";
 import GreenButton from "../../../UI/buttons/GreenButton";
-import MiniPlusButton from "../../../UI/buttons/MiniPlusButton";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import FlexCenterRowContainer from "../../../UI/containers/FlexCenterRowContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInputCheckBox from "../../../UI/form/FormInputCheckBox";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
-import "./CategoryExtras.css";
 import CategoryExtraService from "./CategoryExtraService";
+import "./CategoryExtras.css";
 
 /**
  *

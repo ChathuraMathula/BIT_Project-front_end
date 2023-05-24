@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { sanitize } from "../../../../utils/Sanitizer";
-import { isEmpty, isValid } from "../../../../utils/Validator";
-import GreenButton from "../../../UI/buttons/GreenButton";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
+import { isEmpty } from "../../../../utils/validator";
 import RedButton from "../../../UI/buttons/RedButton";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
-import FormInput from "../../../UI/form/FormInput";
 import FormSelectOptions from "../../../UI/form/FormSelectOptions";
 import FormSubHeading from "../../../UI/form/FormSubHeading";
-import CustomerAddExtraServices from "../../customer/CustomerAddExtraServices";
-import "./UpdateReservation.css";
-import TimeInput from "../../../UI/inputs/TimeInput";
 import AddressInput from "../../../UI/inputs/AddressInput";
 import CostInput from "../../../UI/inputs/CostInput";
+import TimeInput from "../../../UI/inputs/TimeInput";
 import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
-import useWarningMessage from "../../../../hooks/useWarningMessage";
+import CustomerAddExtraServices from "../../customer/CustomerAddExtraServices";
+import "./UpdateReservation.css";
 
 /**
  *

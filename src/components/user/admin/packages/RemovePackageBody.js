@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { sanitize } from "../../../../utils/Sanitizer";
-import { isValid } from "../../../../utils/Validator";
-import OrangeButton from "../../../UI/buttons/OrangeButton";
+import { sanitize } from "../../../../utils/sanitize";
+import { isValid } from "../../../../utils/validator";
 import RedButton from "../../../UI/buttons/RedButton";
 import WarningCard from "../../../UI/cards/WarningCard";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";

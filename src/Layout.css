@@ -2,14 +2,22 @@
   position: relative;
   width: 100%;
   margin: 1rem auto;
-  padding: 1rem;
+  padding: 0.3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+
+/* For medium size phones */
+@media (min-width: 576px) {
+  .main-container {
+    padding: 1rem;
+  }
+}
+
 /* For Tablets */
-@media (min-width: 768px) and (max-width: 992px) {
+@media (min-width: 768px) {
   .main-container {
     width: 80%;
     margin: 1rem auto;
@@ -18,8 +26,8 @@
 
 /* For Laptops */
 @media (min-width: 992px) {
-    .main-container {
-        width: 70%;
-        margin: 1rem auto;
-      }
+  .main-container {
+    width: 70%;
+  }
 }
+

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../context/Context";
 import BlueButton from "../../UI/buttons/BlueButton";
-import GreenButton from "../../UI/buttons/GreenButton";
 import IncreaseButton from "../../UI/buttons/IncreaseButton";
 import ReduceButton from "../../UI/buttons/ReduceButton";
 import FlexCenterColumnContainer from "../../UI/containers/FlexCenterColumnContainer";

@@ -1,25 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserLoginContext } from "../../../../context/Context";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
 import GreenButton from "../../../UI/buttons/GreenButton";
 import OrangeButton from "../../../UI/buttons/OrangeButton";
 import RedButton from "../../../UI/buttons/RedButton";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
 import WarningCard from "../../../UI/cards/WarningCard";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
-import DetailsContainer from "../../../UI/containers/DetailsContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
-import NameValueString from "../../../UI/other/NameValueString";
-import NameValueTitle from "../../../UI/other/NameValueTitle";
+import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
+import CostDetails from "../../customer/CostDetails";
+import CustomerDetails from "../../customer/CustomerDetails";
+import EventDetails from "../../customer/EventDetaills";
+import PackageDetails from "../../customer/PackageDetails";
+import PaymentDetails from "../../customer/PaymentDetails";
 import "./ConfirmedReservation.css";
 import UpdateReservation from "./UpdateReservation";
-import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
-import useWarningMessage from "../../../../hooks/useWarningMessage";
-import ListContainer from "../../../UI/containers/ListContainer";
-import EventDetails from "../../customer/EventDetaills";
-import CustomerDetails from "../../customer/CustomerDetails";
-import PackageDetails from "../../customer/PackageDetails";
-import CostDetails from "../../customer/CostDetails";
-import PaymentDetails from "../../customer/PaymentDetails";
 
 /**
  *

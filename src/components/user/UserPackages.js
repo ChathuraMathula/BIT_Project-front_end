@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import socket from "../../utils/socket";
 import CardContainer from "../UI/containers/CardContainer";
-import FormHeading from "../UI/form/FormHeading";
 import FormSubHeading from "../UI/form/FormSubHeading";
 import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import UserPackage from "./UserPackage";

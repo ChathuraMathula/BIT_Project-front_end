@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { isValid } from "../../../../utils/Validator";
+import { isValid } from "../../../../utils/validator";
 import PlusButton from "../../../UI/buttons/PlusButton";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
 import FormInput from "../../../UI/form/FormInput";

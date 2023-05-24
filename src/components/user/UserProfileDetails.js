@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { isEmpty } from "../../utils/Validator";
+import { isEmpty } from "../../utils/validator";
 import GreenButton from "../UI/buttons/GreenButton";
 import ButtonContainer from "../UI/containers/ButtonContainer";
 import CardContainer from "../UI/containers/CardContainer";
 import FlexCenterColumnContainer from "../UI/containers/FlexCenterColumnContainer";
-import FormInput from "../UI/form/FormInput";
-import CardContainerTitle from "../UI/titles/CardContainerTitle";
-import "./UserProfileDetails.css";
+import AddressInput from "../UI/inputs/AddressInput";
 import EmailInput from "../UI/inputs/EmailInput";
 import PhoneInput from "../UI/inputs/PhoneInput";
-import AddressInput from "../UI/inputs/AddressInput";
+import CardContainerTitle from "../UI/titles/CardContainerTitle";
+import "./UserProfileDetails.css";
 
 /**
  *

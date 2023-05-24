@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
-import "./PhotoModalBody.css";
-import ModalCloseButton from "./ModalCloseButton";
 import { UserLoginContext } from "../../../context/Context";
+import "./PhotoModalBody.css";
 
 /**
  *

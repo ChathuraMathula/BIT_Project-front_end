@@ -1,6 +1,5 @@
 import React from "react";
 import CloseButton from "../../../UI/buttons/CloseButton";
-import RoundedCardContainer from "../../../UI/containers/RoundedCardContainer";
 import "./CategoryExtraService.css";
 
 /**

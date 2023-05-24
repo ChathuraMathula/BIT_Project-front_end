@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import {
+  BrowserRouter,
   Route,
   Routes,
-  BrowserRouter,
-  Outlet,
-  useNavigate,
 } from "react-router-dom";
 
-import Welcome from "./pages/Welcome";
 import Dates from "./pages/Dates";
 import SignUp from "./pages/SignUp";
+import Welcome from "./pages/Welcome";
 
 import Layout from "./Layout";
-import Login from "./pages/Login";
-import { UserLoginContext } from "./context/Context";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import useLocalStorage from "./hooks/useLocalStorage";
 import AdminPhotographerProfile from "./components/user/admin/AdminPhotographerProfile";
+import { UserLoginContext } from "./context/Context";
+import useLocalStorage from "./hooks/useLocalStorage";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 import Packages from "./pages/Packages";
-import socket from "./utils/socket";
 import Portfolio from "./pages/Portfolio";
+import Profile from "./pages/Profile";
 import ResetPassword from "./pages/ResetPassword";
+import socket from "./utils/socket";
 
 function App() {
   const [login, setLogin] = useLocalStorage("login", {

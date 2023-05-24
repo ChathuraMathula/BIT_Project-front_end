@@ -1,9 +1,8 @@
 import React, { useState } from "react";
+import UploadSVG from "../../../UI/SVG/UploadSVG";
 import CardContainer from "../../../UI/containers/CardContainer";
-import FormHeading from "../../../UI/form/FormHeading";
 import PortfolioImagesGallary from "../../../UI/gallary/PortfolioImagesGallary";
 import Modal from "../../../UI/modal/Modal";
-import UploadSVG from "../../../UI/SVG/UploadSVG";
 import "./AdminPortfolio.css";
 const AdminPortfolio = (props) => {
   const [imageFiles, setImageFiles] = useState([]);

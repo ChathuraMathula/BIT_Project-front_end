@@ -3,13 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import GreenButton from "../components/UI/buttons/GreenButton";
 import ButtonContainer from "../components/UI/containers/ButtonContainer";
 import CardContainer from "../components/UI/containers/CardContainer";
-import FormInput from "../components/UI/form/FormInput";
-import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
-import { sanitize } from "../utils/Sanitizer";
-import { isValid } from "../utils/Validator";
-import "./ResetPassword.css";
-import PasswordInput from "../components/UI/inputs/PasswordInput";
 import FlexCenterColumnContainer from "../components/UI/containers/FlexCenterColumnContainer";
+import PasswordInput from "../components/UI/inputs/PasswordInput";
+import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
+import "./ResetPassword.css";
 
 const ResetPassword = (props) => {
   const params = useParams();

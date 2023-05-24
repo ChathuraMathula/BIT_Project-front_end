@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { sanitize } from "../../../../utils/Sanitizer";
-import { isEmpty, isValid } from "../../../../utils/Validator";
+import { sanitize } from "../../../../utils/sanitize";
+import { isEmpty, isValid } from "../../../../utils/validator";
 import OrangeButton from "../../../UI/buttons/OrangeButton";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
-import FormInput from "../../../UI/form/FormInput";
 import FormInputTextArea from "../../../UI/form/FormInputTextArea";
+import CostInput from "../../../UI/inputs/CostInput";
 import NameValueString from "../../../UI/other/NameValueString";
 import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import "./UpdatePackageBody.css";
-import CostInput from "../../../UI/inputs/CostInput";
 
 /**
  * @param category (string) name of the package category

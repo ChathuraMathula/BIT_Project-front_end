@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Modal from "../../../UI/modal/Modal";
-import DateAvailabilityController from "./DateAvailabilityController";
 import socket from "../../../../utils/socket";
-import "./AdminDateController.css";
-import ReservationRequestController from "../reservation/ReservationRequestController";
-import ConfirmedReservation from "../reservation/ConfirmedReservation";
-import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import GreenButton from "../../../UI/buttons/GreenButton";
+import ButtonContainer from "../../../UI/containers/ButtonContainer";
+import Modal from "../../../UI/modal/Modal";
+import ConfirmedReservation from "../reservation/ConfirmedReservation";
+import ReservationRequestController from "../reservation/ReservationRequestController";
+import "./AdminDateController.css";
+import DateAvailabilityController from "./DateAvailabilityController";
 
 /**
  *

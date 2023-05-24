@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { sanitize } from "../../../utils/Sanitizer";
-import { isValid } from "../../../utils/Validator";
+import { sanitize } from "../../../utils/sanitize";
+import { isValid } from "../../../utils/validator";
 import GreenButton from "../../UI/buttons/GreenButton";
 import ButtonContainer from "../../UI/containers/ButtonContainer";
 import CardContainer from "../../UI/containers/CardContainer";
 import FlexCenterColumnContainer from "../../UI/containers/FlexCenterColumnContainer";
-import FormActionButton from "../../UI/form/FormActionButton";
-import FormContainer from "../../UI/form/FormContainer";
 import FormInput from "../../UI/form/FormInput";
 import FormInputTextArea from "../../UI/form/FormInputTextArea";
-import FormSubHeading from "../../UI/form/FormSubHeading";
 import CardContainerTitle from "../../UI/titles/CardContainerTitle";
 import "./UpdatePersonalDetails.css";
 
