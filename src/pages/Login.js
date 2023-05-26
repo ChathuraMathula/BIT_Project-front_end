@@ -13,14 +13,15 @@ import { isValid } from "../utils/validator";
 import "./Login.css";
 import UsernameInput from "../components/UI/inputs/UsernameInput";
 import PasswordInput from "../components/UI/inputs/PasswordInput";
+import WarningMessageBox from "../components/UI/warnings/WarningMessageBox";
+import useWarningMessage from "../hooks/useWarningMessage";
 
 const Login = (props) => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
+  const [warningMessage, setWarningMessage] = useWarningMessage("");
   const [isSentEmail, setIsSentEmail] = useState(false);
 
   const onChangeUsernameHandler = (usernameText) => {
@@ -31,26 +32,14 @@ const Login = (props) => {
     setPassword(passwordText);
   };
 
-  const displayWarning = (message) => {
-    setWarningStyles("login-form-warning__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
-
   const onClickLoginHandler = async () => {
     setUsername(username.trim());
     setPassword(password.trim());
 
     if (!username || !password) {
-      displayWarning("Please enter a valid username and password.");
-    } else if (
-      !isValid("username", username) ||
-      !isValid("password", password)
-    ) {
-      displayWarning("Username or password not valid. Please check again.");
+      setWarningMessage("Please enter a valid username and password.");
+    } else if (username === "invalid" || password === "invalid") {
+      setWarningMessage("Invalid Username or password. Please check again.");
     } else {
       const formData = new FormData();
       formData.append("username", username);
@@ -64,7 +53,7 @@ const Login = (props) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
-            displayWarning(data.error);
+            setWarningMessage(data.error);
           } else if (data.user) {
             props.user(data);
             console.log("inside login.js: ", data);
@@ -74,14 +63,16 @@ const Login = (props) => {
         })
         .catch((error) => {
           if (error) {
-            displayWarning("User login error... Please try again.");
+            console.log(error);
+            setWarningMessage("User login error... Please try again.");
           }
         });
     }
   };
 
   const onClickForgotPasswordHandler = async (event) => {
-    if (username) {
+    if (username && username !== "invalid") {
+      console.log(true);
       await fetch("http://localhost:3001/forgot/password", {
         method: "POST",
         credentials: "include",
@@ -95,13 +86,14 @@ const Login = (props) => {
           if (data.success) {
             setIsSentEmail(true);
           } else {
-            displayWarning(
-              "Sending reset link failed. Please try again later."
-            );
+            setIsSentEmail(true);
+            // setWarningMessage(
+            //   "Sending reset link failed. Please try again later."
+            // );
           }
         });
     } else {
-      displayWarning(
+      setWarningMessage(
         "Please add a valid username to generate a password reset link."
       );
     }
@@ -109,6 +101,7 @@ const Login = (props) => {
 
   const onClickOkHandler = (e) => {
     setIsSentEmail(false);
+    setUsername("");
   };
 
   return (
@@ -135,9 +128,7 @@ const Login = (props) => {
             </div>
             <div>Forgot Password</div>
           </div>
-          <div className={"login-form-action__message " + warningStyles}>
-            {warningMessage}
-          </div>
+          <WarningMessageBox message={warningMessage} />
           <LoginButton onClick={onClickLoginHandler}>Login</LoginButton>
         </LoginCardContainer>
       ) : isSentEmail ? (

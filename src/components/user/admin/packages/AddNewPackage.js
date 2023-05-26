@@ -172,11 +172,11 @@ const AddNewPackage = (props) => {
             Package Price:
           </FormInput>
           <AddNewPackageServices onChange={packageServicesInputHandler} />
+          <WarningMessageBox message={warningMessage} />
         </ModalCardContainer>
-        <WarningMessageBox message={warningMessage}/>
-        <ButtonContainer>
-          <GreenButton onClick={onClickAddPackageHandler}>Add</GreenButton>
-        </ButtonContainer>
+          <ButtonContainer>
+            <GreenButton onClick={onClickAddPackageHandler}>Add</GreenButton>
+          </ButtonContainer>
       </Modal>
     </>
   );
