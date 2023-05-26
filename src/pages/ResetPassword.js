@@ -49,12 +49,17 @@ const ResetPassword = (props) => {
 
   const onClickResetPassword = async (event) => {
     try {
-      if (
-        password &&
-        confirmedPassword &&
-        password === confirmedPassword &&
-        password !== "invalid"
-      ) {
+      if (!password && !confirmedPassword) {
+        setWarningMessage(
+          "Both fields cannot be empty. please enter valid passwords."
+        );
+      } else if (password === "invalid" || confirmedPassword === "invalid") {
+        setWarningMessage("Both passwords must be valid. please check again.");
+      } else if (password !== confirmedPassword) {
+        setWarningMessage(
+          "Both passwords must be same. please check again."
+        );
+      } else {
         fetch("http://localhost:3001/password/reset", {
           method: "POST",
           credentials: "include",
@@ -74,8 +79,6 @@ const ResetPassword = (props) => {
               setWarningMessage("Reset password failed.");
             }
           });
-      } else {
-        setWarningMessage("Invalid password. please check again.");
       }
     } catch (error) {
       setWarningMessage("Reset password failed.");

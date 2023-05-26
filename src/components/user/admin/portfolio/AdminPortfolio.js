@@ -10,7 +10,20 @@ const AdminPortfolio = (props) => {
 
   const onChangeImageFilesHandler = (e) => {
     const files = e.target.files;
-    setImageFiles([...files]);
+    const tempFiles = [];
+    for (let file of files) {
+      console.log(file);
+      if (
+        file.type === "image/jpeg" ||
+        file.type === "image/png" ||
+        file.type === "image/jpg"
+      ) {
+        tempFiles.push(file);
+      } else {
+        continue;
+      }
+    }
+    setImageFiles([...tempFiles]);
   };
 
   const onClickShowPhotoUploadModal = (e) => {

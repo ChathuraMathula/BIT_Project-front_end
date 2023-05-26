@@ -1,17 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import HeaderOptions from "./HeaderOptions";
+import HomeButton from "../UI/buttons/HomeButton";
 
 const Header = (props) => {
+  const navigate = useNavigate();
 
+  const onClickHomeButton = (event) => {
+    navigate("/", { replace: true });
+  };
 
   return (
     <nav className="main-header">
-      <Link className="main-header__title" to="/">
-        Reserve4U
-      </Link>
-
+      <HomeButton onClick={onClickHomeButton} />
       <HeaderOptions />
     </nav>
   );

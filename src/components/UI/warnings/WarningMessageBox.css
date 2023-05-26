@@ -1,5 +1,6 @@
 .warning-message-box__container {
-  height: 1.6rem;
+  min-height: 1.6rem;
+  padding: 0.3rem;
   font-size: 0.8rem;
   margin: 0.5rem 0;
   text-align: center;

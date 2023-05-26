@@ -32,18 +32,14 @@ const Login = (props) => {
     setPassword(passwordText);
   };
 
-
   const onClickLoginHandler = async () => {
     setUsername(username.trim());
     setPassword(password.trim());
 
     if (!username || !password) {
       setWarningMessage("Please enter a valid username and password.");
-    } else if (
-      !isValid("username", username) ||
-      !isValid("password", password)
-    ) {
-      setWarningMessage("Username or password not valid. Please check again.");
+    } else if (username === "invalid" || password === "invalid") {
+      setWarningMessage("Invalid Username or password. Please check again.");
     } else {
       const formData = new FormData();
       formData.append("username", username);
@@ -57,7 +53,7 @@ const Login = (props) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {
-            displayWarning(data.error);
+            setWarningMessage(data.error);
           } else if (data.user) {
             props.user(data);
             console.log("inside login.js: ", data);
@@ -67,6 +63,7 @@ const Login = (props) => {
         })
         .catch((error) => {
           if (error) {
+            console.log(error);
             setWarningMessage("User login error... Please try again.");
           }
         });
@@ -74,7 +71,8 @@ const Login = (props) => {
   };
 
   const onClickForgotPasswordHandler = async (event) => {
-    if (username) {
+    if (username && username !== "invalid") {
+      console.log(true);
       await fetch("http://localhost:3001/forgot/password", {
         method: "POST",
         credentials: "include",
@@ -88,9 +86,10 @@ const Login = (props) => {
           if (data.success) {
             setIsSentEmail(true);
           } else {
-            setWarningMessage(
-              "Sending reset link failed. Please try again later."
-            );
+            setIsSentEmail(true);
+            // setWarningMessage(
+            //   "Sending reset link failed. Please try again later."
+            // );
           }
         });
     } else {
@@ -102,6 +101,7 @@ const Login = (props) => {
 
   const onClickOkHandler = (e) => {
     setIsSentEmail(false);
+    setUsername("");
   };
 
   return (
@@ -128,7 +128,7 @@ const Login = (props) => {
             </div>
             <div>Forgot Password</div>
           </div>
-          <WarningMessageBox message={warningMessage}/>
+          <WarningMessageBox message={warningMessage} />
           <LoginButton onClick={onClickLoginHandler}>Login</LoginButton>
         </LoginCardContainer>
       ) : isSentEmail ? (

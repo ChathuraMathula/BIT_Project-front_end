@@ -1,0 +1,38 @@
+.home-button__container {
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .home-button__container:hover {
+    opacity: 0.4;
+    transition: all 0.4s;
+  }
+  
+  .home-button__container svg {
+    height: inherit;
+    width: inherit;
+  }
+  
+  
+  /* For medium size phones */
+  @media (min-width: 576px) {
+  }
+  /* For Tablets */
+  @media (min-width: 768px) {
+    .home-button__container {
+      height: 3.5rem;
+      width: 3.5rem;
+      margin-right: 1.2rem;
+    }
+  
+  }
+  /* For Laptops */
+  @media (min-width: 992px) {
+  }
+  
