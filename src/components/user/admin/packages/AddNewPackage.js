@@ -8,6 +8,10 @@ import FormSelectOptions from "../../../UI/form/FormSelectOptions";
 import Modal from "../../../UI/modal/Modal";
 import "./AddNewPackage.css";
 import AddNewPackageServices from "./AddNewPackageServices";
+import GreenButton from "../../../UI/buttons/GreenButton";
+import ButtonContainer from "../../../UI/containers/ButtonContainer";
+import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
 
 /**
  *
@@ -23,17 +27,7 @@ const AddNewPackage = (props) => {
   const [packageServices, setPackageServices] = useState("");
   const [price, setPrice] = useState("");
 
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
-
-  const displayWarning = (message) => {
-    setWarningStyles("warning-msg-styles__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
+  const [warningMessage, setWarningMessage] = useWarningMessage("");
 
   const setBackToDefaultValues = () => {
     setCategory("new");
@@ -116,12 +110,12 @@ const AddNewPackage = (props) => {
                 props.onAddCategory(data.categories);
                 setShowModal(false);
               } else if (data.error) {
-                displayWarning(data.error);
+                setWarningMessage(data.error);
               }
             }
           });
       } else {
-        displayWarning("Input data is invalid. Please check again. 😡");
+        setWarningMessage("Input data is invalid. Please check again.");
       }
     } catch (error) {}
   };
@@ -137,10 +131,6 @@ const AddNewPackage = (props) => {
         onClose={onCloseAddPackageHandler}
         heading="ADD NEW PACKAGE"
         onBackdropClick={onBackdropClickHandler}
-        leftButton="Add Package"
-        onClickLeft={onClickAddPackageHandler}
-        warningMessage={warningMessage}
-        warningStyles={warningStyles}
       >
         <ModalCardContainer>
           <FormSelectOptions
@@ -181,8 +171,12 @@ const AddNewPackage = (props) => {
           >
             Package Price:
           </FormInput>
-          <AddNewPackageServices onChange={packageServicesInputHandler}/>
+          <AddNewPackageServices onChange={packageServicesInputHandler} />
         </ModalCardContainer>
+        <WarningMessageBox message={warningMessage}/>
+        <ButtonContainer>
+          <GreenButton onClick={onClickAddPackageHandler}>Add</GreenButton>
+        </ButtonContainer>
       </Modal>
     </>
   );
