@@ -7,6 +7,7 @@ import FormInputTextArea from "../../../UI/form/FormInputTextArea";
 import FormSelectOptions from "../../../UI/form/FormSelectOptions";
 import Modal from "../../../UI/modal/Modal";
 import "./AddNewPackage.css";
+import AddNewPackageServices from "./AddNewPackageServices";
 
 /**
  *
@@ -69,8 +70,8 @@ const AddNewPackage = (props) => {
     setPackageName(event.target.value);
   };
 
-  const packageServicesInputHandler = (event) => {
-    setPackageServices(event.target.value);
+  const packageServicesInputHandler = (servicesString) => {
+    setPackageServices(servicesString);
   };
 
   const priceInputHandler = (event) => {
@@ -180,13 +181,7 @@ const AddNewPackage = (props) => {
           >
             Package Price:
           </FormInput>
-          <FormInputTextArea
-            onChange={packageServicesInputHandler}
-            placeholder="Please add comma separated list of services to be included in the package"
-            value={packageServices}
-          >
-            Package Services:
-          </FormInputTextArea>
+          <AddNewPackageServices onChange={packageServicesInputHandler}/>
         </ModalCardContainer>
       </Modal>
     </>

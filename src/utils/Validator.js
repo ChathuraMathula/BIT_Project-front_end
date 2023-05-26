@@ -89,6 +89,10 @@ export const isValid = (type, value) => {
       // eg: comma seperated list (allowd characters are "&,()×")
       pattern = /^[a-zA-Z0-9\ \,\&\(\)\×\x\[\]]+$/i;
       break;
+    case "packageService":
+      // eg: comma seperated list (allowd characters are " &,()×")
+      pattern = /^[a-zA-Z0-9\ \&\(\)\×\x\[\]]+$/i;
+      break;
     case "integer":
       // integer numbers
       pattern = /^[0-9]+$/i;
