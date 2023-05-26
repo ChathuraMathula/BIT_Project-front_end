@@ -1,0 +1,14 @@
+.package-service__container {
+    width: 100%;
+    position: relative;
+    padding: 0.5rem;
+    margin: 0.4rem 0;
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    border-radius: 0 1rem 0 0;
+    background-color: hsl(216, 100%, 10%);
+    animation-name: wipeIn;
+    animation-duration: 0.4s;
+  }
+  
+  

@@ -7,8 +7,11 @@ import PhotographerProfilePicture from "../../user/photographer/PhotographerProf
 import LightBlueButton from "../buttons/LightBlueButton";
 import PurpleButton from "../buttons/PurpleButton";
 import YellowButton from "../buttons/YellowButton";
-import ButtonContainer from "../containers/ButtonContainer";
+import CardContainer from "../containers/CardContainer";
+import FlexCenterColumnContainer from "../containers/FlexCenterColumnContainer";
+import FlexRowContainer from "../containers/FlexRowContainer";
 import NormalCardContainer from "../containers/NormalCardContainer";
+import CardContainerTitle from "../titles/CardContainerTitle";
 import "./WelcomeCard.css";
 
 const WelcomeCard = (props) => {
@@ -62,24 +65,32 @@ const WelcomeCard = (props) => {
 
   return (
     <>
-      <NormalCardContainer>
-        <PhotographerProfilePicture src={imageUrl} />
-        <PhotographerName firstname={firstname} lastname={lastname} />
-        <PhotographerDescription description={summary} />
-        <PhotographerContacts
-          phoneNo={phoneNo}
-          email={email}
-          facebook={facebook}
-          instagram={instagram}
-        />
-      </NormalCardContainer>
-      <NormalCardContainer>
-        <ButtonContainer>
-          <PurpleButton onClick={onClickDatesHandler}>Dates</PurpleButton>
-          <YellowButton onClick={onClickPackagesHandler}>Packages</YellowButton>
-          <LightBlueButton onClick={onClickPortfolioHandler}>Portfolio</LightBlueButton>
-        </ButtonContainer>
-      </NormalCardContainer>
+      <FlexRowContainer>
+        <FlexCenterColumnContainer>
+          <CardContainer>
+            <PurpleButton onClick={onClickDatesHandler}>Dates</PurpleButton>
+            <YellowButton onClick={onClickPackagesHandler}>
+              Packages
+            </YellowButton>
+            <LightBlueButton onClick={onClickPortfolioHandler}>
+              Portfolio
+            </LightBlueButton>
+          </CardContainer>
+        </FlexCenterColumnContainer>
+
+        <NormalCardContainer>
+          <CardContainerTitle>Hire Me...!</CardContainerTitle>
+          <PhotographerProfilePicture src={imageUrl} />
+          <PhotographerName firstname={firstname} lastname={lastname} />
+          <PhotographerDescription description={summary} />
+          <PhotographerContacts
+            phoneNo={phoneNo}
+            email={email}
+            facebook={facebook}
+            instagram={instagram}
+          />
+        </NormalCardContainer>
+      </FlexRowContainer>
     </>
   );
 };

@@ -3,19 +3,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import GreenButton from "../components/UI/buttons/GreenButton";
 import ButtonContainer from "../components/UI/containers/ButtonContainer";
 import CardContainer from "../components/UI/containers/CardContainer";
-import FormInput from "../components/UI/form/FormInput";
-import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
-import { sanitize } from "../utils/Sanitizer";
-import { isValid } from "../utils/Validator";
-import "./ResetPassword.css";
-import PasswordInput from "../components/UI/inputs/PasswordInput";
 import FlexCenterColumnContainer from "../components/UI/containers/FlexCenterColumnContainer";
+import PasswordInput from "../components/UI/inputs/PasswordInput";
+import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
+import WarningMessageBox from "../components/UI/warnings/WarningMessageBox";
+import useWarningMessage from "../hooks/useWarningMessage";
+import "./ResetPassword.css";
 
 const ResetPassword = (props) => {
   const params = useParams();
   const [verified, setVerified] = useState(false);
-  const [warningMessage, setWarningMessage] = useState("");
-  const [warningStyles, setWarningStyles] = useState("");
+
+  const [warningMessage, setWarningMessage] = useWarningMessage("");
 
   const [password, setPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
@@ -39,15 +38,6 @@ const ResetPassword = (props) => {
         }
       });
   }, []);
-
-  const displayWarning = (message) => {
-    setWarningStyles("warning-msg-styles__white");
-    setWarningMessage(message);
-    setTimeout(() => {
-      setWarningStyles("");
-      setWarningMessage("");
-    }, 5000);
-  };
 
   const onChangePasswordHandler = (passwordText) => {
     setPassword(passwordText);
@@ -81,14 +71,14 @@ const ResetPassword = (props) => {
             if (data.success) {
               navigate("/login", { replace: true });
             } else {
-              displayWarning("Reset password failed. 😐");
+              setWarningMessage("Reset password failed.");
             }
           });
       } else {
-        displayWarning("Invalid password. please check again 😐");
+        setWarningMessage("Invalid password. please check again.");
       }
     } catch (error) {
-      displayWarning("Reset password failed. 😐");
+      setWarningMessage("Reset password failed.");
     }
   };
 
@@ -111,10 +101,7 @@ const ResetPassword = (props) => {
                 onChange={onChangeConfirmedPasswordHandler}
               />
             </FlexCenterColumnContainer>
-
-            <div className={"warning-msg__container " + warningStyles}>
-              {warningMessage}
-            </div>
+            <WarningMessageBox message={warningMessage} />
             <ButtonContainer>
               <GreenButton onClick={onClickResetPassword}>Reset</GreenButton>
             </ButtonContainer>

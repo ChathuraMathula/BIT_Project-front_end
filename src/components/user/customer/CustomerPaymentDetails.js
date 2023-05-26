@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { isValid } from "../../../utils/Validator";
+import { isValid } from "../../../utils/validator";
 import GreenButton from "../../UI/buttons/GreenButton";
 import RedButton from "../../UI/buttons/RedButton";
 import CalenderDateState from "../../UI/calender/CalenderDateState";

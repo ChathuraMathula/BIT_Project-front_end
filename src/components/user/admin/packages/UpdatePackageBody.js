@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { sanitize } from "../../../../utils/Sanitizer";
-import { isEmpty, isValid } from "../../../../utils/Validator";
+import { sanitize } from "../../../../utils/sanitize";
+import { isEmpty, isValid } from "../../../../utils/validator";
 import OrangeButton from "../../../UI/buttons/OrangeButton";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
-import FormInput from "../../../UI/form/FormInput";
-import FormInputTextArea from "../../../UI/form/FormInputTextArea";
+import CostInput from "../../../UI/inputs/CostInput";
 import NameValueString from "../../../UI/other/NameValueString";
 import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
+import AddNewPackageServices from "./AddNewPackageServices";
 import "./UpdatePackageBody.css";
-import CostInput from "../../../UI/inputs/CostInput";
 
 /**
  * @param category (string) name of the package category
@@ -24,7 +23,7 @@ import CostInput from "../../../UI/inputs/CostInput";
 const UpdatePackageBody = (props) => {
   const [initialPrice, setInitialPrice] = useState(props.price);
   const [price, setPrice] = useState("");
-  const [services, setServices] = useState(props.services);
+  const [services, setServices] = useState("");
 
   const [warningMessage, setWarningMessage] = useState("");
   const [warningStyles, setWarningStyles] = useState("");
@@ -85,8 +84,8 @@ const UpdatePackageBody = (props) => {
     setPrice(priceInputValue);
   };
 
-  const onChangeServicesHandler = (e) => {
-    setServices(sanitize(e.target.value));
+  const onChangeServicesHandler = (servicesString) => {
+    setServices(servicesString);
   };
 
   return (
@@ -101,13 +100,10 @@ const UpdatePackageBody = (props) => {
           value={initialPrice}
           onChange={onChangePriceHandler}
         />
-        <FormInputTextArea
+        <AddNewPackageServices
           onChange={onChangeServicesHandler}
-          placeholder="Please add comma separated list of services to be included in the package"
-          value={services}
-        >
-          Package Services:
-        </FormInputTextArea>
+          servicesString={props.services}
+        />
         <div className={"warning-msg__container " + warningStyles}>
           {warningMessage}
         </div>

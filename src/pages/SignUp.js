@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import "./SignUp.css";
-import FormUploadProfilePhoto from "../components/UI/form/FormUploadProfilePhoto";
-import FormInputCheckBox from "../components/UI/form/FormInputCheckBox";
-import { isEmpty } from "../utils/Validator";
 import { useNavigate } from "react-router-dom";
-import CardContainer from "../components/UI/containers/CardContainer";
-import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
-import ButtonContainer from "../components/UI/containers/ButtonContainer";
 import GreenButton from "../components/UI/buttons/GreenButton";
-import NameInput from "../components/UI/inputs/NameInput";
-import PhoneInput from "../components/UI/inputs/PhoneInput";
+import ButtonContainer from "../components/UI/containers/ButtonContainer";
+import CardContainer from "../components/UI/containers/CardContainer";
+import FormInputCheckBox from "../components/UI/form/FormInputCheckBox";
+import FormUploadProfilePhoto from "../components/UI/form/FormUploadProfilePhoto";
 import AddressInput from "../components/UI/inputs/AddressInput";
-import UsernameInput from "../components/UI/inputs/UsernameInput";
-import PasswordInput from "../components/UI/inputs/PasswordInput";
 import EmailInput from "../components/UI/inputs/EmailInput";
+import NameInput from "../components/UI/inputs/NameInput";
+import PasswordInput from "../components/UI/inputs/PasswordInput";
+import PhoneInput from "../components/UI/inputs/PhoneInput";
+import UsernameInput from "../components/UI/inputs/UsernameInput";
+import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
+import { isEmpty } from "../utils/validator";
+import "./SignUp.css";
 
 const SignUp = (props) => {
   const navigate = useNavigate();

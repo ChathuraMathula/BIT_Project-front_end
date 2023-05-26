@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import Sanitizer, { sanitize } from "../../../utils/Sanitizer";
-import Validator, { isEmpty, isValid } from "../../../utils/Validator";
+import React from "react";
 import "./FormInput.css";
 
 /**

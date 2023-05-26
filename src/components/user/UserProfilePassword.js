@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { sanitize } from "../../utils/Sanitizer";
-import { isEmpty, isValid } from "../../utils/Validator";
+import { isEmpty } from "../../utils/validator";
 import GreenButton from "../UI/buttons/GreenButton";
 import ButtonContainer from "../UI/containers/ButtonContainer";
 import CardContainer from "../UI/containers/CardContainer";
-import FormActionButton from "../UI/form/FormActionButton";
-import FormContainer from "../UI/form/FormContainer";
-import FormInput from "../UI/form/FormInput";
-import FormSubHeading from "../UI/form/FormSubHeading";
+import FlexCenterColumnContainer from "../UI/containers/FlexCenterColumnContainer";
+import PasswordInput from "../UI/inputs/PasswordInput";
 import CardContainerTitle from "../UI/titles/CardContainerTitle";
 import "./UserProfilePassword.css";
-import PasswordInput from "../UI/inputs/PasswordInput";
-import FlexCenterColumnContainer from "../UI/containers/FlexCenterColumnContainer";
 
 const UserProfilePassword = (props) => {
   const [oldPassword, setOldPassword] = useState("");

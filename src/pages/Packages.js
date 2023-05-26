@@ -1,21 +1,3 @@
-// import React, { useContext } from "react";
-// import AdminPackages from "../components/user/admin/AdminPackages";
-// import UserPackages from "../components/user/UserPackages";
-// import { UserLoginContext } from "../context/Context";
-
-// const Packages = (props) => {
-//   const login = useContext(UserLoginContext);
-
-//   return (
-//     <>
-//       <AdminPackages />
-      
-//     </>
-//   );
-// };
-
-// export default Packages;
-
 
 import React, { useContext, useEffect, useState } from "react";
 import CardContainerTitle from "../components/UI/titles/CardContainerTitle";

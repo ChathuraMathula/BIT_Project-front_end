@@ -1,7 +1,7 @@
 import React from "react";
-import "./GeneralNav.css";
-import FlexCenterRowContainer from "../../UI/containers/FlexCenterRowContainer";
 import { useNavigate } from "react-router-dom";
+import FlexCenterRowContainer from "../../UI/containers/FlexCenterRowContainer";
+import "./GeneralNav.css";
 
 // This component renders the header navigation links that are general to all users
 

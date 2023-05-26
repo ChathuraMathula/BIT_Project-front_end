@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
+import useWarningMessage from "../../../../hooks/useWarningMessage";
 import GreenButton from "../../../UI/buttons/GreenButton";
 import RedButton from "../../../UI/buttons/RedButton";
 import CalenderDateState from "../../../UI/calender/CalenderDateState";
 import ButtonContainer from "../../../UI/containers/ButtonContainer";
-import DetailsContainer from "../../../UI/containers/DetailsContainer";
 import ModalCardContainer from "../../../UI/containers/ModalCardContainer";
-import NameValueString from "../../../UI/other/NameValueString";
-import NameValueTitle from "../../../UI/other/NameValueTitle";
-import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import CostInput from "../../../UI/inputs/CostInput";
 import MessageInput from "../../../UI/inputs/MessageInput";
-import ReservationRejection from "./ReservationRejection";
+import CardContainerTitle from "../../../UI/titles/CardContainerTitle";
 import WarningMessageBox from "../../../UI/warnings/WarningMessageBox";
-import useWarningMessage from "../../../../hooks/useWarningMessage";
-import "./NewReservationRequest.css";
-import EventDetails from "../../customer/EventDetaills";
 import CustomerDetails from "../../customer/CustomerDetails";
+import EventDetails from "../../customer/EventDetaills";
 import PackageDetails from "../../customer/PackageDetails";
+import "./NewReservationRequest.css";
+import ReservationRejection from "./ReservationRejection";
 
 /**
  *

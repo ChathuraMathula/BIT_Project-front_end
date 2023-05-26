@@ -1,15 +1,14 @@
-import Sanitizer from "./Sanitizer";
-import Validator from "./Validator";
+import { sanitize } from "./sanitize";
+import { isValid } from "./validator";
 
 export const postLogin = async (userData) => {
   const formData = new FormData();
-  console.log("inside post.js => " ,userData);
-  const username = Sanitizer.sanitize(userData.username);
-  const password = Sanitizer.sanitize(userData.password);
+  const username = sanitize(userData.username);
+  const password = sanitize(userData.password)
 
   if (
-    Validator.isValid("username", username) &&
-    Validator.isValid("password", password)
+    isValid("username", username) &&
+    isValid("password", password)
   ) {
 
     formData.append("username", username);

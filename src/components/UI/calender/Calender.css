@@ -76,7 +76,7 @@
   }
 }
 
-/* For Tablets & Laptops */
+/* For Tablets */
 @media (min-width: 768px) {
   .calender-body__container {
     width: 70%;

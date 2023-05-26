@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { UserLoginContext } from "../../../context/Context";
 import "./LogoutButton.css";
 

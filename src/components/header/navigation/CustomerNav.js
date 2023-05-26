@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import NavigationButton from "../../UI/buttons/NavigationButton";
 import UserNavigation from "../../UI/navigation/UserNavigation";
 import "./CustomerNav.css";

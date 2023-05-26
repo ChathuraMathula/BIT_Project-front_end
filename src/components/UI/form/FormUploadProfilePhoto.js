@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { isValidImageFile } from "../../../utils/Validator";
+import { isValidImageFile } from "../../../utils/validator";
 import "./FormUploadProfilePhoto.css";
 
 /**

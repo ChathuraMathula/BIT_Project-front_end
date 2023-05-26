@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { UserLoginContext } from "../../context/Context";
-import "./HeaderOptions.css";
-import GeneralNav from "./navigation/GeneralNav";
-import AdminNav from "./navigation/AdminNav";
-import PhotograpehrNav from "./navigation/PhotographerNav";
-import CustomerNav from "./navigation/CustomerNav";
 import FlexCenterRowContainer from "../UI/containers/FlexCenterRowContainer";
 import NotificationMain from "../UI/notification/NotificationMain";
+import "./HeaderOptions.css";
+import AdminNav from "./navigation/AdminNav";
+import CustomerNav from "./navigation/CustomerNav";
+import GeneralNav from "./navigation/GeneralNav";
+import PhotograpehrNav from "./navigation/PhotographerNav";
 
 /*
     This component renders the Option links in Main Header based on the login state and user

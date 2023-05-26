@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Label from "./Label";
 import InputWarning from "../warnings/InputWarning";
-import { sanitize } from "../../../utils/Sanitizer";
-import { isValid } from "../../../utils/Validator";
+import { sanitize } from "../../../utils/sanitize";
+import { isValid } from "../../../utils/validator";
 
 /**
  *

@@ -8,7 +8,7 @@ import NormalCardContainer from "../components/UI/containers/NormalCardContainer
 import WarningContainer from "../components/UI/containers/WarningContainer";
 import PadlockSVG from "../components/UI/SVG/PadlockSVG";
 import CardContainerTitle from "../components/UI/titles/CardContainerTitle";
-import { isValid } from "../utils/Validator";
+import { isValid } from "../utils/validator";
 
 import "./Login.css";
 import UsernameInput from "../components/UI/inputs/UsernameInput";

@@ -1,6 +1,5 @@
 import React from "react";
 import "./InfoButton.css";
-import InfoSVG from "../SVG/InfoSVG";
 
 /**
  *
