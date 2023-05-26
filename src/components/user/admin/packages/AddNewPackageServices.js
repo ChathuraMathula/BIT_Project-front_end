@@ -27,8 +27,6 @@ const AddNewPackageServices = (props) => {
     setServicesArray([...tempServiceArray]);
   };
 
-  console.log("+++ ", servicesArray);
-
   useEffect(() => {
     props.onChange(servicesArray.join(","));
   }, [servicesArray]);
