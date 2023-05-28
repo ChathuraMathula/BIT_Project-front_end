@@ -56,7 +56,7 @@ const ReservationRejection = (props) => {
           console.log(data);
           if (data) {
             if (!data.success) {
-              setWarningMessage("Removing reservation failed.");
+              setWarningMessage("Rejecting reservation failed.");
             } else if (data.success) {
               props.onSuccess(true);
             }
