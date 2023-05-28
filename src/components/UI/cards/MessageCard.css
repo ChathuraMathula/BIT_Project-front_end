@@ -1,0 +1,11 @@
+.message-card {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px dashed hsl(220, 61%, 80%);
+  background-color: hsl(220, 61%, 30%);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  -webkit-user-select: none;
+  user-select: none;
+  margin: 0.5rem 0 1rem 0;
+}
