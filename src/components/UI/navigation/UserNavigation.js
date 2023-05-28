@@ -91,16 +91,6 @@ const UserNavigation = (props) => {
               >
                 Profile
               </NavigationButton>
-            </>
-          ) : null}
-          {login.user?.name === "admin" ? (
-            <>
-              <NavigationButton
-                onClick={onClickNavigationButtonHandler}
-                to="/photographer"
-              >
-                Photographer
-              </NavigationButton>
               <NavigationButton
                 onClick={onClickNavigationButtonHandler}
                 to="/packages"
@@ -112,6 +102,16 @@ const UserNavigation = (props) => {
                 to="/portfolio"
               >
                 Portfolio
+              </NavigationButton>
+            </>
+          ) : null}
+          {login.user?.name === "admin" ? (
+            <>
+              <NavigationButton
+                onClick={onClickNavigationButtonHandler}
+                to="/photographer"
+              >
+                Photographer
               </NavigationButton>
             </>
           ) : null}
