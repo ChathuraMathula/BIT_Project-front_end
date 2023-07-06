@@ -109,6 +109,7 @@ const AddNewPackage = (props) => {
               if (data.success) {
                 props.onAddCategory(data.categories);
                 setShowModal(false);
+                setBackToDefaultValues();
               } else if (data.error) {
                 setWarningMessage(data.error);
               }

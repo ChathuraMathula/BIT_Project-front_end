@@ -1,6 +1,6 @@
 .lightblue-button {
   margin: 1rem 0.5rem;
-  width: 10rem;
+  /* width: 10rem; */
   text-align: center;
   padding: 0.5rem;
   border: none;
@@ -23,7 +23,7 @@
 /* For medium size phones */
 @media (min-width: 576px) {
   .lightblue-button {
-    width: 6rem;
+    /* width: 6rem; */
   }
 }
 

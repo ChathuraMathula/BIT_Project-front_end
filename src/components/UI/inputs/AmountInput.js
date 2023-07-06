@@ -38,7 +38,7 @@ const AmountInput = (props) => {
       setInvalid(false);
       props.onChange(paidAmount);
     } else {
-      setMessage("⚠ Please enter a valid Date");
+      setMessage("⚠ Please enter a valid Amount");
       setInvalid(true);
       props.onChange("invalid");
     }

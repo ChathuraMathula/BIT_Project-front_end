@@ -2,10 +2,7 @@
   padding: 0.5rem 1rem;
   width: 100%;
   height: 100%;
-  
-
 }
-
 
 .list-container__container ul {
   list-style: square;
@@ -15,11 +12,13 @@
 
 /* For medium size phones */
 @media (min-width: 576px) {
-  
+  .list-container__container ul{
+    padding-left: 0;
+  }
 }
 
 /* For Tablets */
-@media (min-width: 768px)  {
+@media (min-width: 768px) {
   .list-container__container ul {
     list-style: square;
     padding-left: 1rem;
@@ -28,5 +27,4 @@
 }
 
 @media (max-width: 992px) {
-  
 }

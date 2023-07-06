@@ -33,7 +33,7 @@ const PhotographerCard = (props) => {
         <img className="photographer-card__img" alt=""></img>
       </div>
       <div className="photographer-card__info-container">
-        <h1 className="photographer-card__info-Heading">Hire Me!</h1>
+        <h1 className="photographer-card__info-Heading">About Me.</h1>
         <div className="photographer-card__info-Description">{summary}</div>
         <div className="photographer-card__info-Name">
           {firstname ? `- ${firstname} ${lastname}` : ``}
