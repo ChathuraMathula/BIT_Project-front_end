@@ -68,18 +68,18 @@ const WelcomeCard = (props) => {
       <FlexRowContainer>
         <FlexCenterColumnContainer>
           <CardContainer>
-            <PurpleButton onClick={onClickDatesHandler}>Dates</PurpleButton>
+            <PurpleButton onClick={onClickDatesHandler}>Get Reserved a Date</PurpleButton>
             <YellowButton onClick={onClickPackagesHandler}>
-              Packages
+              Explore Packages
             </YellowButton>
             <LightBlueButton onClick={onClickPortfolioHandler}>
-              Portfolio
+              See My Portfolio
             </LightBlueButton>
           </CardContainer>
         </FlexCenterColumnContainer>
 
         <NormalCardContainer>
-          <CardContainerTitle>Hire Me...!</CardContainerTitle>
+          <CardContainerTitle>I am your photographer.</CardContainerTitle>
           <PhotographerProfilePicture src={imageUrl} />
           <PhotographerName firstname={firstname} lastname={lastname} />
           <PhotographerDescription description={summary} />

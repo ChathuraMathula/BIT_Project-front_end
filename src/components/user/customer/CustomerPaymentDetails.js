@@ -170,10 +170,26 @@ const CustomerPaymentDetails = (props) => {
   const onClickSendPaymentDetailsHandler = async (e) => {
     if (paymentMethod === "bank") {
       if (
-        paidBranch !== "invalid" &&
-        paidAmount !== "invalid" &&
-        paidDate !== "invalid" &&
-        paidTime !== "invalid" &&
+        paidBranch == "" &&
+        paidAmount == "" &&
+        paidDate == "" &&
+        paidTime == "" &&
+        !paymentSlipPhoto
+      ) {
+        setWarningMessage("Input fields cannot be empty.");
+      } else if (
+        paidBranch !== "invalid" && paidBranch !== "" &&
+        paidAmount !== "invalid" && paidAmount !== "" &&
+        paidDate !== "invalid" && paidDate !== "" &&
+        paidTime !== "invalid" && paidTime !== "" &&
+        !paymentSlipPhoto
+      ) {
+        setWarningMessage("Payment slip photo must be uploaded. Please try again.");
+      } else if (
+        paidBranch !== "invalid" && paidBranch !== "" &&
+        paidAmount !== "invalid" && paidAmount !== "" &&
+        paidDate !== "invalid" && paidDate !== "" &&
+        paidTime !== "invalid" && paidTime !== "" &&
         paymentSlipPhoto
       ) {
         const formData = new FormData();
@@ -203,13 +219,28 @@ const CustomerPaymentDetails = (props) => {
             }
           });
       } else {
-        setWarningMessage("Input data is invalid. Please check and try again.");
+        setWarningMessage("Error: Please check your input data and try again.");
       }
     } else if (paymentMethod === "online banking") {
+      
       if (
-        isValid("paidAmount", paidAmount) &&
-        isValid("date", paidDate) &&
-        isValid("time", paidTime) &&
+        paidAmount == "" &&
+        paidDate == "" &&
+        paidTime == "" &&
+        !paymentSlipPhoto
+      ) {
+        setWarningMessage("Input fields cannot be empty.");
+      } else if (
+        paidAmount !== "invalid" && paidAmount !== "" &&
+        paidDate !== "invalid" && paidDate !== "" &&
+        paidTime !== "invalid" && paidTime !== "" &&
+        !paymentSlipPhoto
+      ) {
+        setWarningMessage("Payment slip photo must be uploaded. Please try again.");
+      } else if (
+        paidAmount !== "invalid" && paidAmount !== "" &&
+        paidDate !== "invalid" && paidDate !== "" &&
+        paidTime !== "invalid" && paidTime !== "" &&
         paymentSlipPhoto
       ) {
         const formData = new FormData();
@@ -239,7 +270,7 @@ const CustomerPaymentDetails = (props) => {
             }
           });
       } else {
-        setWarningMessage("Input data is invalid. Please check and try again.");
+        setWarningMessage("Error: Please check your input data and try again.");
       }
     }
   };

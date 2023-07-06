@@ -20,7 +20,7 @@
 /* For Tablets */
 @media (min-width: 768px) {
   .main-container {
-    width: 80%;
+    /* width: 80%; */
     margin: 1rem auto;
   }
 }

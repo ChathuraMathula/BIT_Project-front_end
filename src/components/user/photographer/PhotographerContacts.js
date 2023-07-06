@@ -7,18 +7,14 @@ import "./PhotographerContacts.css";
 
 /**
  *
- * @param email
- * @param phoneNo
- * @param facebook
- * @param instagram
+ * @param props.email
+ * @param props.phoneNo
  * @returns
  */
 const PhotographerContacts = (props) => {
   return <div className="photographer-contacts__container">
-    {props.phoneNo ? <a><PhoneSVG /></a> : null}
-    {props.email ? <a><EmailSVG /></a> : null}
-    {props.facebook ? <a><FacebookSVG /></a> : null}
-    {props.instagram ? <a><InstagramSVG /></a> : null}
+    {props.phoneNo ? <a href={`tel:${props.phoneNo}`}><PhoneSVG /></a> : null}
+    {props.email ? <a target="_blank" href={`mailto:${props.email}`}><EmailSVG /></a> : null}
   </div>;
 };
 
