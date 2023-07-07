@@ -76,7 +76,7 @@ const UpdatePackageBody = (props) => {
         displayWarning("Input data is invalid. Please check again. 😡");
       }
     } catch (error) {
-      console.log("==> ", error);
+      console.log(error);
     }
   };
 

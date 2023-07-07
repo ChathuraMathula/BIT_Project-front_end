@@ -56,13 +56,6 @@ const Calender = (props) => {
     }
   };
 
-  useEffect(() => {
-    fetch("http://localhost:3001/available/dates")
-      .then((res) => res.json())
-      .then((datesCollection) => {
-        console.log(datesCollection);
-      });
-  }, []);
 
   const onClickCalendarInfoHandler = (event) => {
     setShow(true);

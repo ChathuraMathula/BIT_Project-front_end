@@ -29,7 +29,6 @@ const NotificationCardContainer = (props) => {
         reservationStateHandler(props.reservation);
       } else if (props.rejections) {
         for (let i = props.rejections.length - 1; i >= 0; i--) {
-            console.log(i)
           if (props.rejections[i]?.customer === login.user?.name) {
             setState("rejected");
             break;

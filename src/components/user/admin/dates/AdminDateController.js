@@ -49,7 +49,7 @@ const AdminDateController = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          
           if (data.success) {
             setState("Available");
             setShowModal(false);
@@ -74,7 +74,7 @@ const AdminDateController = (props) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          
           if (data.success) {
             setState("Not Available");
             setShowModal(false);

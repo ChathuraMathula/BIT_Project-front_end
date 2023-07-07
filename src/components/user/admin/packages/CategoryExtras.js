@@ -68,7 +68,7 @@ const CategoryExtras = (props) => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        
         if (data.success) {
           props.onSuccess(true);
         }

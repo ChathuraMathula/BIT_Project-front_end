@@ -105,7 +105,7 @@ const AddNewPackage = (props) => {
           .then((res) => res.json())
           .then((data) => {
             if (data) {
-              console.log(data);
+              
               if (data.success) {
                 props.onAddCategory(data.categories);
                 setShowModal(false);

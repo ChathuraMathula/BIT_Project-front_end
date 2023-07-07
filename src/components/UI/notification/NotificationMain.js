@@ -28,12 +28,12 @@ const NotificationMain = (props) => {
     fetch("http://localhost:3001/available/dates")
       .then((res) => res.json())
       .then((dates) => {
-        console.log("Normal Dates TEST >>>")
+        
         setDatesArray([...getFutureDates(dates)]);
       });
 
     socket.on("dates", (dates) => {
-      console.log("Socket Dates TEST >>>")
+      
       setDatesArray([...getFutureDates(dates)]);
     });
   }, [state]);
@@ -111,7 +111,7 @@ const NotificationMain = (props) => {
   };
 
   const onClickNotificationHandler = (notificationData) => {
-    console.log("TEST >>>>>>>>>>>> ", notificationData)
+    
     setState(notificationData.state);
     const currentDate = notificationData.date;
     setDate(new Date(currentDate.year, currentDate.month, currentDate.day));

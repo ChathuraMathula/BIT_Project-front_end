@@ -13,13 +13,11 @@ const PortfolioImagesGallary = (props) => {
     fetch("http://localhost:3001/portfolio/images/names")
       .then((res) => res.json())
       .then((data) => {
-        console.log([...devideIntoFourArrays(data)]);
-        // setImages([...data]);
+        
         setImages([...devideIntoFourArrays(data)]);
       });
 
     socket.on("portfolio", (data) => {
-      console.log("-------->>>>>>>", data)
       setImages([...devideIntoFourArrays(data)]);
     });
   }, []);

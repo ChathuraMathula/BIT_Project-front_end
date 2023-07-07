@@ -14,8 +14,6 @@ import PhotograpehrNav from "./navigation/PhotographerNav";
 const HeaderOptions = (props) => {
   const login = useContext(UserLoginContext);
 
-  console.log("Inside HeaderOptions.js: ", login);
-
   if (login?.isLogged) {
     if (login.user.role === "admin") {
       return (
