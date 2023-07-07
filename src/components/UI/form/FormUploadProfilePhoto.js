@@ -36,7 +36,7 @@ const FormUploadProfilePhoto = (props) => {
         .then((res) => res.blob())
         .then((data) => {
           if (data) {
-            console.log("PICTURE", data);
+            
             setFileUrl(URL.createObjectURL(data));
           }
         });
@@ -75,7 +75,7 @@ const FormUploadProfilePhoto = (props) => {
               transform="translate(231.5 62.5)"
               fill="none"
               stroke="#000a1a"
-              stroke-width="55"
+              strokeWidth="55"
             />
             <line
               id="Line_2"
@@ -84,7 +84,7 @@ const FormUploadProfilePhoto = (props) => {
               transform="translate(400.5 231.5) rotate(90)"
               fill="none"
               stroke="#000a1a"
-              stroke-width="55"
+              strokeWidth="55"
             />
           </svg>
 

@@ -5,7 +5,7 @@ const PackagesSVG = (props) => {
         <>
            <svg className={props.className} xmlns="http://www.w3.org/2000/svg" width="486.5" height="460.5" viewBox="0 0 486.5 460.5">
   <rect id="Rectangle_23" data-name="Rectangle 23" width="486" height="460" rx="51" fill="none"/>
-  <rect id="Rectangle_9" data-name="Rectangle 9" width="341" height="359" rx="51" transform="translate(73 51)" fill="none" stroke="#c299ff" stroke-miterlimit="10" stroke-width="8"/>
+  <rect id="Rectangle_9" data-name="Rectangle 9" width="341" height="359" rx="51" transform="translate(73 51)" fill="none" stroke="#c299ff" stroke-miterlimit="10" strokeWidth="8"/>
   <path id="Path_21" data-name="Path 21" d="M80.69,72.48,186.806,49.09l4.643,119.34L80.69,193.3Z" transform="translate(104.131 122.404)" fill="#c299ff"/>
   <path id="Path_22" data-name="Path 22" d="M73.728,72.48,1.33,20.96V137.04l72.4,56.26Z" transform="translate(111.093 122.404)" fill="#ac7df1"/>
   <path id="Path_23" data-name="Path 23" d="M1.33,20.96l72.4,51.52L179.844,49.09,102.6.53Z" transform="translate(111.093 122.404)" fill="#fff"/>
@@ -23,7 +23,7 @@ const PackagesSVG = (props) => {
   <path id="Path_37" data-name="Path 37" d="M149.3,143.8l38.87,7.16-12.63,8.17-39.92-7.35Z" transform="translate(93.48 122.404)" fill="#904df3"/>
   <path id="Path_51" data-name="Path 51" d="M160.38,179.067l45.809-28.107v63.334L160.38,244.988Z" transform="translate(170.229 75.407)" fill="#9a6ae2"/>
   <path id="Path_38" data-name="Path 38" d="M178.34,169.99l-1.4-3.15-2.1,5.95-.57-12.4-39.35-8.26,4.2-2.49,38.69,8.02Z" transform="translate(93.48 122.404)" fill="#7735da"/>
-  <rect id="Rectangle_10" data-name="Rectangle 10" width="143" height="143" rx="71.5" transform="translate(343 317)" fill="#c299ff" stroke="#c299ff" stroke-miterlimit="10" stroke-width="1"/>
+  <rect id="Rectangle_10" data-name="Rectangle 10" width="143" height="143" rx="71.5" transform="translate(343 317)" fill="#c299ff" stroke="#c299ff" stroke-miterlimit="10" strokeWidth="1"/>
   <path id="Path_20" data-name="Path 20" d="M740.5,548.5c10,2,31,28,31,28l9,12c7-41,55-86,55-86-56,49-60,59-60,59C754.5,551.5,740.5,548.5,740.5,548.5Z" transform="translate(-374.5 -155.5)" fill="#560ac7"/>
   <path id="Path_32" data-name="Path 32" d="M266.232,133.978l-2.214-4.908-3.326,9.269-.9-19.317L197.53,106.151l6.652-3.881,61.2,12.506Z" transform="translate(92.798 122.031)" fill="#5b13c6"/>
 </svg>

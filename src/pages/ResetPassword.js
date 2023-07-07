@@ -22,7 +22,7 @@ const ResetPassword = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(params.token);
+    console.log("Token: ", params.token);
     fetch("http://localhost:3001/verify/password/reset", {
       method: "POST",
       credentials: "include",
@@ -33,8 +33,15 @@ const ResetPassword = (props) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("Data: ", data)
         if (data.success) {
           setVerified(true);
+        } else {
+          navigate("/reset/password/failed", {replace: true})
+        }
+      }).catch((error) => {
+        if (error) {
+          navigate("/reset/password/failed", {replace: true})
         }
       });
   }, []);

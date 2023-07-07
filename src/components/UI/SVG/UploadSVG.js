@@ -25,7 +25,7 @@ const UploadSVG = () => {
             transform="translate(1655.5 -795.5)"
             fill="none"
             stroke="#000a1a"
-            stroke-width="55"
+            strokeWidth="55"
           />
           <g id="Group_1" data-name="Group 1" transform="translate(-32 -16)">
             <g
@@ -50,7 +50,7 @@ const UploadSVG = () => {
               transform="translate(1546 -611)"
               fill="#adc2eb"
               stroke="#adc2eb"
-              stroke-width="1"
+              strokeWidth="1"
             >
               <rect width="283" height="46" stroke="none" />
               <rect x="0.5" y="0.5" width="282" height="45" fill="none" />
@@ -61,7 +61,7 @@ const UploadSVG = () => {
               transform="translate(1546 -553)"
               fill="#adc2eb"
               stroke="#adc2eb"
-              stroke-width="1"
+              strokeWidth="1"
             >
               <rect width="283" height="24" stroke="none" />
               <rect x="0.5" y="0.5" width="282" height="23" fill="none" />

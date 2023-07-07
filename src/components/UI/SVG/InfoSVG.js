@@ -38,7 +38,7 @@ const InfoSVG = (props) => {
             transform="translate(-1236 -303)"
             fill="none"
             stroke="#adc2eb"
-            stroke-width="13"
+            strokeWidth="13"
           >
             <rect width="463" height="463" rx="231.5" stroke="none" />
             <rect

@@ -106,7 +106,6 @@ const UserProfilePicture = (props) => {
       const formData = new FormData();
       formData.append("username", props.user.name);
       formData.append("removeImage", true);
-      console.log(">>>>>>>>>>> ", props.user.name);
 
       await fetch("http://localhost:3001/user/remove/profile/picture", {
         method: "POST",

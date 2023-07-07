@@ -1,10 +1,6 @@
 import React, { useEffect } from "react";
 
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Dates from "./pages/Dates";
 import SignUp from "./pages/SignUp";
@@ -21,6 +17,7 @@ import Portfolio from "./pages/Portfolio";
 import Profile from "./pages/Profile";
 import ResetPassword from "./pages/ResetPassword";
 import socket from "./utils/socket";
+import ErrorFallback from "./ErrorFallback";
 
 function App() {
   const [login, setLogin] = useLocalStorage("login", {
@@ -42,38 +39,74 @@ function App() {
 
   useEffect(() => {
     socket;
-    console.log(Date.now() > loginEndsAt, `${Date.now()} > ${loginEndsAt}`);
     if (Date.now() > loginEndsAt) {
       setLogin({});
     }
   }, []);
+
+  // return (
+  //   <>
+  //     <UserLoginContext.Provider value={login}>
+  //       <BrowserRouter>
+  //         <Routes>
+  //           <Route element={<Layout />} >
+  //             <Route errorElement={<ErrorBoundary />} />
+  //             <Route path="/" element={<Welcome />} />
+  //             <Route path="/sign-up" element={<SignUp />} />
+  //             <Route
+  //               path="/login"
+  //               element={<Login user={userLoginHandler} />}
+  //             />
+  //             <Route path="/dashboard" element={<Dashboard />} />
+  //             <Route path="/profile" element={<Profile />} />
+  //             <Route
+  //               path="/photographer"
+  //               element={<AdminPhotographerProfile />}
+  //             />
+  //             <Route path="/packages" element={<Packages />} />
+  //             <Route path="/dates" element={<Dates />} />
+  //             <Route path="/portfolio" element={<Portfolio />} />
+
+  //             <Route
+  //               path="/reset/password/:username/:token"
+  //               element={<ResetPassword />}
+  //             />
+  //           </Route>
+  //         </Routes>
+  //       </BrowserRouter>
+  //     </UserLoginContext.Provider>
+  //   </>
+  // );
 
   return (
     <>
       <UserLoginContext.Provider value={login}>
         <BrowserRouter>
           <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Welcome />} />
-              <Route path="/sign-up" element={<SignUp />} />
-              <Route
-                path="/login"
-                element={<Login user={userLoginHandler} />}
-              />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route
-                path="/photographer"
-                element={<AdminPhotographerProfile />}
-              />
-              <Route path="/packages" element={<Packages />} />
-              <Route path="/dates" element={<Dates />} />
-              <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/" element={<Layout />}>
+              <Route errorElement={<ErrorFallback />}>
+                <Route path="" element={<Welcome />} />
+                <Route path="sign-up" element={<SignUp />} />
+                <Route
+                  path="login"
+                  element={<Login user={userLoginHandler} />}
+                />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="profile" element={<Profile />} />
+                <Route
+                  path="photographer"
+                  element={<AdminPhotographerProfile />}
+                />
+                <Route path="packages" element={<Packages />} />
+                <Route path="dates" element={<Dates />} />
+                <Route path="portfolio" element={<Portfolio />} />
 
-              <Route
-                path="/reset/password/:username/:token"
-                element={<ResetPassword />}
-              />
+                <Route
+                  path="reset/password/:username/:token"
+                  element={<ResetPassword />}
+                />
+                <Route path="*" element={<ErrorFallback />} />
+              </Route>
             </Route>
           </Routes>
         </BrowserRouter>

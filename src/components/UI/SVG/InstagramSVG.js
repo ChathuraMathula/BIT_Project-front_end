@@ -25,7 +25,7 @@ const InstagramSVG = (props) => {
           fill="none"
           stroke="#000a1a"
           stroke-miterlimit="10"
-          stroke-width="2"
+          strokeWidth="2"
         />
         <circle
           id="Ellipse_6"

@@ -45,7 +45,7 @@ const RemovePackageBody = (props) => {
           .then((res) => res.json())
           .then((data) => {
             if (data) {
-              console.log(data);
+              
               if (data.success) {
                 props.onSuccess(true);
               } else {
